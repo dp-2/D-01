@@ -1,0 +1,170 @@
+
+package services;
+
+import java.util.Collection;
+import java.util.Date;
+
+import javax.transaction.Transactional;
+
+import org.hibernate.engine.config.spi.ConfigurationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
+
+import repositories.MessageRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
+import domain.Actor;
+import domain.Administrator;
+import domain.Box;
+import domain.Message;
+
+@Service
+@Transactional
+public class MessageService {
+
+	@Autowired
+	private ActorService			actorService;
+	@Autowired
+	private MessageRepository		repository;
+	@Autowired
+	private BoxService				boxService;
+	@Autowired
+	private ConfigurationService	configurationService;
+	@Autowired
+	private ServiceUtils			serviceUtils;
+	@Autowired
+	private LoginService			loginService;
+
+
+	public Message findOne(final Integer id) {
+		this.serviceUtils.checkId(id);
+		return this.repository.findOne(id);
+	}
+
+	public Collection<Message> findAll(final Collection<Integer> ids) {
+		this.serviceUtils.checkIds(ids);
+		return this.repository.findAll(ids);
+	}
+
+	public Collection<Message> findAll() {
+		return this.repository.findAll();
+	}
+
+	public Collection<Message> findAll(final Box dependency) {
+		this.serviceUtils.checkObject(dependency);
+		return this.findAll(dependency);
+	}
+
+	public Message create(final Box dependency) {
+		final Message res = new Message();
+		res.setMoment(new Date(System.currentTimeMillis() - 1000));
+		res.setBox(dependency);
+		res.setSender(this.actorService.findPrincipal());
+		return res;
+	}
+
+	public Message save(final Message object) {
+		final Message message = (Message) this.serviceUtils.checkObjectSave(object);
+		final Administrator system = (Administrator) this.actorService.findOneByUserAccount((UserAccount) this.loginService.loadUserByUsername("system"));
+		Message message1 = null;
+		if (message.getId() == 0) {
+			message.setMoment(new Date(System.currentTimeMillis() - 1000));
+			message.setBox(this.boxService.findBoxByActorAndName(message.getSender(), "outBox"));
+		} else
+			message.setBox(object.getBox());
+		final Message res = this.repository.save(message);
+		if (!message.getBox().getActor().equals(system))
+			this.serviceUtils.checkPermisionActor(message.getBox().getActor(), null);
+		if (message.getId() == 0) {
+			message1 = message;
+			message1.setId(0);
+			message1.setVersion(0);
+			if (this.containsSpam(message1))
+				message1.setBox(this.boxService.findBoxByActorAndName(message1.getRecipient(), "spamBox"));
+			else
+				message1.setBox(this.boxService.findBoxByActorAndName(message1.getRecipient(), "inBox"));
+			this.repository.save(message1);
+		}
+		return res;
+	}
+	public void delete(final Message object) {
+		final Message message = (Message) this.serviceUtils.checkObject(object);
+		final Actor principal = this.actorService.findPrincipal();
+		final Box trashboxPrincipal = this.boxService.findBoxByActorAndName(principal, "trashbox");
+		if (message.getBox().equals(trashboxPrincipal)) {
+			Assert.isTrue(message.getBox().getActor().equals(this.actorService.findPrincipal()));
+			this.serviceUtils.checkPermisionActor(message.getBox().getActor(), null);
+			for (final Message m : this.findCopies(message))
+				this.repository.delete(m);
+			this.repository.delete(message);
+		} else {
+			message.setBox(this.boxService.findBoxByActorAndName(object.getBox().getActor(), "trashbox"));
+			this.save(message);
+		}
+	}
+
+	public boolean containsSpam(final Message message) {
+		return this.containsSpam(message.getBody()) || this.containsSpam(message.getTags()) || this.containsSpam(message.getSubject());
+	}
+
+	public boolean containsSpam(final String s) {
+		Boolean res = false;
+		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsEN())
+			if (s.contains(spamWord)) {
+				res = true;
+				break;
+			}
+		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsES())
+			if (s.contains(spamWord)) {
+				res = true;
+				break;
+			}
+		return res;
+	}
+
+	//(Elena) Mensaje a todos los actores. Esta incompleto porque aun no se muy bien como hacerlo.
+
+	public void broadcast(final Message m) {
+		final Message message = (Message) this.serviceUtils.checkObjectSave(m);
+		this.serviceUtils.checkAuthority(Authority.ADMIN);
+		final Actor principal = this.actorService.findPrincipal();
+		for (final Actor a : this.actorService.findAllExceptMe(principal)) {
+			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "inBox"));
+			mes.setBody(message.getBody());
+			mes.setPriority(message.getPriority());
+			mes.setSubject(message.getSubject());
+			mes.setTags(message.getTags());
+			mes.setRecipient(a);
+			this.save(mes);
+		}
+	}
+
+	public Collection<Message> findSendedMessages(final Actor a) {
+		Assert.notNull(a);
+		Assert.isTrue(a.getId() > 0);
+		Assert.notNull(this.actorService.findOne(a.getId()));
+		return this.repository.findSendedMessages(a.getId());
+	}
+
+	public Collection<Message> findReceivedMessages(final Actor a) {
+		Assert.notNull(a);
+		Assert.isTrue(a.getId() > 0);
+		Assert.notNull(this.actorService.findOne(a.getId()));
+		return this.repository.findReceivedMessages(a.getId());
+	}
+
+	public Collection<Message> findByBox(final Box f) {
+		Assert.notNull(f);
+		Assert.isTrue(f.getId() > 0);
+		Assert.notNull(this.boxService.findOne(f.getId()));
+		return this.repository.findByBoxId(f.getId());
+	}
+
+	public Collection<Message> findCopies(final Message m) {
+		final Message message = (Message) this.serviceUtils.checkObject(m);
+		return this.repository.findMessageByMomentSenderReceiverAndSubject(message.getMoment(), message.getSender().getId(), message.getRecipient().getId(), message.getSubject());
+	}
+
+}

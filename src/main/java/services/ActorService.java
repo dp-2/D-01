@@ -52,7 +52,7 @@ public class ActorService {
 	private RefereeService			refereeService;
 
 	@Autowired
-	private FolderService			folderService;
+	private BoxService				boxService;
 
 	@Autowired
 	private MessageService			messageService;
