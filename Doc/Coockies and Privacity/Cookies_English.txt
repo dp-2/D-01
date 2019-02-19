@@ -1,0 +1,19 @@
+What is a cookie and what is it for?
+A "Cookie" is a small file that is stored on the user's computer, tablet, smartphone or any other device with information about navigation.
+The set of "cookies" of all our users helps us to improve the quality of our website, allowing us to control which pages are useful, which are not and which are susceptible to improvement.
+Cookies are essential for the functioning of the Internet, providing countless advantages in the provision of interactive services, facilitating navigation and usability of our website. Under no circumstances could cookies damage your computer. On the other hand, the fact that they are active helps us to identify and resolve errors.
+
+We use cookies to recognize your browser, your device, to learn more about your interests and to provide you with essential tools and services and for other purposes, for example:
+
+Recognize when you register to use our services, which allows us to offer you product recommendations, show you personalized content, recognize you as a member, allow you to use features more comfortably, offer you other features and personalized services.
+Maintain a record of saved products.
+Conduct research and diagnostics to improve the content, products and services of Acme-Madrugá.
+Prevent fraudulent activities.
+Improve security.
+Submit content, including advertisements, Acme-Madrugá and third-party pages that may be of interest to you.
+Inform. This allows us to consider and analyze the performance of our services.
+Acme-Madrugá cookies offer you the possibility to take advantage of many of the essential functionalities of Acme-Madrugá. For example, if you reject or block our cookies, you will not be able to access certain features, access the termination page, or use any of Acme-Madrugá's products or services that require you to log in.
+
+Authorized third parties may also use cookies when you interact with Acme-Madrugá services including search engines, measurement and analytical service providers, social networks, and advertising companies. Third parties use cookies in the process to deliver content, including ads relevant to your interests, to measure the effectiveness of their ads, and to deliver services on behalf of Acme-Madrugá. Click here to learn more about third parties that may use cookies when you use Acme-Madrugá services.
+
+You can manage your browser's cookies through your browser settings. The "Help" feature on most browsers tells you how to set your browser not to accept new cookies, to notify you each time you receive a new cookie, how to disable cookies, and when cookies will expire. If you turn off all cookies in your browser, neither we nor third parties will transfer cookies to your browser. However, you may have to adjust some of your preferences manually whenever you visit a page and some of the tools and services do not work.

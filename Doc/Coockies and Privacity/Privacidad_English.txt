@@ -1,0 +1,29 @@
+1. What is personal data?
+"Personal Data" is any information that makes it possible to identify or make identifiable a person. This information is provided when a person accesses the website on their device.
+
+These include, but are not limited to, first name, last name, nif, postal and e-mail addresses, as well as telephone numbers.
+
+In addition, when the website is used, certain information is automatically stored for technical reasons (e.g., the IP address assigned by the user's Internet access provider).
+
+2. What personal data is used and for what purpose?
+Any personal data provided to Acme-Madrugá when using the Web will be treated in accordance with applicable data protection laws. They will only be collected, processed and used for lawful and legitimate purposes, about which the user is informed at all times. Acme-Madrugá stores and uses your personal information to make the use of the website as simple and convenient as possible, so that you can register, log in, make an appointment in the shops, have your shopping list, formalize a contract through a link to our website, send information or contact Acme-Madrugá.
+
+Also, when these personal data are collected through the forms that are included on the Web, it will be necessary for the user to complete all the data requested, because if they are not provided, considered necessary, the service requested can not be managed or resolve the query made.
+
+Certain technical information is necessary for the Web to continue to be useful in the user's mobile device. Such technical information will be stored and used anonymously for the development of analytics, statistics, and with the aim of improving the Web. The user will be able to indicate which are his preferences through his user account, or to eliminate the same ones if he is opposed to it.
+
+Additionally, personal data and technical information are also stored and used when necessary to monitor and prevent unauthorized use or activities that may be illegal (e.g., to maintain and ensure security in the event of attacks on our computer systems).
+
+Finally, the user's information is stored and used if required by applicable legislation, or, if necessary, to comply with requests from competent public and/or administrative bodies, as well as to make possible the exercise of Acme-Madrugá's rights and actions, and for any other purpose contemplated in the applicable laws.
+
+3. Do we communicate your personal data?
+
+Certain information may be processed by certain service providers who have been selected with special care and who only use it in accordance with our instructions and instructions (including, but not limited to, customer service, central computer services, companies conducting market research or customer satisfaction surveys, as well as payment method providers who perform security checks on our behalf to prevent and prevent fraud or other problems during the payment process). In this regard, information will only be sent to entities that are located within the European Economic Area and, therefore, subject to European Union data protection regulations, or that commit to comply with the corresponding data protection standards.
+
+Finally, we will communicate your data and information, in accordance with data protection rules, to third parties or public bodies if required to do so by virtue of requests from a competent authority, as well as when required to do so by courts and tribunals for any reason.
+
+4. Users' rights.
+Users have recognised rights of access, rectification, cancellation and opposition, which they may exercise free of charge before Acme-Madrugá. The quickest and easiest way to exercise their rights is by accessing the user account on the Web and modifying their data. Any information that we need to store, by virtue of a legal or contractual obligation, will be blocked and will only be used for such purposes instead of being erased.
+
+
+Translated with www.DeepL.com/Translator
