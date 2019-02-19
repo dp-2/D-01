@@ -41,22 +41,197 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="broderhood1" />
+		<property name="password" value="8f0f32240f31aa96a734369819efb284" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BROTHERHOOD" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- La contraseña de system es intencional, no se puede acceder a esta 
+		cuenta -->
 
-	<!-- <bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+	<bean id="userAccountSystem" class="security.UserAccount">
+		<property name="username" value="system" />
+		<property name="password" value="system" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
 					<property name="authority" value="ADMIN" />
 				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
 			</list>
 		</property>
-	</bean> -->
+	</bean>
+
+	
 	
 	<!-- Other domain beans come here -->	
+	
+	
+	<!-- Administrators -->
+	
+		<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Mario" />
+		<property name="surname" value="García" />
+		<property name="photo"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="email" value="maxagar@gmail.com" />
+		<property name="phone" value="+34(456)123456789" />
+		
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="score" value="0.3" />
+		
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	
+	<bean id="system" class="domain.Administrator">
+		<property name="name" value="System" />
+		<property name="surname" value="System" />
+		<property name="email" value="system@system.sys" />
+		<property name="phone" value="+34(456)123456789" />
+		
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="score" value="0.3" />
+		
+		<property name="userAccount" ref="userAccountSystem" />
+	</bean>
+	
+	
+	<!-- Area -->
+	
+	<bean id="area1" class="domain.Area">
+		<property name="name" value="Nombre del area 1" />
+		<property name="pictures" value="foto a cambiar" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="finder" ref="finder1" />
+	</bean>
+	
+	
+	<!-- Box -->
+	
+	<!-- Boxes del system -->
+	<bean id="inboxSystem" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="inboxSystem" />
+		<property name="actor" ref="system" />
+	</bean>
+	
+	<bean id="outboxSystem" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="outboxSystem" />
+		<property name="actor" ref="system" />
+	</bean>
+	
+	<bean id="trashboxSystem" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="trashboxSystem" />
+		<property name="actor" ref="system" />
+	</bean>
+
+
+	<bean id="spamboxSystem" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="spamboxSystem" />
+		<property name="actor" ref="system" />
+	</bean>
+	
+	
+	
+	<!-- Boxes del admin1 -->
+	
+	<bean id="folder1Admin1" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Admin1" />
+		<property name="actor" ref="administrator1" />
+	</bean>
+	
+	<bean id="folder2Admin1" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Admin1" />
+		<property name="actor" ref="administrator1" />
+	</bean>
+	
+	<bean id="folder3Admin1" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Admin1" />
+		<property name="actor" ref="administrator1" />
+	</bean>
+
+
+	<bean id="folder4Admin1" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Admin1" />
+		<property name="actor" ref="administrator1" />
+	</bean>
+	
+	
+	
+	<!-- Brotherhood -->
+	
+	<bean id="brotherhood1" class="domain.Brotherhood">
+		<property name="name" value="Hermandad" />
+		<property name="surname" value="del Amor" />
+		<property name="photo"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="email" value="amor@gmail.com" />
+		<property name="phone" value="+34(456)323456749" />
+		
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="score" value="0.8" />
+		
+		<property name="userAccount" ref="userAccount3" />
+	
+		
+		<property name="title" value="Hdad del amor" />
+		<property name="establishedMoment" value="May 29, 2012 15:00" />
+		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+	</bean>
+	
+	
+	<!-- Finder -->
+	
+	<bean id="finder1" class="domain.Finder">
+		<property name="member" ref="member1" />
+	</bean>
+	
+	
+	<!-- Member -->
+	
+	<bean id="member1" class="domain.Member">
+		<property name="name" value="Juan" />
+		<property name="surname" value="Montes" />
+		<property name="photo"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="email" value="juanmontes@gmail.com" />
+		<property name="phone" value="+34(456)123456749" />
+		
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="score" value="0.4" />
+		
+		<property name="userAccount" ref="userAccount2" />
+		
+		<property name="position" value="President" />
+	</bean>
+	
+	
 	
 </beans>
