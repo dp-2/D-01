@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 @Table(uniqueConstraints = {
 	@UniqueConstraint(columnNames = {
-		"id", "row", "column"
+		"id", "rowAtributte", "columnAtributte"
 	})
 })
 public class March extends DomainEntity {
@@ -25,8 +25,8 @@ public class March extends DomainEntity {
 
 	private String	status;
 	private String	reason;
-	private Integer	row;
-	private Integer	column;
+	private Integer	rowAtributte;
+	private Integer	columnAtributte;
 
 
 	@NotNull
@@ -47,19 +47,19 @@ public class March extends DomainEntity {
 	}
 
 	@Min(0)
-	public Integer getRow() {
-		return this.row;
+	public Integer getRowAtributte() {
+		return this.rowAtributte;
 	}
-	public void setRow(final Integer row) {
-		this.row = row;
+	public void setRowAtributte(final Integer rowAtributte) {
+		this.rowAtributte = rowAtributte;
 	}
 
 	@Min(0)
-	public Integer getColumn() {
-		return this.column;
+	public Integer getColumnAtributte() {
+		return this.columnAtributte;
 	}
-	public void setColumn(final Integer column) {
-		this.column = column;
+	public void setColumnAtributte(final Integer columnAtributte) {
+		this.columnAtributte = columnAtributte;
 	}
 
 	// Relationships
