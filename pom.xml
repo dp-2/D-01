@@ -23,7 +23,7 @@
 	<!-- Indexing information -->
 
 	<name>Acme-Madruga</name>
-	<url>http://www.acme-aadruga.com</url>
+	<url>http://www.acme-madruga.com</url>
 
 	<!-- Build commands -->
 
@@ -315,5 +315,5 @@
 
 	</dependencies>
 
-	<description>This system allows people share their favourite Shouts.</description>
+	<description>This system  consists in helping brotherhoods across the world organise their processions.</description>
 </project> 
