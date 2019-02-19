@@ -7,10 +7,19 @@ import javax.persistence.Entity;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Administrator extends Actor {
+public class Member extends Actor {
 
-	// Identification ---------------------------------------------------------
 	// ATRIBUTOS
+	private String	position;
+
+
+	public String getPosition() {
+		return this.position;
+	}
+
+	public void setPosition(final String position) {
+		this.position = position;
+	}
 
 	// Relationships ---------------------------------------------------------
 
