@@ -11,8 +11,8 @@
 
 	<!-- Artifact identification and properties -->
 
-	<groupId>Design-and-Testing</groupId>
-	<artifactId>Sample-Project</artifactId>
+	<groupId>Acme.com</groupId>
+	<artifactId>Acme-Madruga</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 
@@ -22,8 +22,8 @@
 
 	<!-- Indexing information -->
 
-	<name>Sample Project</name>
-	<url>http://www.sample-project.com</url>
+	<name>Acme-Madruga</name>
+	<url>http://www.acme-aadruga.com</url>
 
 	<!-- Build commands -->
 
