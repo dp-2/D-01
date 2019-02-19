@@ -334,6 +334,60 @@
 		<property name="procession" ref="procession2" />
 	</bean>
 	
+		<!-- DFloat -->
+	
+	<bean id="dfloat1" class="domain.DFloat">
+		<property name="title" value="La pasion de cristo" />
+		<property name="description" value="La pasion de cristo es una procesion normal " />
+		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
+		<property name="brotherhood" ref="brotherhood1" />	
+	</bean>
+	
+	<bean id="dfloat2" class="domain.DFloat">
+		<property name="title" value="La no pasion de cristo" />
+		<property name="description" value="La no pasion de cristo es lo que es ni mas ni menos asi que punto en boca ya juan,PUNTO EN BOCA " />
+		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
+		<property name="brotherhood" ref="brotherhood2" />	
+	</bean>
+	
+	
+			<!-- Social Profile -->
+	
+	<bean id="socialProfile1" class="domain.SocialProfile">
+		<property name="nick" value="Curaneitor78"></property>
+		<property name="nameSN" value="Twitter"></property>
+		<property name="linkSN" value="https://twitter.com/Curaneitor"></property>
+		<property name="actor" ref="administrator1" />
+	</bean>
+	
+	<bean id="socialProfile2" class="domain.SocialProfile">
+		<property name="nick" value="SickerHup"></property>
+		<property name="nameSN" value="Instagram"></property>
+		<property name="linkSN" value="	https://www.instagram.com/sickerHup"></property>
+		<property name="actor" ref="administrator1" />
+	</bean>
+	
+	<bean id="socialProfile3" class="domain.SocialProfile">
+		<property name="nick" value="SickerHup"></property>
+		<property name="nameSN" value="Tuenti"></property>
+		<property name="linkSN" value="	https://www.tuenti.com/sickerHup"></property>
+		<property name="actor" ref="administrator1" />
+	</bean>
+	
+	<bean id="socialProfile4" class="domain.SocialProfile">
+		<property name="nick" value="SickerHup"></property>
+		<property name="nameSN" value="Tuenti"></property>
+		<property name="linkSN" value="	https://www.tuenti.com/sickerHup"></property>
+		<property name="actor" ref="member1" />
+	</bean>
+	
+	<bean id="socialProfile5" class="domain.SocialProfile">
+		<property name="nick" value="Aprobados"></property>
+		<property name="nameSN" value="Twitter"></property>
+		<property name="linkSN" value="https://twitter.com/Aprobados"></property>
+		<property name="actor" ref="member1" />
+	</bean>
+	
 	
 		<!-- Procession -->
 	
