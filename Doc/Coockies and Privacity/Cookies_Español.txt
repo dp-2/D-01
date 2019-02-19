@@ -1,0 +1,20 @@
+¿Qué es una cookie y para qué sirve?
+Una "Cookie" es un pequeño archivo que se almacena en el ordenador del usuario, tablet, smartphone o cualquier otro dispositivo con información sobre la navegación.
+El conjunto de "cookies" de todos nuestros usuarios nos ayuda a mejorar la calidad de nuestra web, permitiéndonos controlar qué páginas son útiles, cuáles no y cuáles son susceptibles de mejora.
+Las cookies son esenciales para el funcionamiento de internet, aportando innumerables ventajas en la prestación de servicios interactivos, facilitándote la navegación y usabilidad de nuestra web. En ningún caso las cookies podrían dañar tu equipo. Por contra, el que estén activas nos ayuda a identificar y resolver los errores.
+
+Utilizamos cookies para reconocer tu navegador, tu dispositivo, para saber más sobre tus intereses y para proporcionarte herramientas esenciales y servicios y para otros fines, por ejemplo:
+
+Reconocer cuando te registras para usar nuestros servicios, lo que nos permite ofrecerte recomendaciones de productos, mostrarte contenido personalizado, reconocerte como miembro, permitirte utilizar funcionalidades mas comodamente, ofrecerte otras funcionalidades y servicios personalizados.
+Mantener un registro de los productos guardados.
+Llevar a cabo investigaciones y diagnósticos para mejorar el contenido, los productos y los servicios de Acme-Madrugá.
+Prevenir actividades fraudulentas.
+Mejorar la seguridad.
+Enviar contenidos, incluyendo anuncios, páginas de Acme-Madrugá y de terceros que podrían interesarte.
+Informar. Esto nos permite considerar y analizar el rendimiento de nuestros servicios.
+Las cookies de Acme-Madrugá te ofrecen la posibilidad de aprovechar muchas de las funcionalidades esenciales de Acme-Madrugá. Por ejemplo, si rechazas o bloqueas nuestras cookies, no podrás acceder a determinadas funcionalidades, acceder a la página de finalización ni usar ninguno de los productos o servicios de Acme-Madrugá que requieren que inicies una sesión.
+
+Los terceros autorizados también pueden utilizar cookies cuando interactúas con los servicios de Acme-Madrugá entre los que se incluyen motores de búsqueda, proveedores de servicios de medición y analíticos, redes sociales y compañías de publicidad. Los terceros utilizan cookies en el proceso para proporcionar contenidos, incluyendo anuncios relevantes para tus intereses, para medir la efectividad de sus anuncios y para prestar servicios en nombre de Acme-Madrugá. Haz clic aquí para saber más sobre los terceros que podrían utilizar cookies cuando utilizas los servicios de Acme-Madrugá.
+
+Puedes gestionar las cookies de tu navegador a través de la configuración de tu navegador. En la función “Ayuda” de la mayoría de los navegadores se indica cómo configurar tu navegador para que no acepte cookies nuevas, para que te notifique cada vez que recibes una nueva cookie, cómo desactivar cookies y cuándo caducarán las cookies. Si desactivas todas las cookies en tu navegador, ni nosotros ni terceros transferiremos cookies a tu navegador. Sin embargo, es probable que tengas que ajustar algunas de tus preferencias manualmente siempre que visites una página y que algunas de las herramientas y servicios no funcionen.
+
