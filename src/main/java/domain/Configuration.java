@@ -28,6 +28,10 @@ public class Configuration extends DomainEntity {
 	private String	negativeWordsES;
 	private String	positiveWordsES;
 	private String	positionsES;
+	private String	legalTextEN;
+	private String	legalTextES;
+	private String	cookiesTextEN;
+	private String	cookiesTextES;
 	private int		numResults;
 	private int		cacheFinder;
 
@@ -155,6 +159,42 @@ public class Configuration extends DomainEntity {
 	}
 	public void setCacheFinder(final int cacheFinder) {
 		this.cacheFinder = cacheFinder;
+	}
+
+	@NotBlank
+	public String getLegalTextEN() {
+		return this.legalTextEN;
+	}
+
+	public void setLegalTextEN(final String legalTextEN) {
+		this.legalTextEN = legalTextEN;
+	}
+
+	@NotBlank
+	public String getLegalTextES() {
+		return this.legalTextES;
+	}
+
+	public void setLegalTextES(final String legalTextES) {
+		this.legalTextES = legalTextES;
+	}
+
+	@NotBlank
+	public String getCookiesTextEN() {
+		return this.cookiesTextEN;
+	}
+
+	public void setCookiesTextEN(final String cookiesTextEN) {
+		this.cookiesTextEN = cookiesTextEN;
+	}
+
+	@NotBlank
+	public String getCookiesTextES() {
+		return this.cookiesTextES;
+	}
+
+	public void setCookiesTextES(final String cookiesTextES) {
+		this.cookiesTextES = cookiesTextES;
 	}
 
 }
