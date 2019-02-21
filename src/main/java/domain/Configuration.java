@@ -97,7 +97,7 @@ public class Configuration extends DomainEntity {
 		this.positiveWordsEN = positiveWordsEN;
 	}
 
-	@NotBlank
+	@NotNull
 	@ElementCollection
 	public List<String> getPositionsEN() {
 		return this.positionsEN;
@@ -106,7 +106,7 @@ public class Configuration extends DomainEntity {
 		this.positionsEN = positionsEN;
 	}
 
-	@NotBlank
+	@NotNull
 	@ElementCollection
 	public List<String> getSpamWordsES() {
 		return this.spamWordsES;
@@ -115,7 +115,7 @@ public class Configuration extends DomainEntity {
 		this.spamWordsES = spamWordsES;
 	}
 
-	@NotBlank
+	@NotNull
 	@ElementCollection
 	public List<String> getNegativeWordsES() {
 		return this.negativeWordsES;
@@ -124,7 +124,7 @@ public class Configuration extends DomainEntity {
 		this.negativeWordsES = negativeWordsES;
 	}
 
-	@NotBlank
+	@NotNull
 	@ElementCollection
 	public List<String> getPositiveWordsES() {
 		return this.positiveWordsES;
@@ -133,7 +133,7 @@ public class Configuration extends DomainEntity {
 		this.positiveWordsES = positiveWordsES;
 	}
 
-	@NotBlank
+	@NotNull
 	@ElementCollection
 	public List<String> getPositionsES() {
 		return this.positionsES;
