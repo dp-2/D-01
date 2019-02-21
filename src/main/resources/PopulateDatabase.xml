@@ -157,19 +157,28 @@
 		<property name="userAccount" ref="userAccountSystem" />
 	</bean>
 	
+	<!-- Finder -->
+	
+	<bean id="finder1" class="domain.Finder">
+		<property name="member" ref="member1" />
+	</bean>
+	
+	<bean id="finder2" class="domain.Finder">
+		<property name="member" ref="member2" />
+	</bean>
 	
 	<!-- Area -->
 	
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Nombre del area 1" />
-		<property name="pictures" value="foto a cambiar" />
+		<property name="pictures" value="https://fotografias.antena3.com/clipping/cmsimages01/2017/02/09/BAB859E5-AE7B-4A0B-B751-7990AEDB777F/58.jpg" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="finder" ref="finder1" />
 	</bean>
 	
 	<bean id="area2" class="domain.Area">
 		<property name="name" value="Nombre del area 2" />
-		<property name="pictures" value="foto a  no cambiar" />
+		<property name="pictures" value="https://fotografias.antena3.com/clipping/cmsimages01/2017/02/09/BAB859E5-AE7B-4A0B-B751-7990AEDB777F/58.jpg" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="finder" ref="finder2" />
 	</bean>
@@ -418,15 +427,18 @@
 	</bean>
 	
 	
-	<!-- Finder -->
-	
-	<bean id="finder1" class="domain.Finder">
+<!-- 	<bean id="march1" class="domain.March">
+		<property name="status" value="ACCEPTED" />
+		<property name="reason" value="" />
+		<property name="rowAtributte" value="1" />
+		<property name="columnAtributte" value="1" />
+		
 		<property name="member" ref="member1" />
-	</bean>
+		<property name="procession" ref="procession1" />
+		
+	</bean> -->
 	
-	<bean id="finder2" class="domain.Finder">
-		<property name="member" ref="member2" />
-	</bean>
+	
 	
 	
 	<!-- Member -->
