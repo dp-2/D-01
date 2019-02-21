@@ -22,7 +22,6 @@ public class DFloat extends DomainEntity {
 	private String	pictures;
 
 
-	@NotNull
 	@NotBlank
 	public String getTitle() {
 		return this.title;
@@ -31,7 +30,6 @@ public class DFloat extends DomainEntity {
 		this.title = title;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getDescription() {
 		return this.description;

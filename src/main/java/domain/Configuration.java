@@ -36,7 +36,6 @@ public class Configuration extends DomainEntity {
 	private int		cacheFinder;
 
 
-	@NotNull
 	@NotBlank
 	public String getNameSys() {
 		return this.nameSys;
@@ -45,7 +44,6 @@ public class Configuration extends DomainEntity {
 		this.nameSys = nameSys;
 	}
 
-	@NotNull
 	@NotBlank
 	@URL
 	public String getBanner() {
@@ -55,7 +53,6 @@ public class Configuration extends DomainEntity {
 		this.banner = banner;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getWelcomeMessageEN() {
 		return this.welcomeMessageEN;
@@ -64,7 +61,6 @@ public class Configuration extends DomainEntity {
 		this.welcomeMessageEN = welcomeMessageEN;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getSpamWordsEN() {
 		return this.spamWordsEN;
@@ -82,7 +78,6 @@ public class Configuration extends DomainEntity {
 		this.negativeWordsEN = negativeWordsEN;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getPositiveWordsEN() {
 		return this.positiveWordsEN;
@@ -91,7 +86,6 @@ public class Configuration extends DomainEntity {
 		this.positiveWordsEN = positiveWordsEN;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getPositionsEN() {
 		return this.positionsEN;
@@ -100,7 +94,6 @@ public class Configuration extends DomainEntity {
 		this.positionsEN = positionsEN;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getWelcomeMessageES() {
 		return this.welcomeMessageES;
@@ -109,7 +102,6 @@ public class Configuration extends DomainEntity {
 		this.welcomeMessageES = welcomeMessageES;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getSpamWordsES() {
 		return this.spamWordsES;
@@ -118,7 +110,6 @@ public class Configuration extends DomainEntity {
 		this.spamWordsES = spamWordsES;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getNegativeWordsES() {
 		return this.negativeWordsES;
@@ -127,7 +118,6 @@ public class Configuration extends DomainEntity {
 		this.negativeWordsES = negativeWordsES;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getPositiveWordsES() {
 		return this.positiveWordsES;
@@ -136,7 +126,6 @@ public class Configuration extends DomainEntity {
 		this.positiveWordsES = positiveWordsES;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getPositionsES() {
 		return this.positionsES;

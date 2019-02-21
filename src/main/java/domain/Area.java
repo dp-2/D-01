@@ -18,10 +18,9 @@ public class Area extends DomainEntity {
 	// Properties
 
 	private String	name;
-	private String	pictures;
+	private Integer	pictures;
 
 
-	@NotNull
 	@NotBlank
 	public String getName() {
 		return this.name;
@@ -30,12 +29,11 @@ public class Area extends DomainEntity {
 		this.name = name;
 	}
 
-	@NotNull
 	@NotBlank
-	public String getPictures() {
+	public Integer getPictures() {
 		return this.pictures;
 	}
-	public void setPictures(final String pictures) {
+	public void setPictures(final Integer pictures) {
 		this.pictures = pictures;
 	}
 

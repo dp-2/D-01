@@ -31,7 +31,6 @@ public class March extends DomainEntity {
 	private Integer	columnAtributte;
 
 
-	@NotNull
 	@NotBlank
 	@Pattern(regexp = "^PENDING$|^ACCEPTED$|^REJECTED$")
 	public String getStatus() {
