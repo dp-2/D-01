@@ -171,16 +171,26 @@
 	
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Nombre del area 1" />
-		<property name="pictures" value="https://fotografias.antena3.com/clipping/cmsimages01/2017/02/09/BAB859E5-AE7B-4A0B-B751-7990AEDB777F/58.jpg" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="finder" ref="finder1" />
+		<property name="pictures">
+			<list>
+				<value>http://www.semanasantapalencia.com/images/foto/0025.jpg</value>
+				<value>https://upload.wikimedia.org/wikipedia/commons/0/02/Legionarios_Paso_Blanco.JPG</value>
+				
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="area2" class="domain.Area">
 		<property name="name" value="Nombre del area 2" />
-		<property name="pictures" value="https://fotografias.antena3.com/clipping/cmsimages01/2017/02/09/BAB859E5-AE7B-4A0B-B751-7990AEDB777F/58.jpg" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="finder" ref="finder2" />
+		<property name="pictures">
+			<list>
+	
+			</list>
+		</property>
 	</bean>
 	
 	
