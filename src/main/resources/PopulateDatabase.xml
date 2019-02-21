@@ -298,6 +298,153 @@
 		<property name="actor" ref="administrator2" />
 
 	</bean>
+	
+	
+		<!-- Boxes del member1 -->
+	
+	<bean id="folder1Member1" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Member1" />
+		<property name="actor" ref="member1" />
+		
+	</bean>
+	
+	<bean id="folder2Member1" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Member1" />
+		<property name="actor" ref="member1" />
+		
+	</bean>
+	
+	<bean id="folder3Member1" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Member1" />
+		<property name="actor" ref="member1" />
+		
+	</bean>
+
+
+	<bean id="folder4Member1" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Member1" />
+		<property name="actor" ref="member1" />
+		
+	</bean>
+	
+	
+		<!-- Boxes del member2 -->
+	
+	<bean id="folder1Member2" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Member2" />
+		<property name="actor" ref="member2" />
+		
+	</bean>
+	
+	<bean id="folder2Member2" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Member2" />
+		<property name="actor" ref="member2" />
+		
+	</bean>
+	
+	<bean id="folder3Member2" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Member2" />
+		<property name="actor" ref="member2" />
+		
+	</bean>
+
+
+	<bean id="folder4Member2" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Member2" />
+		<property name="actor" ref="member2" />
+		
+	</bean>
+	
+	
+	
+	
+		<!-- Boxes del brotherhood1 -->
+	
+	<bean id="folder1Brotherhood1" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+		
+	</bean>
+	
+	<bean id="folder2Brotherhood1" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+		
+	</bean>
+	
+	<bean id="folder3Brotherhood1" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+		
+	</bean>
+
+
+	<bean id="folder4Brotherhood1" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+		
+	</bean>
+	
+	
+	<!-- Boxes del brotherhood2 -->
+	
+	<bean id="folder1Brotherhood2" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+		
+	</bean>
+	
+	<bean id="folder2Brotherhood2" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+		
+	</bean>
+	
+	<bean id="folder3Brotherhood2" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+		
+	</bean>
+
+
+	<bean id="folder4Brotherhood2" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+		
+	</bean>
+	
 
 	<!-- Enroll -->
 
