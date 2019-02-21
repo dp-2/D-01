@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2019 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -41,7 +35,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="broderhood1" />
 		<property name="password" value="8f0f32240f31aa96a734369819efb284" />
@@ -53,7 +47,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="admin2" />
 		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
@@ -65,7 +59,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="broderhood2" />
 		<property name="password" value="bccb2fea6548fde343ae9771bc94b123" />
@@ -77,7 +71,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="member2" />
 		<property name="password" value="88ed421f060aadcacbd63f28d889797f" />
@@ -89,7 +83,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- La contraseña de system es intencional, no se puede acceder a esta 
 		cuenta -->
 
@@ -105,29 +99,29 @@
 		</property>
 	</bean>
 
-	
-	
-	<!-- Other domain beans come here -->	
-	
-	
+
+
+	<!-- Other domain beans come here -->
+
+
 	<!-- Administrators -->
-	
-		<bean id="administrator1" class="domain.Administrator">
+
+	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Mario" />
 		<property name="surname" value="García" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="maxagar@gmail.com" />
 		<property name="phone" value="+34(456)123456789" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.3" />
-		
+
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
-	
-		
+
+
 	<bean id="administrator2" class="domain.Administrator">
 		<property name="name" value="Julian" />
 		<property name="surname" value="DelBario" />
@@ -135,91 +129,93 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="juliki@gmail.com" />
 		<property name="phone" value="+34(456)473456789" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.7" />
-		
+
 		<property name="userAccount" ref="userAccount4" />
 	</bean>
-	
-	
+
+
 	<bean id="system" class="domain.Administrator">
 		<property name="name" value="System" />
 		<property name="surname" value="System" />
 		<property name="email" value="system@system.sys" />
 		<property name="phone" value="+34(456)123456789" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.3" />
-		
+
 		<property name="userAccount" ref="userAccountSystem" />
 	</bean>
-	
+
 	<!-- Finder -->
-	
+
 	<bean id="finder1" class="domain.Finder">
 		<property name="member" ref="member1" />
 	</bean>
-	
+
 	<bean id="finder2" class="domain.Finder">
 		<property name="member" ref="member2" />
 	</bean>
-	
+
 	<!-- Area -->
-	
+
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Nombre del area 1" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="finder" ref="finder1" />
 		<property name="pictures">
 			<list>
-				<value>http://www.semanasantapalencia.com/images/foto/0025.jpg</value>
-				<value>https://upload.wikimedia.org/wikipedia/commons/0/02/Legionarios_Paso_Blanco.JPG</value>
-				
+				<value>http://www.semanasantapalencia.com/images/foto/0025.jpg
+				</value>
+				<value>https://upload.wikimedia.org/wikipedia/commons/0/02/Legionarios_Paso_Blanco.JPG
+				</value>
+
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="area2" class="domain.Area">
 		<property name="name" value="Nombre del area 2" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="finder" ref="finder2" />
 		<property name="pictures">
 			<list>
-	
+
 			</list>
 		</property>
 	</bean>
-	
-	
-	
+
+
+
 	<!-- Box -->
-	
+
 	<!-- Boxes del system -->
 	<bean id="inboxSystem" class="domain.Box">
 		<property name="name" value="inBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="inboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
-	
+
 	<bean id="outboxSystem" class="domain.Box">
 		<property name="name" value="outBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="outboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
-	
+
 	<bean id="trashboxSystem" class="domain.Box">
 		<property name="name" value="trashBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="trashboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
 
 
@@ -228,35 +224,35 @@
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="spamboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
-	
-	
-	
+
+
+
 	<!-- Boxes del admin1 -->
-	
+
 	<bean id="folder1Admin1" class="domain.Box">
 		<property name="name" value="inBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder1Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
-	
+
 	<bean id="folder2Admin1" class="domain.Box">
 		<property name="name" value="outBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder2Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
-	
+
 	<bean id="folder3Admin1" class="domain.Box">
 		<property name="name" value="trashBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder3Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
 
 
@@ -265,33 +261,33 @@
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
-	
-		<!-- Boxes del admin2 -->
-	
+
+	<!-- Boxes del admin2 -->
+
 	<bean id="folder1Admin2" class="domain.Box">
 		<property name="name" value="inBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder1Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
-	
+
 	<bean id="folder2Admin2" class="domain.Box">
 		<property name="name" value="outBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder2Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
-	
+
 	<bean id="folder3Admin2" class="domain.Box">
 		<property name="name" value="trashBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder3Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
 
 
@@ -300,91 +296,95 @@
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
-	
-		<!-- Enroll -->
-		
-	
+
+	<!-- Enroll -->
+
+
 	<bean id="enroll1" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2017 15:00" />
 		<property name="endMoment" value="June 29, 2018 15:00" />
 		<property name="position" value="PRESIDENT" />
-		
+
 		<property name="member" ref="member1" />
 		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
-	
+
 	<bean id="enroll2" class="domain.Enroll">
 		<property name="startMoment" value="April 27, 2014 12:40" />
 		<property name="endMoment" value="December 12, 2018 15:00" />
 		<property name="position" value="SECRETARY" />
 		<property name="member" ref="member2" />
-		
+
 		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
-	
-		<!-- DFloat -->
-	
+
+	<!-- DFloat -->
+
 	<bean id="dFloat1" class="domain.DFloat">
 		<property name="title" value="La pasion de cristo" />
 		<property name="description" value="La pasion de cristo es una procesion normal " />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
-		<property name="brotherhood" ref="brotherhood1" />	
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
-	
+
 	<bean id="dFloat2" class="domain.DFloat">
 		<property name="title" value="La no pasion de cristo" />
-		<property name="description" value="La no pasion de cristo es lo que es ni mas ni menos asi que punto en boca ya juan,PUNTO EN BOCA " />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
-		<property name="brotherhood" ref="brotherhood2" />	
+		<property name="description"
+			value="La no pasion de cristo es lo que es ni mas ni menos asi que punto en boca ya juan,PUNTO EN BOCA " />
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
-	
-	
-			<!-- Social Profile -->
-	
+
+
+	<!-- Social Profile -->
+
 	<bean id="socialProfile1" class="domain.SocialProfile">
 		<property name="nick" value="Curaneitor78"></property>
 		<property name="nameSN" value="Twitter"></property>
 		<property name="linkSN" value="https://twitter.com/Curaneitor"></property>
 		<property name="actor" ref="administrator1" />
 	</bean>
-	
+
 	<bean id="socialProfile2" class="domain.SocialProfile">
 		<property name="nick" value="SickerHup"></property>
 		<property name="nameSN" value="Instagram"></property>
 		<property name="linkSN" value="	https://www.instagram.com/sickerHup"></property>
 		<property name="actor" ref="administrator1" />
 	</bean>
-	
+
 	<bean id="socialProfile3" class="domain.SocialProfile">
 		<property name="nick" value="SickerHup"></property>
 		<property name="nameSN" value="Tuenti"></property>
 		<property name="linkSN" value="	https://www.tuenti.com/sickerHup"></property>
 		<property name="actor" ref="administrator1" />
 	</bean>
-	
+
 	<bean id="socialProfile4" class="domain.SocialProfile">
 		<property name="nick" value="SickerHup"></property>
 		<property name="nameSN" value="Tuenti"></property>
 		<property name="linkSN" value="	https://www.tuenti.com/sickerHup"></property>
 		<property name="actor" ref="member1" />
 	</bean>
-	
+
 	<bean id="socialProfile5" class="domain.SocialProfile">
 		<property name="nick" value="Aprobados"></property>
 		<property name="nameSN" value="Twitter"></property>
 		<property name="linkSN" value="https://twitter.com/Aprobados"></property>
 		<property name="actor" ref="member1" />
 	</bean>
-	
-	
-		<!-- Procession -->
-	
+
+
+	<!-- Procession -->
+
 	<bean id="procession1" class="domain.Procession">
 		<property name="ticker" value="123456-ASDFGH" />
 		<property name="title" value="El Cacharro" />
-		<property name="description" value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="description"
+			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="April 19, 2019 12:45" />
 		<property name="ffinal" value="true" />
 		<property name="finder" ref="finder1" />
@@ -393,13 +393,14 @@
 				<ref bean="dFloat1" />
 			</list>
 		</property>
-		
+
 	</bean>
-	
+
 	<bean id="procession2" class="domain.Procession">
 		<property name="ticker" value="173456-AUDFGH" />
 		<property name="title" value="La pasion de Cristo" />
-		<property name="description" value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="description"
+			value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="April 17, 2019 23:45" />
 		<property name="ffinal" value="true" />
 		<property name="finder" ref="finder2" />
@@ -408,13 +409,13 @@
 				<ref bean="dFloat2" />
 			</list>
 		</property>
-		
+
 	</bean>
-	
-	
-	
+
+
+
 	<!-- Brotherhood -->
-	
+
 	<bean id="brotherhood1" class="domain.Brotherhood">
 		<property name="name" value="Hermandad" />
 		<property name="surname" value="del Amor" />
@@ -422,20 +423,21 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="amor@gmail.com" />
 		<property name="phone" value="+34(456)323456749" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.8" />
-		
+
 		<property name="userAccount" ref="userAccount3" />
-	
-		
+
+
 		<property name="title" value="Hdad del amor" />
 		<property name="establishedMoment" value="May 29, 2012 15:00" />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 	</bean>
-	
-	
+
+
 	<bean id="brotherhood2" class="domain.Brotherhood">
 		<property name="name" value="Hermandad del bracalete" />
 		<property name="surname" value="sin apellidos" />
@@ -443,90 +445,93 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="amorYPaz@gmail.com" />
 		<property name="phone" value="+34(457)321456749" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.2" />
-		
+
 		<property name="userAccount" ref="userAccount5" />
-	
-		
+
+
 		<property name="title" value="Hermanos del amor" />
 		<property name="establishedMoment" value="May 19, 2010 12:00" />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 	</bean>
-	
-	
-		<!-- March -->
-	
- 	<bean id="march1" class="domain.March">
+
+
+	<!-- March -->
+
+	<bean id="march1" class="domain.March">
 		<property name="status" value="ACCEPTED" />
 		<property name="reason" value="" />
 		<property name="rowAtributte" value="1" />
 		<property name="columnAtributte" value="1" />
-		
+
 		<property name="member" ref="member1" />
 		<property name="procession" ref="procession1" />
-		
-	</bean> 
-	
-	 <bean id="march2" class="domain.March">
+
+	</bean>
+
+	<bean id="march2" class="domain.March">
 		<property name="status" value="REJECTED" />
 		<property name="reason" value="Tu no hereje" />
 		<property name="rowAtributte" value="1" />
 		<property name="columnAtributte" value="2" />
-		
+
 		<property name="member" ref="member2" />
 		<property name="procession" ref="procession2" />
-		
-	</bean> 
-	
-			<!-- Message -->
-	
- 	<bean id="message1" class="domain.Message">
+
+	</bean>
+
+	<!-- Message -->
+
+	<bean id="message1" class="domain.Message">
 		<property name="subject" value="Tema" />
-		<property name="body" value="Esto es un body normal ,normal body un es Esto" />
+		<property name="body"
+			value="Esto es un body normal ,normal body un es Esto" />
 		<property name="moment" value="January 19, 2019 17:00" />
 		<property name="priority" value="HIGH" />
 		<property name="tags" value="Queso,Aprobado,PASS" />
-		
+
 		<property name="box" ref="folder1Admin1" />
 		<property name="sender" ref="administrator1" />
 		<property name="recipient" ref="administrator2" />
-		
-	</bean> 
 
-	
-	 <bean id="message3" class="domain.Message">
+	</bean>
+
+
+	<bean id="message3" class="domain.Message">
 		<property name="subject" value="DEVULVEME EL CIRIO LADRON!!!! " />
-		<property name="body" value="DAME MI CIRIOOOO ,QUE TE LO PRESTE Y NO ME LO HAS DEVUELTO" />
+		<property name="body"
+			value="DAME MI CIRIOOOO ,QUE TE LO PRESTE Y NO ME LO HAS DEVUELTO" />
 		<property name="moment" value="February 1, 2018 16:40" />
 		<property name="priority" value="HIGH" />
 		<property name="tags" value="Cirio,Ladron" />
-		
+
 		<property name="box" ref="folder1Admin1" />
 		<property name="sender" ref="administrator1" />
 		<property name="recipient" ref="administrator2" />
-		
-	</bean> 
-	
-	 <bean id="message2" class="domain.Message">
+
+	</bean>
+
+	<bean id="message2" class="domain.Message">
 		<property name="subject" value="TemaDos" />
 		<property name="body" value="Lorem input normal body ASR DP" />
 		<property name="moment" value="December 19, 2018 12:01" />
 		<property name="priority" value="NEUTRAL" />
 		<property name="tags" value="Aprobado,PASS" />
-		
+
 		<property name="box" ref="folder1Admin2" />
 		<property name="sender" ref="administrator2" />
 		<property name="recipient" ref="administrator1" />
-		</bean> 
-	
-	
-	
-	
+	</bean>
+
+
+
+
 	<!-- Member -->
-	
+
 	<bean id="member1" class="domain.Member">
 		<property name="name" value="Juan" />
 		<property name="surname" value="Montes" />
@@ -534,16 +539,16 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="juanmontes@gmail.com" />
 		<property name="phone" value="+34(456)123456749" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.4" />
-		
+
 		<property name="userAccount" ref="userAccount2" />
-		
+
 	</bean>
-	
-		
+
+
 	<bean id="member2" class="domain.Member">
 		<property name="name" value="Alfonso" />
 		<property name="surname" value="Del rio" />
@@ -551,15 +556,149 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="adelvalle@gmail.com" />
 		<property name="phone" value="+34(456)778456749" />
-		
+
 		<property name="spammer" value="true" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.1" />
-		
+
 		<property name="userAccount" ref="userAccount6" />
-		
+
 	</bean>
-	
-	
-	
+
+
+	<!-- Configuration -->
+
+	<bean id="configuration1" class="domain.Configuration">
+		<property name="nameSys" value="Acme Madrugá"></property>
+		<property name="banner" value="https://tinyurl.com/acme-madruga"></property>
+		<property name="positionsEN">
+			<list>
+				<value>President</value>
+				<value>Vice-President</value>
+				<value>Secretary</value>
+				<value>Treasurer</value>
+				<value>Historian</value>
+				<value>Fundraiser</value>
+				<value>Officer</value>
+			</list>
+		</property>
+		<property name="positionsES">
+			<list>
+				<value>Presidente</value>
+				<value>Vice-Presidente</value>
+				<value>Secretario</value>
+				<value>Tesorero</value>
+				<value>Historiador</value>
+				<value>Fundador</value>
+				<value>Oficial</value>
+			</list>
+		</property>
+		<property name="welcomeMessageEN"
+			value="Welcome to Acme Madrugá, the site to organise your processions!"></property>
+		<property name="welcomeMessageES"
+			value="¡Bienvenidos a Acme Madrugá! Tu sitio para organizar procesiones!"></property>
+		<property name="spamWordsEN">
+			<list>
+				<value>sex</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>one million</value>
+				<value>you`ve been selected</value>
+				<value>nigeria</value>
+			</list>
+		</property>
+		<property name="spamWordsES">
+			<list>
+				<value>sexo</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>un millón</value>
+				<value>ha sido seleccionado</value>
+				<value>nigeria</value>
+			</list>
+		</property>
+		<property name="negativeWordsEN">
+			<list>
+				<value>not</value>
+				<value>bad</value>
+				<value>horrible</value>
+				<value>average</value>
+				<value>disaster</value>
+
+			</list>
+		</property>
+		<property name="negativeWordsES">
+			<list>
+				<value>no</value>
+				<value>malo</value>
+				<value>mala</value>
+				<value>horrible</value>
+				<value>mediocre</value>
+				<value>desastre</value>
+			</list>
+		</property>
+		<property name="positiveWordsEN">
+			<list>
+				<value>good</value>
+				<value>fantastic</value>
+				<value>excellent</value>
+				<value>great</value>
+				<value>amazing</value>
+				<value>terrific</value>
+				<value>beautiful</value>
+			</list>
+		</property>
+
+		<property name="positiveWordsES">
+			<list>
+				<value>bueno</value>
+				<value>fantástico</value>
+				<value>buena</value>
+				<value>fantástica</value>
+				<value>excelente</value>
+				<value>gran</value>
+				<value>increíble</value>
+				<value>terrorífico</value>
+				<value>hermoso</value>
+				<value>terrorífica</value>
+				<value>hermosa</value>
+			</list>
+		</property>
+
+		<property name="legalTextEN"
+			value="1. What is personal data?
+'Personal Data' is any information that makes it possible to identify or make identifiable a person. This information is provided when a person accesses the website on their device.
+These include, but are not limited to, first name, last name, nif, postal and e-mail addresses, as well as telephone numbers.
+In addition, when the website is used, certain information is automatically stored for technical reasons (e.g., the IP address assigned by the user's Internet access provider).
+2. What personal data is used and for what purpose?
+Any personal data provided to Acme-Madrugá when using the Web will be treated in accordance with applicable data protection laws. They will only be collected, processed and used for lawful and legitimate purposes, about which the user is informed at all times. Acme-Madrugá stores and uses your personal information to make the use of the website as simple and convenient as possible, so that you can register, log in, make an appointment in the shops, have your shopping list, formalize a contract through a link to our website, send information or contact Acme-Madrugá.
+Also, when these personal data are collected through the forms that are included on the Web, it will be necessary for the user to complete all the data requested, because if they are not provided, considered necessary, the service requested can not be managed or resolve the query made.
+Certain technical information is necessary for the Web to continue to be useful in the user's mobile device. Such technical information will be stored and used anonymously for the development of analytics, statistics, and with the aim of improving the Web. The user will be able to indicate which are his preferences through his user account, or to eliminate the same ones if he is opposed to it.
+Additionally, personal data and technical information are also stored and used when necessary to monitor and prevent unauthorized use or activities that may be illegal (e.g., to maintain and ensure security in the event of attacks on our computer systems).
+Finally, the user's information is stored and used if required by applicable legislation, or, if necessary, to comply with requests from competent public and/or administrative bodies, as well as to make possible the exercise of Acme-Madrugá's rights and actions, and for any other purpose contemplated in the applicable laws.
+3. Do we communicate your personal data?
+Certain information may be processed by certain service providers who have been selected with special care and who only use it in accordance with our instructions and instructions (including, but not limited to, customer service, central computer services, companies conducting market research or customer satisfaction surveys, as well as payment method providers who perform security checks on our behalf to prevent and prevent fraud or other problems during the payment process). In this regard, information will only be sent to entities that are located within the European Economic Area and, therefore, subject to European Union data protection regulations, or that commit to comply with the corresponding data protection standards.
+Finally, we will communicate your data and information, in accordance with data protection rules, to third parties or public bodies if required to do so by virtue of requests from a competent authority, as well as when required to do so by courts and tribunals for any reason.
+4. Users' rights.
+Users have recognised rights of access, rectification, cancellation and opposition, which they may exercise free of charge before Acme-Madrugá. The quickest and easiest way to exercise their rights is by accessing the user account on the Web and modifying their data. Any information that we need to store, by virtue of a legal or contractual obligation, will be blocked and will only be used for such purposes instead of being erased."></property>
+
+		<property name="legalTextES"
+			value="1. ¿Qué son datos personales?
+'Dato Personal' es cualquier información que permite identificar o hacer identificable a una persona. Esta información se facilita cuando una persona accede  en su dispositivo a la web.
+Entre otros, se incluyen el nombre, apellidos, nif, la dirección postal y electrónica, así como el número de teléfono entre otros.
+Adicionalmente, cuando se usa la web, determinada información es almacenada de forma automática por motivos técnicos (p.e., la dirección IP asignada por el proveedor de acceso a Internet del usuario).
+2. ¿Qué datos personales son utilizados y para qué finalidad?
+Cualquier dato personal que se facilite a Acme-Madrugá al usar la Web será tratado de conformidad con las leyes de protección de datos aplicables. Sólo serán recogidos, tratados y utilizados para fines lícitos y legítimos, sobre los cuales se informa al usuario en todo momento. Acme-Madrugá almacena y utiliza su información personal para hacer que el uso de la Web sea lo más sencillo y cómodo posible, para que pueda registrarse, iniciar sesión, solicitar cita previa en las tiendas, tener la lista de sus compras, formalizar un contrato a través de un enlace a nuestro sitio web, enviar información o contactar con Acme-Madrugá.
+Asimismo, cuando estos datos personales sean recabados a través de los formularios que se incluyen en la Web, será necesario que el usuario complete todos los datos solicitados, ya que si no se suministrasen los mismos, considerados necesarios, no se podrá gestionar el servicio solicitado o resolver la consulta formulada.
+Determinada información técnica es necesaria para que la Web siga siendo de utilidad en el dispositivo móvil del usuario. Tal información técnica será almacenada y utilizada de forma anónima para el desarrollo de analíticas, estadísticas, y con el objetivo de mejorar la Web. El usuario podrá indicar cuáles son sus preferencias a través de su cuenta de usuario, o eliminar las mismas si se opone a ello.
+Adicionalmente, también se almacenan y se utilizan datos personales e información técnica cuando es necesario para monitorizar y prevenir usos no autorizados o actividades que puedan ser ilegales (p.e., para mantener y garantizar la seguridad en caso de ataques a nuestros sistemas informáticos).
+Finalmente, se almacena y se utiliza la información del usuario en caso de ser requerido por la legislación aplicable, o, si fuera necesario, para dar cumplimiento a requerimientos procedentes de órganos públicos y/o administrativos competentes, así como para hacer posible el ejercicio de los derechos y acciones de Acme-Madrugá, y para cualquier otra finalidad contemplada en las leyes aplicables.
+3. ¿Comunicamos sus datos personales?
+Determinada información puede ser tratada por ciertos proveedores de servicios que han sido seleccionados con especial cuidado, que únicamente la utilizan siguiendo nuestras instrucciones e indicaciones (entre otros, cabe incluir servicios de atención al cliente, servicios informáticos centrales, compañías que desarrollan investigaciones de mercado o encuestas de satisfacción de clientes, así como proveedores de medios de pago que realizan comprobaciones de seguridad en nuestro nombre para evitar y prevenir fraudes u otros problemas durante el proceso de pago). En este sentido, solo se enviará información a entidades que estén ubicadas dentro del Espacio Económico Europeo y, por tanto, sujetas a las normas de la Unión Europea sobre protección de datos, o que se comprometan a cumplir con los correspondientes estándares de protección de datos.
+Finalmente, comunicaremos sus datos e información, de conformidad con las normas sobre protección de datos, a terceras partes u organismos públicos en caso de ser requeridos para ello en virtud de solicitudes procedentes de una autoridad competente, así como cuando se nos requiera por juzgados y tribunales por cualquier motivo.
+4. Derechos de los usuarios.
+Los usuarios tienen reconocidos los derechos de acceso, rectificación, cancelación y oposición, que podrán ejercitar gratuitamente ante Acme-Madrugá. La forma más rápida y sencilla para ejercitar sus derechos es accediendo a la cuenta de usuario en la Web y modificando sus datos. Cualquier información que necesitemos almacenar, en virtud de una obligación legal o contractual, será bloqueada y solo será utilizada para tales fines en lugar de ser borrada."></property>
+		<property name="cacheFinder" value="1"></property>
+		<property name="numResults" value="10"></property>
+	</bean>
 </beans>
