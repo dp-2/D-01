@@ -297,27 +297,33 @@
 		
 	
 	<bean id="enroll1" class="domain.Enroll">
-		<property name="moment" value="June 29, 2015 15:00" />
+		<property name="startMoment" value="June 29, 2017 15:00" />
+		<property name="endMoment" value="June 29, 2018 15:00" />
+		<property name="position" value="PRESIDENT" />
+		
 		<property name="member" ref="member1" />
-		<property name="procession" ref="procession1" />
+		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
 	
 	<bean id="enroll2" class="domain.Enroll">
-		<property name="moment" value="February 29, 2014 15:00" />
+		<property name="startMoment" value="April 27, 2014 12:40" />
+		<property name="endMoment" value="December 12, 2018 15:00" />
+		<property name="position" value="SECRETARY" />
 		<property name="member" ref="member2" />
-		<property name="procession" ref="procession2" />
+		
+		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
 	
 		<!-- DFloat -->
 	
-	<bean id="dfloat1" class="domain.DFloat">
+	<bean id="dFloat1" class="domain.DFloat">
 		<property name="title" value="La pasion de cristo" />
 		<property name="description" value="La pasion de cristo es una procesion normal " />
 		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
 		<property name="brotherhood" ref="brotherhood1" />	
 	</bean>
 	
-	<bean id="dfloat2" class="domain.DFloat">
+	<bean id="dFloat2" class="domain.DFloat">
 		<property name="title" value="La no pasion de cristo" />
 		<property name="description" value="La no pasion de cristo es lo que es ni mas ni menos asi que punto en boca ya juan,PUNTO EN BOCA " />
 		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
@@ -371,6 +377,13 @@
 		<property name="description" value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="April 19, 2019 12:45" />
 		<property name="ffinal" value="true" />
+		<property name="finder" ref="finder1" />
+		<property name="dFloats">
+			<list>
+				<ref bean="dFloat1" />
+			</list>
+		</property>
+		
 	</bean>
 	
 	<bean id="procession2" class="domain.Procession">
@@ -379,6 +392,13 @@
 		<property name="description" value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="April 17, 2019 23:45" />
 		<property name="ffinal" value="true" />
+		<property name="finder" ref="finder2" />
+		<property name="dFloats">
+			<list>
+				<ref bean="dFloat2" />
+			</list>
+		</property>
+		
 	</bean>
 	
 	
@@ -427,7 +447,9 @@
 	</bean>
 	
 	
-<!-- 	<bean id="march1" class="domain.March">
+		<!-- March -->
+	
+ 	<bean id="march1" class="domain.March">
 		<property name="status" value="ACCEPTED" />
 		<property name="reason" value="" />
 		<property name="rowAtributte" value="1" />
@@ -436,7 +458,59 @@
 		<property name="member" ref="member1" />
 		<property name="procession" ref="procession1" />
 		
-	</bean> -->
+	</bean> 
+	
+	 <bean id="march2" class="domain.March">
+		<property name="status" value="REJECTED" />
+		<property name="reason" value="Tu no hereje" />
+		<property name="rowAtributte" value="1" />
+		<property name="columnAtributte" value="2" />
+		
+		<property name="member" ref="member2" />
+		<property name="procession" ref="procession2" />
+		
+	</bean> 
+	
+			<!-- Message -->
+	
+ 	<bean id="message1" class="domain.Message">
+		<property name="subject" value="Tema" />
+		<property name="body" value="Esto es un body normal ,normal body un es Esto" />
+		<property name="moment" value="January 19, 2019 17:00" />
+		<property name="priority" value="HIGH" />
+		<property name="tags" value="Queso,Aprobado,PASS" />
+		
+		<property name="box" ref="folder1Admin1" />
+		<property name="sender" ref="administrator1" />
+		<property name="recipient" ref="administrator2" />
+		
+	</bean> 
+
+	
+	 <bean id="message3" class="domain.Message">
+		<property name="subject" value="DEVULVEME EL CIRIO LADRON!!!! " />
+		<property name="body" value="DAME MI CIRIOOOO ,QUE TE LO PRESTE Y NO ME LO HAS DEVUELTO" />
+		<property name="moment" value="February 1, 2018 16:40" />
+		<property name="priority" value="HIGH" />
+		<property name="tags" value="Cirio,Ladron" />
+		
+		<property name="box" ref="folder1Admin1" />
+		<property name="sender" ref="administrator1" />
+		<property name="recipient" ref="administrator2" />
+		
+	</bean> 
+	
+	 <bean id="message2" class="domain.Message">
+		<property name="subject" value="TemaDos" />
+		<property name="body" value="Lorem input normal body ASR DP" />
+		<property name="moment" value="December 19, 2018 12:01" />
+		<property name="priority" value="NEUTRAL" />
+		<property name="tags" value="Aprobado,PASS" />
+		
+		<property name="box" ref="folder1Admin2" />
+		<property name="sender" ref="administrator2" />
+		<property name="recipient" ref="administrator1" />
+		</bean> 
 	
 	
 	
@@ -457,7 +531,6 @@
 		
 		<property name="userAccount" ref="userAccount2" />
 		
-		<property name="position" value="President" />
 	</bean>
 	
 		
@@ -475,7 +548,6 @@
 		
 		<property name="userAccount" ref="userAccount6" />
 		
-		<property name="position" value="Fundraiser" />
 	</bean>
 	
 	
