@@ -2,10 +2,14 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -65,6 +69,35 @@ public class Procession extends DomainEntity {
 	}
 	public void setFfinal(final boolean ffinal) {
 		this.ffinal = ffinal;
+	}
+
+
+	//Relationships
+
+	private List<DFloat>	dFloats;
+	private Finder			finder;
+
+
+	@Valid
+	@NotNull
+	@ManyToMany
+	public List<DFloat> getdFloats() {
+		return this.dFloats;
+	}
+
+	public void setdFloats(final List<DFloat> dFloats) {
+		this.dFloats = dFloats;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Finder getFinder() {
+		return this.finder;
+	}
+
+	public void setFinder(final Finder finder) {
+		this.finder = finder;
 	}
 
 }

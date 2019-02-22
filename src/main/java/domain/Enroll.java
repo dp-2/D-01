@@ -6,10 +6,15 @@ import java.util.Date;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -17,23 +22,46 @@ public class Enroll extends DomainEntity {
 
 	// Properties
 
-	private Date	moment;
+	private Date	startMoment;
+	private String	position;
+	private Date	endMoment;
 
 
 	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
 	@Past
-	public Date getMoment() {
-		return this.moment;
+	public Date getStartMoment() {
+		return this.startMoment;
 	}
-	public void setMoment(final Date moment) {
-		this.moment = moment;
+
+	public void setStartMoment(final Date startMoment) {
+		this.startMoment = startMoment;
+	}
+
+	public String getPosition() {
+		return this.position;
+	}
+
+	public void setPosition(final String position) {
+		this.position = position;
+	}
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@Past
+	public Date getEndMoment() {
+		return this.endMoment;
+	}
+
+	public void setEndMoment(final Date endMoment) {
+		this.endMoment = endMoment;
 	}
 
 
 	// Relationships
-
 	private Member		member;
-	private Procession	procession;
+	private Brotherhood	brotherhood;
 
 
 	@NotNull
@@ -48,12 +76,13 @@ public class Enroll extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToOne(optional = true)
-	public Procession getProcession() {
-		return this.procession;
+	@ManyToOne(optional = false)
+	public Brotherhood getBrotherhood() {
+		return this.brotherhood;
 	}
-	public void setProcession(final Procession procession) {
-		this.procession = procession;
+
+	public void setBrotherhood(final Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
 	}
 
 }

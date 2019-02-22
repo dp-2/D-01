@@ -1,8 +1,11 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -17,11 +20,10 @@ public class Area extends DomainEntity {
 
 	// Properties
 
-	private String	name;
-	private String	pictures;
+	private String				name;
+	private Collection<String>	pictures;
 
 
-	@NotNull
 	@NotBlank
 	public String getName() {
 		return this.name;
@@ -29,13 +31,12 @@ public class Area extends DomainEntity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
 	@NotNull
-	@NotBlank
-	public String getPictures() {
+	@ElementCollection
+	public Collection<String> getPictures() {
 		return this.pictures;
 	}
-	public void setPictures(final String pictures) {
+	public void setPictures(final Collection<String> pictures) {
 		this.pictures = pictures;
 	}
 

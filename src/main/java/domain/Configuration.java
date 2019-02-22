@@ -1,8 +1,11 @@
 
 package domain;
 
+import java.util.List;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -16,23 +19,24 @@ public class Configuration extends DomainEntity {
 
 	// Properties
 
-	private String	nameSys;
-	private String	banner;
-	private String	welcomeMessageEN;
-	private String	spamWordsEN;
-	private String	negativeWordsEN;
-	private String	positiveWordsEN;
-	private String	positionsEN;
-	private String	welcomeMessageES;
-	private String	spamWordsES;
-	private String	negativeWordsES;
-	private String	positiveWordsES;
-	private String	positionsES;
-	private int		numResults;
-	private int		cacheFinder;
+	private String			nameSys;
+	private String			banner;
+	private List<String>	positionsEN;
+	private List<String>	positionsES;
+	private String			welcomeMessageES;
+	private String			welcomeMessageEN;
+	private List<String>	spamWordsEN;
+	private List<String>	spamWordsES;
+	private List<String>	negativeWordsEN;
+	private List<String>	positiveWordsEN;
+	private List<String>	negativeWordsES;
+	private List<String>	positiveWordsES;
+	private String			legalTextEN;
+	private String			legalTextES;
+	private int				numResults;
+	private int				cacheFinder;
 
 
-	@NotNull
 	@NotBlank
 	public String getNameSys() {
 		return this.nameSys;
@@ -41,7 +45,6 @@ public class Configuration extends DomainEntity {
 		this.nameSys = nameSys;
 	}
 
-	@NotNull
 	@NotBlank
 	@URL
 	public String getBanner() {
@@ -51,7 +54,6 @@ public class Configuration extends DomainEntity {
 		this.banner = banner;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getWelcomeMessageEN() {
 		return this.welcomeMessageEN;
@@ -60,43 +62,6 @@ public class Configuration extends DomainEntity {
 		this.welcomeMessageEN = welcomeMessageEN;
 	}
 
-	@NotNull
-	@NotBlank
-	public String getSpamWordsEN() {
-		return this.spamWordsEN;
-	}
-	public void setSpamWordsEN(final String spamWordsEN) {
-		this.spamWordsEN = spamWordsEN;
-	}
-
-	@NotNull
-	@NotBlank
-	public String getNegativeWordsEN() {
-		return this.negativeWordsEN;
-	}
-	public void setNegativeWordsEN(final String negativeWordsEN) {
-		this.negativeWordsEN = negativeWordsEN;
-	}
-
-	@NotNull
-	@NotBlank
-	public String getPositiveWordsEN() {
-		return this.positiveWordsEN;
-	}
-	public void setPositiveWordsEN(final String positiveWordsEN) {
-		this.positiveWordsEN = positiveWordsEN;
-	}
-
-	@NotNull
-	@NotBlank
-	public String getPositionsEN() {
-		return this.positionsEN;
-	}
-	public void setPositionsEN(final String positionsEN) {
-		this.positionsEN = positionsEN;
-	}
-
-	@NotNull
 	@NotBlank
 	public String getWelcomeMessageES() {
 		return this.welcomeMessageES;
@@ -106,38 +71,74 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotNull
-	@NotBlank
-	public String getSpamWordsES() {
+	@ElementCollection
+	public List<String> getSpamWordsEN() {
+		return this.spamWordsEN;
+	}
+	public void setSpamWordsEN(final List<String> spamWordsEN) {
+		this.spamWordsEN = spamWordsEN;
+	}
+
+	@NotNull
+	@ElementCollection
+	public List<String> getNegativeWordsEN() {
+		return this.negativeWordsEN;
+	}
+	public void setNegativeWordsEN(final List<String> negativeWordsEN) {
+		this.negativeWordsEN = negativeWordsEN;
+	}
+
+	@NotNull
+	@ElementCollection
+	public List<String> getPositiveWordsEN() {
+		return this.positiveWordsEN;
+	}
+	public void setPositiveWordsEN(final List<String> positiveWordsEN) {
+		this.positiveWordsEN = positiveWordsEN;
+	}
+
+	@NotNull
+	@ElementCollection
+	public List<String> getPositionsEN() {
+		return this.positionsEN;
+	}
+	public void setPositionsEN(final List<String> positionsEN) {
+		this.positionsEN = positionsEN;
+	}
+
+	@NotNull
+	@ElementCollection
+	public List<String> getSpamWordsES() {
 		return this.spamWordsES;
 	}
-	public void setSpamWordsES(final String spamWordsES) {
+	public void setSpamWordsES(final List<String> spamWordsES) {
 		this.spamWordsES = spamWordsES;
 	}
 
 	@NotNull
-	@NotBlank
-	public String getNegativeWordsES() {
+	@ElementCollection
+	public List<String> getNegativeWordsES() {
 		return this.negativeWordsES;
 	}
-	public void setNegativeWordsES(final String negativeWordsES) {
+	public void setNegativeWordsES(final List<String> negativeWordsES) {
 		this.negativeWordsES = negativeWordsES;
 	}
 
 	@NotNull
-	@NotBlank
-	public String getPositiveWordsES() {
+	@ElementCollection
+	public List<String> getPositiveWordsES() {
 		return this.positiveWordsES;
 	}
-	public void setPositiveWordsES(final String positiveWordsES) {
+	public void setPositiveWordsES(final List<String> positiveWordsES) {
 		this.positiveWordsES = positiveWordsES;
 	}
 
 	@NotNull
-	@NotBlank
-	public String getPositionsES() {
+	@ElementCollection
+	public List<String> getPositionsES() {
 		return this.positionsES;
 	}
-	public void setPositionsES(final String positionsES) {
+	public void setPositionsES(final List<String> positionsES) {
 		this.positionsES = positionsES;
 	}
 
@@ -155,6 +156,24 @@ public class Configuration extends DomainEntity {
 	}
 	public void setCacheFinder(final int cacheFinder) {
 		this.cacheFinder = cacheFinder;
+	}
+
+	@NotBlank
+	public String getLegalTextEN() {
+		return this.legalTextEN;
+	}
+
+	public void setLegalTextEN(final String legalTextEN) {
+		this.legalTextEN = legalTextEN;
+	}
+
+	@NotBlank
+	public String getLegalTextES() {
+		return this.legalTextES;
+	}
+
+	public void setLegalTextES(final String legalTextES) {
+		this.legalTextES = legalTextES;
 	}
 
 }

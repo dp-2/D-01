@@ -4,8 +4,10 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,7 +31,6 @@ public class March extends DomainEntity {
 	private Integer	columnAtributte;
 
 
-	@NotNull
 	@NotBlank
 	@Pattern(regexp = "^PENDING$|^ACCEPTED$|^REJECTED$")
 	public String getStatus() {
@@ -62,6 +63,33 @@ public class March extends DomainEntity {
 		this.columnAtributte = columnAtributte;
 	}
 
+
 	// Relationships
+
+	private Member		member;
+	private Procession	procession;
+
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Member getMember() {
+		return this.member;
+	}
+
+	public void setMember(final Member member) {
+		this.member = member;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Procession getProcession() {
+		return this.procession;
+	}
+
+	public void setProcession(final Procession procession) {
+		this.procession = procession;
+	}
 
 }

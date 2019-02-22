@@ -2,51 +2,39 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.March;
+import domain.Member;
 
 @Repository
 public interface MarchRepository extends JpaRepository<March, Integer> {
 
-	@Query("select a from March a where a.handyWorker.id = ?1")
-	Collection<March> findMarchsByHandyWorker(int handyWorkerId);
+	@Query("select a from March a where a.member.id = ?1")
+	Collection<March> findMarchsByMember(int memberId);
 
-	@Query("select a from March a where a.fixupTask.id = ?1")
-	Collection<March> findMarchsByFixupTask(int fixupTaskId);
+	@Query("select a from March a where a.procession.id = ?1")
+	Collection<March> findMarchsByProcession(int processionId);
 
-	//---------------------Query C4------------------------------
-	//The average, the minimum, the maximum, and the standard deviation of the
-	//price offered in the marchs
+	//Queries Dashboard-----------------------------------------------------------
 
-	@Query("select min(a.price),max(a.price),avg(a.price),sqrt(sum(a.price * a.price) /count(a.price) - (avg(a.price) *avg(a.price))) from March a")
-	Double[] marchPriceStats();
+	//The ratio of requests to march in a procession, grouped by their status.
 
-	//------------------------Query C5----------------------------------------
-	//The ratio of pending marchs.
+	@Query("select 1.0*count(m)/(select count(mm) from March mm ) from March m where m.status='APPROVED' and m.procession.id=?1 groupby m.status")
+	List<Double> ratioAcceptedMarchByProcession(int processionId);
 
-	@Query("select (select count(*) from a where status='PENDING' )/count(*)*100 from March a")
-	Double pendingRatio();
+	//The listing of members who have got at least 10% the maximum number of request to march accepted.
 
-	//------------------------Query C6----------------------------------------
-	//The ratio of accepted marchs.
+	@Query("select m from Member m where (((select count(mm) from March mm where mm.member.id=m.id and mm.status = 'APPROVED' )*1.0 /(select count(mmm) from March mmm ))>=(select count(mmmm) from March mmmm ))")
+	List<Member> members10PerMarchAccepted();
 
-	@Query("select (select count(*) from a where status='ACCEPTED' )/count(*)*100 from March a")
-	Double acceptedRatio();
+	//The ratio of requests to march grouped by their status.
 
-	//------------------------Query C7----------------------------------------
-	//The ratio of rejected marchs.
-
-	@Query("select count(app)/(select count(ap) from March ap)from March app where app.status='REJECTED'")
-	Double appsRejectedRatio();
-
-	//------------------------Query C8----------------------------------------
-	//The ratio of pending marchs that cannot change its status because their time period elapsed.
-
-	@Query("select 100*(count(app)/(select count(ap) from March ap))from March app where app.status='PENDING' and app.fixupTask.end < CURRENT_TIMESTAMP ")
-	Double lateMarchsRatio();
+	@Query("select 1.0*count(m)/(select count(mm) from March mm ) from March m  groupby m.status")
+	List<Double> ratioMarchByStatus();
 
 }
