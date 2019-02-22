@@ -34,9 +34,6 @@ public class MemberService {
 	private ServiceUtils			serviceUtils;
 
 	@Autowired
-	private ActorService			actorService;
-
-	@Autowired
 	private ConfigurationService	configurationService;
 
 
