@@ -92,7 +92,7 @@ public class ServiceUtils {
 	}
 
 	public void checkNoActor() {
-		final Actor principal = this.actorService.findOneByUserAccount(LoginService.getPrincipal());
+		final Actor principal = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		Assert.isNull(principal);
 	}
 
@@ -103,7 +103,7 @@ public class ServiceUtils {
 			// Comprueba que el Actor está en la base de datos
 			Assert.notNull(this.actorService.findOne(a.getId()));
 			// Comprueba que el actor de entrada y el actor logueado son el mismo
-			final Actor principal = this.actorService.findOneByUserAccount(LoginService.getPrincipal());
+			final Actor principal = this.actorService.findByUserAccount(LoginService.getPrincipal());
 			Assert.isTrue(principal.equals(a));
 		}
 	}

@@ -67,7 +67,7 @@ public class MessageService {
 
 	public Message save(final Message object) {
 		final Message message = (Message) this.serviceUtils.checkObjectSave(object);
-		final Administrator system = (Administrator) this.actorService.findOneByUserAccount((UserAccount) this.loginService.loadUserByUsername("system"));
+		final Administrator system = (Administrator) this.actorService.findByUserAccount((UserAccount) this.loginService.loadUserByUsername("system"));
 		Message message1 = null;
 		if (message.getId() == 0) {
 			message.setMoment(new Date(System.currentTimeMillis() - 1000));
@@ -123,8 +123,6 @@ public class MessageService {
 			}
 		return res;
 	}
-
-	//(Elena) Mensaje a todos los actores. Esta incompleto porque aun no se muy bien como hacerlo.
 
 	public void broadcast(final Message m) {
 		final Message message = (Message) this.serviceUtils.checkObjectSave(m);
