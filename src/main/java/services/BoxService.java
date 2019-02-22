@@ -10,11 +10,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BoxRepository;
 import domain.Actor;
 import domain.Box;
 import domain.Message;
+import forms.BoxForm;
 
 @Service
 @Transactional
@@ -33,6 +36,8 @@ public class BoxService {
 	private MessageService	messageService;
 	@Autowired
 	private ServiceUtils	serviceUtils;
+	@Autowired
+	private Validator		validator;
 
 
 	// CRUD
@@ -146,6 +151,25 @@ public class BoxService {
 
 	public void flush() {
 		this.repository.flush();
+	}
+
+	public BoxForm construct(final Box box) {
+		final BoxForm res = new BoxForm();
+		res.setName(box.getName());
+		res.setRootBox(box.getRootBox());
+		return res;
+	}
+
+	public Box deconstruct(final BoxForm form, final BindingResult binding) {
+		Box res = null;
+		if (form.getId() == 0)
+			this.create(this.actorService.findPrincipal());
+		else
+			res = (Box) this.serviceUtils.checkObject(form);
+		res.setName(form.getName());
+		res.setRootBox(form.getRootBox());
+		this.validator.validate(res, binding);
+		return res;
 	}
 
 }

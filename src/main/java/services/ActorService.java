@@ -99,4 +99,10 @@ public class ActorService {
 		return this.actorRepository.findByUserAccount(userAccount.getId());
 	}
 
+	public Collection<Actor> findAllExceptMe() {
+		final Collection<Actor> res = this.findAll();
+		res.remove(this.findPrincipal());
+		return res;
+	}
+
 }

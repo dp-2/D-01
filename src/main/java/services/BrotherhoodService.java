@@ -9,12 +9,15 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Brotherhood;
 import domain.Url;
+import forms.BrotherhoodForm;
 
 @Service
 @Transactional
@@ -33,6 +36,8 @@ public class BrotherhoodService {
 	private BoxService				boxService;
 	@Autowired
 	private ServiceUtils			serviceUtils;
+	@Autowired
+	private Validator				validator;
 
 
 	public Brotherhood findOne(final Integer id) {
@@ -96,6 +101,39 @@ public class BrotherhoodService {
 		final Brotherhood brotherhood = (Brotherhood) this.serviceUtils.checkObject(b);
 		this.serviceUtils.checkActor(brotherhood);
 		this.repository.delete(brotherhood);
+	}
+
+	public BrotherhoodForm construct(final Brotherhood b) {
+		final BrotherhoodForm res = new BrotherhoodForm();
+		res.setEmail(b.getEmail());
+		res.setName(b.getName());
+		res.setPhone(b.getPhone());
+		res.setPhoto(b.getPhoto());
+		res.setPictures(b.getPictures());
+		res.setSurname(b.getSurname());
+		res.setTitle(b.getTitle());
+		res.setUsername(b.getUserAccount().getUsername());
+		res.setPassword(b.getUserAccount().getPassword());
+		return res;
+	}
+
+	public Brotherhood deconstruct(final BrotherhoodForm form, final BindingResult binding) {
+		Brotherhood res = null;
+		if (form.getId() == 0)
+			res = this.create();
+		else
+			res = (Brotherhood) this.serviceUtils.checkObject(form);
+		res.setEmail(form.getEmail());
+		res.setName(form.getName());
+		res.setPhone(form.getPhone());
+		res.setPhoto(form.getPhoto());
+		res.setPictures(form.getPictures());
+		res.setSurname(form.getSurname());
+		res.setTitle(form.getTitle());
+		res.getUserAccount().setUsername(form.getUsername());
+		res.getUserAccount().setPassword(form.getPassword());
+		this.validator.validate(res, binding);
+		return res;
 	}
 
 }
