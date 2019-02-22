@@ -580,9 +580,7 @@
 
 		<property name="title" value="Hdad del amor" />
 		<property name="establishedMoment" value="May 29, 2012 15:00" />
-		<property name="pictures"
-			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
-			
+
 		<property name="pictures">
 			<list>
 				<bean id="url1brotherhood1" class="domain.Url">
@@ -615,7 +613,7 @@
 		<property name="establishedMoment" value="May 19, 2010 12:00" />
 		<property name="pictures">
 			<list>
-				<bean id="url1brotherhood1" class="domain.Url">
+				<bean id="url1brotherhood2" class="domain.Url">
 					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>

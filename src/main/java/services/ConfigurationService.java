@@ -12,11 +12,10 @@ import org.springframework.util.Assert;
 
 import repositories.ConfigurationRepository;
 import domain.Configuration;
-import domain.DomainEntity;
 
 @Service
 @Transactional
-public class ConfigurationService extends DomainEntity {
+public class ConfigurationService {
 
 	//Repository-----------------------------------------------------------------
 

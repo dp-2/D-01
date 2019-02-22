@@ -50,6 +50,7 @@ public class Brotherhood extends Actor {
 
 	@ElementCollection
 	@Valid
+	@NotNull
 	public Collection<Url> getPictures() {
 		return this.pictures;
 	}

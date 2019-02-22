@@ -1,8 +1,6 @@
 
 package forms;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -10,7 +8,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import domain.Box;
 import domain.DomainEntity;
 
-@Access(AccessType.PROPERTY)
 public class BoxForm extends DomainEntity {
 
 	private String	name;

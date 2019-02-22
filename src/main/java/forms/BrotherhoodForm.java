@@ -3,8 +3,6 @@ package forms;
 
 import java.util.Collection;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -16,7 +14,6 @@ import org.hibernate.validator.constraints.URL;
 import domain.DomainEntity;
 import domain.Url;
 
-@Access(AccessType.PROPERTY)
 public class BrotherhoodForm extends DomainEntity {
 
 	private String			name;

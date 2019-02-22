@@ -14,10 +14,10 @@ import utilities.AbstractTest;
 import domain.Box;
 import domain.Message;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
-@RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class MessageServiceTest extends AbstractTest {
 

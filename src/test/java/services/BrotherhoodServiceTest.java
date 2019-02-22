@@ -13,10 +13,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import utilities.AbstractTest;
 import domain.Brotherhood;
 
+@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
 })
-@RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class BrotherhoodServiceTest extends AbstractTest {
 

@@ -12,15 +12,15 @@ import org.hibernate.validator.constraints.URL;
 @Access(AccessType.PROPERTY)
 public class Url {
 
-	private Url	url;
+	private String	url;
 
 
 	@URL
 	@NotBlank
-	public Url getUrl() {
+	public String getUrl() {
 		return this.url;
 	}
-	public void setUrl(final Url url) {
+	public void setUrl(final String url) {
 		this.url = url;
 	}
 
