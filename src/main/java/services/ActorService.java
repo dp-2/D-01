@@ -57,6 +57,7 @@ public class ActorService {
 		actor.setUserAccount(userAccount);
 		actor.setBanned(false);
 		actor.setSpammer(false);
+		actor.setScore(0.0);
 		return actor;
 	}
 	public Actor findOne(final int actorId) {

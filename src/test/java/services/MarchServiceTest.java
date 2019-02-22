@@ -37,9 +37,9 @@ public class MarchServiceTest extends AbstractTest {
 		final int processionId = this.getEntityId("procession1");
 		try {
 			final March march = this.marchService.create(processionId, memberId);
-			march.setReason("aaa");
-			march.setRowAtributte(2);
-			march.setColumnAtributte(2);
+			march.setReason("");
+			march.setRowAtributte(null);
+			march.setColumnAtributte(null);
 			march.setStatus("PENDING");
 
 			Assert.notNull(march);
