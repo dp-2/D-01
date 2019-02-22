@@ -27,7 +27,7 @@ public class EnrollService {
 	private MemberService		memberService;
 
 	@Autowired
-	private ProcessionService	processionService;
+	private BrotherhoodService	brotherhoodService;
 
 
 	//Constructor----------------------------------------------------------------------------
@@ -37,10 +37,12 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create(final int memberId, final int processionId) {
+	public Enroll create(final int memberId, final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
 		enroll.setMember(this.memberService.findOne(memberId));
-		enroll.setProcession(this.processionService.findOne(processionId));
+		enroll.setBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
+		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
+		enroll.setHaSalido(false);
 
 		return enroll;
 	}
@@ -64,7 +66,10 @@ public class EnrollService {
 		Assert.notNull(enroll);
 		this.checkPrincipal(enroll);
 		Enroll result;
-		enroll.setMoment(new Date(System.currentTimeMillis() - 1000));
+		if (enroll.getHaSalido() == true)
+			enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
+		if (enroll.getHaSalido() == true)
+			enroll.setEndMoment(new Date(System.currentTimeMillis() - 1000));
 		result = this.enrollRepository.save(enroll);
 
 		return result;
@@ -77,8 +82,8 @@ public class EnrollService {
 	}
 	//Other Methods-----------------------------------------------------------------
 	public Boolean checkPrincipal(final Enroll enroll) {
-		final UserAccount u = enroll.getMember().getUserAccount();
-		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con este Miembro");
+		final UserAccount u = enroll.getBrotherhood().getUserAccount();
+		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con esta hermandad");
 		return true;
 	}
 }

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class MarchService {
 		march = new March();
 		march.setMember(this.memberRepository.findOne(MemberId));
 		march.setProcession(this.processionRepository.findOne(processionId));
-
+		march.setStatus("PENDING");
 		return march;
 	}
 
@@ -72,7 +73,10 @@ public class MarchService {
 		this.checkPrincipal(march);
 		Assert.notNull(march);
 		March result;
-
+		if (march.getStatus().equals("APPROVED")) {
+			march.setRowAtributte(this.isUniqueRowNum());
+			march.setColumnAtributte(this.isUniqueColumNum());
+		}
 		result = this.marchRepository.save(march);
 		Assert.notNull(result);
 		final List<March> marchs = this.marchRepository.findAll();
@@ -84,7 +88,7 @@ public class MarchService {
 		this.checkPrincipal(march);
 		this.marchRepository.delete(march);
 		final List<March> marchs = this.marchRepository.findAll();
-		Assert.isTrue(!marchs.contains(march));
+		Assert.isTrue(!(marchs.contains(march)));
 	}
 
 	//Other methods
@@ -99,5 +103,38 @@ public class MarchService {
 
 	public Collection<March> findMarchsByMember(final int memberId) {
 		return this.marchRepository.findMarchsByMember(memberId);
+	}
+
+	private int generarNum() {
+
+		return num;
+	}
+
+	public int isUniqueColumNum() {
+		int result = this.generarNum();
+		final Collection<March> marchs = this.marchRepository.findAll();
+		final ArrayList<Integer> columA = new ArrayList<>();
+
+		for (final March m : marchs)
+			columA.add(m.getColumnAtributte());
+
+		if (columA.contains(result))
+			result = this.isUniqueColumNum();
+
+		return result;
+	}
+
+	public int isUniqueRowNum() {
+		int result = this.generarNum();
+		final Collection<March> marchs = this.marchRepository.findAll();
+		final ArrayList<Integer> rowA = new ArrayList<>();
+
+		for (final March m : marchs)
+			rowA.add(m.getRowAtributte());
+
+		if (rowA.contains(result))
+			result = this.isUniqueColumNum();
+
+		return result;
 	}
 }

@@ -23,8 +23,8 @@ public class Enroll extends DomainEntity {
 	// Properties
 
 	private Date	startMoment;
-	private String	position;
 	private Date	endMoment;
+	private boolean	haSalido;
 
 
 	@NotNull
@@ -34,18 +34,10 @@ public class Enroll extends DomainEntity {
 	public Date getStartMoment() {
 		return this.startMoment;
 	}
-
 	public void setStartMoment(final Date startMoment) {
 		this.startMoment = startMoment;
 	}
 
-	public String getPosition() {
-		return this.position;
-	}
-
-	public void setPosition(final String position) {
-		this.position = position;
-	}
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
@@ -58,10 +50,21 @@ public class Enroll extends DomainEntity {
 		this.endMoment = endMoment;
 	}
 
+	@NotNull
+	@Valid
+	public boolean getHaSalido() {
+		return this.haSalido;
+	}
+
+	public void setHaSalido(final boolean haSalido) {
+		this.haSalido = haSalido;
+	}
+
 
 	// Relationships
 	private Member		member;
 	private Brotherhood	brotherhood;
+	private Position	position;
 
 
 	@NotNull
@@ -83,6 +86,16 @@ public class Enroll extends DomainEntity {
 
 	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
+	}
+
+	@Valid
+	@ManyToOne(optional = false)
+	public Position getPosition() {
+		return this.position;
+	}
+
+	public void setPosition(final Position position) {
+		this.position = position;
 	}
 
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles.xml
+ * tiles_es.xml
  *
  * Copyright (C) 2019 Universidad de Sevilla
  * 
@@ -13,17 +13,17 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+      
 <tiles-definitions>
 
-	<definition name="march/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit request" />
-		<put-attribute name="body" value="/views/march/edit.jsp" />
+	<definition name="profile/action-1" extends="master.page">	
+		<put-attribute name="title" value="Perfil: Acción 1" />
+		<put-attribute name="body" value="/views/profile/action-1.jsp" />
 	</definition>
 	
-	<definition name="march/list" extends="master.page">	
-		<put-attribute name="title" value="List of requests" />
-		<put-attribute name="body" value="/views/march/list.jsp" />
+	<definition name="profile/action-2" extends="master.page">	
+		<put-attribute name="title" value="Perfil: Acción 2" />
+		<put-attribute name="body" value="/views/profile/action-2.jsp" />
 	</definition>
 	
 </tiles-definitions>
