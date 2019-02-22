@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
@@ -35,6 +36,7 @@ public class Configuration extends DomainEntity {
 	private String			legalTextES;
 	private int				numResults;
 	private int				cacheFinder;
+	private String			countryCode;
 
 
 	@NotBlank
@@ -174,6 +176,14 @@ public class Configuration extends DomainEntity {
 
 	public void setLegalTextES(final String legalTextES) {
 		this.legalTextES = legalTextES;
+	}
+	@NotBlank
+	@Pattern(regexp = "\\+\\d{1,3}")
+	public String getCountryCode() {
+		return this.countryCode;
+	}
+	public void setCountryCode(final String countryCode) {
+		this.countryCode = countryCode;
 	}
 
 }

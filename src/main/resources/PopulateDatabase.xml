@@ -37,8 +37,8 @@
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="broderhood1" />
-		<property name="password" value="8f0f32240f31aa96a734369819efb284" />
+		<property name="username" value="brotherhood1" />
+		<property name="password" value="479e3180a45b21ea8e88beb0c45aa8ed" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -61,8 +61,8 @@
 	</bean>
 
 	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="broderhood2" />
-		<property name="password" value="bccb2fea6548fde343ae9771bc94b123" />
+		<property name="username" value="brotherhood2" />
+		<property name="password" value="88f1b810c40cd63107fb758fef4d77db" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -582,6 +582,17 @@
 		<property name="establishedMoment" value="May 29, 2012 15:00" />
 		<property name="pictures"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+			
+		<property name="pictures">
+			<list>
+				<bean id="url1brotherhood1" class="domain.Url">
+					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+				</bean>
+				<bean id="url2brotherhood2" class="domain.Url">
+					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+				</bean>
+			</list>
+		</property>
 	</bean>
 
 
@@ -602,8 +613,13 @@
 
 		<property name="title" value="Hermanos del amor" />
 		<property name="establishedMoment" value="May 19, 2010 12:00" />
-		<property name="pictures"
-			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="pictures">
+			<list>
+				<bean id="url1brotherhood1" class="domain.Url">
+					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+				</bean>
+			</list>
+		</property>
 	</bean>
 
 
@@ -819,5 +835,7 @@
 			value="1. ¿Qué son datos personales?"></property>
 		<property name="cacheFinder" value="1"></property>
 		<property name="numResults" value="10"></property>
+		<property name="countryCode" value="+34"></property> 
+		
 	</bean>
 </beans>
