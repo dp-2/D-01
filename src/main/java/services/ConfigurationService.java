@@ -136,4 +136,7 @@ public class ConfigurationService extends DomainEntity {
 
 	//Otros-----------------------------------------------------------------------
 
+	public Configuration findSettings() {
+		return this.configurationRepository.findConfigurations();
+	}
 }
