@@ -60,10 +60,10 @@ public class MemberService {
 		return result;
 	}
 
-	public Member findOne(final int customerId) {
+	public Member findOne(final int memberId) {
 		Member res;
 
-		res = this.memberRepository.findOne(customerId);
+		res = this.memberRepository.findOne(memberId);
 		Assert.notNull(res);
 
 		return res;
@@ -80,7 +80,7 @@ public class MemberService {
 	}
 
 	public Member save(final Member member) {
-		//comprobamos que el customer que nos pasan no sea nulo
+		//comprobamos que el member que nos pasan no sea nulo
 		Assert.notNull(member);
 		Boolean isCreating = null;
 
@@ -90,7 +90,7 @@ public class MemberService {
 			isCreating = true;
 			member.setSpammer(false);
 
-			//comprobamos que ningún actor resté autenticado (ya que ningun actor puede crear los customers)
+			//comprobamos que ningún actor resté autenticado (ya que ningun actor puede crear los members)
 			//this.serviceUtils.checkNoActor();
 
 		} else {
@@ -98,11 +98,11 @@ public class MemberService {
 			//comprobamos que su id no sea negativa por motivos de seguridad
 			this.serviceUtils.checkIdSave(member);
 
-			//este customer será el que está en la base de datos para usarlo si estamos ante un customer que ya existe
+			//este member será el que está en la base de datos para usarlo si estamos ante un member que ya existe
 			Member memberDB;
 			Assert.isTrue(member.getId() > 0);
 
-			//cogemos el customer de la base de datos
+			//cogemos el member de la base de datos
 			memberDB = this.memberRepository.findOne(member.getId());
 
 			member.setSpammer(memberDB.getSpammer());
@@ -120,14 +120,14 @@ public class MemberService {
 			member.setPhone(confs.getCountryCode() + member.getPhone());
 		}
 		Member res;
-		//le meto al resultado final el customer que he ido modificando anteriormente
+		//le meto al resultado final el member que he ido modificando anteriormente
 		res = this.memberRepository.save(member);
 		this.flush();
 		if (isCreating)
 			this.boxService.createIsSystemBoxs(res);
 		return res;
 	}
-	//no realizamos el delete porque no se va a borrar nunca un customer
+	//no realizamos el delete porque no se va a borrar nunca un member
 
 	// Other business methods -------------------------------------------------
 
@@ -135,15 +135,15 @@ public class MemberService {
 	//		Assert.notNull(a);
 	//		this.serviceUtils.checkAuthority("ADMIN");
 	//		a.getUserAccount().setBanned(true);
-	//		this.customerRepository.save(a);
+	//		this.memberRepository.save(a);
 	//
 	//	}
 
-	//	public void unBanActor(final Customer a) {
+	//	public void unBanActor(final member a) {
 	//		Assert.notNull(a);
 	//		this.serviceUtils.checkAuthority("ADMIN");
 	//		a.getUserAccount().setBanned(false);
-	//		this.customerRepository.save(a);
+	//		this.memberRepository.save(a);
 	//
 	//	}
 
