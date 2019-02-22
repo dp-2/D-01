@@ -6,7 +6,6 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.engine.config.spi.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -111,12 +110,12 @@ public class MessageService {
 
 	public boolean containsSpam(final String s) {
 		Boolean res = false;
-		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsEN())
+		for (final String spamWord : this.configurationService.findOne().getSpamWordsES())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;
 			}
-		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsES())
+		for (final String spamWord : this.configurationService.findOne().getSpamWordsEN())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;
@@ -128,7 +127,7 @@ public class MessageService {
 		final Message message = (Message) this.serviceUtils.checkObjectSave(m);
 		this.serviceUtils.checkAuthority(Authority.ADMIN);
 		final Actor principal = this.actorService.findPrincipal();
-		for (final Actor a : this.actorService.findAllExceptMe(principal)) {
+		for (final Actor a : this.actorService.findAllExceptMe()) {
 			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "inBox"));
 			mes.setBody(message.getBody());
 			mes.setPriority(message.getPriority());
