@@ -11,8 +11,10 @@ import domain.Actor;
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select a from Actor a where a.userAccount.id = ?1")
-	Actor findOneByUserAccount(int userAccountId);
+	Actor findByUserAccount(int userAccountId);
 
+	@Query("select a from Actor a where a.userAccount.username=?1")
+	Actor findByUsername(String username);
 	//---------------------Query C1------------------------------
 	//The average, the minimum, the maximum, and the standard deviation of the number of fix-up tasks per user
 
