@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 
@@ -88,6 +89,11 @@ public class ActorService {
 		Assert.notNull(result);
 
 		return result;
+	}
+
+	public Actor findPrincipal() {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		return this.actorRepository.findByUserAccount(userAccount.getId());
 	}
 
 	// -------------------------Other methods-------------------------
