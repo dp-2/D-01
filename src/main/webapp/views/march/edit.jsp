@@ -27,8 +27,8 @@
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
 
-		<acme:select code="march.status" path="status" 
-			items="${statuses}" itemLabel="status" />
+		<acme:select code="march.status" path="status" items="${statuses}"
+			itemLabel="status" />
 
 		<br />
 
@@ -51,18 +51,22 @@
 
 
 	<acme:submit name="save" code="march.save" />
+	<security:authorize access="hasRole('MEMBER')">
+		<jstl:if test="${march.id != 0 && march.status==PENDING}">
 
-	<jstl:if test="${march.id != 0}">
+			<acme:submit name="delete" code="march.delete" />
 
-		<acme:submit name="delete" code="march.delete" />
+		</jstl:if>
 
-	</jstl:if>
+		<acme:cancel url="/march/member/list.do" code="march.cancel" />
 
-	<acme:cancel url="/procession/list.do" code="march.cancel" />
+		<br />
+	</security:authorize>
+	<security:authorize access="hasRole('BROTHERHOOD')">
+		<acme:cancel url="/march/brotherhood/list.do" code="march.cancel" />
 
-	<br />
-
-
+		<br />
+	</security:authorize>
 
 </form:form>
 
