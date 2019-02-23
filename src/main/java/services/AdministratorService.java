@@ -34,9 +34,6 @@ public class AdministratorService {
 	private ServiceUtils			serviceUtils;
 
 	@Autowired
-	private UserAccountService		userAccountService;
-
-	@Autowired
 	private ConfigurationService	configurationService;
 
 
@@ -51,7 +48,6 @@ public class AdministratorService {
 	public Administrator create() {
 		Administrator result;
 		result = new Administrator();
-		result.setUserAccount(this.userAccountService.create("ADMIN"));
 		result.setBanned(false);
 		result.setSpammer(false);
 		//establezco ya su tipo de userAccount porque no va a cambiar

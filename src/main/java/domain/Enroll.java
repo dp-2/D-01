@@ -24,7 +24,6 @@ public class Enroll extends DomainEntity {
 
 	private Date	startMoment;
 	private Date	endMoment;
-	private boolean	haSalido;
 
 
 	@NotNull
@@ -38,7 +37,6 @@ public class Enroll extends DomainEntity {
 		this.startMoment = startMoment;
 	}
 
-	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
 	@Past
@@ -48,16 +46,6 @@ public class Enroll extends DomainEntity {
 
 	public void setEndMoment(final Date endMoment) {
 		this.endMoment = endMoment;
-	}
-
-	@NotNull
-	@Valid
-	public boolean getHaSalido() {
-		return this.haSalido;
-	}
-
-	public void setHaSalido(final boolean haSalido) {
-		this.haSalido = haSalido;
 	}
 
 
@@ -74,6 +62,7 @@ public class Enroll extends DomainEntity {
 	public Member getMember() {
 		return this.member;
 	}
+
 	public void setMember(final Member member) {
 		this.member = member;
 	}
@@ -94,5 +83,9 @@ public class Enroll extends DomainEntity {
 	public Position getPosition() {
 		return this.position;
 
+	}
+
+	public void setPosition(final Position position) {
+		this.position = position;
 	}
 }

@@ -78,7 +78,6 @@ public class Procession extends DomainEntity {
 
 
 	@Valid
-	@NotNull
 	@ManyToOne(optional = true)
 	public Finder getFinder() {
 		return this.finder;

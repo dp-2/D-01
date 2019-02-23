@@ -10,7 +10,7 @@ import domain.Finder;
 @Repository
 public interface FinderRepository extends JpaRepository<Finder, Integer> {
 
-	@Query("select f from Finder f where f.handyWorker.id = ?1")
-	Finder findByHandyWorkerId(int handyWorkerId);
-	
+	@Query("select p.finder from Procession p where p.id = ?1")
+	Finder findByProcessionId(int processionId);
+
 }

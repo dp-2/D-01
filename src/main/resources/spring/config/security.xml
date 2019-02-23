@@ -31,6 +31,9 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/styles/**"
 			access="permitAll" />
+		<security:intercept-url pattern="/law/**"
+			access="permitAll" />
+
 
 		<security:intercept-url pattern="/views/misc/index.jsp"
 			access="permitAll" />
