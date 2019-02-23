@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,13 +29,9 @@ public class Configuration extends DomainEntity {
 	private List<String>	spamWordsES;
 	private List<String>	negativeWordsES;
 	private List<String>	positiveWordsES;
-	private String			legalTextEN;
-	private String			legalTextES;
-	private String			cookiesTextEN;
-	private String			cookiesTextES;
 	private int				numResults;
 	private int				cacheFinder;
-	private int				countrtCode;
+	private int				countryCode;
 
 
 	@NotBlank
@@ -45,8 +42,8 @@ public class Configuration extends DomainEntity {
 		this.nameSys = nameSys;
 	}
 
-	@NotBlank
 	@URL
+	@NotBlank
 	public String getBanner() {
 		return this.banner;
 	}
@@ -63,6 +60,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotEmpty
+	@ElementCollection
 	public List<String> getSpamWordsEN() {
 		return this.spamWordsEN;
 	}
@@ -71,6 +69,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotEmpty
+	@ElementCollection
 	public List<String> getNegativeWordsEN() {
 		return this.negativeWordsEN;
 	}
@@ -79,6 +78,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotEmpty
+	@ElementCollection
 	public List<String> getPositiveWordsEN() {
 		return this.positiveWordsEN;
 	}
@@ -95,6 +95,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotEmpty
+	@ElementCollection
 	public List<String> getSpamWordsES() {
 		return this.spamWordsES;
 	}
@@ -103,6 +104,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotEmpty
+	@ElementCollection
 	public List<String> getNegativeWordsES() {
 		return this.negativeWordsES;
 	}
@@ -111,6 +113,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotEmpty
+	@ElementCollection
 	public List<String> getPositiveWordsES() {
 		return this.positiveWordsES;
 	}
@@ -134,49 +137,13 @@ public class Configuration extends DomainEntity {
 		this.cacheFinder = cacheFinder;
 	}
 
-	@NotBlank
-	public String getLegalTextEN() {
-		return this.legalTextEN;
-	}
-
-	public void setLegalTextEN(final String legalTextEN) {
-		this.legalTextEN = legalTextEN;
-	}
-
-	@NotBlank
-	public String getLegalTextES() {
-		return this.legalTextES;
-	}
-
-	public void setLegalTextES(final String legalTextES) {
-		this.legalTextES = legalTextES;
-	}
-
-	@NotBlank
-	public String getCookiesTextEN() {
-		return this.cookiesTextEN;
-	}
-
-	public void setCookiesTextEN(final String cookiesTextEN) {
-		this.cookiesTextEN = cookiesTextEN;
-	}
-
-	@NotBlank
-	public String getCookiesTextES() {
-		return this.cookiesTextES;
-	}
-
-	public void setCookiesTextES(final String cookiesTextES) {
-		this.cookiesTextES = cookiesTextES;
-	}
-
 	@Range(min = 1, max = 999)
-	public int getCountrtCode() {
-		return this.countrtCode;
+	public int getCountryCode() {
+		return this.countryCode;
 	}
 
-	public void setCountrtCode(final int countrtCode) {
-		this.countrtCode = countrtCode;
+	public void setCountryCode(final int countrtCode) {
+		this.countryCode = countrtCode;
 	}
 
 }

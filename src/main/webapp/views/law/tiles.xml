@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- 
+ * tiles.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="law/terminosYCondiciones" extends="master.page">	
+		<put-attribute name="title" value="Terms and conditions" />
+		<put-attribute name="body" value="/views/law/terminosYCondiciones.jsp" />
+	</definition>
+	
+	<definition name="law/politicaCookies" extends="master.page">	
+		<put-attribute name="title" value="Cookies policy" />
+		<put-attribute name="body" value="/views/law/politicaCookies.jsp" />
+	</definition>
+	
+	<definition name="law/avisoLegal" extends="master.page">	
+		<put-attribute name="title" value="Legal warning" />
+		<put-attribute name="body" value="/views/law/avisoLegal.jsp" />
+	</definition>
+	
+</tiles-definitions>

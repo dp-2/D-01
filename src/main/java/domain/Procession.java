@@ -73,25 +73,13 @@ public class Procession extends DomainEntity {
 
 	//Relationships
 
-	private domain.Float	dfloat;
-	private Finder			finder;
-	private Brotherhood		brotherhood;
+	private Finder		finder;
+	private Brotherhood	brotherhood;
 
 
 	@Valid
 	@NotNull
-	@ManyToOne(optional = false)
-	public domain.Float getDfloat() {
-		return this.dfloat;
-	}
-
-	public void setDfloat(final domain.Float dfloat) {
-		this.dfloat = dfloat;
-	}
-
-	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Finder getFinder() {
 		return this.finder;
 	}

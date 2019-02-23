@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Float extends DomainEntity {
+public class DFloat extends DomainEntity {
 
 	// Properties
 
@@ -22,7 +22,6 @@ public class Float extends DomainEntity {
 	private String	pictures;
 
 
-	@NotNull
 	@NotBlank
 	public String getTitle() {
 		return this.title;
@@ -31,7 +30,6 @@ public class Float extends DomainEntity {
 		this.title = title;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getDescription() {
 		return this.description;
@@ -52,7 +50,19 @@ public class Float extends DomainEntity {
 	// Relatonships
 
 	private Brotherhood	brotherhood;
+	private Procession	procession;
 
+
+	@NotNull
+	@Valid
+	@OneToOne(optional = false)
+	public Procession getProcession() {
+		return this.procession;
+	}
+
+	public void setProcession(final Procession procession) {
+		this.procession = procession;
+	}
 
 	@NotNull
 	@Valid
