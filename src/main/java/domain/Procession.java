@@ -2,18 +2,19 @@
 package domain;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -28,7 +29,6 @@ public class Procession extends DomainEntity {
 	private boolean	ffinal;
 
 
-	@NotNull
 	@NotBlank
 	@Pattern(regexp = "^\\d{6}-[A-Z]{6}$")
 	public String getTicker() {
@@ -38,7 +38,6 @@ public class Procession extends DomainEntity {
 		this.ticker = ticker;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getTitle() {
 		return this.title;
@@ -47,7 +46,6 @@ public class Procession extends DomainEntity {
 		this.title = title;
 	}
 
-	@NotNull
 	@NotBlank
 	public String getDescription() {
 		return this.description;
@@ -56,7 +54,8 @@ public class Procession extends DomainEntity {
 		this.description = description;
 	}
 
-	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy/mm/dd")
 	public Date getMomentOrganised() {
 		return this.momentOrganised;
 	}
@@ -74,19 +73,20 @@ public class Procession extends DomainEntity {
 
 	//Relationships
 
-	private List<DFloat>	dFloats;
+	private domain.Float	dfloat;
 	private Finder			finder;
+	private Brotherhood		brotherhood;
 
 
 	@Valid
 	@NotNull
-	@ManyToMany
-	public List<DFloat> getdFloats() {
-		return this.dFloats;
+	@ManyToOne(optional = false)
+	public domain.Float getDfloat() {
+		return this.dfloat;
 	}
 
-	public void setdFloats(final List<DFloat> dFloats) {
-		this.dFloats = dFloats;
+	public void setDfloat(final domain.Float dfloat) {
+		this.dfloat = dfloat;
 	}
 
 	@Valid
@@ -98,6 +98,17 @@ public class Procession extends DomainEntity {
 
 	public void setFinder(final Finder finder) {
 		this.finder = finder;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Brotherhood getBrotherhood() {
+		return this.brotherhood;
+	}
+
+	public void setBrotherhood(final Brotherhood brotherhood) {
+		this.brotherhood = brotherhood;
 	}
 
 }

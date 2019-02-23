@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class DFloat extends DomainEntity {
+public class Float extends DomainEntity {
 
 	// Properties
 
