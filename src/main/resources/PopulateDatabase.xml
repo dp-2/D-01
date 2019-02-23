@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 
- * PopulateDatabase.xml
- *
- * Copyright (C) 2019 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	">
-	
+
 	<!-- User accounts -->
 
 	<bean id="userAccount1" class="security.UserAccount">
@@ -41,7 +35,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="broderhood1" />
 		<property name="password" value="8f0f32240f31aa96a734369819efb284" />
@@ -53,7 +47,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="admin2" />
 		<property name="password" value="c84258e9c39059a89ab77d846ddab909" />
@@ -65,7 +59,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="broderhood2" />
 		<property name="password" value="bccb2fea6548fde343ae9771bc94b123" />
@@ -77,7 +71,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="member2" />
 		<property name="password" value="88ed421f060aadcacbd63f28d889797f" />
@@ -89,7 +83,7 @@
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- La contraseña de system es intencional, no se puede acceder a esta 
 		cuenta -->
 
@@ -105,29 +99,29 @@
 		</property>
 	</bean>
 
-	
-	
-	<!-- Other domain beans come here -->	
-	
-	
+
+
+	<!-- Other domain beans come here -->
+
+
 	<!-- Administrators -->
-	
-		<bean id="administrator1" class="domain.Administrator">
+
+	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Mario" />
 		<property name="surname" value="García" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="maxagar@gmail.com" />
 		<property name="phone" value="+34(456)123456789" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.3" />
-		
+
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
-	
-		
+
+
 	<bean id="administrator2" class="domain.Administrator">
 		<property name="name" value="Julian" />
 		<property name="surname" value="DelBario" />
@@ -135,72 +129,72 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="juliki@gmail.com" />
 		<property name="phone" value="+34(456)473456789" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.7" />
-		
+
 		<property name="userAccount" ref="userAccount4" />
 	</bean>
-	
-	
+
+
 	<bean id="system" class="domain.Administrator">
 		<property name="name" value="System" />
 		<property name="surname" value="System" />
 		<property name="email" value="system@system.sys" />
 		<property name="phone" value="+34(456)123456789" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.3" />
-		
+
 		<property name="userAccount" ref="userAccountSystem" />
 	</bean>
-	
-	
+
+
 	<!-- Area -->
-	
+
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Nombre del area 1" />
 		<property name="pictures" value="foto a cambiar" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="finder" ref="finder1" />
 	</bean>
-	
+
 	<bean id="area2" class="domain.Area">
 		<property name="name" value="Nombre del area 2" />
 		<property name="pictures" value="foto a  no cambiar" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="finder" ref="finder2" />
 	</bean>
-	
-	
-	
+
+
+
 	<!-- Box -->
-	
+
 	<!-- Boxes del system -->
 	<bean id="inboxSystem" class="domain.Box">
 		<property name="name" value="inBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="inboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
-	
+
 	<bean id="outboxSystem" class="domain.Box">
 		<property name="name" value="outBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="outboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
-	
+
 	<bean id="trashboxSystem" class="domain.Box">
 		<property name="name" value="trashBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="trashboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
 
 
@@ -209,35 +203,35 @@
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="spamboxSystem" />
 		<property name="actor" ref="system" />
-		
+
 	</bean>
-	
-	
-	
+
+
+
 	<!-- Boxes del admin1 -->
-	
+
 	<bean id="folder1Admin1" class="domain.Box">
 		<property name="name" value="inBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder1Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
-	
+
 	<bean id="folder2Admin1" class="domain.Box">
 		<property name="name" value="outBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder2Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
-	
+
 	<bean id="folder3Admin1" class="domain.Box">
 		<property name="name" value="trashBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder3Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
 
 
@@ -246,33 +240,33 @@
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Admin1" />
 		<property name="actor" ref="administrator1" />
-		
+
 	</bean>
-	
-		<!-- Boxes del admin2 -->
-	
+
+	<!-- Boxes del admin2 -->
+
 	<bean id="folder1Admin2" class="domain.Box">
 		<property name="name" value="inBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder1Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
-	
+
 	<bean id="folder2Admin2" class="domain.Box">
 		<property name="name" value="outBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder2Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
-	
+
 	<bean id="folder3Admin2" class="domain.Box">
 		<property name="name" value="trashBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder3Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
 
 
@@ -281,101 +275,106 @@
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Admin2" />
 		<property name="actor" ref="administrator2" />
-		
+
 	</bean>
-	
-		<!-- Enroll -->
-		
-	
+
+	<!-- Enroll -->
+
+
 	<bean id="enroll1" class="domain.Enroll">
 		<property name="moment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member1" />
 		<property name="procession" ref="procession1" />
 	</bean>
-	
+
 	<bean id="enroll2" class="domain.Enroll">
 		<property name="moment" value="February 29, 2014 15:00" />
 		<property name="member" ref="member2" />
 		<property name="procession" ref="procession2" />
 	</bean>
-	
-		<!-- DFloat -->
-	
+
+	<!-- DFloat -->
+
 	<bean id="dfloat1" class="domain.DFloat">
 		<property name="title" value="La pasion de cristo" />
 		<property name="description" value="La pasion de cristo es una procesion normal " />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
-		<property name="brotherhood" ref="brotherhood1" />	
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
-	
+
 	<bean id="dfloat2" class="domain.DFloat">
 		<property name="title" value="La no pasion de cristo" />
-		<property name="description" value="La no pasion de cristo es lo que es ni mas ni menos asi que punto en boca ya juan,PUNTO EN BOCA " />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />		
-		<property name="brotherhood" ref="brotherhood2" />	
+		<property name="description"
+			value="La no pasion de cristo es lo que es ni mas ni menos asi que punto en boca ya juan,PUNTO EN BOCA " />
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
-	
-	
-			<!-- Social Profile -->
-	
+
+
+	<!-- Social Profile -->
+
 	<bean id="socialProfile1" class="domain.SocialProfile">
 		<property name="nick" value="Curaneitor78"></property>
 		<property name="nameSN" value="Twitter"></property>
 		<property name="linkSN" value="https://twitter.com/Curaneitor"></property>
 		<property name="actor" ref="administrator1" />
 	</bean>
-	
+
 	<bean id="socialProfile2" class="domain.SocialProfile">
 		<property name="nick" value="SickerHup"></property>
 		<property name="nameSN" value="Instagram"></property>
 		<property name="linkSN" value="	https://www.instagram.com/sickerHup"></property>
 		<property name="actor" ref="administrator1" />
 	</bean>
-	
+
 	<bean id="socialProfile3" class="domain.SocialProfile">
 		<property name="nick" value="SickerHup"></property>
 		<property name="nameSN" value="Tuenti"></property>
 		<property name="linkSN" value="	https://www.tuenti.com/sickerHup"></property>
 		<property name="actor" ref="administrator1" />
 	</bean>
-	
+
 	<bean id="socialProfile4" class="domain.SocialProfile">
 		<property name="nick" value="SickerHup"></property>
 		<property name="nameSN" value="Tuenti"></property>
 		<property name="linkSN" value="	https://www.tuenti.com/sickerHup"></property>
 		<property name="actor" ref="member1" />
 	</bean>
-	
+
 	<bean id="socialProfile5" class="domain.SocialProfile">
 		<property name="nick" value="Aprobados"></property>
 		<property name="nameSN" value="Twitter"></property>
 		<property name="linkSN" value="https://twitter.com/Aprobados"></property>
 		<property name="actor" ref="member1" />
 	</bean>
-	
-	
-		<!-- Procession -->
-	
+
+
+	<!-- Procession -->
+
 	<bean id="procession1" class="domain.Procession">
 		<property name="ticker" value="123456-ASDFGH" />
 		<property name="title" value="El Cacharro" />
-		<property name="description" value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="description"
+			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="April 19, 2019 12:45" />
 		<property name="ffinal" value="true" />
 	</bean>
-	
+
 	<bean id="procession2" class="domain.Procession">
 		<property name="ticker" value="173456-AUDFGH" />
 		<property name="title" value="La pasion de Cristo" />
-		<property name="description" value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="description"
+			value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="April 17, 2019 23:45" />
 		<property name="ffinal" value="true" />
 	</bean>
-	
-	
-	
+
+
+
 	<!-- Brotherhood -->
-	
+
 	<bean id="brotherhood1" class="domain.Brotherhood">
 		<property name="name" value="Hermandad" />
 		<property name="surname" value="del Amor" />
@@ -383,20 +382,21 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="amor@gmail.com" />
 		<property name="phone" value="+34(456)323456749" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.8" />
-		
+
 		<property name="userAccount" ref="userAccount3" />
-	
-		
+
+
 		<property name="title" value="Hdad del amor" />
 		<property name="establishedMoment" value="May 29, 2012 15:00" />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 	</bean>
-	
-	
+
+
 	<bean id="brotherhood2" class="domain.Brotherhood">
 		<property name="name" value="Hermandad del bracalete" />
 		<property name="surname" value="sin apellidos" />
@@ -404,33 +404,34 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="amorYPaz@gmail.com" />
 		<property name="phone" value="+34(457)321456749" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.2" />
-		
+
 		<property name="userAccount" ref="userAccount5" />
-	
-		
+
+
 		<property name="title" value="Hermanos del amor" />
 		<property name="establishedMoment" value="May 19, 2010 12:00" />
-		<property name="pictures" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 	</bean>
-	
-	
+
+
 	<!-- Finder -->
-	
+
 	<bean id="finder1" class="domain.Finder">
 		<property name="member" ref="member1" />
 	</bean>
-	
+
 	<bean id="finder2" class="domain.Finder">
 		<property name="member" ref="member2" />
 	</bean>
-	
-	
+
+
 	<!-- Member -->
-	
+
 	<bean id="member1" class="domain.Member">
 		<property name="name" value="Juan" />
 		<property name="surname" value="Montes" />
@@ -438,17 +439,17 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="juanmontes@gmail.com" />
 		<property name="phone" value="+34(456)123456749" />
-		
+
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.4" />
-		
+
 		<property name="userAccount" ref="userAccount2" />
-		
+
 		<property name="position" value="President" />
 	</bean>
-	
-		
+
+
 	<bean id="member2" class="domain.Member">
 		<property name="name" value="Alfonso" />
 		<property name="surname" value="Del rio" />
@@ -456,16 +457,94 @@
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="email" value="adelvalle@gmail.com" />
 		<property name="phone" value="+34(456)778456749" />
-		
+
 		<property name="spammer" value="true" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.1" />
-		
+
 		<property name="userAccount" ref="userAccount6" />
-		
+
 		<property name="position" value="Fundraiser" />
 	</bean>
-	
-	
-	
+
+
+	<!-- Configuration -->
+
+	<bean id="configuration" class="domain.Configuration">
+		<property name="nameSys" value="Acme-Madrugá" />
+		<property name="banner" value="https://tinyurl.com/acme-madruga" />
+		<property name="welcomeMessageEN"
+			value="Welcome to Acme Madrugá¡! The site to organise your processions." />
+		<property name="welcomeMessageES"
+			value="¡Bienvenidos a Acme Madrugá¡! Tu sitio para organizar procesiones." />
+		<property name="spamWordsEN">
+			<list>
+				<value>sex</value>
+				<value>cialis</value>
+				<value>viagra</value>
+				<value>you've been selected</value>
+				<value>one million</value>
+				<value>nigeria</value>
+			</list>
+		</property>
+		<property name="spamWordsES">
+			<list>
+				<value>sexo</value>
+				<value>cialis</value>
+				<value>viagra</value>
+				<value>has sido seleccionado</value>
+				<value>un millon</value>
+				<value>nigeria</value>
+			</list>
+		</property>
+		<property name="positiveWordsEN">
+			<list>
+				<value>good</value>
+				<value>fantastic</value>
+				<value>excellent</value>
+				<value>great</value>
+				<value>amazing</value>
+				<value>terrific</value>
+			</list>
+		</property>
+		<property name="positiveWordsES">
+			<list>
+				<value>bueno</value>
+				<value>fantastico</value>
+				<value>excelente</value>
+				<value>genial</value>
+				<value>increible</value>
+				<value>estupendo</value>
+			</list>
+		</property>
+		<property name="negativeWordsEN">
+			<list>
+				<value>not</value>
+				<value>bad</value>
+				<value>horrible</value>
+				<value>average</value>
+				<value>disaster</value>
+			</list>
+		</property>
+		<property name="negativeWordsES">
+			<list>
+				<value>no</value>
+				<value>malo</value>
+				<value>horrible</value>
+				<value>mediocre</value>
+				<value>desastroso</value>
+			</list>
+		</property>
+		<property name="legalTextEN"
+			value="1. What is personal data? Personal Data is any information that makes it possible to identify or make identifiable a person. This information is provided when a person accesses the website on their device. These include, but are not limited to, first name, last name, nif, postal and e-mail addresses, as well as telephone numbers. In addition, when the website is used, certain information is automatically stored for technical reasons (e.g., the IP address assigned by the users Internet access provider). 2. What personal data is used and for what purpose? Any personal data provided to Acme-MadrugÃ¡ when using the Web will be treated in accordance with applicable data protection laws. They will only be collected, processed and used for lawful and legitimate purposes, about which the user is informed at all times. Acme-MadrugÃ¡ stores and uses your personal information to make the use of the website as simple and convenient as possible, so that you can register, log in, make an appointment in the shops, have your shopping list, formalize a contract through a link to our website, send information or contact Acme-Madrugá¡. Also, when these personal data are collected through the forms that are included on the Web, it will be necessary for the user to complete all the data requested, because if they are not provided, considered necessary, the service requested can not be managed or resolve the query made. Certain technical information is necessary for the Web to continue to be useful in the users mobile device. Such technical information will be stored and used anonymously for the development of analytics, statistics, and with the aim of improving the Web. The user will be able to indicate which are his preferences through his user account, or to eliminate the same ones if he is opposed to it. Additionally, personal data and technical information are also stored and used when necessary to monitor and prevent unauthorized use or activities that may be illegal (e.g., to maintain and ensure security in the event of attacks on our computer systems).Finally, the users information is stored and used if required by applicable legislation, or, if necessary, to comply with requests from competent public and/or administrative bodies, as well as to make possible the exercise of Acme-MadrugÃ¡s rights and actions, and for any other purpose contemplated in the applicable laws.3. Do we communicate your personal data? Certain information may be processed by certain service providers who have been selected with special care and who only use it in accordance with our instructions and instructions (including, but not limited to, customer service, central computer services, companies conducting market research or customer satisfaction surveys, as well as payment method providers who perform security checks on our behalf to prevent and prevent fraud or other problems during the payment process). In this regard, information will only be sent to entities that are located within the European Economic Area and, therefore, subject to European Union data protection regulations, or that commit to comply with the corresponding data protection standards. Finally, we will communicate your data and information, in accordance with data protection rules, to third parties or public bodies if required to do so by virtue of requests from a competent authority, as well as when required to do so by courts and tribunals for any reason. 4. Users rights. Users have recognised rights of access, rectification, cancellation and opposition, which they may exercise free of charge before Acme-MadrugÃ¡. The quickest and easiest way to exercise their rights is by accessing the user account on the Web and modifying their data. Any information that we need to store, by virtue of a legal or contractual obligation, will be blocked and will only be used for such purposes instead of being erased." />
+		<property name="legalTextES"
+			value="1. ¿Que son datos personales? Datos Personal es cualquier informacion que permite identificar o hacer identificable a una persona. Esta informacion se facilita cuando una persona accede  en su dispositivo a la web. Entre otros, se incluyen el nombre, apellidos, nif, la direccion postal y electronica, asi como el numero de telefono entre otros. Adicionalmente, cuando se usa la web, determinada informacion es almacenada de forma automatica por motivos tecnicos (p.e., la direccion IP asignada por el proveedor de acceso a Internet del usuario). 2. ¿Que datos personales son utilizados y para que finalidad? Cualquier dato personal que se facilite a Acme-MadrugÃ¡ al usar la Web serÃ¡ tratado de conformidad con las leyes de protecciÃ³n de datos aplicables. SÃ³lo serÃ¡n recogidos, tratados y utilizados para fines lÃ­citos y legÃ­timos, sobre los cuales se informa al usuario en todo momento. Acme-MadrugÃ¡ almacena y utiliza su informaciÃ³n personal para hacer que el uso de la Web sea lo mÃ¡s sencillo y cÃ³modo posible, para que pueda registrarse, iniciar sesiÃ³n, solicitar cita previa en las tiendas, tener la lista de sus compras, formalizar un contrato a traves de un enlace a nuestro sitio web, enviar informacion o contactar con Acme-Madrugá¡. Asimismo, cuando estos datos personales sean recabados a travÃ©s de los formularios que se incluyen en la Web, serÃ¡ necesario que el usuario complete todos los datos solicitados, ya que si no se suministrasen los mismos, considerados necesarios, no se podrÃ¡ gestionar el servicio solicitado o resolver la consulta formulada. Determinada informaciÃ³n tÃ©cnica es necesaria para que la Web siga siendo de utilidad en el dispositivo movil del usuario. Tal informacion tecnica sera almacenada y utilizada de forma anonima para el desarrollo de analaticas, estadisticas, y con el objetivo de mejorar la Web. El usuario podra indicar cuales son sus preferencias a traves de su cuenta de usuario, o eliminar las mismas si se opone a ello. Adicionalmente, tambiÃ©n se almacenan y se utilizan datos personales e informacion tecnica cuando es necesario para monitorizar y prevenir usos no autorizados o actividades que puedan ser ilegales (p.e., para mantener y garantizar la seguridad en caso de ataques a nuestros sistemas informaticos). Finalmente, se almacena y se utiliza la informacion del usuario en caso de ser requerido por la legislacion aplicable, o, si fuera necesario, para dar cumplimiento a requerimientos procedentes de organos publicos y/o administrativos competentes, asi como para hacer posible el ejercicio de los derechos y acciones de Acme-Madrugá, y para cualquier otra finalidad contemplada en las leyes aplicables. 3. ¿Comunicamos sus datos personales? Determinada informaciÃ³n puede ser tratada por ciertos proveedores de servicios que han sido seleccionados con especial cuidado, que Ãºnicamente la utilizan siguiendo nuestras instrucciones e indicaciones (entre otros, cabe incluir servicios de atenciÃ³n al cliente, servicios informÃ¡ticos centrales, compaÃ±Ã­as que desarrollan investigaciones de mercado o encuestas de satisfacciÃ³n de clientes, asÃ­ como proveedores de medios de pago que realizan comprobaciones de seguridad en nuestro nombre para evitar y prevenir fraudes u otros problemas durante el proceso de pago). En este sentido, solo se enviarÃ¡ informaciÃ³n a entidades que estÃ©n ubicadas dentro del Espacio EconÃ³mico Europeo y, por tanto, sujetas a las normas de la Union Europea sobre proteccion de datos, o que se comprometan a cumplir con los correspondientes estandares de proteccion de datos. Finalmente, comunicaremos sus datos e informaciÃ³n, de conformidad con las normas sobre protecciÃ³n de datos, a terceras partes u organismos pÃºblicos en caso de ser requeridos para ello en virtud de solicitudes procedentes de una autoridad competente, asi como cuando se nos requiera por juzgados y tribunales por cualquier motivo. 4. Derechos de los usuarios. Los usuarios tienen reconocidos los derechos de acceso, rectificacion, cancelacion y oposicion, que podran ejercitar gratuitamente ante Acme-Madrugá. La forma mas rapida y sencilla para ejercitar sus derechos es accediendo a la cuenta de usuario en la Web y modificando sus datos. Cualquier informacion que necesitemos almacenar, en virtud de una obligacion legal o contractual, sera bloqueada y solo sera utilizada para tales fines en lugar de ser borrada." />
+		<property name="cookiesTextEN"
+			value="What is a cookie and what is it for? A Cookie is a small file that is stored on the users computer, tablet, smartphone or any other device with information about navigation. The set of cookies of all our users helps us to improve the quality of our website, allowing us to control which pages are useful, which are not and which are susceptible to improvement. Cookies are essential for the functioning of the Internet, providing countless advantages in the provision of interactive services, facilitating navigation and usability of our website. Under no circumstances could cookies damage your computer. On the other hand, the fact that they are active helps us to identify and resolve errors. We use cookies to recognize your browser, your device, to learn more about your interests and to provide you with essential tools and services and for other purposes, for example: Recognize when you register to use our services, which allows us to offer you product recommendations, show you personalized content, recognize you as a member, allow you to use features more comfortably, offer you other features and personalized services. Maintain a record of saved products. Conduct research and diagnostics to improve the content, products and services of Acme-MadrugÃ¡. Prevent fraudulent activities. Improve security. Submit content, including advertisements, Acme-MadrugÃ¡ and third-party pages that may be of interest to you. Inform. This allows us to consider and analyze the performance of our services. Acme-Madrugá¡ cookies offer you the possibility to take advantage of many of the essential functionalities of Acme-MadrugÃ¡. For example, if you reject or block our cookies, you will not be able to access certain features, access the termination page, or use any of Acme-Madrugá products or services that require you to log in. Authorized third parties may also use cookies when you interact with Acme-MadrugÃ¡ services including search engines, measurement and analytical service providers, social networks, and advertising companies. Third parties use cookies in the process to deliver content, including ads relevant to your interests, to measure the effectiveness of their ads, and to deliver services on behalf of Acme-MadrugÃ¡. Click here to learn more about third parties that may use cookies when you use Acme-Madrugá services. You can manage your browsers cookies through your browser settings. The Help feature on most browsers tells you how to set your browser not to accept new cookies, to notify you each time you receive a new cookie, how to disable cookies, and when cookies will expire. If you turn off all cookies in your browser, neither we nor third parties will transfer cookies to your browser. However, you may have to adjust some of your preferences manually whenever you visit a page and some of the tools and services do not work." />
+		<property name="cookiesTextES"
+			value="¿Que es una cookie y para que sirve? Una Cookie es un pequeño archivo que se almacena en el ordenador del usuario, tablet, smartphone o cualquier otro dispositivo con informacion sobre la navegacion.El conjunto de cookies de todos nuestros usuarios nos ayuda a mejorar la calidad de nuestra web, permitiendonos controlar que paginas son utiles, cuales no y cuales son susceptibles de mejora. Las cookies son esenciales para el funcionamiento de internet, aportando innumerables ventajas en la prestaciÃ³n de servicios interactivos, facilitÃ¡ndote la navegaciÃ³n y usabilidad de nuestra web. En ningÃºn caso las cookies podrÃ­an daÃ±ar tu equipo. Por contra, el que estÃ©n activas nos ayuda a identificar y resolver los errores. Utilizamos cookies para reconocer tu navegador, tu dispositivo, para saber mÃ¡s sobre tus intereses y para proporcionarte herramientas esenciales y servicios y para otros fines, por ejemplo: Reconocer cuando te registras para usar nuestros servicios, lo que nos permite ofrecerte recomendaciones de productos, mostrarte contenido personalizado, reconocerte como miembro, permitirte utilizar funcionalidades mas comodamente, ofrecerte otras funcionalidades y servicios personalizados. Mantener un registro de los productos guardados. Llevar a cabo investigaciones y diagnosticos para mejorar el contenido, los productos y los servicios de Acme-Madrugá. Prevenir actividades fraudulentas. Mejorar la seguridad. Enviar contenidos, incluyendo anuncios, páginas de Acme-Madrugá y de terceros que podrÃ­an interesarte. Informar. Esto nos permite considerar y analizar el rendimiento de nuestros servicios. Las cookies de Acme-MadrugÃ¡ te ofrecen la posibilidad de aprovechar muchas de las funcionalidades esenciales de Acme-Madrugá. Por ejemplo, si rechazas o bloqueas nuestras cookies, no podras acceder a determinadas funcionalidades, acceder a la pagina de finalizacion ni usar ninguno de los productos o servicios de Acme-Madrugá que requieren que inicies una sesion. Los terceros autorizados tambiÃ©n pueden utilizar cookies cuando interactÃºas con los servicios de Acme-MadrugÃ¡ entre los que se incluyen motores de bÃºsqueda, proveedores de servicios de mediciÃ³n y analÃ­ticos, redes sociales y compaÃ±Ã­as de publicidad. Los terceros utilizan cookies en el proceso para proporcionar contenidos, incluyendo anuncios relevantes para tus intereses, para medir la efectividad de sus anuncios y para prestar servicios en nombre de Acme-MadrugÃ¡. Haz clic aquÃ­ para saber mÃ¡s sobre los terceros que podrÃ­an utilizar cookies cuando utilizas los servicios de Acme-Madrugá. Puedes gestionar las cookies de tu navegador a traves de la configuracion de tu navegador. En la funcion âAyudaâ de la mayoria de los navegadores se indica como configurar tu navegador para que no acepte cookies nuevas, para que te notifique cada vez que recibes una nueva cookie, como desactivar cookies y cuando caducaran las cookies. Si desactivas todas las cookies en tu navegador, ni nosotros ni terceros transferiremos cookies a tu navegador. Sin embargo, es probable que tengas que ajustar algunas de tus preferencias manualmente siempre que visites una pagina y que algunas de las herramientas y servicios no funcionen." />
+		<property name="cacheFinder" value="1" />
+		<property name="numResults" value="Acme-Madrugá" />
+		<property name="countryCode" value="34" />
+	</bean>
 </beans>
