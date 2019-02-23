@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import domain.Enroll;
 import repositories.EnrollRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Enroll;
 
 @Service
 @Transactional
@@ -21,13 +21,13 @@ public class EnrollService {
 
 	// Managed repository ----------------------------------------------------------------
 	@Autowired
-	private EnrollRepository	enrollRepository;
+	private EnrollRepository enrollRepository;
 
-	@Autowired
-	private MemberService		memberService;
-
-	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	//	@Autowired
+	//	private MemberService		memberService;
+	//
+	//	@Autowired
+	//	private BrotherhoodService	brotherhoodService;
 
 
 	//Constructor----------------------------------------------------------------------------
@@ -39,10 +39,9 @@ public class EnrollService {
 	// Simple CRUD methods -------------------------------------------------------------------
 	public Enroll create(final int memberId, final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
-		enroll.setMember(this.memberService.findOne(memberId));
-		enroll.setBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
+		//		enroll.setMember(this.memberService.findOne(memberId));
+		//		enroll.setBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
-		enroll.setHaSalido(false);
 
 		return enroll;
 	}
@@ -66,19 +65,17 @@ public class EnrollService {
 		Assert.notNull(enroll);
 		this.checkPrincipal(enroll);
 		Enroll result;
-		if (enroll.getHaSalido() == true)
-			enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
-		if (enroll.getHaSalido() == true)
-			enroll.setEndMoment(new Date(System.currentTimeMillis() - 1000));
+		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 		result = this.enrollRepository.save(enroll);
 
 		return result;
 	}
 	public void delete(final Enroll enroll) {
-
 		Assert.notNull(enroll);
 		this.checkPrincipal(enroll);
-		this.enrollRepository.delete(enroll);
+		Enroll result;
+		enroll.setEndMoment(new Date(System.currentTimeMillis() - 1000));
+		result = this.enrollRepository.save(enroll);
 	}
 	//Other Methods-----------------------------------------------------------------
 	public Boolean checkPrincipal(final Enroll enroll) {

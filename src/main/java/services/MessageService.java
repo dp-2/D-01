@@ -6,19 +6,18 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.engine.config.spi.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.MessageRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
 import domain.Box;
 import domain.Message;
+import repositories.MessageRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -53,7 +52,6 @@ public class MessageService {
 	}
 
 	public Collection<Message> findAll(final Box dependency) {
-		this.serviceUtils.checkObject(dependency);
 		return this.findAll(dependency);
 	}
 
@@ -111,12 +109,12 @@ public class MessageService {
 
 	public boolean containsSpam(final String s) {
 		Boolean res = false;
-		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsEN())
+		for (final String spamWord : this.configurationService.findOne().getSpamWordsEN())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;
 			}
-		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsES())
+		for (final String spamWord : this.configurationService.findOne().getSpamWordsES())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;

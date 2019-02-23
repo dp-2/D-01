@@ -24,7 +24,7 @@ public interface MarchRepository extends JpaRepository<March, Integer> {
 
 	//The ratio of requests to march in a procession, grouped by their status.
 
-	@Query("select 1.0*count(m)/(select count(mm) from March mm ) from March m where m.status='APPROVED' and m.procession.id=?1 groupby m.status")
+	@Query("select 1.0*count(m)/(select count(mm) from March mm ) from March m where m.status='APPROVED' and m.procession.id=?1 group by m.status")
 	List<Double> ratioAcceptedMarchByProcession(int processionId);
 
 	//The listing of members who have got at least 10% the maximum number of request to march accepted.
