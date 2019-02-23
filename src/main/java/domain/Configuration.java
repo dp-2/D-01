@@ -5,12 +5,10 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 
@@ -22,21 +20,21 @@ public class Configuration extends DomainEntity {
 
 	private String			nameSys;
 	private String			banner;
-	private List<String>	positionsEN;
-	private List<String>	positionsES;
-	private String			welcomeMessageES;
 	private String			welcomeMessageEN;
 	private List<String>	spamWordsEN;
-	private List<String>	spamWordsES;
 	private List<String>	negativeWordsEN;
 	private List<String>	positiveWordsEN;
+	private String			welcomeMessageES;
+	private List<String>	spamWordsES;
 	private List<String>	negativeWordsES;
 	private List<String>	positiveWordsES;
 	private String			legalTextEN;
 	private String			legalTextES;
+	private String			cookiesTextEN;
+	private String			cookiesTextES;
 	private int				numResults;
 	private int				cacheFinder;
-	private String			countryCode;
+	private int				countrtCode;
 
 
 	@NotBlank
@@ -64,6 +62,30 @@ public class Configuration extends DomainEntity {
 		this.welcomeMessageEN = welcomeMessageEN;
 	}
 
+	@NotEmpty
+	public List<String> getSpamWordsEN() {
+		return this.spamWordsEN;
+	}
+	public void setSpamWordsEN(final List<String> spamWordsEN) {
+		this.spamWordsEN = spamWordsEN;
+	}
+
+	@NotEmpty
+	public List<String> getNegativeWordsEN() {
+		return this.negativeWordsEN;
+	}
+	public void setNegativeWordsEN(final List<String> negativeWordsEN) {
+		this.negativeWordsEN = negativeWordsEN;
+	}
+
+	@NotEmpty
+	public List<String> getPositiveWordsEN() {
+		return this.positiveWordsEN;
+	}
+	public void setPositiveWordsEN(final List<String> positiveWordsEN) {
+		this.positiveWordsEN = positiveWordsEN;
+	}
+
 	@NotBlank
 	public String getWelcomeMessageES() {
 		return this.welcomeMessageES;
@@ -72,44 +94,7 @@ public class Configuration extends DomainEntity {
 		this.welcomeMessageES = welcomeMessageES;
 	}
 
-	@NotNull
-	@ElementCollection
-	public List<String> getSpamWordsEN() {
-		return this.spamWordsEN;
-	}
-	public void setSpamWordsEN(final List<String> spamWordsEN) {
-		this.spamWordsEN = spamWordsEN;
-	}
-
-	@NotNull
-	@ElementCollection
-	public List<String> getNegativeWordsEN() {
-		return this.negativeWordsEN;
-	}
-	public void setNegativeWordsEN(final List<String> negativeWordsEN) {
-		this.negativeWordsEN = negativeWordsEN;
-	}
-
-	@NotNull
-	@ElementCollection
-	public List<String> getPositiveWordsEN() {
-		return this.positiveWordsEN;
-	}
-	public void setPositiveWordsEN(final List<String> positiveWordsEN) {
-		this.positiveWordsEN = positiveWordsEN;
-	}
-
-	@NotNull
-	@ElementCollection
-	public List<String> getPositionsEN() {
-		return this.positionsEN;
-	}
-	public void setPositionsEN(final List<String> positionsEN) {
-		this.positionsEN = positionsEN;
-	}
-
-	@NotNull
-	@ElementCollection
+	@NotEmpty
 	public List<String> getSpamWordsES() {
 		return this.spamWordsES;
 	}
@@ -117,8 +102,7 @@ public class Configuration extends DomainEntity {
 		this.spamWordsES = spamWordsES;
 	}
 
-	@NotNull
-	@ElementCollection
+	@NotEmpty
 	public List<String> getNegativeWordsES() {
 		return this.negativeWordsES;
 	}
@@ -126,22 +110,12 @@ public class Configuration extends DomainEntity {
 		this.negativeWordsES = negativeWordsES;
 	}
 
-	@NotNull
-	@ElementCollection
+	@NotEmpty
 	public List<String> getPositiveWordsES() {
 		return this.positiveWordsES;
 	}
 	public void setPositiveWordsES(final List<String> positiveWordsES) {
 		this.positiveWordsES = positiveWordsES;
-	}
-
-	@NotNull
-	@ElementCollection
-	public List<String> getPositionsES() {
-		return this.positionsES;
-	}
-	public void setPositionsES(final List<String> positionsES) {
-		this.positionsES = positionsES;
 	}
 
 	@Range(min = 10, max = 100)
@@ -177,13 +151,32 @@ public class Configuration extends DomainEntity {
 	public void setLegalTextES(final String legalTextES) {
 		this.legalTextES = legalTextES;
 	}
+
 	@NotBlank
-	@Pattern(regexp = "\\+\\d{1,3}")
-	public String getCountryCode() {
-		return this.countryCode;
+	public String getCookiesTextEN() {
+		return this.cookiesTextEN;
 	}
-	public void setCountryCode(final String countryCode) {
-		this.countryCode = countryCode;
+
+	public void setCookiesTextEN(final String cookiesTextEN) {
+		this.cookiesTextEN = cookiesTextEN;
+	}
+
+	@NotBlank
+	public String getCookiesTextES() {
+		return this.cookiesTextES;
+	}
+
+	public void setCookiesTextES(final String cookiesTextES) {
+		this.cookiesTextES = cookiesTextES;
+	}
+
+	@Range(min = 1, max = 999)
+	public int getCountrtCode() {
+		return this.countrtCode;
+	}
+
+	public void setCountrtCode(final int countrtCode) {
+		this.countrtCode = countrtCode;
 	}
 
 }

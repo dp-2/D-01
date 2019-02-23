@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.engine.config.spi.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -66,7 +67,7 @@ public class MessageService {
 
 	public Message save(final Message object) {
 		final Message message = (Message) this.serviceUtils.checkObjectSave(object);
-		final Administrator system = (Administrator) this.actorService.findByUserAccount((UserAccount) this.loginService.loadUserByUsername("system"));
+		final Administrator system = (Administrator) this.actorService.findOneByUserAccount((UserAccount) this.loginService.loadUserByUsername("system"));
 		Message message1 = null;
 		if (message.getId() == 0) {
 			message.setMoment(new Date(System.currentTimeMillis() - 1000));
@@ -110,12 +111,12 @@ public class MessageService {
 
 	public boolean containsSpam(final String s) {
 		Boolean res = false;
-		for (final String spamWord : this.configurationService.findOne().getSpamWordsES())
+		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsEN())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;
 			}
-		for (final String spamWord : this.configurationService.findOne().getSpamWordsEN())
+		for (final String spamWord : this.configurationService.findConfiguration().getSpamWordsES())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;
@@ -123,11 +124,13 @@ public class MessageService {
 		return res;
 	}
 
+	//(Elena) Mensaje a todos los actores. Esta incompleto porque aun no se muy bien como hacerlo.
+
 	public void broadcast(final Message m) {
 		final Message message = (Message) this.serviceUtils.checkObjectSave(m);
 		this.serviceUtils.checkAuthority(Authority.ADMIN);
 		final Actor principal = this.actorService.findPrincipal();
-		for (final Actor a : this.actorService.findAllExceptMe()) {
+		for (final Actor a : this.actorService.findAllExceptMe(principal)) {
 			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "inBox"));
 			mes.setBody(message.getBody());
 			mes.setPriority(message.getPriority());

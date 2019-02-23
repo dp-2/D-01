@@ -9,9 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.AdministratorRepository;
 import domain.Administrator;
 import domain.Configuration;
+import repositories.AdministratorRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -148,7 +151,7 @@ public class AdministratorService {
 		//		this.save(a);
 		//		return banned;
 		//	}
-		//	
+		//
 		//	//unban actor
 		//	public Boolean unbanActor(final Administrator a) {
 		//		Boolean banned = true;
@@ -158,15 +161,25 @@ public class AdministratorService {
 		//		this.save(a);
 		//		return banned;
 		//	}
-		//	
-		//	//comprueba que tenga spam, 
-		//	
+		//
+		//	//comprueba que tenga spam,
+		//
 		////	public Boolean checkBan(final Actor a){
 		////		Boolean res= false;
-		////		
+		////
 		////	}
-		//	
-		//	public 
+		//
+		//	public
+	}
+
+	public boolean isPrincipalAdmin() {
+		boolean res = false;
+		final UserAccount u = LoginService.getPrincipal();
+		final Authority a = new Authority();
+		a.setAuthority("ADMIN");
+		if (u.getAuthorities().contains(a))
+			res = true;
+		return res;
 	}
 
 }
