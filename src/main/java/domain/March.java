@@ -3,17 +3,17 @@ package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -26,10 +26,9 @@ public class March extends DomainEntity {
 
 	// Properties
 
-	private String	status;
-	private String	reason;
-	private Integer	rowAtributte;
-	private Integer	columnAtributte;
+	private String					status;
+	private String					reason;
+	private Par<Integer, Integer>	location;
 
 
 	@NotNull
@@ -48,22 +47,15 @@ public class March extends DomainEntity {
 	public void setReason(final String reason) {
 		this.reason = reason;
 	}
-
-	@Min(0)
-	public Integer getRowAtributte() {
-		return this.rowAtributte;
-	}
-	public void setRowAtributte(final Integer rowAtributte) {
-		this.rowAtributte = rowAtributte;
+	@ElementCollection
+	@NotEmpty
+	@Valid
+	public Par<Integer, Integer> getLocation() {
+		return this.location;
 	}
 
-	@Min(0)
-	@Max(3)
-	public Integer getColumnAtributte() {
-		return this.columnAtributte;
-	}
-	public void setColumnAtributte(final Integer columnAtributte) {
-		this.columnAtributte = columnAtributte;
+	public void setLocation(final Par<Integer, Integer> location) {
+		this.location = location;
 	}
 
 

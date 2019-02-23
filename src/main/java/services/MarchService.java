@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import repositories.ProcessionRepository;
 import security.LoginService;
 import domain.March;
 import domain.Member;
+import domain.Par;
 
 @Service
 @Transactional
@@ -72,18 +74,19 @@ public class MarchService {
 	public March save(final March march) {
 		this.checkPrincipal(march);
 		Assert.notNull(march);
-		March result;
-		if (march.getStatus().equals("APPROVED")) {
-			//	march.setRowAtributte(this.isUniqueRowNum());
-			//	march.setColumnAtributte(this.isUniqueColumNum());
-		}
+		final March result;
+		final Collection<March> marchs = this.marchRepository.findAll();
+		final Collection<Par<Integer, Integer>> locations = new ArrayList<>();
+		for (final March m : marchs)
+			locations.add(m.getLocation());
+		if (march.getStatus().equals("APPROVED"))
+			march.setLocation(this.isUniqueColumNum());
 		result = this.marchRepository.save(march);
+		Assert.isTrue(!locations.contains(march.getLocation()));
 		Assert.notNull(result);
-		final List<March> marchs = this.marchRepository.findAll();
 		Assert.isTrue(marchs.contains(result));
 		return result;
 	}
-
 	public void delete(final March march) {
 		this.checkPrincipal(march);
 		this.marchRepository.delete(march);
@@ -105,39 +108,26 @@ public class MarchService {
 		return this.marchRepository.findMarchsByMember(memberId);
 	}
 
-	/*
-	 * private int generarNum() {
-	 * for(int i=0;i<100;i++){
-	 * 
-	 * }
-	 * }
-	 * 
-	 * public int isUniqueColumNum() {
-	 * int result = this.generarNum();
-	 * final Collection<March> marchs = this.marchRepository.findAll();
-	 * final ArrayList<Integer> columA = new ArrayList<>();
-	 * final ArrayList<Integer> rowA = new ArrayList<>();
-	 * 
-	 * for (final March m : marchs)
-	 * columA.add(m.getColumnAtributte());
-	 * for (final March m : marchs)
-	 * rowA.add(m.getRowAtributte());
-	 * if (columA.contains(result) && rowA.contains(result))
-	 * result = this.isUniqueColumNum();
-	 * 
-	 * return result;
-	 * }
-	 * public int isUniqueRowNum() {
-	 * int result = this.generarNum();
-	 * final Collection<March> marchs = this.marchRepository.findAll();
-	 * 
-	 * for (final March m : marchs)
-	 * rowA.add(m.getRowAtributte());
-	 * 
-	 * if (rowA.contains(result))
-	 * result = this.isUniqueColumNum();
-	 * 
-	 * return result;
-	 * }
-	 */
+	private Par<Integer, Integer> generarNum() {
+		final Par<Integer, Integer> result = null;
+
+		//Consideramos que hay como máximo 23 filas y 3 columnas
+		final int i = (int) Math.random() * 25;
+		final int j = (int) Math.random() * 3;
+		result.setColumna(j);
+		result.setFila(i);
+		return result;
+	}
+	public Par<Integer, Integer> isUniqueColumNum() {
+		Par<Integer, Integer> result = this.generarNum();
+
+		final Collection<March> marchs = this.marchRepository.findAll();
+		final Collection<Par<Integer, Integer>> locations = new ArrayList<>();
+		for (final March m : marchs)
+			locations.add(m.getLocation());
+		if (locations.contains(result))
+			result = this.generarNum();
+
+		return result;
+	}
 }

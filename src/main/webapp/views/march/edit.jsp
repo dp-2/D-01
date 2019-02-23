@@ -38,12 +38,12 @@
 		</jstl:if>
 
 		<jstl:if test="${march.status==APPROVED}">
-			<acme:textbox code="march.rowAtributte" path="rowAtributte" />
+			<acme:textbox code="march.location.fila" path="rowAtributte" />
 			<br />
 		</jstl:if>
 
 		<jstl:if test="${march.status==APPROVED}">
-			<acme:textbox code="march.columnAtributte" path="columnAtributte" />
+			<acme:textbox code="march.location.columna" path="columnAtributte" />
 			<br />
 		</jstl:if>
 

@@ -58,9 +58,8 @@
 			style="background-color:Orange" />
 	</jstl:if>
 	<display:column property="reason" titleKey="march.reason" />
-	<display:column property="rowAtributte" titleKey="march.rowAtributte" />
-	<display:column property="columnAtributte"
-		titleKey="march.columnAtributte" />
+	<display:column property="location" titleKey="march.location" />
+	
 
 
 

@@ -40,8 +40,7 @@ public class MarchServiceTest extends AbstractTest {
 
 			march.setStatus("PENDING");
 			march.setReason("");
-			march.setRowAtributte(1);
-			march.setColumnAtributte(2);
+
 			Assert.notNull(march);
 
 			System.out.println("¡Exito!");
@@ -65,8 +64,7 @@ public class MarchServiceTest extends AbstractTest {
 		try {
 			march = this.marchService.create(processionId, memberId);
 			march.setReason("aaa");
-			march.setRowAtributte(2);
-			march.setColumnAtributte(2);
+
 			march.setStatus("PENDING");
 			saved = this.marchService.save(march);
 
