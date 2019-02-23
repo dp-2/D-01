@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,10 @@ public class AreaService {
 
 
 	//Methods-----------------------------------------------------------
+
+	public List<Area> findAll() {
+		return this.areaRepository.findAll();
+	}
 
 	public Area findOne(final Integer id) {
 		return this.areaRepository.findOne(id);
