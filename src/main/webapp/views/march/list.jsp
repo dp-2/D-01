@@ -20,7 +20,18 @@
 
 <display:table name="marchs" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
+	
+	<security:authorize access="hasRole('MEMBER')">
+	<jstl:if test="${memberId==row.member.id}">
+	<display:column>
 
+				<a href="march/member/edit.do?marchId=${row.id}"> <spring:message
+						code="march.edit" />
+				</a>
+
+			</display:column>
+	</jstl:if>
+	</security:authorize>
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<jstl:if test="${brotherhoodId==row.procession.brotherhood.id}">
 			<display:column>
@@ -32,17 +43,17 @@
 			</display:column>
 		</jstl:if>
 	</security:authorize>
-	<jstl:if test="${march.status==PENDING}">
+	<jstl:if test="${march.status.equals(PENDING)}">
 		<display:column property="status" titleKey="march.status"
 			style="background-color:Grey" />
 	</jstl:if>
 
-	<jstl:if test="${march.status==ACCEPTED }">
+	<jstl:if test="${march.status.equals(ACCEPTED) }">
 		<display:column property="status" titleKey="march.status"
 			style="background-color:Green" />
 	</jstl:if>
 
-	<jstl:if test="${march.status==REJECTED}">
+	<jstl:if test="${march.status.equals(REJECTED)}">
 		<display:column property="status" titleKey="march.status"
 			style="background-color:Orange" />
 	</jstl:if>
@@ -55,12 +66,6 @@
 
 
 </display:table>
-<security:authorize access="hasRole('MEMBER')">
-	<a href="march/member/create.do"> <spring:message
-			code="march.create" />
-	</a>
-</security:authorize>
-<br />
 
-<br />
+
 

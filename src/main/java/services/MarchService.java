@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -75,8 +74,8 @@ public class MarchService {
 		Assert.notNull(march);
 		March result;
 		if (march.getStatus().equals("APPROVED")) {
-			march.setRowAtributte(this.isUniqueRowNum());
-			march.setColumnAtributte(this.isUniqueColumNum());
+			//	march.setRowAtributte(this.isUniqueRowNum());
+			//	march.setColumnAtributte(this.isUniqueColumNum());
 		}
 		result = this.marchRepository.save(march);
 		Assert.notNull(result);
@@ -106,36 +105,39 @@ public class MarchService {
 		return this.marchRepository.findMarchsByMember(memberId);
 	}
 
-	private void generarNum() {
-		final int num = 1;
-
-	}
-
-	public int isUniqueColumNum() {
-		int result = this.generarNum();
-		final Collection<March> marchs = this.marchRepository.findAll();
-		final ArrayList<Integer> columA = new ArrayList<>();
-
-		for (final March m : marchs)
-			columA.add(m.getColumnAtributte());
-
-		if (columA.contains(result))
-			result = this.isUniqueColumNum();
-
-		return result;
-	}
-
-	public int isUniqueRowNum() {
-		int result = this.generarNum();
-		final Collection<March> marchs = this.marchRepository.findAll();
-		final ArrayList<Integer> rowA = new ArrayList<>();
-
-		for (final March m : marchs)
-			rowA.add(m.getRowAtributte());
-
-		if (rowA.contains(result))
-			result = this.isUniqueColumNum();
-
-		return result;
-	}
+	/*
+	 * private int generarNum() {
+	 * for(int i=0;i<100;i++){
+	 * 
+	 * }
+	 * }
+	 * 
+	 * public int isUniqueColumNum() {
+	 * int result = this.generarNum();
+	 * final Collection<March> marchs = this.marchRepository.findAll();
+	 * final ArrayList<Integer> columA = new ArrayList<>();
+	 * final ArrayList<Integer> rowA = new ArrayList<>();
+	 * 
+	 * for (final March m : marchs)
+	 * columA.add(m.getColumnAtributte());
+	 * for (final March m : marchs)
+	 * rowA.add(m.getRowAtributte());
+	 * if (columA.contains(result) && rowA.contains(result))
+	 * result = this.isUniqueColumNum();
+	 * 
+	 * return result;
+	 * }
+	 * public int isUniqueRowNum() {
+	 * int result = this.generarNum();
+	 * final Collection<March> marchs = this.marchRepository.findAll();
+	 * 
+	 * for (final March m : marchs)
+	 * rowA.add(m.getRowAtributte());
+	 * 
+	 * if (rowA.contains(result))
+	 * result = this.isUniqueColumNum();
+	 * 
+	 * return result;
+	 * }
+	 */
 }

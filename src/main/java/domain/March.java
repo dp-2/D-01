@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -57,6 +58,7 @@ public class March extends DomainEntity {
 	}
 
 	@Min(0)
+	@Max(3)
 	public Integer getColumnAtributte() {
 		return this.columnAtributte;
 	}
