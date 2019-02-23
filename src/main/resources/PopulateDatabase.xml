@@ -278,19 +278,33 @@
 
 	</bean>
 
+	<!-- Positions -->
+
+	<bean id="position1_1" class="domain.Position">
+		<property name="name" value="President" />
+		<property name="language" value="en" />
+	</bean>
+
+	<bean id="position1_2" class="domain.Position">
+		<property name="name" value="President" />
+		<property name="language" value="es" />
+	</bean>
 	<!-- Enroll -->
 
 
 	<bean id="enroll1" class="domain.Enroll">
-		<property name="moment" value="June 29, 2015 15:00" />
+		<property name="startMoment" value="June 29, 2015 15:00" />
+		<property name="endMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member1" />
-		<property name="procession" ref="procession1" />
+		<property name="position" ref="position1_1" />
+		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
 
 	<bean id="enroll2" class="domain.Enroll">
-		<property name="moment" value="February 29, 2014 15:00" />
+		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member2" />
-		<property name="procession" ref="procession2" />
+		<property name="position" ref="position1_1" />
+		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
 
 	<!-- Float -->
