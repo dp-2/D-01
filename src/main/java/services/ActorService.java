@@ -14,6 +14,7 @@ import repositories.ActorRepository;
 import repositories.BrotherhoodRepository;
 import repositories.MemberRepository;
 import security.Authority;
+import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
@@ -174,6 +175,22 @@ public class ActorService {
 			this.boxService.createIsSystemBoxs(actor1);
 		}
 
+	}
+
+	public Actor findActorByUsername(final String username) {
+		final Actor actor = this.actorRepository.findByUsername(username);
+		return actor;
+	}
+
+	public Actor findPrincipal() {
+		final UserAccount userAccount = LoginService.getPrincipal();
+		return this.actorRepository.findByUserAccount(userAccount.getId());
+	}
+
+	public Collection<Actor> findAllExceptMe() {
+		final Collection<Actor> res = this.findAll();
+		res.remove(this.findPrincipal());
+		return res;
 	}
 
 }

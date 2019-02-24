@@ -25,7 +25,7 @@ public interface BoxRepository extends JpaRepository<Box, Integer> {
 	@Query("select b from Box b where b.actor.id = ?1 and b.rootBox.id = ?2")
 	Collection<Box> findByActorIdAndRootId(Integer actorId, Integer rootId);
 
-	@Query("select b from Box b where b.actor.id = ?1 and (b.rootBox.id = b.id or b.rootBox= NULL)")
+	@Query("select b from Box b where b.actor.id = ?1 and (b.rootBox.id = b.id or b.rootBox = NULL)")
 	Collection<Box> findByActorIdWithoutRoot(Integer actorId);
 
 }
