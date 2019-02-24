@@ -108,6 +108,7 @@
 
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Mario" />
+		<property name="middleName" value="" />
 		<property name="surname" value="García" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -124,6 +125,7 @@
 
 	<bean id="administrator2" class="domain.Administrator">
 		<property name="name" value="Julian" />
+		<property name="middleName" value="" />
 		<property name="surname" value="DelBario" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -140,6 +142,7 @@
 
 	<bean id="system" class="domain.Administrator">
 		<property name="name" value="System" />
+		<property name="middleName" value="" />
 		<property name="surname" value="System" />
 		<property name="email" value="system@system.sys" />
 		<property name="phone" value="+34(456)123456789" />
@@ -395,6 +398,7 @@
 
 	<bean id="brotherhood1" class="domain.Brotherhood">
 		<property name="name" value="Hermandad" />
+		<property name="middleName" value="" />
 		<property name="surname" value="del Amor" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -417,6 +421,7 @@
 
 	<bean id="brotherhood2" class="domain.Brotherhood">
 		<property name="name" value="Hermandad del bracalete" />
+		<property name="middleName" value="" />
 		<property name="surname" value="sin apellidos" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -452,6 +457,7 @@
 
 	<bean id="member1" class="domain.Member">
 		<property name="name" value="Juan" />
+		<property name="middleName" value="" />
 		<property name="surname" value="Montes" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -470,6 +476,7 @@
 
 	<bean id="member2" class="domain.Member">
 		<property name="name" value="Alfonso" />
+		<property name="middleName" value="" />
 		<property name="surname" value="Del rio" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />

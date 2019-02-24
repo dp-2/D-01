@@ -21,6 +21,7 @@ public class Actor extends DomainEntity {
 
 	// Identification ---------------------------------------------------------
 	private String	name;
+	private String	middleName;
 	private String	surname;
 	private String	photo;
 	private String	email;
@@ -98,6 +99,15 @@ public class Actor extends DomainEntity {
 
 	public void setScore(final double score) {
 		this.score = score;
+	}
+
+	@NotNull
+	public String getMiddleName() {
+		return this.middleName;
+	}
+
+	public void setMiddleName(final String middleName) {
+		this.middleName = middleName;
 	}
 
 
