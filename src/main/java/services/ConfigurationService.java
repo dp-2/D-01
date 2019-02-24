@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.ConfigurationRepository;
 import domain.Configuration;
 import domain.Procession;
-import repositories.ConfigurationRepository;
 
 @Service
 @Transactional
@@ -87,6 +87,10 @@ public class ConfigurationService {
 				result = this.isUniqueTicker();
 
 		return result;
+	}
+
+	public Configuration findConfigurations() {
+		return this.configurationRepository.findConfigurations();
 	}
 
 }
