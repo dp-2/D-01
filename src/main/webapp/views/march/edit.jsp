@@ -38,14 +38,10 @@
 		</jstl:if>
 
 		<jstl:if test="${march.status==APPROVED}">
-			<acme:textbox code="march.location.fila" path="rowAtributte" />
+			<acme:textbox code="march.location.fila" path="march.location" />
 			<br />
 		</jstl:if>
 
-		<jstl:if test="${march.status==APPROVED}">
-			<acme:textbox code="march.location.columna" path="columnAtributte" />
-			<br />
-		</jstl:if>
 
 	</security:authorize>
 

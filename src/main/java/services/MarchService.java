@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.March;
-import domain.Member;
 import repositories.MarchRepository;
 import repositories.MemberRepository;
 import repositories.ProcessionRepository;
 import security.LoginService;
+import domain.March;
+import domain.Member;
 
 @Service
 @Transactional
@@ -89,6 +89,7 @@ public class MarchService {
 	}
 	public void delete(final March march) {
 		this.checkPrincipal(march);
+		Assert.isTrue(march.getStatus().equals("PENDING"));
 		this.marchRepository.delete(march);
 		final List<March> marchs = this.marchRepository.findAll();
 		Assert.isTrue(!(marchs.contains(march)));

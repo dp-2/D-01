@@ -17,6 +17,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table name="marchs" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
@@ -24,10 +25,11 @@
 	<security:authorize access="hasRole('MEMBER')">
 	<jstl:if test="${memberId==row.member.id}">
 	<display:column>
+	<jstl:if test="${row.id != 0 && row.status=='PENDING'}">
 
-				<a href="march/member/edit.do?marchId=${row.id}"> <spring:message
-						code="march.edit" />
-				</a>
+		<acme:submit name="delete" code="march.delete"/>
+
+	</jstl:if>
 
 			</display:column>
 	</jstl:if>
@@ -43,20 +45,21 @@
 			</display:column>
 		</jstl:if>
 	</security:authorize>
-	<jstl:if test="${march.status.equals(PENDING)}">
+	<jstl:if test="${row.status=='PENDING'}">
 		<display:column property="status" titleKey="march.status"
 			style="background-color:Grey" />
 	</jstl:if>
 
-	<jstl:if test="${march.status.equals(ACCEPTED) }">
+	<jstl:if test="${row.status=='APPROVED' }">
 		<display:column property="status" titleKey="march.status"
 			style="background-color:Green" />
 	</jstl:if>
 
-	<jstl:if test="${march.status.equals(REJECTED)}">
+	<jstl:if test="${row.status=='REJECTED'}">
 		<display:column property="status" titleKey="march.status"
 			style="background-color:Orange" />
 	</jstl:if>
+	
 	<display:column property="reason" titleKey="march.reason" />
 	<display:column property="location" titleKey="march.location" />
 	
