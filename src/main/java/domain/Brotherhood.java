@@ -1,18 +1,20 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -20,9 +22,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Brotherhood extends Actor {
 
 	// ATRIBUTOS
-	private String	title;
-	private Date	establishedMoment;
-	private String	pictures;
+	private String			title;
+	private Date			establishedMoment;
+	private Collection<Url>	pictures;
 
 
 	@NotBlank
@@ -46,12 +48,14 @@ public class Brotherhood extends Actor {
 		this.establishedMoment = establishedMoment;
 	}
 
-	@URL
-	public String getPictures() {
+	@ElementCollection
+	@Valid
+	@NotNull
+	public Collection<Url> getPictures() {
 		return this.pictures;
 	}
 
-	public void setPictures(final String pictures) {
+	public void setPictures(final Collection<Url> pictures) {
 		this.pictures = pictures;
 	}
 

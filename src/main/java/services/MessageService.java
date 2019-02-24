@@ -9,15 +9,18 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
-import domain.Actor;
-import domain.Administrator;
-import domain.Box;
-import domain.Message;
 import repositories.MessageRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
+import domain.Administrator;
+import domain.Box;
+import domain.Message;
+import forms.MessageForm;
 
 @Service
 @Transactional
@@ -35,6 +38,8 @@ public class MessageService {
 	private ServiceUtils			serviceUtils;
 	@Autowired
 	private LoginService			loginService;
+	@Autowired
+	private Validator				validator;
 
 
 	public Message findOne(final Integer id) {
@@ -52,6 +57,7 @@ public class MessageService {
 	}
 
 	public Collection<Message> findAll(final Box dependency) {
+		this.serviceUtils.checkObject(dependency);
 		return this.findAll(dependency);
 	}
 
@@ -109,12 +115,12 @@ public class MessageService {
 
 	public boolean containsSpam(final String s) {
 		Boolean res = false;
-		for (final String spamWord : this.configurationService.findOne().getSpamWordsEN())
+		for (final String spamWord : this.configurationService.findOne().getSpamWordsES())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;
 			}
-		for (final String spamWord : this.configurationService.findOne().getSpamWordsES())
+		for (final String spamWord : this.configurationService.findOne().getSpamWordsEN())
 			if (s.contains(spamWord)) {
 				res = true;
 				break;
@@ -122,13 +128,11 @@ public class MessageService {
 		return res;
 	}
 
-	//(Elena) Mensaje a todos los actores. Esta incompleto porque aun no se muy bien como hacerlo.
-
 	public void broadcast(final Message m) {
 		final Message message = (Message) this.serviceUtils.checkObjectSave(m);
 		this.serviceUtils.checkAuthority(Authority.ADMIN);
 		final Actor principal = this.actorService.findPrincipal();
-		for (final Actor a : this.actorService.findAllExceptMe(principal)) {
+		for (final Actor a : this.actorService.findAllExceptMe()) {
 			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "inBox"));
 			mes.setBody(message.getBody());
 			mes.setPriority(message.getPriority());
@@ -165,4 +169,31 @@ public class MessageService {
 		return this.repository.findMessageByMomentSenderReceiverAndSubject(message.getMoment(), message.getSender().getId(), message.getRecipient().getId(), message.getSubject());
 	}
 
+	public MessageForm construct(final Message m) {
+		final MessageForm res = new MessageForm();
+		res.setBody(m.getBody());
+		res.setPriority(m.getPriority());
+		res.setRecipient(m.getRecipient());
+		res.setSubject(m.getSubject());
+		res.setTags(m.getTags());
+		return res;
+	}
+
+	public Message deconstruct(final MessageForm form, final BindingResult binding) {
+		Message res = null;
+		if (form.getId() == 0) {
+			final Actor principal = this.actorService.findPrincipal();
+			final Box inbox = this.boxService.findBoxByActorAndName(principal, "inBox");
+			res = this.create(inbox);
+		} else
+			res = (Message) this.serviceUtils.checkObject(form);
+		res = this.findOne(form.getId());
+		res.setBody(form.getBody());
+		res.setPriority(form.getPriority());
+		res.setRecipient(form.getRecipient());
+		res.setSubject(form.getSubject());
+		res.setTags(form.getTags());
+		this.validator.validate(res, binding);
+		return res;
+	}
 }
