@@ -557,20 +557,34 @@
 		<property name="numResults" value="10" />
 		<property name="countryCode" value="34" />
 	</bean>
-	
+
 	<!-- March -->
 	<bean id="march1" class="domain.March">
-		<property name="status" value="PENDING"></property>
-		<property name="reason" value=""></property>
-		<property name="location" value=""></property>
+		<property name="status" value="PENDING" />
 		<property name="member" ref="member1" />
 		<property name="procession" ref="procession1" />
 	</bean>
-	
+
 	<bean id="march2" class="domain.March">
-		<property name="status" value="REJECT"></property>
+		<property name="status" value="REJECTED"></property>
 		<property name="reason" value="NO SE PUEDE"></property>
-		<property name="location" value=""></property>
+		<property name="member" ref="member2" />
+		<property name="procession" ref="procession1" />
+	</bean>
+
+	<bean id="march3" class="domain.March">
+		<property name="status" value="APPROVED" />
+		<property name="location">
+			<map>
+				<entry>
+					<key>
+						<value>1</value>
+					</key>
+					<value>1
+					</value>
+				</entry>
+			</map>
+		</property>
 		<property name="member" ref="member2" />
 		<property name="procession" ref="procession1" />
 	</bean>

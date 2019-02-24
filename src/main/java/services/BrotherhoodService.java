@@ -24,4 +24,9 @@ public class BrotherhoodService {
 	public Brotherhood findBrotherhoodByUserAcountId(final int userAccountId) {
 		return this.brotherhoodRepository.findBrotherhoodByUserAcountId(userAccountId);
 	}
+
+	public Brotherhood findOne(final Integer id) {
+		return this.brotherhoodRepository.findOne(id);
+	}
+
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import domain.Brotherhood;
 
 @Repository
-public interface BrotherhoodRepository extends JpaRepository<BrotherhoodRepository, Integer> {
+public interface BrotherhoodRepository extends JpaRepository<Brotherhood, Integer> {
 
 	@Query("select b from Brotherhood b where b.userAccount.id =?1")
 	Brotherhood findBrotherhoodByUserAcountId(int userAccountId);

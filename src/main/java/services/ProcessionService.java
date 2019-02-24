@@ -8,9 +8,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import domain.Brotherhood;
+import domain.Finder;
 import domain.Procession;
+import forms.ProcessionForm;
 import repositories.ProcessionRepository;
 import security.LoginService;
 
@@ -30,6 +34,12 @@ public class ProcessionService {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private FinderService			finderService;
+
+	@Autowired
+	private Validator				validator;
 
 
 	//Methods--------------------------------------------------------------------
@@ -79,6 +89,31 @@ public class ProcessionService {
 		Assert.isTrue(brotherhood.getId() == principal.getId());
 
 		return true;
+	}
+
+	public Procession reconstructToProceesion(final ProcessionForm processionForm, final BindingResult bindingResult) {
+		Procession procession;
+		final Brotherhood brotherhood = this.brotherhoodService.findOne(processionForm.getBrotherhoodId());
+
+		if (processionForm.getId() == 0)
+			procession = this.create();
+		else {
+			procession = this.findOne(processionForm.getId());
+			procession.setTicker(processionForm.getTicker());
+			procession.setTitle(processionForm.getTitle());
+			procession.setDescription(processionForm.getDescription());
+			procession.setFfinal(processionForm.isFfinal());
+			procession.setBrotherhood(brotherhood);
+			if (processionForm.getFinderId() != 0) {
+				final Finder finder = this.finderService.findOne(processionForm.getFinderId());
+				procession.setFinder(finder);
+			}
+
+			this.validator.validate(procession, bindingResult);
+		}
+
+		return procession;
+
 	}
 
 }

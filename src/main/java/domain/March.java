@@ -1,6 +1,8 @@
 
 package domain;
 
+import java.util.Map;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
@@ -13,13 +15,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Access(AccessType.PROPERTY)
 @Table(uniqueConstraints = {
 	@UniqueConstraint(columnNames = {
-		"id", "rowAtributte", "columnAtributte"
+		"id"
 	})
 })
 public class March extends DomainEntity {
@@ -28,12 +29,12 @@ public class March extends DomainEntity {
 
 	private String					status;
 	private String					reason;
-	private Par<Integer, Integer>	location;
+	private Map<Integer, Integer>	location;
 
 
 	@NotNull
 	@NotBlank
-	@Pattern(regexp = "^PENDING$|^ACCEPTED$|^REJECTED$")
+	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$")
 	public String getStatus() {
 		return this.status;
 	}
@@ -47,14 +48,13 @@ public class March extends DomainEntity {
 	public void setReason(final String reason) {
 		this.reason = reason;
 	}
+
 	@ElementCollection
-	@NotEmpty
-	@Valid
-	public Par<Integer, Integer> getLocation() {
+	public Map<Integer, Integer> getLocation() {
 		return this.location;
 	}
 
-	public void setLocation(final Par<Integer, Integer> location) {
+	public void setLocation(final Map<Integer, Integer> location) {
 		this.location = location;
 	}
 

@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -11,19 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import domain.March;
+import domain.Member;
 import repositories.MarchRepository;
 import repositories.MemberRepository;
 import repositories.ProcessionRepository;
 import security.LoginService;
-import domain.March;
-import domain.Member;
-import domain.Par;
 
 @Service
 @Transactional
 public class MarchService {
 
-	// Managed repository ------------------------------ 
+	// Managed repository ------------------------------
 	@Autowired
 	private MarchRepository			marchRepository;
 
@@ -76,7 +76,7 @@ public class MarchService {
 		Assert.notNull(march);
 		final March result;
 		final Collection<March> marchs = this.marchRepository.findAll();
-		final Collection<Par<Integer, Integer>> locations = new ArrayList<>();
+		final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
 		for (final March m : marchs)
 			locations.add(m.getLocation());
 		if (march.getStatus().equals("APPROVED"))
@@ -108,21 +108,20 @@ public class MarchService {
 		return this.marchRepository.findMarchsByMember(memberId);
 	}
 
-	private Par<Integer, Integer> generarNum() {
-		final Par<Integer, Integer> result = null;
+	private Map<Integer, Integer> generarNum() {
+		final Map<Integer, Integer> result = null;
 
 		//Consideramos que hay como máximo 23 filas y 3 columnas
 		final int i = (int) Math.random() * 25;
 		final int j = (int) Math.random() * 3;
-		result.setColumna(j);
-		result.setFila(i);
+		result.put(i, j);
 		return result;
 	}
-	public Par<Integer, Integer> isUniqueColumNum() {
-		Par<Integer, Integer> result = this.generarNum();
+	public Map<Integer, Integer> isUniqueColumNum() {
+		Map<Integer, Integer> result = this.generarNum();
 
 		final Collection<March> marchs = this.marchRepository.findAll();
-		final Collection<Par<Integer, Integer>> locations = new ArrayList<>();
+		final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
 		for (final March m : marchs)
 			locations.add(m.getLocation());
 		if (locations.contains(result))
