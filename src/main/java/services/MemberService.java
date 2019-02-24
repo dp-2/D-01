@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import domain.Configuration;
+import domain.Member;
 import repositories.MemberRepository;
 import security.Authority;
 import security.UserAccount;
-import domain.Configuration;
-import domain.Member;
 
 @Service
 @Transactional
@@ -116,7 +116,7 @@ public class MemberService {
 		}
 
 		if ((!member.getPhone().startsWith("+")) && StringUtils.isNumeric(member.getPhone()) && member.getPhone().length() > 3) {
-			final Configuration confs = this.configurationService.findConfigurations();
+			final Configuration confs = this.configurationService.findOne();
 			member.setPhone(confs.getCountryCode() + member.getPhone());
 		}
 		Member res;

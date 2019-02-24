@@ -1,7 +1,7 @@
 
 package services;
 
-import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +35,9 @@ public class FinderService {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private ProcessionService		processionService;
 
 
 	//Methods-------------------------------------------------------------------
@@ -75,8 +78,20 @@ public class FinderService {
 		return true;
 	}
 
-	public List<Procession> searchProcessions(final String keyword, final Date dateMin, final Date dateMax, final Area area, final Pageable pageable) {
-		return this.finderRepository.searchProcessions(keyword, dateMin, dateMax, area);
+	public List<Procession> searchProcessions(final String keyword, final Date dateMin, final Date dateMax) {
+		return this.finderRepository.searchProcessions(keyword, dateMin, dateMax);
+	}
+
+	public List<Procession> finalFilter(final String keyword, final Date dateMin, final Date dateMax, final Area area) {
+		List<Procession> res = new ArrayList<>();
+
+		if ((!keyword.isEmpty() || dateMax == null || dateMin == null) && area == null)
+			res = this.searchProcessions(keyword, dateMin, dateMax);
+		else if ((!keyword.isEmpty() || dateMax == null || dateMin == null) && area != null)
+			for (final Procession procession : res)
+				if (area.getBrotherhood().getId() == procession.getBrotherhood().getId())
+					res.add(procession);
+		return res;
 	}
 
 	public Finder updateFinder(final Finder finder) {
