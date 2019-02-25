@@ -605,4 +605,11 @@
 		<property name="member" ref="member2" />
 		<property name="procession" ref="procession1" />
 	</bean>
+	
+	<bean id="march4" class="domain.March">
+		<property name="status" value="PENDING"></property>
+		<property name="reason" value=""></property>
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession1" />
+	</bean>
 </beans>

@@ -47,17 +47,17 @@
 	</security:authorize>
 	<jstl:if test="${row.status=='PENDING'}">
 		<display:column property="status" titleKey="march.status"
-			style="background-color:Grey" />
+			style="background-color:Grey" sortable="true" />
 	</jstl:if>
 
 	<jstl:if test="${row.status=='APPROVED' }">
 		<display:column property="status" titleKey="march.status"
-			style="background-color:Green" />
+			style="background-color:Green" sortable="true"/>
 	</jstl:if>
 
 	<jstl:if test="${row.status=='REJECTED'}">
 		<display:column property="status" titleKey="march.status"
-			style="background-color:Orange" />
+			style="background-color:Orange" sortable="true"/>
 	</jstl:if>
 	
 	<display:column property="reason" titleKey="march.reason" />

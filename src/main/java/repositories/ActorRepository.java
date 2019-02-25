@@ -1,6 +1,8 @@
 
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,9 @@ public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	@Query("select a from Actor a where a.userAccount.username=?1")
 	Actor findByUsername(String username);
+
+	@Query("select a from Actor a where a.spammer = true")
+	Collection<Actor> findSpammerActors();
 	//---------------------Query C1------------------------------
 	//The average, the minimum, the maximum, and the standard deviation of the number of fix-up tasks per user
 

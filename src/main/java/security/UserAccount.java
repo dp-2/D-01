@@ -51,7 +51,16 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	private String					username;
 	private String					password;
 	private Collection<Authority>	authorities;
+	private Boolean					enabled;
 
+
+	public void setEnabled(final Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Boolean getEnabled() {
+		return this.enabled;
+	}
 
 	@Size(min = 5, max = 32)
 	@Column(unique = true)
