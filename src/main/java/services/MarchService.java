@@ -3,6 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,14 +76,14 @@ public class MarchService {
 		this.checkPrincipal(march);
 		Assert.notNull(march);
 		final March result;
+		final Map<Integer, Integer> a = new HashMap<>();
 		final Collection<March> marchs = this.marchRepository.findAll();
-		final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
-		for (final March m : marchs)
-			locations.add(m.getLocation());
 		if (march.getStatus().equals("APPROVED"))
 			march.setLocation(this.isUniqueColumNum());
+		else
+			march.setLocation(a);
 		result = this.marchRepository.save(march);
-		Assert.isTrue(!locations.contains(march.getLocation()));
+
 		Assert.notNull(result);
 		Assert.isTrue(marchs.contains(result));
 		return result;
@@ -110,7 +111,7 @@ public class MarchService {
 	}
 
 	private Map<Integer, Integer> generarNum() {
-		final Map<Integer, Integer> result = null;
+		final Map<Integer, Integer> result = new HashMap<>();
 
 		//Consideramos que hay como máximo 23 filas y 3 columnas
 		final int i = (int) Math.random() * 25;

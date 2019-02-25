@@ -3,6 +3,8 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -61,13 +63,13 @@ public class MarchServiceTest extends AbstractTest {
 		this.authenticate("member1");
 		final int memberId = this.getEntityId("member1");
 		final int processionId = this.getEntityId("procession1");
+		final Map<Integer, Integer> a = new HashMap<>();
 		try {
 			march = this.marchService.create(processionId, memberId);
 			march.setReason("aaa");
-
 			march.setStatus("PENDING");
+			march.setLocation(a);
 			saved = this.marchService.save(march);
-
 			marchs = this.marchService.findAll();
 			Assert.isTrue(marchs.contains(saved));
 			System.out.println("¡Exito!");
@@ -110,12 +112,12 @@ public class MarchServiceTest extends AbstractTest {
 	@Test
 	public void testDelete() {
 		System.out.println("========== testDelete() ==========");
-		this.authenticate("handyworker1");
+		this.authenticate("member1");
 		final int marchId = this.getEntityId("march1");
 
 		try {
 			final March march = this.marchService.findOne(marchId);
-
+			Assert.isTrue(march.getStatus().equals("PENDING"));
 			this.marchService.delete(march);
 
 			final Collection<March> marchs = new ArrayList<>(this.marchService.findAll());
