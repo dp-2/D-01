@@ -51,8 +51,7 @@
 	</jstl:if>
 
 	<jstl:if test="${isRead == true}">
-		<acme:cancel url="procession/brotherhood/myList.do"
-			code="procession.back" />
+		<acme:cancel url="procession/list.do" code="procession.back" />
 	</jstl:if>
 
 
