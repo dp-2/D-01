@@ -82,7 +82,9 @@
 		<security:authorize access="hasRole('MEMBER')">
 
 			<li><a class="fNiv" href="march/member/list.do"><spring:message
-						code="master.page.march" /></a></li>
+						code="master.page.march" /></a></li>		
+			<li><a class="fNiv" href="member/edit.do"><spring:message
+						code="master.page.member" /></a></li>
 
 		</security:authorize>
 

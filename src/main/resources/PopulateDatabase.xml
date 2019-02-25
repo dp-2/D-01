@@ -37,8 +37,8 @@
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="broderhood1" />
-		<property name="password" value="8f0f32240f31aa96a734369819efb284" />
+		<property name="username" value="brotherhood1" />
+		<property name="password" value="479e3180a45b21ea8e88beb0c45aa8ed" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -61,8 +61,8 @@
 	</bean>
 
 	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="broderhood2" />
-		<property name="password" value="bccb2fea6548fde343ae9771bc94b123" />
+		<property name="username" value="brotherhood2" />
+		<property name="password" value="88f1b810c40cd63107fb758fef4d77db" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">

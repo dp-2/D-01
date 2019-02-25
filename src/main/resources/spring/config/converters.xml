@@ -38,6 +38,9 @@
 
 		<bean class="converters.ProcessionToStringConverter" />
 		<bean class="converters.StringToProcessionConverter" />
+		
+		<bean class="converters.MemberToStringConverter" />
+		<bean class="converters.StringToMemberConverter" />
 
 	</util:list>
 
