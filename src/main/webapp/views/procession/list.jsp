@@ -35,15 +35,13 @@
 	<display:column property="brotherhood.name" titleKey="procession.hood" />
 	<display:column property="ticker" titleKey="procession.ticker" />
 
-	<security:authorize access="isAuthenticated()">
-		<display:column>
+	<display:column>
 
-			<a href="procession/brotherhood/show.do?processionId=${row.id}">
-				<spring:message code="procession.show" />
-			</a>
+		<a href="procession/brotherhood/show.do?processionId=${row.id}"> <spring:message
+				code="procession.show" />
+		</a>
 
-		</display:column>
-	</security:authorize>
+	</display:column>
 
 </display:table>
 

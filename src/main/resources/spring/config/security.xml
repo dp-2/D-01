@@ -105,7 +105,7 @@
 		<security:intercept-url pattern="/procession/brotherhood/edit.do"
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/procession/brotherhood/show.do"
-			access="hasRole('isAuthenticated()')" />
+			access="permitAll" />
 		<security:intercept-url pattern="/procession/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
 
