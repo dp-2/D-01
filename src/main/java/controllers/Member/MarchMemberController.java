@@ -104,9 +104,10 @@ public class MarchMemberController extends AbstractController {
 
 	// DELETE
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(@Valid final March march, final BindingResult binding) {
+	public ModelAndView delete(@RequestParam final int marchId, final BindingResult binding) {
 
 		ModelAndView result;
+		March march=this.marchService.findOne(marchId);
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		try {
 			this.marchService.delete(march);

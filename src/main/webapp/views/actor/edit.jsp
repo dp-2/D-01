@@ -52,8 +52,7 @@
 	<acme:textbox code="actor.email" path="email" />
 	<br />
 
-	<acme:textbox code="actor.address" path="address" />
-	<br />
+	
 
 	<acme:textbox code="actor.phone" path="phone" />
 	<br />
@@ -85,8 +84,7 @@
 
 	<jstl:if test="${isRead == false}">
 		<br />
-		<acme:submit name="save" code="actor.save"
-		onclick=" javascript: return isValid();" />
+		<acme:submit name="save" code="actor.save" />
 
 		<acme:cancel url="welcome/index.do" code="actor.cancel" />
 	</jstl:if>

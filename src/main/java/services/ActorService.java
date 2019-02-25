@@ -133,6 +133,7 @@ public class ActorService {
 			member.setPhoto(actor.getPhoto());
 			member.setSurname(actor.getSurname());
 			member.setScore(0.0);
+			member.setAddress(actor.getAddress());
 
 			final Actor actor1 = this.memberService.save(member);
 			this.boxService.createIsSystemBoxs(actor1);
@@ -153,6 +154,7 @@ public class ActorService {
 			brotherhood.setPhone(actor.getPhone());
 			brotherhood.setPhoto(actor.getPhoto());
 			brotherhood.setSurname(actor.getSurname());
+			brotherhood.setAddress(actor.getAddress());
 
 			final Actor actor1 = this.brotherhoodService.save(brotherhood);
 			this.boxService.createIsSystemBoxs(actor1);
@@ -173,6 +175,7 @@ public class ActorService {
 			administrator.setName(actor.getName());
 			administrator.setPhone(actor.getPhone());
 			administrator.setPhoto(actor.getPhoto());
+			administrator.setAddress(actor.getAddress());
 
 			final Actor actor1 = this.administratorService.save(administrator);
 			this.boxService.createIsSystemBoxs(actor1);

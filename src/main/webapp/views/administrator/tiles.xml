@@ -15,15 +15,6 @@
 		<put-attribute name="body" value="/views/administrator/dashboard.jsp" />
 	</definition>
 	
-	<definition name="administrator/endorser/list" extends="master.page">
-		<put-attribute name="title" value="List of endorser" />
-		<put-attribute name="body" value="/views/administrator/listEndorser.jsp" />
-	</definition>
-	
-	<definition name="administrator/referee" extends="master.page">
-		<put-attribute name="title" value="Register as a referee" />
-		<put-attribute name="body" value="/views/administrator/register.jsp" />
-	</definition>
 	
 		<definition name="administrator/admin" extends="master.page">
 		<put-attribute name="title" value="Register as a administrator" />

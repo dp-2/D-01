@@ -28,7 +28,7 @@ public class RegisterController extends AbstractController {
 
 	// Register handyWorker
 	@RequestMapping(value = "/actor", method = RequestMethod.GET)
-	public ModelAndView createHandyWorker(@RequestParam(required = false, defaultValue = "default") final String authority) {
+	public ModelAndView create(@RequestParam(required = false, defaultValue = "default") final String authority) {
 		ModelAndView modelAndView;
 		try {
 			Actor actor = null;
