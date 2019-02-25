@@ -9,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
+import repositories.ProcessionRepository;
+import security.LoginService;
 import domain.Brotherhood;
 import domain.Finder;
 import domain.Procession;
 import forms.ProcessionForm;
-import repositories.ProcessionRepository;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -38,9 +37,9 @@ public class ProcessionService {
 	@Autowired
 	private FinderService			finderService;
 
-	@Autowired
-	private Validator				validator;
 
+	//	@Autowired
+	//	private Validator				validator;
 
 	//Methods--------------------------------------------------------------------
 
@@ -109,7 +108,7 @@ public class ProcessionService {
 				procession.setFinder(finder);
 			}
 
-			this.validator.validate(procession, bindingResult);
+			//			this.validator.validate(procession, bindingResult);
 		}
 
 		return procession;

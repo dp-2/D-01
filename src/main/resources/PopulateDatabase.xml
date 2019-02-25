@@ -159,16 +159,28 @@
 
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Nombre del area 1" />
-		<property name="pictures" value="foto a cambiar" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="finder" ref="finder1" />
+		<property name="pictures">	
+			<list>	
+				<bean id="picture1area1" class="domain.Url">
+					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+				</bean>
+			</list>
+		</property>
 	</bean>
 
 	<bean id="area2" class="domain.Area">
 		<property name="name" value="Nombre del area 2" />
-		<property name="pictures" value="foto a  no cambiar" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="finder" ref="finder2" />
+		<property name="pictures">	
+			<list>	
+				<bean id="picture1area2" class="domain.Url">
+					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+				</bean>
+			</list>
+		</property>
 	</bean>
 
 
