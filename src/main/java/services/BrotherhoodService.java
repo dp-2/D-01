@@ -55,6 +55,7 @@ public class BrotherhoodService {
 	}
 
 	public Brotherhood create() {
+		this.serviceUtils.checkNoActor();
 		final Brotherhood res = new Brotherhood();
 		res.setBanned(false);
 		res.setSpammer(false);
