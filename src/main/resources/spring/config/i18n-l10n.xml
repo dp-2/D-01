@@ -25,6 +25,8 @@
 		<value>/views/configuration/messages</value>
 		<value>/views/actor/messages</value>
 		<value>/views/procession/messages</value>
+		<value>/views/member/messages</value>
+		
 	</util:list>
 
 </beans>

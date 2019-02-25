@@ -82,11 +82,11 @@ public class MemberServiceTest extends AbstractTest {
 	public void testFindOneIncorrecto() {
 		Member member;
 
-		final int idBusqueda = super.getEntityId("custemer");
+		final int idBusqueda = super.getEntityId("member2");
 		member = this.memberService.findOne(idBusqueda);
+		Assert.isTrue(member.getName().equals("member2"));
 		Assert.isNull(member);
 	}
-
 	@Test
 	public void testFindAll() {
 		Collection<Member> members;

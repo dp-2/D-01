@@ -77,12 +77,18 @@
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv" href="configuration/administrator/list.do"><spring:message
 						code="master.page.configuration" /></a></li>
+			<li><a href="actor/administrator/list.do"><spring:message
+						code="master.page.administrator.actors" /></a></li>
+			<li><a href="register/administrator/newActor.do?authority=ADMIN"><spring:message
+								code="master.page.register.admin" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('MEMBER')">
 
 			<li><a class="fNiv" href="march/member/list.do"><spring:message
-						code="master.page.march" /></a></li>
+						code="master.page.march" /></a></li>		
+			<li><a class="fNiv" href="member/edit.do"><spring:message
+						code="master.page.member" /></a></li>
 
 		</security:authorize>
 
@@ -123,12 +129,8 @@
 			</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message
-								code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message
-								code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message
-								code="master.page.profile.action.3" /></a></li>
+					<li><a href="actor/edit.do"><spring:message
+								code="master.page.profile.edit" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
 				</ul></li>
