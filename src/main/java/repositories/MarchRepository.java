@@ -14,10 +14,10 @@ import domain.Member;
 @Repository
 public interface MarchRepository extends JpaRepository<March, Integer> {
 
-	@Query("select a from March a where a.member.id = ?1 group by a.status")
+	@Query("select a from March a where a.member.id = ?1")
 	Collection<March> findMarchsByMember(int memberId);
 
-	@Query("select a from March a where a.procession.id = ?1 group by status")
+	@Query("select a from March a where a.procession.id = ?1")
 	Collection<March> findMarchsByProcession(int processionId);
 
 	//Queries Dashboard-----------------------------------------------------------

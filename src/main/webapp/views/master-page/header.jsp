@@ -66,23 +66,17 @@
 <!--//FIN BLOQUE COOKIES-->
 
 
-<div>
-	<a href="#"><img src="images/logo.png" alt="Acme-Madruga Co., Inc." /></a>
+<div align="center">
+	<a href="#"><img src="${banner}" alt="Acme-Madruga Co., Inc."
+		width="450px" height="200px" /></a>
 </div>
 
-<div>
+<div align="center">
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
-			<li><a class="fNiv"><spring:message
-						code="master.page.administrator" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message
-								code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message
-								code="master.page.administrator.action.2" /></a></li>
-				</ul></li>
+			<li><a class="fNiv" href="configuration/administrator/list.do"><spring:message
+						code="master.page.configuration" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('MEMBER')">
@@ -95,6 +89,18 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message
 						code="master.page.login" /></a></li>
+			<li><a class="fNiv"><spring:message
+						code="master.page.register" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="register/actor.do?authority=MEMBER"><spring:message
+								code="master.page.register.member" /></a></li>
+
+					<li><a href="register/actor.do?authority=BROTHERHOOD"><spring:message
+								code="master.page.register.brotherhood" /></a></li>
+
+				</ul></li>
+			
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
@@ -117,7 +123,7 @@
 	</ul>
 </div>
 
-<div>
+<div align="center">
 	<a href="?language=en">en</a> | <a href="?language=es">es</a>
 </div>
 

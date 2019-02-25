@@ -3,7 +3,7 @@
 <!-- 
  * tiles_es.xml
  *
- * Copyright (C) 2019 Universidad de Sevilla
+ * Copyright (C) 2018 Universidad de Sevilla
  * 
  * The use of this project is hereby constrained to the conditions of the 
  * TDG Licence, a copy of which you may download from 
@@ -16,14 +16,14 @@
       
 <tiles-definitions>
 
-	<definition name="profile/action-1" extends="master.page">	
-		<put-attribute name="title" value="Perfil: Acción 1" />
-		<put-attribute name="body" value="/views/profile/action-1.jsp" />
+	<definition name="socialProfile/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar perfil social" />
+		<put-attribute name="body" value="/views/socialProfile/edit.jsp" />
 	</definition>
 	
-	<definition name="profile/action-2" extends="master.page">	
-		<put-attribute name="title" value="Perfil: Acción 2" />
-		<put-attribute name="body" value="/views/profile/action-2.jsp" />
+	<definition name="socialProfile/list" extends="master.page">	
+		<put-attribute name="title" value="Listado de perfiles sociales" />
+		<put-attribute name="body" value="/views/socialProfile/list.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
-import repositories.BrotherhoodRepository;
-import repositories.MemberRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
@@ -31,10 +29,10 @@ public class ActorService {
 
 	//Service-----------------------------------------------------------------------------
 	@Autowired
-	private MemberRepository		memberRepository;
+	private MemberService			memberService;
 
 	@Autowired
-	private BrotherhoodRepository	brotherhoodRepository;
+	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
 	private AdministratorService	administratorService;
@@ -52,7 +50,7 @@ public class ActorService {
 		a.setAuthority(authority);
 		authorities.add(a);
 		userAccount.setAuthorities(authorities);
-
+		actor.setSpammer(false);
 		actor.setUserAccount(userAccount);
 		actor.setBanned(false);
 		actor.setScore(0.0);
@@ -89,15 +87,20 @@ public class ActorService {
 
 	//Other Methods---------------------------------------------------------------------
 
+	public Collection<Actor> findSpammerActors() {
+		return this.actorRepository.findSpammerActors();
+	}
+
 	public void ban(final Actor actor) {
 		actor.setBanned(true);
-
+		actor.getUserAccount().setEnabled(false);
 		this.save(actor);
 	}
 
 	public void unban(final Actor actor) {
 		actor.setBanned(false);
-
+		actor.setSpammer(false);
+		actor.getUserAccount().setEnabled(true);
 		this.save(actor);
 
 	}
@@ -117,10 +120,10 @@ public class ActorService {
 		if (authorities.contains(mem)) {
 			Member member = null;
 			if (actor.getId() != 0)
-				member = this.memberRepository.findOne(actor.getId());
+				member = this.memberService.findOne(actor.getId());
 			else
-				//member = this.memberRepository.create();
-				member.setUserAccount(actor.getUserAccount());
+				member = this.memberService.create();
+			member.setUserAccount(actor.getUserAccount());
 
 			member.setEmail(actor.getEmail());
 			member.setBanned(actor.getBanned());
@@ -131,17 +134,17 @@ public class ActorService {
 			member.setSurname(actor.getSurname());
 			member.setScore(0.0);
 
-			final Actor actor1 = this.memberRepository.save(member);
+			final Actor actor1 = this.memberService.save(member);
 			this.boxService.createIsSystemBoxs(actor1);
 		} else if (authorities.contains(bro)) {
-			final Brotherhood brotherhood = null;
+			Brotherhood brotherhood = null;
 			if (actor.getId() != 0)
 
-				//brotherhood = this.brotherhoodRepository.findOne(actor.getId());
-				//else {
-				//	bro = this.brotherhoodRepository.create();
+				brotherhood = this.brotherhoodService.findOne(actor.getId());
+			else {
+				brotherhood = this.brotherhoodService.create();
 				brotherhood.setUserAccount(actor.getUserAccount());
-			//}
+			}
 			brotherhood.setScore(0.0);
 			brotherhood.setEmail(actor.getEmail());
 			brotherhood.setBanned(actor.getBanned());
@@ -151,8 +154,8 @@ public class ActorService {
 			brotherhood.setPhoto(actor.getPhoto());
 			brotherhood.setSurname(actor.getSurname());
 
-			//final Actor actor1 = this.brotherhoodRepository.save(brotherhood);
-			//this.boxService.createIsSystemBoxs(actor1);
+			final Actor actor1 = this.brotherhoodService.save(brotherhood);
+			this.boxService.createIsSystemBoxs(actor1);
 
 		} else if (authorities.contains(admin)) {
 			Administrator administrator = null;

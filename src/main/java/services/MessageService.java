@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
 
 import repositories.MessageRepository;
 import security.Authority;
@@ -38,9 +37,10 @@ public class MessageService {
 	private ServiceUtils			serviceUtils;
 	@Autowired
 	private LoginService			loginService;
-	@Autowired
-	private Validator				validator;
 
+
+	//	@Autowired
+	//	private Validator				validator;
 
 	public Message findOne(final Integer id) {
 		this.serviceUtils.checkId(id);
@@ -193,7 +193,7 @@ public class MessageService {
 		res.setRecipient(form.getRecipient());
 		res.setSubject(form.getSubject());
 		res.setTags(form.getTags());
-		this.validator.validate(res, binding);
+		//		this.validator.validate(res, binding);
 		return res;
 	}
 }

@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -87,6 +88,18 @@ public class ConfigurationService {
 				result = this.isUniqueTicker();
 
 		return result;
+	}
+
+	public String internacionalizcionWelcome() {
+		String res = null;
+		final Configuration configuration = this.findOne();
+
+		if (LocaleContextHolder.getLocale().getLanguage().toLowerCase().equals("en"))
+			res = configuration.getWelcomeMessageEN();
+		else if (LocaleContextHolder.getLocale().getLanguage().toLowerCase().equals("es"))
+			res = configuration.getWelcomeMessageES();
+
+		return res;
 	}
 
 }
