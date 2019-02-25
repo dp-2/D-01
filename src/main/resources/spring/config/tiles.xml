@@ -24,6 +24,7 @@
 		<value>/views/law/tiles.xml</value>
 		<value>/views/configuration/tiles.xml</value>
 		<value>/views/actor/tiles.xml</value>
+		<value>/views/procession/tiles.xml</value>
 	</util:list>
 
 </beans>

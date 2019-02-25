@@ -30,7 +30,7 @@ public class Procession extends DomainEntity {
 
 
 	@NotBlank
-	@Pattern(regexp = "^\\d{6}-[A-Z]{6}$")
+	@Pattern(regexp = "^\\d{6}-[A-Z]{5}$")
 	public String getTicker() {
 		return this.ticker;
 	}

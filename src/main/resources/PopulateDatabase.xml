@@ -37,8 +37,8 @@
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="broderhood1" />
-		<property name="password" value="8f0f32240f31aa96a734369819efb284" />
+		<property name="username" value="brotherhood1" />
+		<property name="password" value="479E3180A45B21EA8E88BEB0C45AA8ED" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -61,8 +61,8 @@
 	</bean>
 
 	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="broderhood2" />
-		<property name="password" value="bccb2fea6548fde343ae9771bc94b123" />
+		<property name="username" value="brotherhood2" />
+		<property name="password" value="88F1B810C40CD63107FB758FEF4D77DB" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -161,10 +161,11 @@
 		<property name="name" value="Nombre del area 1" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="finder" ref="finder1" />
-		<property name="pictures">	
-			<list>	
+		<property name="pictures">
+			<list>
 				<bean id="picture1area1" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -174,10 +175,11 @@
 		<property name="name" value="Nombre del area 2" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="finder" ref="finder2" />
-		<property name="pictures">	
-			<list>	
+		<property name="pictures">
+			<list>
 				<bean id="picture1area2" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -385,23 +387,42 @@
 	<!-- Procession -->
 
 	<bean id="procession1" class="domain.Procession">
-		<property name="ticker" value="123456-ASDFGH" />
+		<property name="ticker" value="123456-ASDFG" />
 		<property name="title" value="El Cacharro" />
 		<property name="description"
 			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
-		<property name="momentOrganised" value="April 19, 2019 12:45" />
-		<property name="ffinal" value="true" />
+		<property name="momentOrganised" value="2019/09/09" />
+		<property name="ffinal" value="false" />
 		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
 
 	<bean id="procession2" class="domain.Procession">
-		<property name="ticker" value="173456-AUDFGH" />
+		<property name="ticker" value="173456-AUDFG" />
 		<property name="title" value="La pasion de Cristo" />
 		<property name="description"
 			value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
-		<property name="momentOrganised" value="April 17, 2019 23:45" />
+		<property name="momentOrganised" value="2019/09/09" />
 		<property name="ffinal" value="true" />
-		<property name="brotherhood" ref="brotherhood2" />
+		<property name="brotherhood" ref="brotherhood1" />
+	</bean>
+
+	<bean id="procession3" class="domain.Procession">
+		<property name="ticker" value="123436-ASFGC" />
+		<property name="title" value="Presentacion Al Pueblo" />
+		<property name="description" value="Jesus Nuestro señor es presentado al pueblo" />
+		<property name="momentOrganised" value="2019/09/09" />
+		<property name="ffinal" value="false" />
+		<property name="brotherhood" ref="brotherhood1" />
+	</bean>
+
+	<bean id="procession4" class="domain.Procession">
+		<property name="ticker" value="173453-AXFGH" />
+		<property name="title" value="La macarena" />
+		<property name="description"
+			value="La Macareana es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="momentOrganised" value="2019/09/09" />
+		<property name="ffinal" value="true" />
+		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
 
 
@@ -426,10 +447,11 @@
 
 		<property name="title" value="Hdad del amor" />
 		<property name="establishedMoment" value="May 29, 2012 15:00" />
-		<property name="pictures">	
-			<list>	
+		<property name="pictures">
+			<list>
 				<bean id="picture1brotherhood1" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -457,7 +479,8 @@
 		<property name="pictures">
 			<list>
 				<bean id="picture1brotherhood2" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -617,7 +640,7 @@
 		<property name="member" ref="member2" />
 		<property name="procession" ref="procession1" />
 	</bean>
-	
+
 	<bean id="march4" class="domain.March">
 		<property name="status" value="PENDING"></property>
 		<property name="reason" value=""></property>

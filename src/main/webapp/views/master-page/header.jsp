@@ -86,6 +86,19 @@
 
 		</security:authorize>
 
+		<security:authorize access="permitAll">
+			<li><a class="fNiv" href="procession/list.do"><spring:message
+						code="master.page.processions" /></a>
+				<ul>
+					<security:authorize access="hasRole('BROTHERHOOD')">
+						<li class="arrow"></li>
+						<li><a href="procession/brotherhood/myList.do"><spring:message
+									code="master.page.processions.brotherhood" /></a></li>
+					</security:authorize>
+
+				</ul></li>
+		</security:authorize>
+
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message
 						code="master.page.login" /></a></li>
@@ -100,7 +113,7 @@
 								code="master.page.register.brotherhood" /></a></li>
 
 				</ul></li>
-			
+
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
