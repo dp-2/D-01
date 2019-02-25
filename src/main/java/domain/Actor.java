@@ -101,7 +101,6 @@ public class Actor extends DomainEntity {
 		this.score = score;
 	}
 
-	@NotNull
 	public String getMiddleName() {
 		return this.middleName;
 	}

@@ -76,7 +76,7 @@ public class RegisterController extends AbstractController {
 				if (test != null)
 					result = this.createEditModelAndView(actor, "actor.userExists");
 				else
-					result = this.createEditModelAndView(actor, "message.commit.error");
+					result = this.createEditModelAndView(actor, "actor.commit.error");
 			}
 		return result;
 	}

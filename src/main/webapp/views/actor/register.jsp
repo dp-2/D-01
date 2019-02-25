@@ -51,12 +51,7 @@
 	<acme:textbox code="actor.email" path="email" />
 	<br />
 
-	<acme:textbox code="actor.address" path="address" />
-	<br />
-
-	<acme:textbox code="actor.phone" path="phone" />
-	<br />
-
+	
 	<script type="text/javascript">
 		function isValid() {
 			var phoneRe = /^(((\+[1-9][0-9]{0,2}) \(([1-9][0-9]{0,2})\) (\d\d\d\d+))|((\+[1-9][0-9]{0,2}) (\d\d\d\d+))|((\d\d\d\d+)))$/;
@@ -69,9 +64,14 @@
 			}
 		}
 	</script>
+	<acme:textbox code="actor.phone" path="phone" />
+	<br />
 
-	<acme:submit name="save" code="actor.save"
-		onclick=" javascript: return isValid();" />
+	
+
+	<input type="submit" name="save"
+			value='<spring:message code="actor.save"/>'
+			onclick=" javascript: return isValid();">
 
 	<acme:cancel url="welcome/index.do" code="actor.cancel" />
 

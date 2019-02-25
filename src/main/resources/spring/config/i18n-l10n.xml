@@ -23,6 +23,7 @@
 		<value>/views/march/messages</value>
 		<value>/views/law/messages</value>
 		<value>/views/configuration/messages</value>
+		<value>/views/actor/messages</value>
 	</util:list>
 
 </beans>

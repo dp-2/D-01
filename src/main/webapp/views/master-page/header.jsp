@@ -89,6 +89,18 @@
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message
 						code="master.page.login" /></a></li>
+			<li><a class="fNiv"><spring:message
+						code="master.page.register" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="register/actor.do?authority=MEMBER"><spring:message
+								code="master.page.register.member" /></a></li>
+
+					<li><a href="register/actor.do?authority=BROTHERHOOD"><spring:message
+								code="master.page.register.brotherhood" /></a></li>
+
+				</ul></li>
+			
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
