@@ -87,12 +87,12 @@
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/march/member/delete.do"
 			access="hasRole('MEMBER')" />
-			
-			<security:intercept-url pattern="/member/edit.do"
+
+		<security:intercept-url pattern="/member/edit.do"
 			access="hasRole('MEMBER')" />
 
-			
-			
+
+
 
 		<security:intercept-url pattern="/march/brotherhood/list.do"
 			access="hasRole('BROTHERHOOD')" />
@@ -105,13 +105,13 @@
 		<security:intercept-url pattern="/procession/brotherhood/edit.do"
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/procession/brotherhood/show.do"
-			access="hasRole('BROTHERHOOD')" />
+			access="hasRole('isAuthenticated()')" />
 		<security:intercept-url pattern="/procession/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
 
 
 
-		
+
 		<security:intercept-url pattern="/actor/edit.do"
 			access="isAuthenticated()" />
 

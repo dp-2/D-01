@@ -69,7 +69,6 @@ public class ProcessionBrotherhoodController extends AbstractController {
 		Assert.notNull(procession);
 
 		modelAndView = this.createEditModelAndView(procession);
-		modelAndView.addObject("requestURI", "procession/brotherhood/create.do");
 
 		return modelAndView;
 
@@ -118,7 +117,7 @@ public class ProcessionBrotherhoodController extends AbstractController {
 			modelAndView = this.createEditModelAndView(procession);
 		else
 			try {
-				procession.setTicker(this.configurationService.isUniqueTicker(procession));
+
 				this.processionService.save(procession);
 				modelAndView = this.myList();
 			} catch (final Exception e) {

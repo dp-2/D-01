@@ -12,7 +12,7 @@ import domain.Procession;
 @Repository
 public interface ProcessionRepository extends JpaRepository<Procession, Integer> {
 
-	@Query("select p from Procession p where p.ffinal = true and p.momentOrganised > CURRENT_TIME")
+	@Query("select p from Procession p where p.ffinal = true and p.momentOrganised > CURRENT_DATE")
 	List<Procession> findProcessionsFinal();
 
 	@Query("select p from Procession p where p.ffinal = true and p.momentOrganised > CURRENT_TIME and p.brotherhood.id = ?1")

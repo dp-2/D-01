@@ -46,7 +46,7 @@ public class ProcessionService {
 
 	public Procession create() {
 		final Procession procession = new Procession();
-		final String ticker = " ";
+		final String ticker = "ticker";
 		final Brotherhood brotherhood = this.brotherhoodService.findBrotherhoodByUserAcountId(LoginService.getPrincipal().getId());
 
 		procession.setBrotherhood(brotherhood);
@@ -72,7 +72,8 @@ public class ProcessionService {
 		if (procession.getId() != 0) {
 			this.checkPrincipal(procession);
 			this.checkNoFinalMode(procession);
-		}
+		} else
+			procession.setTicker(this.configurationService.isUniqueTicker(procession));
 
 		final Procession saved = this.processionRepository.save(procession);
 		return saved;

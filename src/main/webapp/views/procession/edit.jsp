@@ -19,7 +19,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${requestURI}" modelAttribute="procession">
+<form:form action="procession/brotherhood/edit.do"
+	modelAttribute="procession">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="brotherhood" />

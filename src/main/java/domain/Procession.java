@@ -11,7 +11,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,7 +29,6 @@ public class Procession extends DomainEntity {
 
 
 	@NotBlank
-	@Pattern(regexp = "^\\d{6}-[A-Z]{5}$")
 	public String getTicker() {
 		return this.ticker;
 	}
