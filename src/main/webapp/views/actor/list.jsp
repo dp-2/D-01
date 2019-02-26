@@ -1,9 +1,8 @@
+
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
@@ -26,12 +25,12 @@
 
 	<security:authorize access="hasRole('ADMIN')">
 		<display:column>
-			<jstl:if test="${row.isBanned == false }">
+			<jstl:if test="${row.banned == false }">
 				<a href="actor/administrator/ban.do?actorId=${row.id}"> <spring:message
 						code="actor.ban" />
 				</a>
 			</jstl:if>
-			<jstl:if test="${row.isBanned == true}">
+			<jstl:if test="${row.banned == true}">
 				<a href="actor/administrator/unban.do?actorId=${row.id}"> <spring:message
 						code="actor.unban" />
 				</a>
