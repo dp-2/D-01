@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,4 +18,7 @@ public interface DFloatRepository extends JpaRepository<DFloat, Integer> {
 
 	@Query("select c from DFloat c where c.brotherhood IS NULL")
 	Collection<DFloat> SearchDFloatsWithoutBrotherhood();
+
+	@Query("select d from DFloat d where d.procession.id =?1")
+	List<DFloat> findDFloatsByProcessionId(int processionId);
 }
