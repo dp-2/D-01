@@ -12,7 +12,7 @@ import domain.DFloat;
 @Repository
 public interface DFloatRepository extends JpaRepository<DFloat, Integer> {
 
-	@Query("select d from DFloat d where c.brotherhood.id = ?1")
+	@Query("select c from DFloat c where c.brotherhood.id = ?1")
 	Collection<DFloat> SearchDFloatsByBrotherhood(Integer brotherhoodId);
 
 	@Query("select c from DFloat c where c.brotherhood IS NULL")
