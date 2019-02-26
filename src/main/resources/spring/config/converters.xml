@@ -38,6 +38,21 @@
 
 		<bean class="converters.ProcessionToStringConverter" />
 		<bean class="converters.StringToProcessionConverter" />
+		
+		<bean class="converters.MemberToStringConverter" />
+		<bean class="converters.StringToMemberConverter" />
+
+		<bean class="converters.BrotherhoodToStringConverter" />
+		<bean class="converters.StringToBrotherhoodConverter" />
+
+		<bean class="converters.MemberToStringConverter" />
+		<bean class="converters.StringToMemberConverter" />
+		
+		<bean class="converters.MessageToStringConverter" />
+		<bean class="converters.StringToMessageConverter" />
+		
+		<bean class="converters.BoxToStringConverter" />
+		<bean class="converters.StringToBoxConverter" />
 
 	</util:list>
 

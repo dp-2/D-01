@@ -26,6 +26,7 @@ public class Actor extends DomainEntity {
 	private String	photo;
 	private String	email;
 	private String	phone;
+	private String	address;
 	private boolean	spammer;
 	private boolean	banned;
 	private double	score;
@@ -107,6 +108,14 @@ public class Actor extends DomainEntity {
 
 	public void setMiddleName(final String middleName) {
 		this.middleName = middleName;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(final String address) {
+		this.address = address;
 	}
 
 

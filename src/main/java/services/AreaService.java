@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,8 @@ import repositories.AreaRepository;
 import security.LoginService;
 import domain.Actor;
 import domain.Area;
+import domain.Brotherhood;
+import domain.Url;
 
 @Service
 @Transactional
@@ -22,20 +25,35 @@ public class AreaService {
 	//Managed Repository
 
 	@Autowired
-	private AreaRepository	areaRepository;
+	private AreaRepository			areaRepository;
 
 	//Supporting Service
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private FinderService			finderService;
+
+	@Autowired
+	private BrotherhoodService		brotherHoodService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Simple CRUD methods
 	public Area create() {
-		Area res;
-		res = new Area();
+		final Area res = new Area();
+		Brotherhood bh;
+		bh = (Brotherhood) this.actorService.findByUserAccount(LoginService.getPrincipal());
+		res.setBrotherhood(bh);
+
+		final Collection<Url> pictures = new ArrayList<>();
+		res.setPictures(pictures);
+		res.setFinder(this.finderService.create());
+
 		return res;
 	}
-
 	public Collection<Area> findAll() {
 		return this.areaRepository.findAll();
 	}
@@ -47,6 +65,7 @@ public class AreaService {
 	public Area save(final Area area) {
 		Area res = null;
 		Assert.notNull(area);
+		System.out.println(area.getName());
 
 		final Actor a;
 		a = this.actorService.findByUserAccount(LoginService.getPrincipal());

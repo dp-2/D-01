@@ -28,16 +28,16 @@
 		</div>
 		
 		<div>
-			<form:label path="rootFolderBox">
-				<spring:message code="box.rootFolderbox"/>
+			<form:label path="rootBox">
+				<spring:message code="box.rootbox"/>
 			</form:label>
-			<form:select path="rootFolderBox">
+			<form:select path="rootBox">
 				<form:option value="${box.id}">-----</form:option>
 				<jstl:forEach items="${boxs}" var="boxVar">
 					<form:option value="${boxVar.id}">${boxVar.name}</form:option>
 				</jstl:forEach>
 			</form:select>
-			<form:errors path="rootFolderBox" class="error" />
+			<form:errors path="rootBox" class="error" />
 		</div>
 		
 		<div>

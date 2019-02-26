@@ -9,48 +9,39 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <jstl:if test="${isPrincipalAuthorizedEdit}">
 
-	<display:table name="folders" id="row" requestURI="${requestURI}"
+	<display:table name="boxs" id="row" requestURI="${requestURI}"
 		pagesize="5" class="displaytag">
 	
-		<display:column property="name" titleKey="folder.name" sortable="false"></display:column>
-	
-		<display:column>
-			<a href="folder/actor/list.do?rootFolderId=${row.id}" >
-				<spring:message code="folder.listsubfolders" />
-			</a>	
-		</display:column>
-	
-		<display:column>
-			<a href='message/actor/list.do?folderId=${row.id}' >
-				<spring:message code="folder.listmessages" />
-			</a>
-		</display:column>
+		<acme:column value="${row.name}" code="box.name" sortable="false" />
+
+		<spring:message code='box.listsubboxs' var="altListSubboxes" />
+		<acme:column value="box/actor/list.do?rootId=${row.id}" alt="${altListSubboxes}" url="true" />
 		
-		<display:column>
-			<jstl:if test="${row.system == false}">
-				<a href="folder/actor/edit.do?folderId=${row.id}">
-					<spring:message code="folder.edit" />
-				</a>
-			</jstl:if>
-		</display:column>
+		<spring:message code='box.listmessages' var="altListMessages" />
+		<acme:column value="message/actor/list.do?boxId=${row.id}" alt="${altListMessages}" url="true" />
+		
+		<spring:message code='box.edit' var="altBoxEdit" />
+		<acme:column value="box/actor/edit.do?boxId=${row.id}" alt="${altBoxEdit}" 
+			url="true" test="${row.isSystem == false}" />
 		
 	</display:table>
 	
-	<a href="folder/actor/create.do"> <spring:message
-			code="folder.create"></spring:message></a>
+	<a href="box/actor/create.do"> <spring:message
+			code="box.create"></spring:message></a>
 	
 	<jstl:choose>
-		<jstl:when test="${not (backFolderId eq null)}">
-			<a href="folder/actor/list.do?rootFolderId=${backFolderId}"> 
-				<spring:message code="folder.back"></spring:message>
+		<jstl:when test="${not (backBoxId eq null)}">
+			<a href="box/actor/list.do?rootBoxId=${backBoxId}"> 
+				<spring:message code="box.back"></spring:message>
 			</a>
 		</jstl:when>
-		<jstl:when test="${(rootFolder.id eq rootFolder.rootFolder.id) and showBack}">
-			<a href="folder/actor/list.do"> 
-				<spring:message code="folder.back"></spring:message>
+		<jstl:when test="${(rootBox.id eq rootBox.rootBox.id) and showBack}">
+			<a href="box/actor/list.do"> 
+				<spring:message code="box.back"></spring:message>
 			</a>
 		</jstl:when>
 	</jstl:choose>	

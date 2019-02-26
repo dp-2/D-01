@@ -35,12 +35,8 @@ public class AreaServiceTest extends AbstractTest {
 	public void testCreate() {
 		this.authenticate("brotherhood1");
 		final Area a = this.areaService.create();
-		Assert.notNull(a);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreateIncorrecto() {
-		final Area a = this.areaService.create();
+		a.setName("Hi");
+		System.out.println(a.getName());
 		Assert.notNull(a);
 	}
 
@@ -55,8 +51,7 @@ public class AreaServiceTest extends AbstractTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testFindOneIncorrecto() {
 		Area app;
-
-		final int idBusqueda = super.getEntityId("pololp");
+		final int idBusqueda = super.getEntityId("area2");
 		app = this.areaService.findOne(idBusqueda);
 		Assert.isNull(app);
 	}

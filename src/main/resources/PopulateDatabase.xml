@@ -37,8 +37,8 @@
 	</bean>
 
 	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="broderhood1" />
-		<property name="password" value="8f0f32240f31aa96a734369819efb284" />
+		<property name="username" value="brotherhood1" />
+		<property name="password" value="479e3180a45b21ea8e88beb0c45aa8ed" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -61,8 +61,8 @@
 	</bean>
 
 	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="broderhood2" />
-		<property name="password" value="bccb2fea6548fde343ae9771bc94b123" />
+		<property name="username" value="brotherhood2" />
+		<property name="password" value="88f1b810c40cd63107fb758fef4d77db" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -118,7 +118,7 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.3" />
-
+		<property name="address" value="Un lugar llamado mundo" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
@@ -135,7 +135,7 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.7" />
-
+		<property name="address" value="" />
 		<property name="userAccount" ref="userAccount4" />
 	</bean>
 
@@ -161,10 +161,11 @@
 		<property name="name" value="Nombre del area 1" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="finder" ref="finder1" />
-		<property name="pictures">	
-			<list>	
+		<property name="pictures">
+			<list>
 				<bean id="picture1area1" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -174,10 +175,11 @@
 		<property name="name" value="Nombre del area 2" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="finder" ref="finder2" />
-		<property name="pictures">	
-			<list>	
+		<property name="pictures">
+			<list>
 				<bean id="picture1area2" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -385,21 +387,41 @@
 	<!-- Procession -->
 
 	<bean id="procession1" class="domain.Procession">
-		<property name="ticker" value="123456-ASDFGH" />
+		<property name="ticker" value="123456-ASDGH" />
 		<property name="title" value="El Cacharro" />
 		<property name="description"
 			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
-		<property name="momentOrganised" value="April 19, 2019 12:45" />
-		<property name="ffinal" value="true" />
+		<property name="momentOrganised" value="2020/09/02" />
+		<property name="ffinal" value="false" />
 		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
 
 	<bean id="procession2" class="domain.Procession">
-		<property name="ticker" value="173456-AUDFGH" />
+		<property name="ticker" value="173456-AUDFG" />
 		<property name="title" value="La pasion de Cristo" />
 		<property name="description"
 			value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
-		<property name="momentOrganised" value="April 17, 2019 23:45" />
+		<property name="momentOrganised" value="2018/09/02" />
+		<property name="ffinal" value="true" />
+		<property name="brotherhood" ref="brotherhood1" />
+	</bean>
+
+	<bean id="procession3" class="domain.Procession">
+		<property name="ticker" value="123456-ASDBH" />
+		<property name="title" value="El Cacharro" />
+		<property name="description"
+			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="momentOrganised" value="2020/09/02" />
+		<property name="ffinal" value="false" />
+		<property name="brotherhood" ref="brotherhood2" />
+	</bean>
+
+	<bean id="procession4" class="domain.Procession">
+		<property name="ticker" value="173456-BUDFG" />
+		<property name="title" value="La pasion de Cristo" />
+		<property name="description"
+			value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="momentOrganised" value="2020/09/02" />
 		<property name="ffinal" value="true" />
 		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
@@ -420,16 +442,17 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.8" />
-
+		<property name="address" value="" />
 		<property name="userAccount" ref="userAccount3" />
 
 
 		<property name="title" value="Hdad del amor" />
 		<property name="establishedMoment" value="May 29, 2012 15:00" />
-		<property name="pictures">	
-			<list>	
+		<property name="pictures">
+			<list>
 				<bean id="picture1brotherhood1" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -457,7 +480,8 @@
 		<property name="pictures">
 			<list>
 				<bean id="picture1brotherhood2" class="domain.Url">
-					<property name="url" value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+					<property name="url"
+						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -489,7 +513,7 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.4" />
-
+		<property name="address" value="" />
 		<property name="userAccount" ref="userAccount2" />
 
 		<property name="position" value="President" />
@@ -508,7 +532,7 @@
 		<property name="spammer" value="true" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.1" />
-
+		<property name="address" value="" />
 		<property name="userAccount" ref="userAccount6" />
 
 		<property name="position" value="Fundraiser" />
@@ -617,7 +641,7 @@
 		<property name="member" ref="member2" />
 		<property name="procession" ref="procession1" />
 	</bean>
-	
+
 	<bean id="march4" class="domain.March">
 		<property name="status" value="PENDING"></property>
 		<property name="reason" value=""></property>

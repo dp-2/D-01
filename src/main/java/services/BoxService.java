@@ -164,7 +164,7 @@ public class BoxService {
 	public Box deconstruct(final Box box, final BindingResult binding) {
 		Box res = null;
 		if (box.getId() == 0)
-			this.create(this.actorService.findPrincipal());
+			res = this.create(this.actorService.findPrincipal());
 		else
 			res = (Box) this.serviceUtils.checkObject(box);
 		res.setName(box.getName());

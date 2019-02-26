@@ -1,8 +1,8 @@
 /*
- * master.page.member * CurriculaToStringConverter.java
- * 
+ * CurriculaToStringConverter.java
+ *
  * Copyright (C) 2016 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -14,20 +14,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import domain.Message;
+import domain.Brotherhood;
 
 @Component
 @Transactional
-public class MessageToStringConverter implements Converter<Message, String> {
+public class BrotherhoodToStringConverter implements Converter<Brotherhood, String> {
 
 	@Override
-	public String convert(final Message message) {
+	public String convert(final Brotherhood procession) {
 		String result;
 
-		if (message == null)
+		if (procession == null)
 			result = null;
 		else
-			result = String.valueOf(message.getId());
+			result = String.valueOf(procession.getId());
 
 		return result;
 	}

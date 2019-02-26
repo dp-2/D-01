@@ -54,8 +54,8 @@ public class ConfigurationService {
 	//Otros-----------------------------------------------------------------------
 
 	@SuppressWarnings("deprecation")
-	public String generateTicker() {
-		final Date date = new Date();
+	public String generateTicker(final Procession procession) {
+		final Date date = procession.getMomentOrganised();
 		final Integer s1 = date.getDate();
 		String day = s1.toString();
 		if (day.length() == 1)
@@ -71,21 +71,21 @@ public class ConfigurationService {
 	}
 
 	private String generateStringAux() {
-		final int length = 6;
-		final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		final int length = 5;
+		final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		final Random rng = new Random();
 		final char[] text = new char[length];
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < 5; i++)
 			text[i] = characters.charAt(rng.nextInt(characters.length()));
 		return new String(text);
 	}
 
-	public String isUniqueTicker() {
-		String result = this.generateTicker();
+	public String isUniqueTicker(final Procession procession) {
+		String result = this.generateTicker(procession);
 
-		for (final Procession procession : this.processionService.findAll())
-			if (procession.getTicker().equals(result))
-				result = this.isUniqueTicker();
+		for (final Procession procession1 : this.processionService.findAll())
+			if (procession1.getTicker().equals(result))
+				result = this.isUniqueTicker(procession);
 
 		return result;
 	}

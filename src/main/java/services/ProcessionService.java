@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -10,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
-import repositories.ProcessionRepository;
-import security.LoginService;
 import domain.Brotherhood;
 import domain.Finder;
 import domain.Procession;
 import forms.ProcessionForm;
+import repositories.ProcessionRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -37,16 +38,16 @@ public class ProcessionService {
 	@Autowired
 	private FinderService			finderService;
 
-
 	//	@Autowired
 	//	private Validator				validator;
+
 
 	//Methods--------------------------------------------------------------------
 
 	public Procession create() {
 		final Procession procession = new Procession();
+		final String ticker = "ticker";
 		final Brotherhood brotherhood = this.brotherhoodService.findBrotherhoodByUserAcountId(LoginService.getPrincipal().getId());
-		final String ticker = this.configurationService.isUniqueTicker();
 
 		procession.setBrotherhood(brotherhood);
 		procession.setFfinal(false);
@@ -66,9 +67,13 @@ public class ProcessionService {
 
 	public Procession save(final Procession procession) {
 		Assert.notNull(procession);
+		this.checkMoment(procession);
 
-		if (procession.getId() != 0)
+		if (procession.getId() != 0) {
 			this.checkPrincipal(procession);
+			this.checkNoFinalMode(procession);
+		} else
+			procession.setTicker(this.configurationService.isUniqueTicker(procession));
 
 		final Procession saved = this.processionRepository.save(procession);
 		return saved;
@@ -76,6 +81,7 @@ public class ProcessionService {
 
 	public void delete(final Procession procession) {
 		this.checkPrincipal(procession);
+		this.checkNoFinalMode(procession);
 		this.processionRepository.delete(procession);
 	}
 
@@ -85,8 +91,20 @@ public class ProcessionService {
 		final Brotherhood brotherhood = procession.getBrotherhood();
 		final Brotherhood principal = this.brotherhoodService.findBrotherhoodByUserAcountId(LoginService.getPrincipal().getId());
 
-		Assert.isTrue(brotherhood.getId() == principal.getId());
+		Assert.isTrue(brotherhood.getId() == principal.getId(), "noOwner");
 
+		return true;
+	}
+
+	private boolean checkNoFinalMode(final Procession procession) {
+		Assert.isTrue(procession.isFfinal() == false, "noFinal");
+
+		return true;
+	}
+
+	private boolean checkMoment(final Procession procession) {
+		final Date now = new Date();
+		Assert.isTrue(now.before(procession.getMomentOrganised()), "noFuture");
 		return true;
 	}
 
@@ -113,6 +131,18 @@ public class ProcessionService {
 
 		return procession;
 
+	}
+
+	public List<Procession> findProcessionsFinal() {
+		return this.processionRepository.findProcessionsFinal();
+	}
+
+	public List<Procession> findProcessionsFinalByBrotherhoodId(final int brotherhoodId) {
+		return this.processionRepository.findProcessionsFinalByBrotherhoodId(brotherhoodId);
+	}
+
+	public List<Procession> findProcessionsByBrotherhoodId(final int brotherhoodId) {
+		return this.processionRepository.findProcessionsByBrotherhoodId(brotherhoodId);
 	}
 
 }

@@ -72,8 +72,9 @@
 		}
 	</script>
 
-	<acme:submit name="save" code="actor.save"
-		onclick=" javascript: return isValid();" />
+	<input type="submit" name="save"
+		value='<spring:message code="actor.save"/>'
+		onclick=" javascript: return isValid();">
 
 	<acme:cancel url="welcome/index.do" code="actor.cancel" />
 

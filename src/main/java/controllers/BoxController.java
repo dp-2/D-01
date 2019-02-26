@@ -26,7 +26,7 @@ public class BoxController extends AbstractController {
 	// Services
 
 	@Autowired
-	private BoxService	boxService;
+	private BoxService		boxService;
 	@Autowired
 	private ActorService	actorService;
 
@@ -51,7 +51,10 @@ public class BoxController extends AbstractController {
 			this.isPrincipalAuthorizedEdit(res, root, false);
 		}
 		res.addObject("boxs", boxs);
-		res.addObject("requestURI", "box/actor/list.do");
+		if (rootId == null)
+			res.addObject("requestURI", "box/actor/list.do");
+		else
+			res.addObject("requestURI", "box/actor/list.do?rootId=" + new Integer(rootId).toString());
 		return res;
 	}
 
@@ -128,12 +131,16 @@ public class BoxController extends AbstractController {
 		return res;
 	}
 
-	private void isPrincipalAuthorizedEdit(final ModelAndView modelAndView, final Box box, final Boolean isEdit) {
+	private void isPrincipalAuthorizedEdit(final ModelAndView modelAndView, final Box inputBox, final Boolean isEdit) {
 		Boolean res = false;
-		final Actor principal = this.actorService.findPrincipal();
-		if (box.getActor().equals(principal) && !box.getIsSystem() && isEdit)
-			res = true;
-		else if (box.getActor().equals(principal) && !isEdit)
+		if (inputBox.getId() > 0) {
+			final Box box = this.boxService.findOne(inputBox.getId());
+			final Actor principal = this.actorService.findPrincipal();
+			if (box.getActor().equals(principal) && !box.getIsSystem() && isEdit)
+				res = true;
+			else if (box.getActor().equals(principal) && !isEdit)
+				res = true;
+		} else if (inputBox.getId() == 0)
 			res = true;
 		modelAndView.addObject("isPrincipalAuthorizedEdit", res);
 	}

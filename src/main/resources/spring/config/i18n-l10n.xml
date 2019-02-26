@@ -24,6 +24,12 @@
 		<value>/views/law/messages</value>
 		<value>/views/configuration/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/procession/messages</value>
+		<value>/views/member/messages</value>
+		<value>/views/message/messages</value>
+		<value>/views/box/messages</value>
+		
+		
 	</util:list>
 
 </beans>
