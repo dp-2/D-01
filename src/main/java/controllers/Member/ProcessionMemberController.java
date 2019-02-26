@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.ConfigurationService;
+import services.MarchService;
 import services.ProcessionService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -31,6 +32,9 @@ public class ProcessionMemberController extends AbstractController {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private MarchService			marchService;
 
 
 	// Constructor---------------------------------------------------------
