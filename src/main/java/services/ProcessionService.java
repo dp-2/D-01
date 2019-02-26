@@ -102,7 +102,8 @@ public class ProcessionService {
 	}
 
 	private boolean checkNoFinalMode(final Procession procession) {
-		Assert.isTrue(procession.isFfinal() == false, "noFinal");
+		final Procession processionBD = this.findOne(procession.getId());
+		Assert.isTrue(processionBD.isFfinal() == false, "noFinal");
 
 		return true;
 	}

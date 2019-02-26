@@ -32,24 +32,19 @@
 		</display:column>
 	</security:authorize>
 
-	<security:authorize access="hasRole('MEMBER')">
-	
-		<display:column>
 
-			<a href="march/member/create.do?processionId=${row.id}"> <spring:message
-					code="procession.createMarch" />
-			</a>
 
-		</display:column>
-		
-	</security:authorize>
+	<display:column titleKey="procession.hood">
+		<a href="procession/listBrotherhood.do?processionId=${row.id}"> <jstl:out
+				value="${row.brotherhood.name}" />
+		</a>
+	</display:column>
 
-	<display:column property="brotherhood.name" titleKey="procession.hood" />
 	<display:column property="ticker" titleKey="procession.ticker" />
 	<security:authorize access="hasRole('BROTHERHOOD')">
 
 		<display:column titleKey="procession.member">
-		
+
 			<a href="march/brotherhood/list.do?processionId=${row.id}"> <spring:message
 					code="procession.list" />
 			</a>
@@ -63,6 +58,18 @@
 		</a>
 
 	</display:column>
+
+	<security:authorize access="hasRole('MEMBER')">
+
+		<display:column>
+
+			<a href="march/member/create.do?processionId=${row.id}"> <spring:message
+					code="procession.createMarch" />
+			</a>
+
+		</display:column>
+
+	</security:authorize>
 
 </display:table>
 
