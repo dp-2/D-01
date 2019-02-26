@@ -76,6 +76,16 @@
 			access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/configuration/administrator/create.do"
 			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/position/administrator/list.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/position/administrator/edit.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/position/administrator/create.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/position/administrator/delete.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/position/administrator/save.do"
+			access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/march/member/list.do"
 			access="hasRole('MEMBER')" />
@@ -110,11 +120,40 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/procession/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
+			
+		<security:intercept-url pattern="/box/actor/**"
+			access="isAuthenticated()" />
+			
+		<security:intercept-url pattern="/message/actor/**"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/message/administrator/**"
+			access="hasRole('ADMIN')" />
+			
+		<security:intercept-url pattern="/brotherhood/actor/**"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/brotherhood/brotherhood/**"
+			access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/brotherhood/none/**"
+			access="!isAuthenticated()" />
 
 
 
 
 		<security:intercept-url pattern="/actor/edit.do"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/edit.do"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/show.do"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/create.do"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/list.do"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/save.do"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/delete.do"
+			access="isAuthenticated()" />
+		<security:intercept-url pattern="/socialProfile/cancel.do"
 			access="isAuthenticated()" />
 
 		<security:intercept-url pattern="/**"

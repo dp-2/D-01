@@ -63,4 +63,5 @@ public class PositionService {
 		Assert.notNull(position);
 		this.positionRepository.delete(position);
 	}
+
 }

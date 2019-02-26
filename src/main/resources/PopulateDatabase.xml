@@ -118,7 +118,7 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.3" />
-		<property name="address" value="" />
+		<property name="address" value="Un lugar llamado mundo" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 
@@ -303,11 +303,11 @@
 	</bean>
 
 	<bean id="position1_2" class="domain.Position">
-		<property name="name" value="President" />
+		<property name="name" value="Presidente" />
 		<property name="language" value="es" />
 	</bean>
+	
 	<!-- Enroll -->
-
 
 	<bean id="enroll1" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
