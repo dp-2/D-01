@@ -10,7 +10,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<form:form action="box/actor/edit.do" modelAttribute="boxForm">
+<form:form action="box/actor/edit.do" modelAttribute="box">
 <security:authentication property="principal.username" var="username" />
 <jstl:if test='${box.actor.userAccount.username == username || box.id == 0}'>
 	
