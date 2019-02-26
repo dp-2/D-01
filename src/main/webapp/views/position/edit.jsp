@@ -27,7 +27,7 @@
 	<acme:textbox code="position.name" path="name" />
 	<br />
 
-	<%-- 	<acme:select items="" itemLabel="" code="position.language" path="language"/>
+	<%-- <acme:select items="EN, ES" itemLabel="EN, ES" code="position.language" path="language"/>
 	<br /> --%>
 
 	<form:label path="language">
