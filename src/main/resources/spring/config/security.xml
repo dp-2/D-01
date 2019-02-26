@@ -108,6 +108,9 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/procession/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
+			
+		<security:intercept-url pattern="/dfloat/brotherhood/**"
+			access="hasRole('BROTHERHOOD')" />
 
 
 
