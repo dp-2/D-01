@@ -24,12 +24,24 @@
 	<form:hidden path="version" />
 	<form:hidden path="member" />
 	<form:hidden path="procession" />
+	<security:authorize access="hasRole('MEMBER')">
+		<form:hidden path="status" />
 
+	</security:authorize>
 	<security:authorize access="hasRole('BROTHERHOOD')">
 
-		<acme:select code="march.status" path="status" 
-			items="${statuses}" itemLabel="status" />
-	
+		<form:label path="status">
+			<spring:message code="march.status"></spring:message>
+		</form:label>
+		<form:select id="status" path="status">
+			<option value="PENDING">PENDING</option>
+			<option value="APPROVED">APPROVED</option>
+			<option value="REJECTED">REJECTED</option>
+
+		</form:select>
+
+
+
 		<br />
 
 		<jstl:if test="${march.status==REJECTED}">
@@ -45,23 +57,19 @@
 
 	</security:authorize>
 
-
 	<acme:submit name="save" code="march.save" />
 
 	<security:authorize access="hasRole('MEMBER')">
-		<jstl:if test="${march.id != 0 && march.status==PENDING}">
 
-		<acme:submit name="delete" code="march.delete" />
-
-	</jstl:if>
-
-	<acme:cancel url="/march/member/list.do" code="march.cancel" />
+		<acme:cancel url="/march/member/list.do" code="march.cancel" />
 
 		<br />
 	</security:authorize>
-	
+
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<acme:cancel url="/march/brotherhood/list.do" code="march.cancel" />
+		<acme:cancel
+			url="/march/brotherhood/list.do?processionId=${march.getProcession().getId()}"
+			code="march.cancel" />
 
 		<br />
 	</security:authorize>

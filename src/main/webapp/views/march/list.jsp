@@ -54,7 +54,7 @@
 
 	<jstl:if test="${row.status=='APPROVED' }">
 		<display:column property="status" titleKey="march.status"
-			style="background-color:Green" sortable="true" />
+			style="background-color:Green" sortable="true "/>
 	</jstl:if>
 
 	<jstl:if test="${row.status=='REJECTED'}">

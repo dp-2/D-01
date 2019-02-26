@@ -32,7 +32,6 @@ public class March extends DomainEntity {
 	private Map<Integer, Integer>	location;
 
 
-	@NotNull
 	@NotBlank
 	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$")
 	public String getStatus() {
