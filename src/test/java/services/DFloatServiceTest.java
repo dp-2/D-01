@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.Collection;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -29,8 +31,63 @@ public class DFloatServiceTest extends AbstractTest {
 	@Test
 	public void testCreate() {
 		this.authenticate("brotherhood1");
-		System.out.println("------------------1");
 		final DFloat dfloat = this.dfloatService.create();
 		Assert.notNull(dfloat);
 	}
+
+	@Test
+	public void testFindAll() {
+		Collection<DFloat> dfloats;
+		dfloats = this.dfloatService.findAll();
+
+		Assert.notNull(dfloats);
+		Assert.notEmpty(dfloats);
+	}
+
+	@Test
+	public void testFindOneCorrecto() {
+		DFloat dfloat;
+
+		final int idBusqueda = super.getEntityId("dfloat1");
+		dfloat = this.dfloatService.findOne(idBusqueda);
+		Assert.notNull(dfloat);
+	}
+
+	@Test(expected = AssertionError.class)
+	public void testFindOneIncorrecto() {
+		DFloat dfloat;
+
+		final int idBusqueda = super.getEntityId("noExiste");
+		dfloat = this.dfloatService.findOne(idBusqueda);
+		Assert.isNull(dfloat);
+	}
+
+	@Test
+	public void testSave() {
+		DFloat dfloat, saved;
+		int dfloatId;
+		dfloatId = this.getEntityId("dfloat1");
+		dfloat = this.dfloatService.findOne(dfloatId);
+		Assert.notNull(dfloat);
+
+		this.authenticate("brotherhood1");
+
+		dfloat.setTitle("hola");
+		saved = this.dfloatService.save(dfloat);
+		Assert.isTrue(saved.getTitle().equals("hola"));
+
+		this.unauthenticate();
+	}
+
+	//TODO está mal
+	@Test
+	public void testDelete() {
+		DFloat dfloat;
+		final int idBusqueda = super.getEntityId("dfloat1");
+		dfloat = this.dfloatService.findOne(idBusqueda);
+		this.dfloatService.delete(dfloat);
+		Assert.notNull(dfloat);
+
+	}
+
 }

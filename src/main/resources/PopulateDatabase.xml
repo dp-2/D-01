@@ -118,7 +118,7 @@
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
 		<property name="score" value="0.3" />
-		<property name="address" value="" />
+		<property name="address" value="Un lugar llamado mundo" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 

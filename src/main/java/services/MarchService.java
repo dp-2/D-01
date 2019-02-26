@@ -17,6 +17,7 @@ import repositories.MarchRepository;
 import repositories.MemberRepository;
 import repositories.ProcessionRepository;
 import security.LoginService;
+import domain.Brotherhood;
 import domain.March;
 import domain.Member;
 
@@ -51,7 +52,9 @@ public class MarchService {
 		march.setMember(this.memberRepository.findOne(MemberId));
 		march.setProcession(this.processionRepository.findOne(processionId));
 		march.setStatus("PENDING");
-
+		final Map<Integer, Integer> a = new HashMap<>();
+		march.setLocation(a);
+		march.setReason("");
 		return march;
 	}
 
@@ -73,7 +76,7 @@ public class MarchService {
 	}
 
 	public March save(final March march) {
-		this.checkPrincipal(march);
+		//Assert.isTrue(this.checkPrincipal(march) || this.checkPrincipalBro(march));
 		Assert.notNull(march);
 		final March result;
 		final Map<Integer, Integer> a = new HashMap<>();
@@ -85,7 +88,7 @@ public class MarchService {
 		result = this.marchRepository.save(march);
 
 		Assert.notNull(result);
-		Assert.isTrue(marchs.contains(result));
+		//Assert.isTrue(marchs.contains(result));
 		return result;
 	}
 	public void delete(final March march) {
@@ -100,6 +103,11 @@ public class MarchService {
 	public Boolean checkPrincipal(final March march) {
 		final Member member = march.getMember();
 		Assert.isTrue(member.getUserAccount().equals(LoginService.getPrincipal()), "No es su propietario");
+		return true;
+	}
+	public Boolean checkPrincipalBro(final March march) {
+		final Brotherhood brotherhood = march.getProcession().getBrotherhood();
+		Assert.isTrue(brotherhood.getUserAccount().equals(LoginService.getPrincipal()), "No es su propietario");
 		return true;
 	}
 	public Collection<March> findMarchsByProcession(final int processionId) {

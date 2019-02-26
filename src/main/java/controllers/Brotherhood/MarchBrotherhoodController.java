@@ -80,7 +80,7 @@ public class MarchBrotherhoodController extends AbstractController {
 			try {
 
 				this.marchService.save(march);
-				result = new ModelAndView("redirect:/march/brotherhood/list.do?=" + march.getProcession().getId());
+				result = new ModelAndView("redirect:welcome/index.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(march, "march.commit.error");
 
