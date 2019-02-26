@@ -303,11 +303,11 @@
 	</bean>
 
 	<bean id="position1_2" class="domain.Position">
-		<property name="name" value="President" />
+		<property name="name" value="Presidente" />
 		<property name="language" value="es" />
 	</bean>
+	
 	<!-- Enroll -->
-
 
 	<bean id="enroll1" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />

@@ -80,13 +80,15 @@
 			<li><a href="actor/administrator/list.do"><spring:message
 						code="master.page.administrator.actors" /></a></li>
 			<li><a href="register/administrator/newActor.do?authority=ADMIN"><spring:message
-								code="master.page.register.admin" /></a></li>
+						code="master.page.register.admin" /></a></li>
+			<li><a class="fNiv" href="position/administrator/list.do"><spring:message
+						code="master.page.position" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('MEMBER')">
 
 			<li><a class="fNiv" href="march/member/list.do"><spring:message
-						code="master.page.march" /></a></li>		
+						code="master.page.march" /></a></li>
 			<li><a class="fNiv" href="member/edit.do"><spring:message
 						code="master.page.member" /></a></li>
 
@@ -123,6 +125,9 @@
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
+			<li><a href="socialProfile/list.do"> <spring:message
+						code="master.page.socialProfile" />
+			</a>
 			<li><a class="fNiv"> <spring:message
 						code="master.page.profile" /> (<security:authentication
 						property="principal.username" />)

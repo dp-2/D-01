@@ -26,7 +26,10 @@
 		<value>/views/actor/messages</value>
 		<value>/views/procession/messages</value>
 		<value>/views/member/messages</value>
-		
+		<value>/views/enroll/messages</value>
+		<value>/views/position/messages</value>
+		<value>/views/socialProfile/messages</value>
+
 	</util:list>
 
 </beans>
