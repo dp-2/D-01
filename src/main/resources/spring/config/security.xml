@@ -100,7 +100,9 @@
 
 		<security:intercept-url pattern="/member/edit.do"
 			access="hasRole('MEMBER')" />
-
+		
+		<security:intercept-url pattern="/procession/member/list.do"
+			access="hasRole('MEMBER')" />
 
 
 
