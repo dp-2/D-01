@@ -96,6 +96,11 @@
 			<li><a class="fNiv" href="procession/list.do"><spring:message
 						code="master.page.processions" /></a>
 				<ul>
+					<security:authorize access="hasRole('MEMBER')">
+						<li class="arrow"></li>
+						<li><a href="procession/member/list.do"><spring:message
+									code="master.page.processions.brotherhood" /></a></li>
+					</security:authorize>
 					<security:authorize access="hasRole('BROTHERHOOD')">
 						<li class="arrow"></li>
 						<li><a href="procession/brotherhood/myList.do"><spring:message

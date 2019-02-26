@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
+import repositories.ProcessionRepository;
+import security.LoginService;
 import domain.Brotherhood;
 import domain.Finder;
 import domain.Procession;
 import forms.ProcessionForm;
-import repositories.ProcessionRepository;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -38,9 +38,9 @@ public class ProcessionService {
 	@Autowired
 	private FinderService			finderService;
 
+
 	//	@Autowired
 	//	private Validator				validator;
-
 
 	//Methods--------------------------------------------------------------------
 
@@ -145,4 +145,7 @@ public class ProcessionService {
 		return this.processionRepository.findProcessionsByBrotherhoodId(brotherhoodId);
 	}
 
+	public List<Procession> findProcessionOfMember(final int memberId) {
+		return this.processionRepository.findProcessionOfMember(memberId);
+	}
 }
