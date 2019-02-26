@@ -22,21 +22,33 @@
 <form:form action="${requestURI}" modelAttribute="position">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	
-	
-	<acme:select itemLabel="positions" items="${position}" code="position.name" path="name"/>
+
+
+	<acme:textbox code="position.name" path="name" />
 	<br />
-	
-	<acme:textbox code="position.language" path="language"/>
-	<br />
-	
-	<acme:submit name="save" code="position.save"/>
-	<acme:cancel code="position.cancel" url="/position/administrator/list.do" />
-		<jstl:if test="${position.id!=0}">
-			<acme:submit code="position.delete" name="delete" />
-		</jstl:if>
-	
-	
+
+	<%-- 	<acme:select items="" itemLabel="" code="position.language" path="language"/>
+	<br /> --%>
+
+	<form:label path="language">
+		<spring:message code="position.language"></spring:message>
+	</form:label>
+	<form:select id="language" path="language">
+		<option value="EN">EN</option>
+		<option value="ES">ES</option>
+
+	</form:select>
+	<br /><br />
+
+
+	<acme:submit name="save" code="position.save" />
+	<acme:cancel code="position.cancel"
+		url="/position/administrator/list.do" />
+	<jstl:if test="${position.id!=0}">
+		<acme:submit code="position.delete" name="delete" />
+	</jstl:if>
+
+
 
 </form:form>
 

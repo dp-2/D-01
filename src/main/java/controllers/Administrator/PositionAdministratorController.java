@@ -111,17 +111,17 @@ public class PositionAdministratorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Position position, final String message) {
 		final ModelAndView result;
 
-		final Collection<Position> lista = this.positionService.findAll();
+		//		final String s = LocaleContextHolder.getLocale().getLanguage().toLowerCase();
+		//		final Collection<Position> lista = this.positionService.findPositionByLanguage(s);
 
 		result = new ModelAndView("position/edit");
 		result.addObject("position", position);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
-		result.addObject("position", lista);
+		//		result.addObject("position", lista);
 
 		result.addObject("requestURI", "position/administrator/edit.do");
 
 		return result;
 	}
-
 }
