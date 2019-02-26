@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Administrator;
-import domain.Configuration;
 import repositories.AdministratorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
+import domain.Administrator;
+import domain.Configuration;
 
 @Service
 @Transactional
@@ -35,6 +36,9 @@ public class AdministratorService {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	// --------------------------Constructor-----------------------
@@ -123,19 +127,19 @@ public class AdministratorService {
 		this.administratorRepository.flush();
 	}
 
-	public void banActor(final Administrator a) {
+	public void banActor(final Actor a) {
 		Assert.notNull(a);
+		Assert.isTrue(a.getSpammer() == true || a.getScore() < -0.5);
 		this.serviceUtils.checkAuthority("ADMIN");
 		a.setBanned(true);
-		this.administratorRepository.save(a);
+		this.actorService.save(a);
 
 	}
-
-	public void unBanActor(final Administrator a) {
+	public void unBanActor(final Actor a) {
 		Assert.notNull(a);
 		this.serviceUtils.checkAuthority("ADMIN");
 		a.setBanned(false);
-		this.administratorRepository.save(a);
+		this.actorService.save(a);
 
 		//	//Ban actor
 		//	public Boolean banActor(final Administrator a) {

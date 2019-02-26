@@ -512,7 +512,7 @@
 
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
-		<property name="score" value="0.4" />
+		<property name="score" value="-0.6" />
 		<property name="address" value="" />
 		<property name="userAccount" ref="userAccount2" />
 
