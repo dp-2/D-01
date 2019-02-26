@@ -22,6 +22,7 @@ public class SocialProfileService {
 	// Managed repository ----------------------------------------------------------------
 	@Autowired
 	private SocialProfileRepository	socialProfileRepository;
+
 	@Autowired
 	private ActorRepository			actorRepository;
 
@@ -34,46 +35,51 @@ public class SocialProfileService {
 
 	// Simple CRUD methods -------------------------------------------------------------------
 	public SocialProfile create(final int actorId) {
-		final SocialProfile profile = new SocialProfile();
-		profile.setActor(this.actorRepository.findOne(actorId));
-		return profile;
+		final SocialProfile socialProfile = new SocialProfile();
+		socialProfile.setActor(this.actorRepository.findOne(actorId));
+		return socialProfile;
 	}
 
 	public Collection<SocialProfile> findAll() {
-		Collection<SocialProfile> profiles;
+		Collection<SocialProfile> socialProfiles;
 
-		profiles = this.socialProfileRepository.findAll();
-		Assert.notNull(profiles);
+		socialProfiles = this.socialProfileRepository.findAll();
+		Assert.notNull(socialProfiles);
 
-		return profiles;
+		return socialProfiles;
 	}
-	public SocialProfile findOne(final int profileId) {
-		SocialProfile profile;
-		profile = this.socialProfileRepository.findOne(profileId);
-		Assert.notNull(profileId);
+	public SocialProfile findOne(final int socialProfileId) {
+		SocialProfile socialProfile;
+		socialProfile = this.socialProfileRepository.findOne(socialProfileId);
+		Assert.notNull(socialProfileId);
 
-		return profile;
+		return socialProfile;
 	}
 
-	public SocialProfile save(final SocialProfile profile) {
-		Assert.notNull(profile);
-		this.checkPrincipal(profile);
+	public SocialProfile save(final SocialProfile socialProfile) {
+		Assert.notNull(socialProfile);
+		this.checkPrincipal(socialProfile);
 		SocialProfile result;
 
-		result = this.socialProfileRepository.save(profile);
+		result = this.socialProfileRepository.save(socialProfile);
 
 		return result;
 	}
-	public void delete(final SocialProfile profile) {
 
-		Assert.notNull(profile);
-		this.checkPrincipal(profile);
-		this.socialProfileRepository.delete(profile);
+	public void delete(final SocialProfile socialProfile) {
+
+		Assert.notNull(socialProfile);
+		this.checkPrincipal(socialProfile);
+		this.socialProfileRepository.delete(socialProfile);
 	}
 	//Other Methods-----------------------------------------------------------------
-	public Boolean checkPrincipal(final SocialProfile profile) {
-		final UserAccount u = profile.getActor().getUserAccount();
+	public Boolean checkPrincipal(final SocialProfile socialProfile) {
+		final UserAccount u = socialProfile.getActor().getUserAccount();
 		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con este actor");
 		return true;
+	}
+
+	public Collection<SocialProfile> findProfileByActorId(final int actorId) {
+		return this.socialProfileRepository.findProfileByActorId(actorId);
 	}
 }

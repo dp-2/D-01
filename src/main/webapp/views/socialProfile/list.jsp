@@ -11,24 +11,24 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<display:table name="profiles" id="row" requestURI="${requestURI}"
+<display:table name="socialProfiles" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
 	<display:column property="actor.userAccount.username"
-		titleKey="profile.username" />
+		titleKey="socialProfile.username" />
 
-	<display:column titleKey="profile.social">
+	<display:column titleKey="socialProfile.social">
 	
-		<a href="profile/show.do?profileId=${row.id}"> <spring:message
-				code="profile.view" />
+		<a href="socialProfile/show.do?socialProfileId=${row.id}"> <spring:message
+				code="socialProfile.view" />
 		</a>
 	</display:column>
 	
 	
 	<display:column>
 		<jstl:if test="${username==row.actor.userAccount.username}">
-		<a href="profile/edit.do?profileId=${row.id}"> <spring:message
-				code="profile.edit" />
+		<a href="socialProfile/edit.do?socialProfileId=${row.id}"> <spring:message
+				code="socialProfile.edit" />
 		</a>
 	</jstl:if>
 	</display:column>
@@ -36,6 +36,6 @@
 	
 </display:table>
 
-<a href="profile/create.do"> <spring:message
-			code="profile.create" />
+<a href="socialProfile/create.do"> <spring:message
+			code="socialProfile.create" />
 	</a>

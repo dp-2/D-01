@@ -92,12 +92,9 @@ public class EnrollServiceTest extends AbstractTest {
 		final Position position = this.positionService.findOne(positionId);
 		try {
 			enroll = this.enrollService.create(memberId, brotherhoodId);
-			enroll.setHaSalido(false);
 			enroll.setPosition(position);
-			if (enroll.getHaSalido() == true)
-				enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
-			if (enroll.getHaSalido() == true)
-				enroll.setEndMoment(new Date(System.currentTimeMillis() - 1000));
+			enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
+			enroll.setEndMoment(null);
 			saved = this.enrollService.save(enroll);
 
 			enrolls = this.enrollService.findAll();
