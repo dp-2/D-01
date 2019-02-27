@@ -27,13 +27,18 @@
 		<value>/views/procession/messages</value>
 		<value>/views/member/messages</value>
 
+
 		<value>/views/dfloat/messages</value>
+
+		<value>/views/enroll/messages</value>
+		<value>/views/position/messages</value>
+		<value>/views/socialProfile/messages</value>
+
 
 		<value>/views/message/messages</value>
 		<value>/views/box/messages</value>
 		
 
-		
 	</util:list>
 
 </beans>

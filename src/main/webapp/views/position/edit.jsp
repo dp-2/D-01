@@ -19,23 +19,36 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${requestURI}" modelAttribute="enroll">
+<form:form action="${requestURI}" modelAttribute="position">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
-	<form:label path="name">
-		<spring:message code="position.name" />
-	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
+
+	<acme:textbox code="position.name" path="name" />
 	<br />
-	
+
+	<%-- <acme:select items="EN, ES" itemLabel="EN, ES" code="position.language" path="language"/>
+	<br /> --%>
+
 	<form:label path="language">
-		<spring:message code="position.language" />
+		<spring:message code="position.language"></spring:message>
 	</form:label>
-	<form:input path="language"/>
-	<form:errors cssClass="error" path="language" />
-	<br />
+	<form:select id="language" path="language">
+		<option value="EN">EN</option>
+		<option value="ES">ES</option>
+
+	</form:select>
+	<br /><br />
+
+
+	<acme:submit name="save" code="position.save" />
+	<acme:cancel code="position.cancel"
+		url="/position/administrator/list.do" />
+	<jstl:if test="${position.id!=0}">
+		<acme:submit code="position.delete" name="delete" />
+	</jstl:if>
+
+
 
 </form:form>
 

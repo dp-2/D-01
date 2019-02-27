@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
 import domain.Brotherhood;
+import domain.DFloat;
 import domain.Finder;
 import domain.Procession;
 import forms.ProcessionForm;
@@ -37,6 +38,9 @@ public class ProcessionService {
 
 	@Autowired
 	private FinderService			finderService;
+
+	@Autowired
+	private DFloatService			dFloatService;
 
 	//	@Autowired
 	//	private Validator				validator;
@@ -82,6 +86,7 @@ public class ProcessionService {
 	public void delete(final Procession procession) {
 		this.checkPrincipal(procession);
 		this.checkNoFinalMode(procession);
+		this.deleteDFloatsOfProcession(procession);
 		this.processionRepository.delete(procession);
 	}
 
@@ -97,7 +102,8 @@ public class ProcessionService {
 	}
 
 	private boolean checkNoFinalMode(final Procession procession) {
-		Assert.isTrue(procession.isFfinal() == false, "noFinal");
+		final Procession processionBD = this.findOne(procession.getId());
+		Assert.isTrue(processionBD.isFfinal() == false, "noFinal");
 
 		return true;
 	}
@@ -145,4 +151,15 @@ public class ProcessionService {
 		return this.processionRepository.findProcessionsByBrotherhoodId(brotherhoodId);
 	}
 
+	public List<Procession> findProcessionOfMember(final int memberId) {
+		return this.processionRepository.findProcessionOfMember(memberId);
+	}
+
+	private void deleteDFloatsOfProcession(final Procession procession) {
+		final List<DFloat> dFloats = this.dFloatService.findDFloatsByProcessionId(procession.getId());
+
+		if (!dFloats.isEmpty())
+			for (final DFloat dFloat : dFloats)
+				this.dFloatService.delete(dFloat);
+	}
 }
