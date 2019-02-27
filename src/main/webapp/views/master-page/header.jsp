@@ -92,6 +92,15 @@
 
 
 		</security:authorize>
+		
+		<security:authorize access="hasRole('BROTHERHOOD')">
+
+			<li><a class="fNiv" href="enroll/brotherhood/list.do"><spring:message
+						code="master.page.enroll" /></a></li>
+
+
+		</security:authorize>
+		
 
 		<security:authorize access="permitAll">
 			<li><a class="fNiv" href="procession/list.do"><spring:message

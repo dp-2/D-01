@@ -37,7 +37,8 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create(final int memberId, final int brotherhoodId) {
+	public Enroll create() {
+		//		final int memberId, final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
 		//		enroll.setMember(this.memberService.findOne(memberId));
 		//		enroll.setBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
@@ -82,5 +83,9 @@ public class EnrollService {
 		final UserAccount u = enroll.getBrotherhood().getUserAccount();
 		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con esta hermandad");
 		return true;
+	}
+
+	public Collection<Enroll> findEnrollByBrotherhood(final int brotherhoodId) {
+		return this.enrollRepository.findEnrollByBrotherhood(brotherhoodId);
 	}
 }

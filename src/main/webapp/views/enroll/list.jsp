@@ -22,10 +22,10 @@
 	pagesize="5" class="displaytag">
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<jstl:if test="${brotherhoodId==row.enrolls.brotherhood.id}">
+		<jstl:if test="${brotherhoodId==row.brotherhood.id}">
 			<display:column>
 
-				<a href="enroll/brotherhood/edit.do?Id=${row.id}"> <spring:message
+				<a href="enroll/brotherhood/edit.do?enrollId=${row.id}"> <spring:message
 						code="enroll.edit" />
 				</a>
 

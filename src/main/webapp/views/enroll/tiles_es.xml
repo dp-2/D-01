@@ -15,7 +15,7 @@
 		<put-attribute name="body" value="/views/enroll/list.jsp" />
 	</definition>
 
-	<definition name="administrator/action-2" extends="master.page">
+	<definition name="enroll/edit" extends="master.page">
 		<put-attribute name="title" value="Editar" />
 		<put-attribute name="body" value="/views/enroll/edit.jsp" />
 	</definition>

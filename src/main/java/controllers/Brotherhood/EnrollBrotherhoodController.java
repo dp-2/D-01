@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.EnrollService;
+import services.MemberService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Enroll;
@@ -33,6 +34,9 @@ public class EnrollBrotherhoodController extends AbstractController {
 	@Autowired
 	private ActorService	actorService;
 
+	@Autowired
+	private MemberService	memberService;
+
 
 	// Constructor---------------------------------------------------------
 
@@ -47,12 +51,27 @@ public class EnrollBrotherhoodController extends AbstractController {
 		final Collection<Enroll> enrolls;
 
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
-		enrolls = this.enrollService.findAll();
+		//		final Member m = this.memberService.findMemberByEnrollId(enrollId);
+		enrolls = this.enrollService.findEnrollByBrotherhood(a.getId());
 
 		result = new ModelAndView("enroll/list");
 		result.addObject("enrolls", enrolls);
 		result.addObject("requestURI", "/enroll/brotherhood/list.do");
-		//		result.addObject("brotherhoodId", a.getId());
+		result.addObject("brotherhoodId", a.getId());
+		//		result.addObject("memberId", m.getId());
+		return result;
+	}
+
+	//Create
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		final Enroll enroll;
+
+		enroll = this.enrollService.create();
+		Assert.notNull(enroll);
+		result = this.createEditModelAndView(enroll);
+
 		return result;
 	}
 
@@ -80,7 +99,7 @@ public class EnrollBrotherhoodController extends AbstractController {
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:/enroll/brotherhood/list.do");
+				result = new ModelAndView("redirect:enroll/brotherhood/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
 
@@ -95,7 +114,7 @@ public class EnrollBrotherhoodController extends AbstractController {
 
 		try {
 			this.enrollService.delete(enroll);
-			result = new ModelAndView("redirect:/enroll/brotherhood/list.do");
+			result = new ModelAndView("redirect:enroll/brotherhood/list.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(enroll, "enroll.commit.error");
 		}
@@ -115,12 +134,12 @@ public class EnrollBrotherhoodController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Enroll enroll, final String message) {
 		ModelAndView result;
 
-		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		//		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		result = new ModelAndView("enroll/edit");
 		result.addObject("enroll", enroll);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
-		result.addObject("brotherhoodId", a.getId());
+		//		result.addObject("brotherhoodId", a.getId());
 		result.addObject("requestURI", "enroll/brotherhood/edit.do");
 
 		return result;

@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Configuration;
-import domain.Member;
 import repositories.MemberRepository;
 import security.Authority;
 import security.UserAccount;
+import domain.Configuration;
+import domain.Member;
 
 @Service
 @Transactional
@@ -153,6 +153,10 @@ public class MemberService {
 
 	public Member findMemberByUserAcountId(final int userAccountId) {
 		return this.memberRepository.findMemberByUserAcountId(userAccountId);
+	}
+
+	public Member findMemberByEnrollId(final int enrollId) {
+		return this.memberRepository.findMemberByEnrollId(enrollId);
 	}
 
 }
