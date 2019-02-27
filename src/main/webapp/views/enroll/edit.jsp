@@ -31,29 +31,29 @@
 		<%-- <acme:select code="enroll.position" path="position" items="${positions}"
 			itemLabel="position" /> --%>
 		<jstl:if test="${idioma}=='es'">
-		<form:label path="position">
-			<spring:message code="enroll.position" />:
+			<form:label path="position">
+				<spring:message code="enroll.position" />:
   		</form:label>
-		<form:select id="positions" path="position">
-			<form:options items="${positionsES}" itemValue="id" itemLabel="name" />
-		</form:select>
-		<form:errors cssClass="error" path="position" />
-		<br />
-		<br />
+			<form:select id="positions" path="position">
+				<form:options items="${positionsES}" itemValue="id" itemLabel="name" />
+			</form:select>
+			<form:errors cssClass="error" path="position" />
+			<br />
+			<br />
 		</jstl:if>
-		
+
 		<jstl:if test="${idioma}=='en'">
-		<form:label path="position">
-			<spring:message code="enroll.position" />:
+			<form:label path="position">
+				<spring:message code="enroll.position" />:
   		</form:label>
-		<form:select id="positions" path="position">
-			<form:options items="${positionsEN}" itemValue="id" itemLabel="name" />
-		</form:select>
-		<form:errors cssClass="error" path="position" />
-		<br />
-		<br />
+			<form:select id="positions" path="position">
+				<form:options items="${positionsEN}" itemValue="id" itemLabel="name" />
+			</form:select>
+			<form:errors cssClass="error" path="position" />
+			<br />
+			<br />
 		</jstl:if>
-		
+
 		<form:label path="position">
 			<spring:message code="enroll.position" />:
   		</form:label>
