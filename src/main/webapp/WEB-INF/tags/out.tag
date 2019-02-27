@@ -33,6 +33,7 @@
 	<b><spring:message code="${code}"></spring:message>:</b>
 	<jstl:out value="${value}"></jstl:out>
 	<br />
+	<br />
 </div>
 
 

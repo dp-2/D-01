@@ -17,6 +17,7 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
 
@@ -43,10 +44,14 @@
 					code="dfloat.display"></spring:message></a>
 		</display:column>
 
-		<spring:message code="dfloat.title"
-			var="dfloat.title"></spring:message>
-		<display:column property="title"
-			title="${dfloat.title}" sortable="true" />
+	
+			
+		<acme:column code="dfloat.title" value="${ dfloat.title}"></acme:column>	
+		<acme:column code="dfloat.description" value="${ dfloat.description}"></acme:column>
+		<acme:column code="dfloat.pictures" value="${ dfloat.pictures}" ></acme:column>
+		<acme:column code="dfloat.brotherhood" value="${ dfloat.brotherhood.title}" ></acme:column>
+		<acme:column code="dfloat.procession" value="${ dfloat.procession.title}" ></acme:column>
+
 
 
 
@@ -63,12 +68,6 @@
 		onclick="javascript:relativeRedir('dfloat/brotherhood/create.do')" />
 </security:authorize>
 
-<%--  Boton de ATRAS --%>
-<security:authorize access="hasRole('BROTHERHOOD')">
 
-	<input type="button" name="back"
-		value="<spring:message code="dfloat.back"></spring:message>"
-		onclick="javascript:relativeRedir('curriculum/brotherhood/display.do')" />
-</security:authorize>
 
 

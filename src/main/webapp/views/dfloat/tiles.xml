@@ -21,5 +21,10 @@
 		<put-attribute name="body" value="/views/dfloat/display.jsp" />
 	</definition>
 	
+	<definition name="dfloat/list" extends="master.page">	
+		<put-attribute name="title" value="List Floats" />
+		<put-attribute name="body" value="/views/dfloat/list.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>

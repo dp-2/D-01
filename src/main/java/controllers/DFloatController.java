@@ -36,7 +36,8 @@ public class DFloatController extends AbstractController {
 		Brotherhood brotherhood;
 
 		brotherhood = (Brotherhood) this.actorService.findActorByUsername(LoginService.getPrincipal().getUsername());
-		dfloats = this.dfloatService.findAll();
+
+		dfloats = this.dfloatService.findAllDFloatsByBrotherhood(brotherhood);
 
 		result = new ModelAndView("dfloat/list");
 		result.addObject("dfloats", dfloats);
