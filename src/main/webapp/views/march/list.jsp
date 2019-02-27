@@ -25,7 +25,7 @@
 	<security:authorize access="hasRole('MEMBER')">
 		<jstl:if test="${memberId==row.member.id}">
 			<display:column>
-				<jstl:if test="${row.id != 0 && row.status=='PENDING'}">
+				<jstl:if test="${row.status=='PENDING'}">
 
 					<a href="march/member/delete.do?marchId=${row.id}">
 						<spring:message code="march.delete" />
@@ -65,8 +65,8 @@
 	<display:column property="reason" titleKey="march.reason" />
 
 	<display:column titleKey="march.location" >
-		<acme:out code="location.row" value="${row.location.values(0)},"/>
-		<acme:out code="location.column" value="${row.location.keySet(0)}"/>
+		<acme:out code="location.row" value="${row.location.value},"/>
+		<acme:out code="location.column" value="${row.location.key}"/>
 	</display:column>
 
 

@@ -80,7 +80,7 @@ public class MarchService {
 		Assert.notNull(march);
 		final March result;
 		final Map<Integer, Integer> a = new HashMap<>();
-		final Collection<March> marchs = this.marchRepository.findAll();
+		//	final Collection<March> marchs = this.marchRepository.findAll();
 		if (march.getStatus().equals("APPROVED"))
 			march.setLocation(this.isUniqueColumNum());
 		else
