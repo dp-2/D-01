@@ -63,10 +63,11 @@
 	</jstl:if>
 
 	<display:column property="reason" titleKey="march.reason" />
-	<display:column property="location" titleKey="march.location" />
 
-
-
+	<display:column titleKey="march.location" >
+		<acme:out code="location.row" value="${row.location.values(0)},"/>
+		<acme:out code="location.column" value="${row.location.keySet(0)}"/>
+	</display:column>
 
 
 </display:table>

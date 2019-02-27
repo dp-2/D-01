@@ -53,9 +53,9 @@ public class MarchMemberController extends AbstractController {
 		result.addObject("marchs", marchs);
 		result.addObject("requestURI", "/list.do?memberId=" + a.getId());
 		result.addObject("memberId", a.getId());
+
 		return result;
 	}
-
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int processionId) {
