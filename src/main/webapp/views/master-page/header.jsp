@@ -129,6 +129,10 @@
 			</a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="box/actor/list.do"><spring:message
+								code="master.page.listboxes" /> </a></li>
+					<li><a href="message/actor/create.do"><spring:message
+								code="master.page.messagecreate" /></a></li>
 					<li><a href="actor/edit.do"><spring:message
 								code="master.page.profile.edit" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message

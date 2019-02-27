@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
 import repositories.BrotherhoodRepository;
 import security.Authority;
@@ -35,10 +36,9 @@ public class BrotherhoodService {
 	private BoxService				boxService;
 	@Autowired
 	private ServiceUtils			serviceUtils;
+	@Autowired
+	private Validator				validator;
 
-
-	//	@Autowired
-	//	private Validator				validator;
 
 	public Brotherhood findOne(final Integer id) {
 		this.serviceUtils.checkId(id);
@@ -55,6 +55,7 @@ public class BrotherhoodService {
 	}
 
 	public Brotherhood create() {
+		this.serviceUtils.checkNoActor();
 		final Brotherhood res = new Brotherhood();
 		res.setBanned(false);
 		res.setSpammer(false);
@@ -132,7 +133,7 @@ public class BrotherhoodService {
 		res.setTitle(form.getTitle());
 		res.getUserAccount().setUsername(form.getUsername());
 		res.getUserAccount().setPassword(form.getPassword());
-		//		this.validator.validate(res, binding);
+		this.validator.validate(res, binding);
 		return res;
 	}
 
