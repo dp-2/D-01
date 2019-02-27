@@ -14,4 +14,11 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 
 	@Query("select p.name from Position p")
 	Collection<Position> findPositionName();
+
+	@Query("select p from Position p where p.language = 'es'")
+	Collection<Position> findPositionES();
+
+	@Query("select p from Position p where p.language = 'en'")
+	Collection<Position> findPositionEN();
+
 }

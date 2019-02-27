@@ -35,6 +35,7 @@
 	
 	<display:column property="startMoment" titleKey="enroll.start" />
 	<display:column property="endMoment" titleKey="enroll.end" />
+	<display:column property="member.name" titleKey="enroll.member" />
 
 
 </display:table>

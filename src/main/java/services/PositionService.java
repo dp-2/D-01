@@ -64,15 +64,15 @@ public class PositionService {
 		this.positionRepository.delete(position);
 	}
 
-	//	public Collection<Position> findPositionName() {
-	//		final Collection<Position> pos = this.positionRepository.findPositionName();
-	//		return pos;
-	//	}
-	//
-	//	public Collection<Position> findPositionLanguage() {
-	//		final Collection<Position> pos = this.positionRepository.findPositionLanguage();
-	//		return pos;
-	//	}
+	public Collection<Position> findPositionES() {
+		final Collection<Position> pos = this.positionRepository.findPositionES();
+		return pos;
+	}
+
+	public Collection<Position> findPositionEN() {
+		final Collection<Position> pos = this.positionRepository.findPositionEN();
+		return pos;
+	}
 	//
 	//	public Collection<Position> findPositionByLanguage(final String lng) {
 	//		final Collection<Position> pos = this.positionRepository.findPositionByLanguage(lng);
