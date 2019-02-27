@@ -22,7 +22,7 @@
 <acme:out code="dfloat.description" value="${dfloat.description}"/>
 <acme:out code="dfloat.pictures" value="${dfloat.pictures}"/>
 <acme:out code="dfloat.brotherhood" value="${dfloat.title}"/>
-<acme:out code="dfloat.procession" value="${dfloat.procession}"/>
+<%-- <acme:out code="dfloat.procession" value="${dfloat.procession}"/> --%>
 
 
 

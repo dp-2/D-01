@@ -50,7 +50,7 @@
 		<acme:column code="dfloat.description" value="${ dfloat.description}"></acme:column>
 		<acme:column code="dfloat.pictures" value="${ dfloat.pictures}" ></acme:column>
 		<acme:column code="dfloat.brotherhood" value="${ dfloat.brotherhood.title}" ></acme:column>
-		<acme:column code="dfloat.procession" value="${ dfloat.procession.title}" ></acme:column>
+		<%-- <acme:column code="dfloat.procession" value="${ dfloat.procession.title}" ></acme:column> --%>
 
 
 

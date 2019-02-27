@@ -3,8 +3,12 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,92 +63,75 @@ public class DFloatController extends AbstractController {
 		return result;
 	}
 
-	//	//------------------------------------------
-	//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	//	public ModelAndView create() {
-	//		ModelAndView result;
-	//		DFloat er;
-	//		Curriculum curriculum;
-	//		HandyWorker handyWorker;
-	//
-	//		handyWorker = (HandyWorker) this.actorService.findOneByUserAccount(LoginService.getPrincipal());
-	//		curriculum = this.curriculumService.findByHandyWorker(handyWorker);
-	//
-	//		er = this.dfloatService.create();
-	//
-	//		er.setCurriculum(curriculum);
-	//
-	//		result = this.createEditModelAndView(er);
-	//
-	//		return result;
-	//
-	//	}
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	//	public ModelAndView edit(@RequestParam final int dfloatId) {
-	//		ModelAndView result;
-	//		DFloat er;
-	//
-	//		er = this.dfloatService.findOne(dfloatId);
-	//		Assert.notNull(er);
-	//		result = this.createEditModelAndView(er);
-	//
-	//		return result;
-	//
-	//	}
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	//	public ModelAndView save(@Valid final DFloat dfloat, final BindingResult binding) {
-	//		ModelAndView result;
-	//
-	//		if (binding.hasErrors())
-	//			result = this.createEditModelAndView(dfloat);
-	//		else
-	//			try {
-	//				this.dfloatService.save(dfloat);
-	//				result = new ModelAndView("redirect:list.do");
-	//			} catch (final Throwable oops) {
-	//				result = this.createEditModelAndView(dfloat, "dfloat.commit.error");
-	//			}
-	//		return result;
-	//	}
-	//
-	//	protected ModelAndView createEditModelAndView(final DFloat dfloat, final String messageCode) {
-	//		final ModelAndView result;
-	//
-	//		Curriculum curriculum;
-	//		HandyWorker handyWorker;
-	//
-	//		handyWorker = (HandyWorker) this.actorService.findOneByUserAccount(LoginService.getPrincipal());
-	//		curriculum = this.curriculumService.findByHandyWorker(handyWorker);
-	//
-	//		result = new ModelAndView("dfloat/edit");
-	//		result.addObject("dfloat", dfloat);
-	//		result.addObject("curriculum", curriculum);
-	//		result.addObject("message", messageCode);
-	//
-	//		return result;
-	//	}
-	//
-	//	protected ModelAndView createEditModelAndView(final DFloat dfloat) {
-	//		ModelAndView result;
-	//
-	//		result = this.createEditModelAndView(dfloat, null);
-	//
-	//		return result;
-	//	}
-	//
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	//	public ModelAndView delete(final DFloat dfloat, final BindingResult binding) {
-	//		ModelAndView result;
-	//		try {
-	//			this.dfloatService.delete(dfloat);
-	//			result = new ModelAndView("redirect:list.do");
-	//		} catch (final Throwable oops) {
-	//			result = this.createEditModelAndView(dfloat, "dfloat.commit.error");
-	//
-	//		}
-	//		return result;
-	//	}
+	//------------------------------------------
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create() {
+		ModelAndView result;
+		DFloat er;
+		er = this.dfloatService.create();
+		result = this.createEditModelAndView(er);
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int dfloatId) {
+		ModelAndView result;
+		DFloat er;
+
+		er = this.dfloatService.findOne(dfloatId);
+		Assert.notNull(er);
+		result = this.createEditModelAndView(er);
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final DFloat dfloat, final BindingResult binding) {
+		ModelAndView result;
+
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(dfloat);
+		else
+			try {
+				this.dfloatService.save(dfloat);
+				result = new ModelAndView("redirect:list.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(dfloat, "dfloat.commit.error");
+			}
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final DFloat dfloat, final String messageCode) {
+		final ModelAndView result;
+
+		result = new ModelAndView("dfloat/edit");
+		result.addObject("dfloat", dfloat);
+		result.addObject("message", messageCode);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final DFloat dfloat) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(dfloat, null);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final DFloat dfloat, final BindingResult binding) {
+		ModelAndView result;
+		try {
+			this.dfloatService.delete(dfloat);
+			result = new ModelAndView("redirect:list.do");
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(dfloat, "dfloat.commit.error");
+
+		}
+		return result;
+	}
 
 }

@@ -306,7 +306,7 @@
 		<property name="name" value="Presidente" />
 		<property name="language" value="es" />
 	</bean>
-	
+
 	<!-- Enroll -->
 
 	<bean id="enroll1" class="domain.Enroll">
@@ -332,7 +332,11 @@
 		<property name="pictures"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="procession" ref="procession1" />
+		<property name="processions">
+			<list>
+				<ref bean="procession1" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="dfloat2" class="domain.DFloat">
@@ -342,7 +346,11 @@
 		<property name="pictures"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="procession" ref="procession2" />
+		<property name="processions">
+			<list>
+				<ref bean="procession2" />
+			</list>
+		</property>
 	</bean>
 
 

@@ -1,10 +1,13 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -49,24 +52,24 @@ public class DFloat extends DomainEntity {
 
 	// Relatonships
 
-	private Brotherhood	brotherhood;
-	private Procession	procession;
+	private Brotherhood				brotherhood;
+	private Collection<Procession>	processions;
 
+
+	@ElementCollection
+	@NotNull
+	@Valid
+	public Collection<Procession> getProcessions() {
+		return this.processions;
+	}
+
+	public void setProcessions(final Collection<Procession> processions) {
+		this.processions = processions;
+	}
 
 	@NotNull
 	@Valid
-	@OneToOne(optional = false)
-	public Procession getProcession() {
-		return this.procession;
-	}
-
-	public void setProcession(final Procession procession) {
-		this.procession = procession;
-	}
-
-	@NotNull
-	@Valid
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}
