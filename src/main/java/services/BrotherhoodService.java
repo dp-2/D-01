@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -16,6 +17,8 @@ import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.UserAccount;
 import domain.Brotherhood;
+import domain.Enroll;
+import domain.Member;
 import domain.Url;
 import forms.BrotherhoodForm;
 
@@ -35,7 +38,11 @@ public class BrotherhoodService {
 	@Autowired
 	private BoxService				boxService;
 	@Autowired
+	private EnrollService			enrollService;
+
+	@Autowired
 	private ServiceUtils			serviceUtils;
+
 	@Autowired
 	private Validator				validator;
 
@@ -140,5 +147,14 @@ public class BrotherhoodService {
 	public Brotherhood findBrotherhoodByUserAcountId(final int userAccountId) {
 		return this.repository.findBrotherhoodByUserAcountId(userAccountId);
 	}
+	//TODO se podria hacer por query pero no lo consigo
+	public List<Member> listMembersByBrotherhood(final Brotherhood bh) {
+		final List<Member> members = new ArrayList<>();
+		final List<Enroll> enrolls = (List<Enroll>) this.enrollService.findAll();
+		for (final Enroll e : enrolls)
+			if (e.getBrotherhood() == bh)
+				members.add(e.getMember());
+		return members;
 
+	}
 }

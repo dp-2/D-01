@@ -51,6 +51,13 @@
 
 		</display:column>
 	</security:authorize>
+	
+		<display:column titleKey="brotherhood.members">
+		<a href="member/list.do?brotherhoodId=${row.id}"> <jstl:out
+				value="${row.brotherhood}" />
+		</a>
+	</display:column>
+	
 	<display:column>
 
 		<a href="procession/brotherhood/show.do?processionId=${row.id}"> <spring:message
@@ -58,6 +65,8 @@
 		</a>
 
 	</display:column>
+	
+
 
 	<security:authorize access="hasRole('MEMBER')">
 

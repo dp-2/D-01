@@ -1,6 +1,8 @@
 
 package controllers.Member;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,52 +136,21 @@ public class MemberController extends AbstractController {
 		return result;
 	}
 
-	//	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	//	public ModelAndView save(@Valid final Member member, final BindingResult br) {
-	//		ModelAndView result;
-	//		Member a = new Member();
-	//		try {
-	//			a = (Member) this.actorService.findOneByUserAccount(LoginService.getPrincipal());
-	//		} catch (final org.springframework.dao.DataIntegrityViolationException e) {
-	//
-	//		}
-	//		if (a != null)
-	//			try {
-	//				//					final UserAccount uA = this.userAccountService.save(member.getUserAccount());
-	//				//					member.setUserAccount(uA);
-	//				this.memberService.save(member);
-	//				result = new ModelAndView("redirect:display.do");
-	//			} catch (final Throwable ops) {
-	//				result = new ModelAndView("member/create");
-	//				result.addObject("member", member);
-	//				result.addObject("message", "member.commit.error");
-	//			}
-	//		//			result = new ModelAndView("member/create");
-	//		//			result.addObject("member", member);
-	//		//			result.addObject("message", "member.commit.error");
-	//		else {
-	//			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-	//			member.getUserAccount().setPassword(encoder.encodePassword(member.getUserAccount().getPassword(), null));
-	//			if (br.hasErrors()) {
-	//				result = this.createEditModelAndView(member);
-	//				result.addObject("member", member);
-	//			} else
-	//				try {
-	//					//					final UserAccount uA = this.userAccountService.save(member.getUserAccount());
-	//					//					member.setUserAccount(uA);
-	//					this.memberService.save(member);
-	//					result = new ModelAndView("redirect:display.do");
-	//				} catch (final Throwable ops) {
-	//					result = new ModelAndView("member/create");
-	//					result.addObject("member", member);
-	//					result.addObject("message", "member.commit.error");
-	//				}
-	//
-	//		}
-	//
-	//		return result;
-	//
-	//	}
+	//-----------------List----------------------------
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
+		ModelAndView result;
+		Collection<Member> members;
+
+		members = this.memberService.findAll();
+
+		result = new ModelAndView("member/list");
+		result.addObject("requestURI", "member/list.do");
+		result.addObject("members", members);
+
+		return result;
+	}
 
 	//---------------------------------------------------------------------------------------------
 
