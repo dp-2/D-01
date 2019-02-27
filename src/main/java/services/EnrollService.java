@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Enroll;
 import repositories.EnrollRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Enroll;
 
 @Service
 @Transactional
@@ -21,14 +21,14 @@ public class EnrollService {
 
 	// Managed repository ----------------------------------------------------------------
 	@Autowired
-	private EnrollRepository enrollRepository;
+	private EnrollRepository	enrollRepository;
+
 
 	//	@Autowired
 	//	private MemberService		memberService;
 	//
 	//	@Autowired
 	//	private BrotherhoodService	brotherhoodService;
-
 
 	//Constructor----------------------------------------------------------------------------
 
