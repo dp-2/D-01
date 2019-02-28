@@ -3,9 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -13,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Brotherhood;
-import domain.March;
-import domain.Member;
 import repositories.MarchRepository;
 import repositories.MemberRepository;
 import repositories.ProcessionRepository;
 import security.LoginService;
+import domain.Brotherhood;
+import domain.March;
+import domain.Member;
 
 @Service
 @Transactional
@@ -52,7 +50,7 @@ public class MarchService {
 		march.setMember(this.memberRepository.findOne(MemberId));
 		march.setProcession(this.processionRepository.findOne(processionId));
 		march.setStatus("PENDING");
-		final Map<Integer, Integer> a = new HashMap<>();
+		final List<Integer> a = new ArrayList<>();
 		march.setLocation(a);
 		march.setReason("");
 		return march;
@@ -79,18 +77,18 @@ public class MarchService {
 		//Assert.isTrue(this.checkPrincipal(march) || this.checkPrincipalBro(march));
 		Assert.notNull(march);
 		final March result;
-		final Map<Integer, Integer> a = new HashMap();
+		final List<Integer> a = new ArrayList<>();
 		//	final Collection<March> marchs = this.marchRepository.findAll();
-		if (march.getStatus().equals("APPROVED") && march.getLocation().isEmpty()) {
+		if (march.getStatus().equals("APPROVED") && march.getLocation().isEmpty())
 			march.setLocation(this.isUniqueColumNum());
+		else if (!march.getLocation().isEmpty()) {
+			march.setLocation(march.getLocation());
 			final Collection<March> marchs = this.marchRepository.findAll();
-			final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
+			final Collection<List<Integer>> locations = new ArrayList<>();
 			for (final March m : marchs)
 				locations.add(m.getLocation());
 			Assert.isTrue(!(locations.contains(march.getLocation())));
-		} else if (!march.getLocation().isEmpty())
-			march.setLocation(march.getLocation());
-		else
+		} else
 			march.setLocation(a);
 
 		result = this.marchRepository.save(march);
@@ -126,20 +124,21 @@ public class MarchService {
 		return this.marchRepository.findMarchsByMember(memberId);
 	}
 
-	private Map<Integer, Integer> generarNum() {
-		final Map<Integer, Integer> result = new HashMap<>();
+	private List<Integer> generarNum() {
+		final List<Integer> result = new ArrayList<>();
 
 		//Consideramos que hay como máximo 23 filas y 3 columnas
 		final int i = (int) (Math.random() * 23);
 		final int j = (int) (Math.random() * 3);
-		result.put(i, j);
+		result.add(i);
+		result.add(j);
 		return result;
 	}
-	public Map<Integer, Integer> isUniqueColumNum() {
-		Map<Integer, Integer> result = this.generarNum();
+	public List<Integer> isUniqueColumNum() {
+		List<Integer> result = this.generarNum();
 
 		final Collection<March> marchs = this.marchRepository.findAll();
-		final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
+		final Collection<List<Integer>> locations = new ArrayList<>();
 		for (final March m : marchs)
 			locations.add(m.getLocation());
 		while (locations.contains(result))
