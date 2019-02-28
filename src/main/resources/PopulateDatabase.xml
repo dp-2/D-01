@@ -160,7 +160,6 @@
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Nombre del area 1" />
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="finder" ref="finder1" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1area1" class="domain.Url">
@@ -174,7 +173,6 @@
 	<bean id="area2" class="domain.Area">
 		<property name="name" value="Nombre del area 2" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="finder" ref="finder2" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1area2" class="domain.Url">
