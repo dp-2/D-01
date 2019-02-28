@@ -32,19 +32,36 @@
 			</display:column>
 		</jstl:if>
 	</security:authorize>
-	
+
 	<display:column property="startMoment" titleKey="enroll.start" />
 	<display:column property="endMoment" titleKey="enroll.end" />
-	<display:column property="member.name" titleKey="enroll.member" />
+	<display:column property="isAccepted" titleKey="enroll.accepted" />
 
+	<security:authorize access="hasRole('BROTHERHOOD')">
+		<display:column property="member.name" titleKey="enroll.member" />
+	</security:authorize>
+
+	<security:authorize access="hasRole('MEMBER')">
+		<display:column property="brotherhood.name"
+			titleKey="enroll.brotherhood" />
+	</security:authorize>
+
+	<jstl:if test="${row.endMoment == null}">
+		<display:column titleKey="enroll.out">
+			<a href="enroll/member/goOut.do"><spring:message
+					code="enroll.getout" /></a>
+		</display:column>
+	</jstl:if>
 
 </display:table>
-<security:authorize access="hasRole('BROTHERHOOD')">
-	<a href="enroll/brotherhood/create.do"> <spring:message
-			code="enroll.create" />
-	</a>
-</security:authorize>
+<%-- <security:authorize access="hasRole('BROTHERHOOD')">
+
+<a href="enroll/brotherhood/create.do"> <spring:message
+		code="enroll.create" />
+</a>
+</security:authorize> --%>
+<br />
 <br />
 
-<br />
+
 

@@ -113,15 +113,14 @@ public class MarchMemberController extends AbstractController {
 	}
 
 	// DELETE
-	@RequestMapping(value = "/delete", method = RequestMethod.GET, params = "delete")
-	public ModelAndView delete(@RequestParam final int marchId, final BindingResult binding) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int marchId) {
 
 		ModelAndView result;
 		final March march = this.marchService.findOne(marchId);
-		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		try {
 			this.marchService.delete(march);
-			result = new ModelAndView("redirect:list.do?memberId=" + a.getId());
+			result = this.list();
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(march, "march.commit.error");
 		}

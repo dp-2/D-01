@@ -42,6 +42,7 @@ public class EnrollService {
 		final Enroll enroll = new Enroll();
 		//		enroll.setMember(this.memberService.findOne(memberId));
 		//		enroll.setBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
+		enroll.setIsAccepted(false);
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 
 		return enroll;
@@ -85,7 +86,24 @@ public class EnrollService {
 		return true;
 	}
 
+	public Collection<Enroll> findEnrollByMember(final int memberId) {
+		return this.enrollRepository.findEnrollByMember(memberId);
+	}
+
 	public Collection<Enroll> findEnrollByBrotherhood(final int brotherhoodId) {
 		return this.enrollRepository.findEnrollByBrotherhood(brotherhoodId);
+	}
+
+	public Collection<Enroll> findEnrollByBrotherhood2(final int brotherhoodId) {
+		return this.enrollRepository.findEnrollByBrotherhood2(brotherhoodId);
+	}
+
+	public Enroll goOut(final int enrollId) {
+		Enroll enroll;
+		enroll = this.enrollRepository.findOne(enrollId);
+
+		enroll.setEndMoment(new Date(System.currentTimeMillis() - 1000));
+		enroll = this.enrollRepository.save(enroll);
+		return enroll;
 	}
 }

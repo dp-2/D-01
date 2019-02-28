@@ -89,8 +89,8 @@
 
 			<li><a class="fNiv" href="march/member/list.do"><spring:message
 						code="master.page.march" /></a></li>
-
-
+			<li><a class="fNiv" href="enroll/member/list.do"><spring:message
+						code="master.page.enroll" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('BROTHERHOOD')">

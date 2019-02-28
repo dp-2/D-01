@@ -140,6 +140,21 @@
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enroll/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
+			
+		<security:intercept-url pattern="/enroll/member/list.do"
+			access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/enroll/member/edit.do"
+			access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/enroll/member/save.do"
+			access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/enroll/member/delete.do"
+			access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/enroll/member/cancel.do"
+			access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/enroll/member/show.do"
+			access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/enroll/member/goOut.do"
+			access="hasRole('MEMBER')" />
 
 
 
