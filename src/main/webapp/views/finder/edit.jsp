@@ -40,7 +40,7 @@
 	<input type="submit" name="save"
 		value="<spring:message code="finder.save"/>" />
 
-	<acme:cancel url="finder/memeber/list.do" code="finder.cancel" />
+	<acme:cancel url="finder/member/list.do" code="finder.cancel" />
 
 	<br />
 
