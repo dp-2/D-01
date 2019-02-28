@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import domain.Brotherhood;
+import domain.March;
+import domain.Member;
 import repositories.MarchRepository;
 import repositories.MemberRepository;
 import repositories.ProcessionRepository;
 import security.LoginService;
-import domain.Brotherhood;
-import domain.March;
-import domain.Member;
 
 @Service
 @Transactional
@@ -79,19 +79,20 @@ public class MarchService {
 		//Assert.isTrue(this.checkPrincipal(march) || this.checkPrincipalBro(march));
 		Assert.notNull(march);
 		final March result;
-		final Map<Integer, Integer> a = new HashMap<>();
+		final Map<Integer, Integer> a = new HashMap();
 		//	final Collection<March> marchs = this.marchRepository.findAll();
-		if (march.getStatus().equals("APPROVED")) {
+		if (march.getStatus().equals("APPROVED") && march.getLocation().isEmpty()) {
 			march.setLocation(this.isUniqueColumNum());
 			final Collection<March> marchs = this.marchRepository.findAll();
 			final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
 			for (final March m : marchs)
 				locations.add(m.getLocation());
 			Assert.isTrue(!(locations.contains(march.getLocation())));
-		}
-
+		} else if (!march.getLocation().isEmpty())
+			march.setLocation(march.getLocation());
 		else
 			march.setLocation(a);
+
 		result = this.marchRepository.save(march);
 
 		Assert.notNull(result);

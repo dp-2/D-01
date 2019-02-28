@@ -51,13 +51,13 @@
 
 		</display:column>
 	</security:authorize>
-	
-		<display:column titleKey="brotherhood.members">
+
+	<display:column titleKey="brotherhood.members">
 		<a href="member/list.do?brotherhoodId=${row.id}"> <jstl:out
 				value="${row.brotherhood}" />
 		</a>
 	</display:column>
-	
+
 	<display:column>
 
 		<a href="procession/brotherhood/show.do?processionId=${row.id}"> <spring:message
@@ -65,7 +65,7 @@
 		</a>
 
 	</display:column>
-	
+
 
 
 	<security:authorize access="hasRole('MEMBER')">
@@ -84,9 +84,17 @@
 
 <br />
 <security:authorize access="hasRole('BROTHERHOOD')">
-	<a href="procession/brotherhood/create.do"> <spring:message
-			code="procession.create" />
-	</a>
+	<jstl:if test="${hasArea != null}">
+		<a href="procession/brotherhood/create.do"> <spring:message
+				code="procession.create" />
+		</a>
+	</jstl:if>
+
+	<jstl:if test="${hasArea == null}">
+		<p>
+			<spring:message code="procession.area.null" />
+		</p>
+	</jstl:if>
 </security:authorize>
 
 

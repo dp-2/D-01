@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.AreaRepository;
-import security.LoginService;
 import domain.Actor;
 import domain.Area;
 import domain.Brotherhood;
 import domain.Url;
+import repositories.AreaRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -74,7 +74,7 @@ public class AreaService {
 		Assert.isTrue(area.getId() > 0);
 		//cogemos el customer de la base de datos
 		areaDB = this.areaRepository.findOne(area.getId());
-		//Si al guardar detecta que lo he puesto en final mode ,pues le meto la fecha 
+		//Si al guardar detecta que lo he puesto en final mode ,pues le meto la fecha
 		if ((area.getId() != 0 && area.getName().equals(areaDB.getName())) || a.getUserAccount().getAuthorities().contains("ADMIN") || area.getId() == 0)
 			res = this.areaRepository.save(area);
 		else
@@ -101,4 +101,8 @@ public class AreaService {
 		res.put("STD", statistics[4]);
 		return res;
 	}
+	public Area findAreaByBrotherhoodId(final int brotherhoodId) {
+		return this.areaRepository.findAreaByBrotherhoodId(brotherhoodId);
+	}
+
 }

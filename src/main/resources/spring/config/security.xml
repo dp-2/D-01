@@ -104,6 +104,12 @@
 		<security:intercept-url pattern="/procession/member/list.do"
 			access="hasRole('MEMBER')" />
 
+		<security:intercept-url pattern="/finder/handy/update.do"
+			access="hasRole('MEMBER')" />
+		<security:intercept-url pattern="/finder/handy/listFixUpTasks.do"
+			access="hasRole('MEMBER')" />
+
+
 
 
 		<security:intercept-url pattern="/march/brotherhood/list.do"
