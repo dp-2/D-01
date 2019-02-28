@@ -1,7 +1,7 @@
 
 package domain;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -27,9 +27,9 @@ public class March extends DomainEntity {
 
 	// Properties
 
-	private String					status;
-	private String					reason;
-	private Map<Integer, Integer>	location;
+	private String			status;
+	private String			reason;
+	private List<Integer>	location;
 
 
 	@NotBlank
@@ -49,11 +49,11 @@ public class March extends DomainEntity {
 	}
 
 	@ElementCollection
-	public Map<Integer, Integer> getLocation() {
+	public List<Integer> getLocation() {
 		return this.location;
 	}
 
-	public void setLocation(final Map<Integer, Integer> location) {
+	public void setLocation(final List<Integer> location) {
 		this.location = location;
 	}
 

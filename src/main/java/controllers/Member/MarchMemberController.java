@@ -2,8 +2,6 @@
 package controllers.Member;
 
 import java.util.Collection;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -16,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-import domain.Actor;
-import domain.March;
 import security.LoginService;
 import services.ActorService;
 import services.ConfigurationService;
 import services.MarchService;
+import controllers.AbstractController;
+import domain.Actor;
+import domain.March;
 
 @Controller
 @RequestMapping("/march/member")
@@ -94,9 +92,6 @@ public class MarchMemberController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final March march, final BindingResult binding) {
 
-		final Map<Integer, Integer> map = march.getLocation().entrySet().stream().collect(Collectors.toMap(entry -> new Integer(entry.getKey()), entry -> new Integer(entry.getValue())));
-
-		march.setLocation(map);
 		ModelAndView result;
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(march, "message.commit.error");
