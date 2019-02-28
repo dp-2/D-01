@@ -98,12 +98,10 @@ public class FinderMemberController extends AbstractController {
 
 		if (finder == null)
 			processions = this.processionService.findProcessionsFinal();
-		else {
-			if (this.finderService.checkCache(finder) == true)
-				processions = this.processionService.findProcessionsFinal();
-			else
-				processions = finder.getProcessions();
-		}
+		else if (this.finderService.checkCache(finder) == true)
+			processions = this.processionService.findProcessionsFinal();
+		else
+			processions = finder.getProcessions();
 
 		modelAndView.addObject("processions", processions);
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
