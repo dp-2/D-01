@@ -69,7 +69,7 @@ public class FinderService {
 
 	public Finder findOneByPrincipal() {
 		final Member member = this.memberService.findMemberByUserAcountId(LoginService.getPrincipal().getId());
-		return this.finderRepository.findOne(member.getId());
+		return this.finderRepository.findFinderByMemberId(member.getId());
 	}
 
 	//Other------------------------------------------------------------------------------------------------
@@ -157,6 +157,10 @@ public class FinderService {
 		final Date lastUpdate = new Date(updateFinder.getTime() - 1000);
 
 		return lastUpdate;
+	}
+
+	public Finder findFinderByMemberId(final int memberId) {
+		return this.finderRepository.findFinderByMemberId(memberId);
 	}
 
 }
