@@ -50,7 +50,6 @@ public class AreaService {
 
 		final Collection<Url> pictures = new ArrayList<>();
 		res.setPictures(pictures);
-		res.setFinder(this.finderService.create());
 
 		return res;
 	}

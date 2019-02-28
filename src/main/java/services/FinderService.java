@@ -43,9 +43,11 @@ public class FinderService {
 		final Finder finder = new Finder();
 		final Member member = this.memberService.findMemberByUserAcountId(LoginService.getPrincipal().getId());
 		final Date lastUpdate = new Date();
+		final List<Procession> processions = new ArrayList<>();
 
 		finder.setMember(member);
 		finder.setLastUpdate(lastUpdate);
+		finder.setProcessions(processions);
 
 		return finder;
 	}

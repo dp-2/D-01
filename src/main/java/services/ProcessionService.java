@@ -11,12 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
-import repositories.ProcessionRepository;
-import security.LoginService;
 import domain.Brotherhood;
-import domain.Finder;
 import domain.Procession;
 import forms.ProcessionForm;
+import repositories.ProcessionRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -41,9 +40,9 @@ public class ProcessionService {
 	@Autowired
 	private DFloatService			dFloatService;
 
-
 	//	@Autowired
 	//	private Validator				validator;
+
 
 	//Methods--------------------------------------------------------------------
 
@@ -126,10 +125,6 @@ public class ProcessionService {
 			procession.setDescription(processionForm.getDescription());
 			procession.setFfinal(processionForm.isFfinal());
 			procession.setBrotherhood(brotherhood);
-			if (processionForm.getFinderId() != 0) {
-				final Finder finder = this.finderService.findOne(processionForm.getFinderId());
-				procession.setFinder(finder);
-			}
 
 			//			this.validator.validate(procession, bindingResult);
 		}

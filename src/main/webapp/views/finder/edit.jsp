@@ -26,8 +26,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="lastUpdate" />
 	<form:hidden path="member" />
-
-
+	<form:hidden path="processions" />
 
 	<acme:textbox code="finder.keyword" path="keyword" />
 	<acme:textbox code="finder.dateMin" path="minDate"
