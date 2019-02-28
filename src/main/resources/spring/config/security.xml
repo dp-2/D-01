@@ -104,9 +104,9 @@
 		<security:intercept-url pattern="/procession/member/list.do"
 			access="hasRole('MEMBER')" />
 
-		<security:intercept-url pattern="/finder/handy/update.do"
+		<security:intercept-url pattern="/finder/member/update.do"
 			access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/finder/handy/listFixUpTasks.do"
+		<security:intercept-url pattern="/finder/member/list.do"
 			access="hasRole('MEMBER')" />
 
 
@@ -140,7 +140,7 @@
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enroll/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
-			
+
 		<security:intercept-url pattern="/enroll/member/list.do"
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enroll/member/edit.do"

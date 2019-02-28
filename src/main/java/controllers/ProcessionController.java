@@ -43,6 +43,7 @@ public class ProcessionController extends AbstractController {
 
 		modelAndView.addObject("processions", processions);
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
+		modelAndView.addObject("numResults", this.configurationService.findOne().getNumResults());
 		modelAndView.addObject("requestURI", "procession/list.do");
 
 		return modelAndView;

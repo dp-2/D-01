@@ -71,19 +71,8 @@ public class Procession extends DomainEntity {
 
 	//Relationships
 
-	private Finder		finder;
-	private Brotherhood	brotherhood;
+	private Brotherhood brotherhood;
 
-
-	@Valid
-	@ManyToOne(optional = true)
-	public Finder getFinder() {
-		return this.finder;
-	}
-
-	public void setFinder(final Finder finder) {
-		this.finder = finder;
-	}
 
 	@Valid
 	@NotNull

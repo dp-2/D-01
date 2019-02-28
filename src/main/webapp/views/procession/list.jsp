@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <display:table name="processions" id="row" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
+	pagesize="${numResults}" class="displaytag">
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
 

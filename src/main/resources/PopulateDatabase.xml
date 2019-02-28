@@ -500,10 +500,16 @@
 
 	<bean id="finder1" class="domain.Finder">
 		<property name="member" ref="member1" />
+		<property name="processions">
+			<list></list>
+		</property>
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
 		<property name="member" ref="member2" />
+		<property name="processions">
+			<list></list>
+		</property>
 	</bean>
 
 
@@ -637,8 +643,8 @@
 		<property name="status" value="APPROVED" />
 		<property name="location">
 			<list>
-			<value>1</value>
-			<value>1</value>
+				<value>1</value>
+				<value>1</value>
 			</list>
 		</property>
 		<property name="member" ref="member2" />

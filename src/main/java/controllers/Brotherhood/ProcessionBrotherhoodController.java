@@ -59,6 +59,7 @@ public class ProcessionBrotherhoodController extends AbstractController {
 		modelAndView.addObject("processions", processions);
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 		modelAndView.addObject("requestURI", "procession/brotherhood/myList.do");
+		modelAndView.addObject("numResults", this.configurationService.findOne().getNumResults());
 		modelAndView.addObject("hasArea", this.areaService.findAreaByBrotherhoodId(brotherhoodId));
 
 		return modelAndView;

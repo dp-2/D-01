@@ -16,17 +16,10 @@
        
 <tiles-definitions>
 
-	<definition name="finder/handy/update" extends="master.page">	
+	<definition name="finder/update" extends="master.page">	
 		<put-attribute name="title" value="Update finder" />
 		<put-attribute name="body" value="/views/finder/edit.jsp" />
 	</definition>
-	
-	
-	<definition name="finder/handy/listFixUpTasks" extends="master.page">	
-		<put-attribute name="title" value="Finder results" />
-		<put-attribute name="body" value="/views/finder/list.jsp" />
-	</definition>
-	
 	
 	
 </tiles-definitions>

@@ -36,17 +36,16 @@ public class FinderService {
 	@Autowired
 	private ConfigurationService	configurationService;
 
-	@Autowired
-	private ProcessionService		processionService;
-
 
 	//Methods-------------------------------------------------------------------
 
 	public Finder create() {
 		final Finder finder = new Finder();
 		final Member member = this.memberService.findMemberByUserAcountId(LoginService.getPrincipal().getId());
+		final Date lastUpdate = new Date();
 
 		finder.setMember(member);
+		finder.setLastUpdate(lastUpdate);
 
 		return finder;
 	}
@@ -54,17 +53,21 @@ public class FinderService {
 	public Finder save(Finder finder) {
 		Assert.notNull(finder);
 		finder.setLastUpdate(this.updateTime());
+		final List<Procession> processions = this.finalFilter(finder.getKeyword(), finder.getMinDate(), finder.getMaxDate(), finder.getArea());
+
 		if (finder.getId() != 0)
 			this.checkPrincipal(finder);
 
 		finder = this.updateFinder(finder);
+		finder.setProcessions(processions);
 
 		final Finder saved = this.finderRepository.save(this.updateFinder(finder));
 		return saved;
 	}
 
-	public Finder findOne(final Integer id) {
-		return this.finderRepository.findOne(id);
+	public Finder findOneByPrincipal() {
+		final Member member = this.memberService.findMemberByUserAcountId(LoginService.getPrincipal().getId());
+		return this.finderRepository.findOne(member.getId());
 	}
 
 	//Other------------------------------------------------------------------------------------------------
@@ -76,6 +79,17 @@ public class FinderService {
 		Assert.isTrue(member.getId() == principal.getId());
 
 		return true;
+	}
+
+	public boolean checkCache(final Finder finder) {
+		boolean res = false;
+		final long now = new Date().getTime();
+		final long last = finder.getLastUpdate().getTime();
+		final long cache = this.configurationService.findOne().getCacheFinder() * 3600000;
+
+		if ((now - last) >= cache)
+			res = true;
+		return res;
 	}
 
 	public List<Procession> searchProcessions(final String keyword, final Date dateMin, final Date dateMax) {
@@ -106,7 +120,6 @@ public class FinderService {
 
 		if (!finder.getLastUpdate().after(updateFinder))
 			result.setLastUpdate(lastUpdate);
-
 		return result;
 	}
 
