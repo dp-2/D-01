@@ -64,7 +64,10 @@
 
 	<display:column property="reason" titleKey="march.reason" />
 
-	<display:column property="location" titleKey="march.location"/>
+	<display:column titleKey="march.location">
+		<acme:out code="march.row" value="${row.location.get(0)}"/>
+		<acme:out code="march.column" value="${row.location.get(1)}"/>
+	</display:column>
 		
 	
 
