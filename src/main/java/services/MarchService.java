@@ -79,15 +79,15 @@ public class MarchService {
 		final March result;
 		final List<Integer> a = new ArrayList<>();
 		//	final Collection<March> marchs = this.marchRepository.findAll();
-		if (march.getStatus().equals("APPROVED") && march.getLocation().isEmpty())
+		if (march.getStatus().equals("APPROVED") && march.getLocation() == null)
 			march.setLocation(this.isUniqueColumNum());
-		else if (!march.getLocation().isEmpty()) {
+		else if (march.getLocation() != null) {
 			march.setLocation(march.getLocation());
 			final Collection<March> marchs = this.marchRepository.findAll();
 			final Collection<List<Integer>> locations = new ArrayList<>();
 			for (final March m : marchs)
 				locations.add(m.getLocation());
-			Assert.isTrue(!(locations.contains(march.getLocation())));
+			Assert.isTrue(!(locations.contains(march.getLocation())), "errorposition");
 		} else
 			march.setLocation(a);
 

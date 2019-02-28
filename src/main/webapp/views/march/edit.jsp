@@ -55,8 +55,7 @@
 		</jstl:if>
 
 		<jstl:if test="${march.status=='APPROVED'}">
-			<acme:textbox code="march.location" path="location.get(0)" />
-			<acme:textbox code="march.location" path="location.get(1)" />
+			<acme:textbox code="march.location" path="location" />
 			<br />
 		</jstl:if>
 

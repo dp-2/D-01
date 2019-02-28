@@ -86,7 +86,10 @@ public class MarchBrotherhoodController extends AbstractController {
 				final int processionId = march.getProcession().getId();
 				result = new ModelAndView("redirect:list.do?processionId=" + processionId);
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(march, "march.commit.error");
+				if (oops.getMessage().equals("errorposition"))
+					result = this.createEditModelAndView(march, "march.commit.errorposition");
+				else
+					result = this.createEditModelAndView(march, "march.commit.error");
 
 			}
 		return result;

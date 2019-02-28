@@ -65,8 +65,13 @@
 	<display:column property="reason" titleKey="march.reason" />
 
 	<display:column titleKey="march.location">
-		<acme:out code="march.row" value="${row.location.get(0)}"/>
-		<acme:out code="march.column" value="${row.location.get(1)}"/>
+		<jstl:if test="${row.location.isEmpty() }">
+			<acme:out code="location.noPosition" value=""/>
+		</jstl:if>
+		<jstl:if test="${!row.location.isEmpty()}">
+		<acme:out code="location.row" value="${row.location.get(0)}"/>
+		<acme:out code="location.column" value="${row.location.get(1)}"/>
+		</jstl:if>
 	</display:column>
 		
 	
