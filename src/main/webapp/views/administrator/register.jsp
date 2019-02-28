@@ -56,7 +56,7 @@
 	<acme:textbox code="actor.address" path="address" />
 	<br />
 
-	<acme:textbox code="actor.phone" path="phone" />
+	<acme:textbox code="actor.phone" path="phone" id="tlf"/>
 	<br />
 
 	<script type="text/javascript">
