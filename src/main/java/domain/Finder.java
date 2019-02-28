@@ -2,10 +2,12 @@
 package domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,8 +68,21 @@ public class Finder extends DomainEntity {
 
 
 	// Relationships
-	private Member member;
+	private Member				member;
+	private Area				area;
+	private List<Procession>	processions;
 
+
+	@Valid
+	@NotNull
+	@OneToMany
+	public List<Procession> getProcessions() {
+		return this.processions;
+	}
+
+	public void setProcessions(final List<Procession> processions) {
+		this.processions = processions;
+	}
 
 	@NotNull
 	@Valid
@@ -77,6 +92,16 @@ public class Finder extends DomainEntity {
 	}
 	public void setMember(final Member member) {
 		this.member = member;
+	}
+
+	@Valid
+	@OneToOne(optional = true)
+	public Area getArea() {
+		return this.area;
+	}
+
+	public void setArea(final Area area) {
+		this.area = area;
 	}
 
 }
