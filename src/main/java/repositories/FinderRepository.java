@@ -15,9 +15,6 @@ import domain.Procession;
 @Repository
 public interface FinderRepository extends JpaRepository<Finder, Integer> {
 
-	@Query("select p.finder from Procession p where p.id = ?1")
-	Finder findByProcessionId(int processionId);
-
 	@Query("select p from Procession p where (p.ticker like %:keyword% or p.description like %:keyword% and (p.momentOrganised BETWEEN :dateMin and :dateMax))")
 	List<Procession> searchProcessions(@Param("keyword") String keyword, @Param("dateMin") Date dateMin, @Param("dateMax") Date dateMax);
 }

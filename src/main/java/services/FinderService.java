@@ -85,12 +85,14 @@ public class FinderService {
 
 	public boolean checkCache(final Finder finder) {
 		boolean res = false;
-		final long now = new Date().getTime();
-		final long last = finder.getLastUpdate().getTime();
-		final long cache = this.configurationService.findOne().getCacheFinder() * 3600000;
+		if (finder != null) {
+			final long now = new Date().getTime();
+			final long last = finder.getLastUpdate().getTime();
+			final long cache = this.configurationService.findOne().getCacheFinder() * 3600000;
 
-		if ((now - last) >= cache)
-			res = true;
+			if ((now - last) >= cache)
+				res = true;
+		}
 		return res;
 	}
 
