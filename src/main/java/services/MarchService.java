@@ -81,8 +81,15 @@ public class MarchService {
 		final March result;
 		final Map<Integer, Integer> a = new HashMap<>();
 		//	final Collection<March> marchs = this.marchRepository.findAll();
-		if (march.getStatus().equals("APPROVED"))
+		if (march.getStatus().equals("APPROVED")) {
 			march.setLocation(this.isUniqueColumNum());
+			final Collection<March> marchs = this.marchRepository.findAll();
+			final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
+			for (final March m : marchs)
+				locations.add(m.getLocation());
+			Assert.isTrue(!(locations.contains(march.getLocation())));
+		}
+
 		else
 			march.setLocation(a);
 		result = this.marchRepository.save(march);
@@ -122,8 +129,8 @@ public class MarchService {
 		final Map<Integer, Integer> result = new HashMap<>();
 
 		//Consideramos que hay como máximo 23 filas y 3 columnas
-		final int i = (int) Math.random() * 25;
-		final int j = (int) Math.random() * 3;
+		final int i = (int) (Math.random() * 23);
+		final int j = (int) (Math.random() * 3);
 		result.put(i, j);
 		return result;
 	}
@@ -134,7 +141,7 @@ public class MarchService {
 		final Collection<Map<Integer, Integer>> locations = new ArrayList<>();
 		for (final March m : marchs)
 			locations.add(m.getLocation());
-		if (locations.contains(result))
+		while (locations.contains(result))
 			result = this.generarNum();
 
 		return result;

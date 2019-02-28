@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.ConfigurationService;
 import services.MarchService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -28,10 +29,13 @@ public class MarchBrotherhoodController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private MarchService	marchService;
+	private MarchService			marchService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -48,14 +52,13 @@ public class MarchBrotherhoodController extends AbstractController {
 
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		marchs = this.marchService.findMarchsByProcession(processionId);
-
 		result = new ModelAndView("march/list");
 		result.addObject("marchs", marchs);
-		result.addObject("requestURI", "/list.do?processionId=" + processionId);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
+		result.addObject("requestURI", "march/brotherhood/list.do?processionId=" + processionId);
 		result.addObject("brotherhoodId", a.getId());
 		return result;
 	}
-
 	// Edit
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int marchId) {
@@ -106,6 +109,7 @@ public class MarchBrotherhoodController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 		result.addObject("brotherhoodId", a.getId());
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		result.addObject("requestURI", "march/brotherhood/edit.do");
 
 		return result;
