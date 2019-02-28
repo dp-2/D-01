@@ -27,8 +27,8 @@
 			<display:column>
 				<jstl:if test="${row.status=='PENDING'}">
 
-					<a href="march/member/delete.do?marchId=${row.id}">
-						<spring:message code="march.delete" />
+					<a href="march/member/delete.do?marchId=${row.id}"> <spring:message
+							code="march.delete" />
 					</a>
 
 				</jstl:if>
@@ -54,7 +54,7 @@
 
 	<jstl:if test="${row.status=='APPROVED' }">
 		<display:column property="status" titleKey="march.status"
-			style="background-color:Green" sortable="true "/>
+			style="background-color:Green" sortable="true " />
 	</jstl:if>
 
 	<jstl:if test="${row.status=='REJECTED'}">
@@ -64,10 +64,10 @@
 
 	<display:column property="reason" titleKey="march.reason" />
 
-	<display:column titleKey="march.location" >
-		<acme:out code="location.row" value="${row.location.value},"/>
-		<acme:out code="location.column" value="${row.location.key}"/>
-	</display:column>
+	<display:column property="location" titleKey="march.location"/>
+		
+	
+
 
 
 </display:table>

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.ConfigurationService;
 import services.MarchService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -28,10 +29,13 @@ public class MarchMemberController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private MarchService	marchService;
+	private MarchService			marchService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -51,7 +55,8 @@ public class MarchMemberController extends AbstractController {
 
 		result = new ModelAndView("march/list");
 		result.addObject("marchs", marchs);
-		result.addObject("requestURI", "/list.do?memberId=" + a.getId());
+		result.addObject("banner", this.configurationService.findOne().getBanner());
+		result.addObject("requestURI", "march/member/list.do?memberId=" + a.getId());
 		result.addObject("memberId", a.getId());
 
 		return result;
@@ -135,6 +140,7 @@ public class MarchMemberController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 		result.addObject("memberId", a.getId());
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		result.addObject("requestURI", "march/member/edit.do");
 
 		return result;
