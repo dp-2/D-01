@@ -27,17 +27,18 @@
 
 
 		<%--  La columna que va a la vista display de las member --%>
-		<display:column>
+<%-- 		<display:column>
 			<a
 				href="member/display.do?memberId=${member.id}"><spring:message
 					code="member.display"></spring:message></a>
 		</display:column>
-
-	
+ --%>
 			
-		<acme:column code="member.name" value="${ member.name}"></acme:column>	
+		<acme:column code="member.name" value="${ member.name}"></acme:column>
+		<acme:column code="member.middleName" value="${ member.middleName}" ></acme:column>	
 		<acme:column code="member.surname" value="${ member.surname}"></acme:column>
-		<acme:column code="member.middleName" value="${ member.middleName}" ></acme:column>
+		<acme:column code="enroll.startDate" value="${enroll.startDate}"></acme:column>
+		
 
 
 

@@ -517,7 +517,7 @@
 
 	<bean id="member1" class="domain.Member">
 		<property name="name" value="Juan" />
-		<property name="middleName" value="" />
+		<property name="middleName" value="Manuel" />
 		<property name="surname" value="Montes" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -536,7 +536,7 @@
 
 	<bean id="member2" class="domain.Member">
 		<property name="name" value="Alfonso" />
-		<property name="middleName" value="" />
+		<property name="middleName" value="Arturo" />
 		<property name="surname" value="Del rio" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
