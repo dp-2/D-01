@@ -53,8 +53,9 @@
 	</security:authorize>
 
 	<display:column titleKey="brotherhood.members">
-		<a href="member/list.do?brotherhoodId=${row.id}"> <jstl:out
-				value="${row.brotherhood}" />
+	
+				<a href="member/list.do?processionId=${row.id}"><spring:message
+				code="procession.show" />
 		</a>
 	</display:column>
 

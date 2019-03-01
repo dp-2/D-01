@@ -1,7 +1,7 @@
 
 package controllers.Member;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -17,9 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
+import services.EnrollService;
 import services.MemberService;
+import services.ProcessionService;
 import services.SocialProfileService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Member;
 
 @Controller
@@ -40,6 +43,12 @@ public class MemberController extends AbstractController {
 
 	@Autowired
 	ActorService			actorService;
+
+	@Autowired
+	EnrollService			enrollService;
+
+	@Autowired
+	ProcessionService		processionService;
 
 	@Autowired
 	SocialProfileService	socialProfileService;
@@ -139,11 +148,9 @@ public class MemberController extends AbstractController {
 	//-----------------List----------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(required = true) final Integer processionId) {
 		ModelAndView result;
-		Collection<Member> members;
-
-		members = this.memberService.findAll();
+		final List<Actor> members = this.processionService.getActorsByProcession(processionId);
 
 		result = new ModelAndView("member/list");
 		result.addObject("requestURI", "member/list.do");
@@ -151,7 +158,6 @@ public class MemberController extends AbstractController {
 
 		return result;
 	}
-
 	//---------------------------------------------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final Member member) {

@@ -148,11 +148,12 @@ public class BrotherhoodService {
 		return this.repository.findBrotherhoodByUserAcountId(userAccountId);
 	}
 	//TODO se podria hacer por query pero no lo consigo
-	public List<Member> listMembersByBrotherhood(final Brotherhood bh) {
+	public List<Member> listMembersByBrotherhoodId(final Integer bh) {
+		final Brotherhood brother = this.findBrotherhoodByUserAcountId(bh);
 		final List<Member> members = new ArrayList<>();
 		final List<Enroll> enrolls = (List<Enroll>) this.enrollService.findAll();
 		for (final Enroll e : enrolls)
-			if (e.getBrotherhood() == bh)
+			if (e.getBrotherhood() == brother)
 				members.add(e.getMember());
 		return members;
 

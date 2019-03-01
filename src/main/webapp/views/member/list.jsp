@@ -37,7 +37,9 @@
 		<acme:column code="member.name" value="${ member.name}"></acme:column>
 		<acme:column code="member.middleName" value="${ member.middleName}" ></acme:column>	
 		<acme:column code="member.surname" value="${ member.surname}"></acme:column>
-		<acme:column code="enroll.startDate" value="${enroll.startDate}"></acme:column>
+
+
+
 		
 
 

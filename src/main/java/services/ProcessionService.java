@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 
+import repositories.ProcessionRepository;
+import security.LoginService;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.Procession;
 import forms.ProcessionForm;
-import repositories.ProcessionRepository;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -35,14 +38,16 @@ public class ProcessionService {
 	private ConfigurationService	configurationService;
 
 	@Autowired
+	private ActorService			actorService;
+	@Autowired
 	private FinderService			finderService;
 
 	@Autowired
 	private DFloatService			dFloatService;
 
+
 	//	@Autowired
 	//	private Validator				validator;
-
 
 	//Methods--------------------------------------------------------------------
 
@@ -156,4 +161,17 @@ public class ProcessionService {
 	//			for (final DFloat dFloat : dFloats)
 	//				this.dFloatService.delete(dFloat);
 	//	}
+
+	public List<Actor> getActorsByProcession(final int processionId) {
+		final Collection<Actor> res = new ArrayList<Actor>();
+		final Collection<Actor> actors = this.actorService.findAll();
+		final Procession proces = this.findOne(processionId);
+		for (final Actor a : actors) {
+			final List<Procession> pros = this.findProcessionOfMember(a.getId());
+			for (final Procession pr : pros)
+				if (pros.contains(proces))
+					res.add(a);
+		}
+		return (List<Actor>) res;
+	}
 }
