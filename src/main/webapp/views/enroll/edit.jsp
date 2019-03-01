@@ -28,9 +28,8 @@
 	<form:hidden path="endMoment" />
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<%-- <acme:select code="enroll.position" path="position" items="${positions}"
-			itemLabel="position" /> --%>
-		<jstl:if test="${idioma}=='es'">
+
+		<%-- <jstl:if test="${idioma}=='es'">
 			<form:label path="position">
 				<spring:message code="enroll.position" />:
   		</form:label>
@@ -52,15 +51,17 @@
 			<form:errors cssClass="error" path="position" />
 			<br />
 			<br />
-		</jstl:if>
+		</jstl:if> --%>
 
-		<form:label path="position">
+		<acme:select code="enroll.position" path="position"
+			items="${positions}" itemLabel="name" />
+		<%-- <form:label path="position">
 			<spring:message code="enroll.position" />:
   		</form:label>
 		<form:select id="positions" path="position">
 			<form:options items="${positions}" itemValue="id" itemLabel="name" />
 		</form:select>
-		<form:errors cssClass="error" path="position" />
+		<form:errors cssClass="error" path="position" /> --%>
 		<br />
 		<br />
 

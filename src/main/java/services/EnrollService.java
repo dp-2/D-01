@@ -101,8 +101,16 @@ public class EnrollService {
 	public Enroll goOut(final int enrollId) {
 		Enroll enroll;
 		enroll = this.enrollRepository.findOne(enrollId);
+		final Date fechaActual = new Date(System.currentTimeMillis() - 1000);
 
-		enroll.setEndMoment(new Date(System.currentTimeMillis() - 1000));
+		enroll.setEndMoment(fechaActual);
+		//		enroll.setBrotherhood(enroll.getBrotherhood());
+		//		enroll.setIsAccepted(enroll.getIsAccepted());
+		//		enroll.setMember(enroll.getMember());
+		//		enroll.setPosition(enroll.getPosition());
+		//		enroll.setStartMoment(enroll.getStartMoment());
+		//		enroll.setId(enroll.getId());
+		//		enroll.setVersion(enroll.getVersion());
 		enroll = this.enrollRepository.save(enroll);
 		return enroll;
 	}

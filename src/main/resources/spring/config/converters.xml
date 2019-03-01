@@ -51,9 +51,16 @@
 		<bean class="converters.MessageToStringConverter" />
 		<bean class="converters.StringToMessageConverter" />
 
-		<bean class="converters.BoxToStringConverter" />
-		<bean class="converters.StringToBoxConverter" />
-
+		<bean class="converters.PositionToStringConverter" />
+		<bean class="converters.StringToPositionConverter" />
+		
+		<bean class="converters.SocialProfileToStringConverter" />
+		<bean class="converters.StringToSocialProfileConverter" />
+		
+		<bean class="converters.EnrollToStringConverter" />
+		<bean class="converters.StringToEnrollConverter" />
+		
+		
 	</util:list>
 
 </beans>

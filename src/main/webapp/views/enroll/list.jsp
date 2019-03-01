@@ -44,15 +44,15 @@
 	<security:authorize access="hasRole('MEMBER')">
 		<display:column property="brotherhood.name"
 			titleKey="enroll.brotherhood" />
+
+
+		<jstl:if test="${row.endMoment == null}">
+			<display:column titleKey="enroll.out">
+				<a href="enroll/member/goOut.do"><spring:message
+						code="enroll.getout" /></a>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
-
-	<jstl:if test="${row.endMoment == null}">
-		<display:column titleKey="enroll.out">
-			<a href="enroll/member/goOut.do"><spring:message
-					code="enroll.getout" /></a>
-		</display:column>
-	</jstl:if>
-
 </display:table>
 <%-- <security:authorize access="hasRole('BROTHERHOOD')">
 
