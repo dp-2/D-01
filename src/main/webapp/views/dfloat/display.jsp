@@ -24,7 +24,26 @@
 <acme:out code="dfloat.brotherhood" value="${dfloat.title}"/>
 <%-- <acme:out code="dfloat.procession" value="${dfloat.procession}"/> --%>
 
+<fieldset>
+				<legend>
+					<b><spring:message code="dfloat.processions"></spring:message></b>
+				</legend>
+				<display:table name="myProcessions" id="processions" pagesize="5"
+					class="displaytag">
 
+					<spring:message code="dfloat.title" var="title"></spring:message>
+					<display:column property="title" title="${title}" sortable="true" />
+
+					<spring:message code="dfloat.brotherhood" var="brotherhood"></spring:message>
+					<display:column property="brotherhood.title" title="${brotherhood}"
+						sortable="true" />
+
+					<spring:message code="dfloat.ticker" var="ticker"></spring:message>
+					<display:column property="ticker" title="${ticker}" sortable="true" />
+
+				</display:table>
+
+</fieldset>
 
 
 <input type="button" name="edit" value="<spring:message code="dfloat.edit"></spring:message>" onclick="javascript:relativeRedir('dfloat/brotherhood/edit.do?dfloatId=${dfloat.id}')"/>	

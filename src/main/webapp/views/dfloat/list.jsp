@@ -35,7 +35,7 @@
 				href="dfloat/brotherhood/edit.do?dfloatId=${dfloat.id}"><spring:message
 					code="dfloat.edit"></spring:message></a>
 		</display:column>
-
+		
 
 		<%--  La columna que va a la vista display de las dfloat --%>
 		<display:column>
@@ -51,7 +51,7 @@
 		<acme:column code="dfloat.pictures" value="${ dfloat.pictures}" ></acme:column>
 		<acme:column code="dfloat.brotherhood" value="${ dfloat.brotherhood.title}" ></acme:column>
 		<%-- <acme:column code="dfloat.procession" value="${ dfloat.procession.title}" ></acme:column> --%>
-
+	
 
 
 

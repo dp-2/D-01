@@ -17,8 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 import security.LoginService;
 import services.ActorService;
 import services.DFloatService;
+import services.ProcessionService;
 import domain.Brotherhood;
 import domain.DFloat;
+import domain.Procession;
 
 @Controller
 @RequestMapping("/dfloat/brotherhood")
@@ -26,10 +28,13 @@ public class DFloatController extends AbstractController {
 
 	//-----------------Services-------------------------
 	@Autowired
-	DFloatService	dfloatService;
+	DFloatService		dfloatService;
 
 	@Autowired
-	ActorService	actorService;
+	ActorService		actorService;
+
+	@Autowired
+	ProcessionService	processionService;
 
 
 	//-------------------------- List ----------------------------------
@@ -56,9 +61,12 @@ public class DFloatController extends AbstractController {
 	public ModelAndView display(@RequestParam final int dfloatId) {
 		ModelAndView result;
 		DFloat dfloat;
+		Collection<Procession> myProcessions;
 		dfloat = this.dfloatService.findOne(dfloatId);
+		myProcessions = dfloat.getProcessions();
 		result = new ModelAndView("dfloat/display");
 		result.addObject("dfloat", dfloat);
+		result.addObject("myProcessions", myProcessions);
 
 		return result;
 	}
@@ -79,9 +87,18 @@ public class DFloatController extends AbstractController {
 		ModelAndView result;
 		DFloat er;
 
+		Collection<Procession> allProcessions;
+		final Collection<Procession> myProcessions;
+
 		er = this.dfloatService.findOne(dfloatId);
 		Assert.notNull(er);
+		final Brotherhood br = er.getBrotherhood();
+		allProcessions = this.processionService.findProcessionsByBrotherhoodId(br.getId());
+		myProcessions = er.getProcessions();
+
 		result = this.createEditModelAndView(er);
+		result.addObject("allProcessions", allProcessions);
+		result.addObject("myProcessions", myProcessions);
 
 		return result;
 
@@ -91,9 +108,10 @@ public class DFloatController extends AbstractController {
 	public ModelAndView save(@Valid final DFloat dfloat, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(dfloat);
-		else
+			System.out.println(binding.getAllErrors());
+		} else
 			try {
 				this.dfloatService.save(dfloat);
 				result = new ModelAndView("redirect:list.do");
@@ -107,6 +125,7 @@ public class DFloatController extends AbstractController {
 		final ModelAndView result;
 
 		result = new ModelAndView("dfloat/edit");
+
 		result.addObject("dfloat", dfloat);
 		result.addObject("message", messageCode);
 

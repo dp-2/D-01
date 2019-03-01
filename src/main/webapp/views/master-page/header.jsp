@@ -110,6 +110,9 @@
 			<li><a class="fNiv" href="enroll/brotherhood/list.do"><spring:message
 						code="master.page.enroll" /></a></li>
 
+			<li><a class="fNiv" href="dfloat/brotherhood/list.do"><spring:message
+						code="master.page.dfloat" /></a></li>
+
 
 		</security:authorize>
 
