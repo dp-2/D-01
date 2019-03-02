@@ -292,8 +292,8 @@
 		<property name="actor" ref="administrator2" />
 
 	</bean>
-	
-	
+
+
 	<!-- Boxes del member1 -->
 
 	<bean id="folder1Member1" class="domain.Box">
@@ -364,8 +364,8 @@
 		<property name="actor" ref="member2" />
 
 	</bean>
-	
-	
+
+
 	<!-- Boxes del brotherhood1 -->
 
 	<bean id="folder1Brotherhood1" class="domain.Box">
@@ -400,8 +400,8 @@
 		<property name="actor" ref="brotherhood1" />
 
 	</bean>
-	
-		
+
+
 	<!-- Boxes del brotherhood2 -->
 
 	<bean id="folder1Brotherhood2" class="domain.Box">
@@ -436,8 +436,8 @@
 		<property name="actor" ref="brotherhood2" />
 
 	</bean>
-	
-	
+
+
 	<!-- Positions -->
 
 	<bean id="f_1" class="domain.Position">
@@ -648,6 +648,10 @@
 		<property name="processions">
 			<list></list>
 		</property>
+		<property name="lastUpdate" value="Feb 1, 2019 12:00" />
+		<property name="minDate" value="Feb 1, 2020 12:00" />
+		<property name="maxDate" value="Feb 1, 2022 12:00" />
+		<property name="keyword" value="finder1" />
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
@@ -655,7 +659,9 @@
 		<property name="processions">
 			<list></list>
 		</property>
+		<property name="lastUpdate" value="Jan 0, 0000" />
 	</bean>
+
 
 
 	<!-- Member -->
