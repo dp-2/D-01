@@ -158,20 +158,29 @@
 	<!-- Area -->
 
 	<bean id="area1" class="domain.Area">
-		<property name="name" value="Nombre del area 1" />
+		<property name="name" value="Catedral de sevilla" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1area1" class="domain.Url">
 					<property name="url"
-						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+						value="http://www.andalucia.org/media/fotos/image_249310_jpeg_800x600_q85.jpg" />
+				</bean>
+				<bean id="picture2area1" class="domain.Url">
+					<property name="url"
+						value="https://cometeelmundo.net/sites/default/files/styles/originalwatermark/public/field/image/impresionante-feretro-de-colon-en-la-catedral-de-sevilla.jpg?itok=3MFclXH-" />
+				</bean>
+				
+				<bean id="picture3area1" class="domain.Url">
+					<property name="url"
+						value="https://sevilla.abc.es/media/sevilla/2018/11/14/s/calles-catedral-sevilla-kg9D--510x287@abc.jpg" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="area2" class="domain.Area">
-		<property name="name" value="Nombre del area 2" />
+		<property name="name" value="Capilla del cristo de la serenidad" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="pictures">
 			<list>

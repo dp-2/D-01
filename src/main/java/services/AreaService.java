@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import repositories.AreaRepository;
+import security.LoginService;
 import domain.Actor;
 import domain.Area;
 import domain.Brotherhood;
 import domain.Url;
-import repositories.AreaRepository;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -82,8 +82,12 @@ public class AreaService {
 	}
 
 	public void delete(final Area area) {
+		Actor actor;
+		actor = this.actorService.findByUserAccount(LoginService.getPrincipal());
+
 		Assert.notNull(area);
 		Assert.isTrue(area.getBrotherhood() == null);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains("ADMIN"));
 		this.areaRepository.delete(area);
 	}
 

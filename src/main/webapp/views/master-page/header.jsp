@@ -83,6 +83,8 @@
 						code="master.page.register.admin" /></a></li>
 			<li><a class="fNiv" href="position/administrator/list.do"><spring:message
 						code="master.page.position" /></a></li>
+			<li><a class="fNiv" href="area/list.do"><spring:message
+						code="master.page.area" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('MEMBER')">
@@ -112,6 +114,9 @@
 
 			<li><a class="fNiv" href="dfloat/brotherhood/list.do"><spring:message
 						code="master.page.dfloat" /></a></li>
+						
+			<li><a class="fNiv" href="area/display.do"><spring:message
+						code="master.page.areaBrotherhood" /></a></li>
 
 
 		</security:authorize>
