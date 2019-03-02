@@ -18,4 +18,6 @@ public interface AreaRepository extends JpaRepository<Area, Integer> {
 	@Query("select a from Area a where a.brotherhood.id = ?1")
 	Area findAreaByBrotherhoodId(int brotherhoodId);
 
+	@Query("(select count(a.brotherhood) from Area a)/(select count(*) from Area a)")
+	Double numeroHermandadesPorArea();
 }
