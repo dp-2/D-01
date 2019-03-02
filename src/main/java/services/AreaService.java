@@ -104,8 +104,18 @@ public class AreaService {
 		return this.areaRepository.findAreaByBrotherhoodId(brotherhoodId);
 	}
 
-	public Double numeroHermandadesPorArea() {
-		return this.areaRepository.numeroHermandadesPorArea();
+	public Double avgHermandadesPorArea() {
+		return this.areaRepository.avgHermandadesPorArea();
+	}
+
+	public Double minHermandadesPorArea() {
+		return this.areaRepository.minHermandadesPorArea();
+	}
+	public Double maxHermandadesPorArea() {
+		return this.areaRepository.maxHermandadesPorArea();
+	}
+	public Double stddevHermandadesPorArea() {
+		return this.areaRepository.stddevHermandadesPorArea();
 	}
 
 }
