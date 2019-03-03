@@ -10,7 +10,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -114,21 +113,13 @@ public class EnrollMemberController extends AbstractController {
 	}
 
 	// GoOut
-	@RequestMapping(value = "/goOut", method = RequestMethod.GET, params = "goOut")
-	public ModelAndView goOut(@ModelAttribute final int enrollId, final BindingResult binding) {
+	@RequestMapping(value = "/goOut", method = RequestMethod.GET)
+	public ModelAndView goOut(@RequestParam final int enrollId) {
 
 		ModelAndView result;
-		final Enroll enroll = this.enrollService.findOne(enrollId);
-		if (binding.hasErrors())
-			result = this.createEditModelAndView(enroll, "enroll.commit.error");
-		else
-			try {
+		this.enrollService.goOut(enrollId);
+		result = this.list();
 
-				this.enrollService.goOut(enrollId);
-				result = new ModelAndView("redirect:enroll/member/list.do");
-			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(enroll, "enroll.commit.error");
-			}
 		return result;
 	}
 	// Delete----------------------------------------------------------------------

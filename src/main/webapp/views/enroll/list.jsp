@@ -1,13 +1,3 @@
-<%--
- * action-2.jsp
- *
- * Copyright (C) 2019 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
-
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -48,18 +38,17 @@
 
 		<jstl:if test="${row.endMoment == null}">
 			<display:column titleKey="enroll.out">
-				<a href="enroll/member/goOut.do"><spring:message
+				<a href="enroll/member/goOut.do?enrollId=${row.id}"><spring:message
 						code="enroll.getout" /></a>
 			</display:column>
 		</jstl:if>
 	</security:authorize>
 </display:table>
-<%-- <security:authorize access="hasRole('BROTHERHOOD')">
-
-<a href="enroll/brotherhood/create.do"> <spring:message
-		code="enroll.create" />
-</a>
-</security:authorize> --%>
+<security:authorize access="hasRole('MEMBER')">
+	<a href="enroll/member/listBrotherhood.do"> <spring:message
+			code="enroll.enroll" />
+	</a>
+</security:authorize>
 <br />
 <br />
 
