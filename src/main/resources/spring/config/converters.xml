@@ -60,7 +60,8 @@
 		<bean class="converters.EnrollToStringConverter" />
 		<bean class="converters.StringToEnrollConverter" />
 		
-		
+		<bean class="converters.FinderToStringConverter" />
+		<bean class="converters.StringToFinderConverter" />
 	</util:list>
 
 </beans>
