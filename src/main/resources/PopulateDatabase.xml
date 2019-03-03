@@ -170,7 +170,7 @@
 					<property name="url"
 						value="https://cometeelmundo.net/sites/default/files/styles/originalwatermark/public/field/image/impresionante-feretro-de-colon-en-la-catedral-de-sevilla.jpg?itok=3MFclXH-" />
 				</bean>
-				
+
 				<bean id="picture3area1" class="domain.Url">
 					<property name="url"
 						value="https://sevilla.abc.es/media/sevilla/2018/11/14/s/calles-catedral-sevilla-kg9D--510x287@abc.jpg" />
@@ -657,20 +657,11 @@
 		<property name="processions">
 			<list></list>
 		</property>
-		<property name="lastUpdate" value="Feb 1, 2019 12:00" />
-		<property name="minDate" value="Feb 1, 2020 12:00" />
-		<property name="maxDate" value="Feb 1, 2022 12:00" />
+		<property name="lastUpdate" value="Feb 1, 2019" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
 		<property name="keyword" value="finder1" />
 	</bean>
-
-	<bean id="finder2" class="domain.Finder">
-		<property name="member" ref="member2" />
-		<property name="processions">
-			<list></list>
-		</property>
-		<property name="lastUpdate" value="Jan 0, 0000" />
-	</bean>
-
 
 
 	<!-- Member -->
