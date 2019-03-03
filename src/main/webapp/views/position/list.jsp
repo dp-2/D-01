@@ -21,22 +21,24 @@
 <display:table name="positions" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
-	<security:authorize access="hasRole('BROTHERHOOD')">
-		<jstl:if test="${brotherhoodId==row.position.brotherhood.id}">
+	<security:authorize access="hasRole('ADMIN')">
 			<display:column>
 
-				<a href="position/brotherhood/edit.do?positionId=${row.id}"> <spring:message
+				<a href="position/administrator/edit.do?positionId=${row.id}"> <spring:message
 						code="position.edit" />
 				</a>
 
 			</display:column>
-		</jstl:if>
 	</security:authorize>
 
 	<display:column property="name" titleKey="position.name" />
 	<display:column property="language" titleKey="position.language" />
 
 </display:table>
+
+<a href="position/administrator/create.do"><spring:message
+		code="position.create" />
+</a>
 
 
 

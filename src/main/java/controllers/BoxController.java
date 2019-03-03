@@ -3,13 +3,10 @@ package controllers;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -85,13 +82,12 @@ public class BoxController extends AbstractController {
 
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "save")
-	private ModelAndView save(@Valid final Box box, final BindingResult binding) {
+	private ModelAndView save(Box box, final BindingResult binding) {
 		ModelAndView res = null;
-		if (binding.hasErrors()) {
-			for (final ObjectError error : binding.getAllErrors())
-				System.out.println();
+		box = this.boxService.deconstruct(box, binding);
+		if (binding.hasErrors())
 			res = this.createEditModelAndView(box);
-		} else
+		else
 			try {
 				this.boxService.save(box);
 				res = new ModelAndView("redirect:list.do");
@@ -104,8 +100,9 @@ public class BoxController extends AbstractController {
 
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
-	private ModelAndView delete(final Box box, final BindingResult binding) {
+	private ModelAndView delete(Box box, final BindingResult binding) {
 		ModelAndView res = null;
+		box = this.boxService.deconstruct(box, binding);
 		try {
 			this.boxService.delete(box);
 			res = new ModelAndView("redirect:list.do");

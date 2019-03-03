@@ -63,4 +63,20 @@ public class PositionService {
 		Assert.notNull(position);
 		this.positionRepository.delete(position);
 	}
+
+	//	public Collection<Position> findPositionName() {
+	//		final Collection<Position> pos = this.positionRepository.findPositionName();
+	//		return pos;
+	//	}
+	//
+	//	public Collection<Position> findPositionLanguage() {
+	//		final Collection<Position> pos = this.positionRepository.findPositionLanguage();
+	//		return pos;
+	//	}
+	//
+	//	public Collection<Position> findPositionByLanguage(final String lng) {
+	//		final Collection<Position> pos = this.positionRepository.findPositionByLanguage(lng);
+	//		return pos;
+	//	}
+
 }

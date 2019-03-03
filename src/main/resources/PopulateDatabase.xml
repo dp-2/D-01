@@ -297,30 +297,30 @@
 
 	<!-- Positions -->
 
-	<bean id="position1_1" class="domain.Position">
+	<bean id="f_1" class="domain.Position">
 		<property name="name" value="President" />
 		<property name="language" value="en" />
 	</bean>
 
 	<bean id="position1_2" class="domain.Position">
-		<property name="name" value="President" />
+		<property name="name" value="Presidente" />
 		<property name="language" value="es" />
 	</bean>
+	
 	<!-- Enroll -->
-
 
 	<bean id="enroll1" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="endMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member1" />
-		<property name="position" ref="position1_1" />
+		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
 
 	<bean id="enroll2" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member2" />
-		<property name="position" ref="position1_1" />
+		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
 
@@ -403,7 +403,7 @@
 			value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="2018/09/02" />
 		<property name="ffinal" value="true" />
-		<property name="brotherhood" ref="brotherhood1" />
+		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
 
 	<bean id="procession3" class="domain.Procession">

@@ -30,7 +30,7 @@
 		
 		<display:column property="sender.name" titleKey="message.sender" sortable="true"></display:column>
 	
-		<display:column property="receiver.name" titleKey="message.receiver" sortable="true"></display:column>
+		<display:column property="recipient.name" titleKey="message.receiver" sortable="true"></display:column>
 		
 		<display:column>
 			<a href="message/actor/edit.do?messageId=${row.id}">

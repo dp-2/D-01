@@ -12,7 +12,6 @@
 
 <form:form action="box/actor/edit.do" modelAttribute="box">
 <security:authentication property="principal.username" var="username" />
-<jstl:if test='${box.actor.userAccount.username == username || box.id == 0}'>
 	
 	<jstl:if test="${isPrincipalAuthorizedEdit}">
 		
@@ -23,7 +22,7 @@
 			<form:label path="name">
 				<spring:message code="box.name"/>
 			</form:label>
-			<form:input path="name" id="name" name="name"/>
+			<form:input path="name" />
 			<form:errors path="name" class="error" />
 		</div>
 		
@@ -49,18 +48,10 @@
 			</jstl:if>
 		</div>
 	</jstl:if>
-	
-	</jstl:if>
-	
+		
 </form:form>
 
 <div>
 	<spring:message code="box.cancel" var="cancelHeader"></spring:message>
 	<button name="cancel" value="${cancelHeader}" onClick="javascript:relativeRedir('box/actor/list.do');" >${cancelHeader}</button>
 </div>
-
-<jstl:if test='${box.actor.userAccount.username != username && box.id != 0}'>
-	<h1>
-		<b><spring:message code="box.permissions"></spring:message></b>
-	</h1>
-</jstl:if>

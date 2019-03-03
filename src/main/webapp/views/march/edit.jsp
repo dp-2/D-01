@@ -25,32 +25,35 @@
 	<form:hidden path="member" />
 	<form:hidden path="procession" />
 	<security:authorize access="hasRole('MEMBER')">
-		<form:hidden path="status" />
+	<form:hidden path="status" />
 
 	</security:authorize>
 	<security:authorize access="hasRole('BROTHERHOOD')">
+		<jstl:if test="${march.status=='PENDING'}">
+			<form:label path="status">
+				<spring:message code="march.status"></spring:message>
+			</form:label>
+			<form:select id="status" path="status">
+				<option value="PENDING">PENDING</option>
+				<option value="APPROVED">APPROVED</option>
+				<option value="REJECTED">REJECTED</option>
 
-		<form:label path="status">
-			<spring:message code="march.status"></spring:message>
-		</form:label>
-		<form:select id="status" path="status">
-			<option value="PENDING">PENDING</option>
-			<option value="APPROVED">APPROVED</option>
-			<option value="REJECTED">REJECTED</option>
+			</form:select>
 
-		</form:select>
-
-
-
+		</jstl:if>
+		<jstl:if test="${march.status!='PENDING'}">
+		<form:hidden path="status"/>
+		</jstl:if>
 		<br />
+		<br/>
 
-		<jstl:if test="${march.status==REJECTED}">
+		<jstl:if test="${march.status=='REJECTED'}">
 			<acme:textbox code="march.reason" path="reason" />
 			<br />
 		</jstl:if>
 
-		<jstl:if test="${march.status==APPROVED}">
-			<acme:textbox code="march.location.fila" path="march.location" />
+		<jstl:if test="${march.status=='APPROVED'}">
+			<acme:textbox code="march.location" path="location" />
 			<br />
 		</jstl:if>
 

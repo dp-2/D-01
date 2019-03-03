@@ -20,12 +20,12 @@
 
 <jstl:if test="${isPrincipalAuthorizedEdit}">
 <security:authentication property="principal.username" var="username" />
-<jstl:if test='${messageObject.box.actor.userAccount.username == username || message.id == 0}'>
+<jstl:if test='${message.box.actor.userAccount.username == username || message.id == 0}'>
 
 	<div>
-	<jstl:if test="${messageObject.id == 0}">
+	<jstl:if test="${message.id == 0}">
 		<form:form action="message/actor/edit.do" method="post" id="formEdit"
-			name="formEdit" modelAttribute="messageObject">
+			name="formEdit" modelAttribute="message">
 			
 			<form:hidden path="id" />
 			<form:hidden path="version" />
@@ -34,7 +34,7 @@
 					<form:label path="subject">
 						<spring:message code="message.subject"></spring:message>
 					</form:label>
-					<form:input path="subject" id="subject" name="subject" />
+					<form:input path="subject" />
 					<form:errors cssClass="error" path="subject"></form:errors>
 				</div>
 				
@@ -42,7 +42,7 @@
 					<form:label path="body">
 						<spring:message code="message.body"></spring:message>
 					</form:label>
-					<form:textarea path="body" id="body" name="body" />
+					<form:textarea path="body" />
 					<form:errors cssClass="error" path="body"></form:errors>
 				</div>
 				
@@ -63,22 +63,24 @@
 					<form:label path="tags">
 						<spring:message code="message.tags"></spring:message>
 					</form:label>
-					<form:input path="tags" id="tags" name="tags" />
+					<form:input path="tags" />
 					<form:errors cssClass="error" path="tags"></form:errors>
 				</div>
 				
-				<div>
-					<form:label path="receiver">
-						<spring:message code="message.receiver"></spring:message>
-					</form:label>
-					<form:select path="receiver">
-						<form:option value="0">-----</form:option>
-						<jstl:forEach items="${actors}" var="actor">
-							<form:option value="${actor.id}"><jstl:out value="${actor.name} ${actor.surname}" /></form:option>
-						</jstl:forEach>
-					</form:select>
-					<form:errors cssClass="error" path="receiver"></form:errors>
-				</div>
+				<jstl:if test="${isBroadcast == false or isBroadcast == null}">
+					<div>
+						<form:label path="recipient">
+							<spring:message code="message.receiver"></spring:message>
+						</form:label>
+						<form:select path="recipient">
+							<form:option value="0">-----</form:option>
+							<jstl:forEach items="${actors}" var="actor">
+								<form:option value="${actor.id}"><jstl:out value="${actor.name} ${actor.surname}" /></form:option>
+							</jstl:forEach>
+						</form:select>
+						<form:errors cssClass="error" path="recipient"></form:errors>
+					</div>
+				</jstl:if>
 		
 			
 			<jstl:choose>
@@ -95,9 +97,9 @@
 		</form:form>
 	</jstl:if>
 		
-	<jstl:if test="${messageObject.id > 0}">
+	<jstl:if test="${message.id > 0}">
 		<form:form action="message/actor/edit.do" method="post" id="formEdit"
-			name="formEdit" modelAttribute="messageObject">
+			name="formEdit" modelAttribute="message">
 				
 				<form:hidden path="id" />
 				<form:hidden path="version" />
@@ -116,7 +118,7 @@
 				</div>
 								
 			<input type="submit" name="save" value="<spring:message code="message.save"></spring:message>" />
-			<jstl:if test="${messageObject.id > 0}">
+			<jstl:if test="${message.id > 0}">
 				<input type="submit" name="delete"
 					value="<spring:message code="message.delete"></spring:message>" />
 			</jstl:if>
@@ -127,10 +129,10 @@
 </jstl:if>
 
 <spring:message code="message.cancel" var="cancel"></spring:message>
-<button name="cancel" value="${cancel}" onclick="javascript:relativeRedir('message/actor/list.do?boxId=${messageObject.box.id}')" >${cancel}</button>
+<button name="cancel" value="${cancel}" onclick="javascript:relativeRedir('')" >${cancel}</button>
 </jstl:if>
 
-<jstl:if test='${messageObject.box.actor.userAccount.username != username && message.id != 0}'>
+<jstl:if test='${message.box.actor.userAccount.username != username && message.id != 0}'>
 	<h1>
 		<b><spring:message code="message.permissions"></spring:message></b>
 	</h1>

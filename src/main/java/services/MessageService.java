@@ -180,20 +180,29 @@ public class MessageService {
 	 */
 
 	public Message deconstruct(final Message message, final BindingResult binding) {
-		Message res = null;
+		Message result = null;
 		if (message.getId() == 0) {
 			final Actor principal = this.actorService.findPrincipal();
 			final Box inbox = this.boxService.findBoxByActorAndName(principal, "inBox");
-			res = this.create(inbox);
-		} else
-			res = (Message) this.serviceUtils.checkObject(message);
-		res = this.findOne(message.getId());
-		res.setBody(message.getBody());
-		res.setPriority(message.getPriority());
-		res.setRecipient(message.getRecipient());
-		res.setSubject(message.getSubject());
-		res.setTags(message.getTags());
-		this.validator.validate(res, binding);
-		return res;
+			message.setBox(inbox);
+			message.setMoment(new Date(System.currentTimeMillis() - 1000));
+			message.setSender(this.actorService.findPrincipal());
+			if (message.getRecipient() == null)
+				message.setRecipient(principal);
+			result = message;
+		} else {
+			result = this.findOne(message.getId());
+			message.setBody(result.getBody());
+			message.setMoment(result.getMoment());
+			message.setPriority(result.getPriority());
+			message.setRecipient(result.getRecipient());
+			message.setSender(result.getSender());
+			message.setSubject(result.getSubject());
+			message.setTags(result.getTags());
+			message.setVersion(result.getVersion());
+			result = message;
+		}
+		this.validator.validate(result, binding);
+		return result;
 	}
 }

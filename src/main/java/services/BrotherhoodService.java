@@ -4,17 +4,24 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 
 import repositories.BrotherhoodRepository;
 import security.Authority;
 import security.UserAccount;
+import security.UserAccountRepository;
 import domain.Brotherhood;
 import domain.Url;
 import forms.BrotherhoodForm;
@@ -35,9 +42,13 @@ public class BrotherhoodService {
 	@Autowired
 	private BoxService				boxService;
 	@Autowired
+	private UserAccountRepository	userAccountRepository;
+	@Autowired
 	private ServiceUtils			serviceUtils;
 	@Autowired
 	private Validator				validator;
+	@Autowired
+	private MessageSource			messageSource;
 
 
 	public Brotherhood findOne(final Integer id) {
@@ -68,13 +79,15 @@ public class BrotherhoodService {
 
 	public Brotherhood save(final Brotherhood b) {
 		final Brotherhood brotherhood = (Brotherhood) this.serviceUtils.checkObjectSave(b);
+		final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+		final String hash = encoder.encodePassword(b.getUserAccount().getPassword(), null);
 		if (b.getId() == 0) {
 			this.serviceUtils.checkNoActor();
 			b.setBanned(false);
 			b.setSpammer(false);
 			b.setEstablishedMoment(new Date(System.currentTimeMillis() - 1000));
 			b.setScore(0.);
-			this.boxService.createIsSystemBoxs(b);
+			b.getUserAccount().setPassword(hash);
 		} else {
 			this.serviceUtils.checkAnyAuthority(new String[] {
 				Authority.ADMIN, Authority.BROTHERHOOD
@@ -82,6 +95,8 @@ public class BrotherhoodService {
 			if (this.actorService.findPrincipal() instanceof Brotherhood) {
 				this.serviceUtils.checkActor(brotherhood);
 				b.setBanned(brotherhood.getBanned());
+				if (brotherhood.getUserAccount().getPassword() != b.getUserAccount().getPassword())
+					b.getUserAccount().setPassword(hash);
 			} else {
 				b.setEmail(brotherhood.getEmail());
 				b.setName(brotherhood.getName());
@@ -94,7 +109,10 @@ public class BrotherhoodService {
 			}
 			b.setEstablishedMoment(brotherhood.getEstablishedMoment());
 		}
+		final UserAccount userAccount = this.userAccountRepository.save(b.getUserAccount());
+		brotherhood.setUserAccount(userAccount);
 		final Brotherhood res = this.repository.save(b);
+		this.boxService.createIsSystemBoxs(res);
 		return res;
 	}
 
@@ -120,10 +138,28 @@ public class BrotherhoodService {
 
 	public Brotherhood deconstruct(final BrotherhoodForm form, final BindingResult binding) {
 		Brotherhood res = null;
+		if (form.getId() == 0 && !form.getAccept()) {
+			/*
+			 * binding.addError(new FieldError("brotherhoodForm", "accept", form.getAccept(), false, new String[] {
+			 * "brotherhoodForm.accept", "accept"
+			 * }, new Object[] {
+			 * new DefaultMessageSourceResolvable(new String[] {
+			 * "brotherhoodForm.accept", "accept"
+			 * }, new Object[] {}, "accept")
+			 * }, "brotherhood.mustaccept"));
+			 */
+			final Locale locale = LocaleContextHolder.getLocale();
+			final String errorMessage = this.messageSource.getMessage("brotherhood.mustaccept", null, locale);
+			binding.addError(new FieldError("brotherhoodForm", "accept", errorMessage));
+		}
+		if (!form.getConfirmPassword().equals(form.getPassword()))
+			binding.addError(new FieldError("brotherhoodForm", "confirmPassword", "brotherhood.brotherhood.mustmatch"));
 		if (form.getId() == 0)
 			res = this.create();
-		else
-			res = (Brotherhood) this.serviceUtils.checkObject(form);
+		else {
+			res = this.findOne(form.getId());
+			Assert.notNull(res);
+		}
 		res.setEmail(form.getEmail());
 		res.setName(form.getName());
 		res.setPhone(form.getPhone());
@@ -133,10 +169,14 @@ public class BrotherhoodService {
 		res.setTitle(form.getTitle());
 		res.getUserAccount().setUsername(form.getUsername());
 		res.getUserAccount().setPassword(form.getPassword());
-		this.validator.validate(res, binding);
+		final Collection<Authority> authorities = new ArrayList<Authority>();
+		final Authority auth = new Authority();
+		auth.setAuthority(Authority.BROTHERHOOD);
+		authorities.add(auth);
+		res.getUserAccount().setAuthorities(authorities);
+		this.validator.validate(form, binding);
 		return res;
 	}
-
 	public Brotherhood findBrotherhoodByUserAcountId(final int userAccountId) {
 		return this.repository.findBrotherhoodByUserAcountId(userAccountId);
 	}

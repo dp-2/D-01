@@ -16,14 +16,19 @@
       
 <tiles-definitions>
 
-	<definition name="administrator/action-1" extends="master.page">	
-		<put-attribute name="title" value="Administrador: Acción 1" />
-		<put-attribute name="body" value="/views/administrator/action-1.jsp" />
+	<definition name="brotherhood/list" extends="master.page">	
+		<put-attribute name="title" value="Listado de hermandades" />
+		<put-attribute name="body" value="/views/brotherhood/list.jsp" />
 	</definition>
 	
-	<definition name="administrator/action-2" extends="master.page">	
-		<put-attribute name="title" value="Administrador: Acción 2" />
-		<put-attribute name="body" value="/views/administrator/action-2.jsp" />
+	<definition name="brotherhood/edit" extends="master.page">	
+		<put-attribute name="title" value="Editar hermandad" />
+		<put-attribute name="body" value="/views/brotherhood/edit.jsp" />
+	</definition>
+	
+	<definition name="brotherhood/display" extends="master.page">	
+		<put-attribute name="title" value="Mostrar hermandad" />
+		<put-attribute name="body" value="/views/brotherhood/display.jsp" />
 	</definition>
 	
 </tiles-definitions>

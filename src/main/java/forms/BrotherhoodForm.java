@@ -1,7 +1,7 @@
 
 package forms;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.validation.Valid;
@@ -16,15 +16,19 @@ import domain.Url;
 
 public class BrotherhoodForm extends DomainEntity {
 
-	private String			name;
-	private String			surname;
-	private String			photo;
-	private String			email;
-	private String			phone;
-	private String			title;
-	private Collection<Url>	pictures;
-	private String			username;
-	private String			password;
+	private String		name;
+	private String		middleName;
+	private String		surname;
+	private String		photo;
+	private String		email;
+	private String		phone;
+	private String		address;
+	private String		title;
+	private List<Url>	pictures;
+	private String		username;
+	private String		password;
+	private String		confirmPassword;
+	private boolean		accept;
 
 
 	@NotBlank
@@ -93,11 +97,40 @@ public class BrotherhoodForm extends DomainEntity {
 
 	@ElementCollection
 	@Valid
-	public Collection<Url> getPictures() {
+	public List<Url> getPictures() {
 		return this.pictures;
 	}
-	public void setPictures(final Collection<Url> pictures) {
+	public void setPictures(final List<Url> pictures) {
 		this.pictures = pictures;
+	}
+
+	@Size(min = 5, max = 32)
+	public String getConfirmPassword() {
+		return this.confirmPassword;
+	}
+	public void setConfirmPassword(final String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+
+	public boolean getAccept() {
+		return this.accept;
+	}
+	public void setAccept(final boolean accept) {
+		this.accept = accept;
+	}
+
+	public String getMiddleName() {
+		return this.middleName;
+	}
+	public void setMiddleName(final String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getAddress() {
+		return this.address;
+	}
+	public void setAddress(final String address) {
+		this.address = address;
 	}
 
 }

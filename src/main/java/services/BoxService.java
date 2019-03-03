@@ -152,9 +152,12 @@ public class BoxService {
 	public void flush() {
 		this.repository.flush();
 	}
+
 	/*
 	 * public BoxForm construct(final Box box) {
 	 * final BoxForm res = new BoxForm();
+	 * res.setId(box.getId());
+	 * res.setVersion(box.getVersion());
 	 * res.setName(box.getName());
 	 * res.setRootBox(box.getRootBox());
 	 * return res;
@@ -162,15 +165,21 @@ public class BoxService {
 	 */
 
 	public Box deconstruct(final Box box, final BindingResult binding) {
-		Box res = null;
-		if (box.getId() == 0)
-			res = this.create(this.actorService.findPrincipal());
-		else
-			res = (Box) this.serviceUtils.checkObject(box);
-		res.setName(box.getName());
-		res.setRootBox(box.getRootBox());
-		this.validator.validate(res, binding);
-		return res;
+		Box result = null;
+		if (box.getId() == 0) {
+			box.setActor(this.actorService.findPrincipal());
+			box.setIsSystem(false);
+			result = box;
+		} else {
+			result = this.findOne(box.getId());
+			box.setActor(result.getActor());
+			box.setIsSystem(result.getIsSystem());
+			box.setVersion(result.getVersion());
+			result = box;
+		}
+		this.validator.validate(result, binding);
+		return result;
 	}
+	// Auxiliar methods
 
 }

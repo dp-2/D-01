@@ -15,36 +15,47 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" uri="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 <jstl:if test="${isPrincipalAuthorizedEdit}">
-	<jstl:choose>
-	<jstl:when test="${isBrotherhood}">
 		<form:form action="brotherhood/brotherhood-none/edit.do" method="post" id="formEdit"
 			name="formEdit" modelAttribute="brotherhoodForm">
 			
 			<form:hidden path="id" />
 			<form:hidden path="version" />
 			
-			<acme:userAccount code="actor.userAccount" />
+			<acme:textbox path="username" code="useraccount.username" />
+			<acme:textbox path="password" code="useraccount.password" />
+			<acme:textbox path="confirmPassword" code="useraccount.confirmPassword" />
 			
 			<acme:textbox path="name" code="brotherhood.name" />
+			<acme:textbox path="middleName" code="brotherhood.middlename" />
 			<acme:textbox path="surname" code="brotherhood.surname" />
 			<acme:textbox path="email" code="brotherhood.email" />
 			<acme:textbox path="phone" code="brotherhood.phone" />
+			<acme:textbox path="address" code="brotherhood.address" />
 			<acme:textbox path="photo" code="brotherhood.photo" />
 			<acme:textbox path="title" code="brotherhood.title" />
-
-			<acme:list-textbox items="${brotherhoodForm.pictures}" path="picture" 
-				code="brotherhood.picture" fieldsetMessage="brotherhood.pictures" 
-				addCode="brotherhood.addPicture" removeCode="brotherhood.removePicture" />
 				
-			
-			
+			<div>
+				<fieldset><legend><spring:message code="brotherhood.pictures" /></legend>
+					<jstl:forEach items="${brotherhoodForm.pictures}" var="iter" varStatus="iterStatus">
+						<acme:textbox path="pictures[${iterStatus.index}].url" code="brotherhood.picture" />
+						<br>
+					</jstl:forEach>
+					<acme:submit name="addPicture" code="brotherhood.addPicture"/>
+					<jstl:if test="${brotherhoodForm.pictures.size() > 0}" >
+						<acme:submit name="removePicture" code="brotherhood.removePicture"/>
+					</jstl:if>
+				</fieldset>
+			</div>
+				
+			<acme:checkbox code="brotherhood.accept" path="accept" />
+				
+			<acme:submit name="save" code="brotherhood.save" />
+				
 		</form:form>
-	</jstl:when>
-	<jstl:when test="${isAdmin}">
-	
-	</jstl:when>
-	</jstl:choose>
+		
+		<acme:cancel url="" code="brotherhood.cancel" />	
+		
 </jstl:if>

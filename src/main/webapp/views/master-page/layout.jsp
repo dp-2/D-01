@@ -72,10 +72,16 @@
 			<tiles:insertAttribute name="title" />
 		</h1>
 		<tiles:insertAttribute name="body" />
-		<jstl:if test="${message != null}">
-			<br />
-			<span class="message"><spring:message code="${message}" /></span>
-		</jstl:if>
+		<jstl:choose>
+			<jstl:when test="${messageError != null}">
+				<br />
+				<span class="message"><spring:message code="${messageError}" /></span>
+			</jstl:when>
+			<jstl:when test="${message != null and notUseMessage == null}">
+				<br />
+				<span class="message"><spring:message code="${message}" /></span>
+			</jstl:when>
+		</jstl:choose>
 	</div>
 	<div>
 		<tiles:insertAttribute name="footer" />

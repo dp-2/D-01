@@ -13,6 +13,6 @@ import domain.SocialProfile;
 public interface SocialProfileRepository extends JpaRepository<SocialProfile, Integer> {
 
 	@Query("select sp from SocialProfile sp where sp.actor.id = ?1")
-	Collection<SocialProfile> findByActor(Integer actorId);
+	Collection<SocialProfile> findProfileByActorId(Integer actorId);
 
 }

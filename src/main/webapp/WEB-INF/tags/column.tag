@@ -22,6 +22,7 @@
 <%@ attribute name="alt" required="false" %>
 <%@ attribute name="sortable" required="false" %>
 <%@ attribute name="test" required="false" %>
+<%@ attribute name="formatDate" required="false" %>
 
 <%@ attribute name="readonly" required="false"%>
 
@@ -69,3 +70,9 @@
 			</display:column>
 		</jstl:otherwise>
 	</jstl:choose>
+	
+<!-- 
+	<jstl:if test="${formatDate != null}">
+						<fmt:formatDate pattern = '${formatDate}' value = '${value}' />
+					</jstl:if>
+ -->

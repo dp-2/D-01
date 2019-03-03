@@ -1,8 +1,11 @@
 
 package controllers.Brotherhood;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -11,16 +14,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.BrotherhoodService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Brotherhood;
+import domain.Url;
 import forms.BrotherhoodForm;
 
 @Controller
 @RequestMapping("brotherhood")
 public class BrotherhoodController extends AbstractController {
 
+	@Autowired
 	private BrotherhoodService	brotherhoodService;
+	@Autowired
+	private ActorService		actorService;
 
 
 	@RequestMapping("any/list")
@@ -46,48 +55,47 @@ public class BrotherhoodController extends AbstractController {
 		return this.createEditModelAndView(brotherhoodForm);
 	}
 
-	@RequestMapping(value = "none/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveAsNone(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
+	@RequestMapping(value = "brotherhood-none/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
 		ModelAndView res = null;
 		final Brotherhood brotherhood = this.brotherhoodService.deconstruct(brotherhoodForm, binding);
 		if (binding.hasErrors())
-			this.createEditModelAndView(brotherhoodForm);
+			res = this.createEditModelAndView(brotherhoodForm);
 		else
 			try {
 				this.brotherhoodService.save(brotherhood);
 				res = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				this.createEditModelAndView(brotherhoodForm, "cannot.commit.error");
+				res = this.createEditModelAndView(brotherhoodForm, "cannot.commit.error");
 			}
 		return res;
 	}
 
-	@RequestMapping(value = "brotherhood/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveAsBrotherhood(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
+	@RequestMapping(value = "brotherhood-none/edit", method = RequestMethod.POST, params = "addPicture")
+	public ModelAndView addPicture(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
 		ModelAndView res = null;
-		final Brotherhood brotherhood = this.brotherhoodService.deconstruct(brotherhoodForm, binding);
-		if (binding.hasErrors())
-			this.createEditModelAndView(brotherhoodForm);
-		else
-			try {
-				this.brotherhoodService.save(brotherhood);
-				res = new ModelAndView("redirect:list.do");
-			} catch (final Throwable oops) {
-				this.createEditModelAndView(brotherhoodForm, "cannot.commit.error");
-			}
+		if (brotherhoodForm.getPictures() == null)
+			brotherhoodForm.setPictures(new ArrayList<Url>());
+		brotherhoodForm.getPictures().add(new Url());
+		res = this.createEditModelAndView(brotherhoodForm);
 		return res;
 	}
 
-	@RequestMapping(value = "brotherhood/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView deleteAsBrotherhood(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
+	@RequestMapping(value = "brotherhood-none/edit", method = RequestMethod.POST, params = "removePicture")
+	public ModelAndView removePicture(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
 		ModelAndView res = null;
-		final Brotherhood brotherhood = this.brotherhoodService.deconstruct(brotherhoodForm, binding);
-		try {
-			this.brotherhoodService.delete(brotherhood);
-			res = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			this.createEditModelAndView(brotherhoodForm, "cannot.commit.error");
-		}
+		final List<Url> pictures = new ArrayList<Url>();
+		pictures.addAll(brotherhoodForm.getPictures());
+		brotherhoodForm.getPictures().remove(pictures.get(pictures.size() - 1));
+		res = this.createEditModelAndView(brotherhoodForm);
+		return res;
+	}
+
+	@RequestMapping("any/display")
+	public ModelAndView display(@RequestParam(required = true) final Integer brotherhoodId) {
+		final ModelAndView res = new ModelAndView("brotherhood/display");
+		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		res.addObject("brotherhood", brotherhood);
 		return res;
 	}
 
@@ -97,9 +105,25 @@ public class BrotherhoodController extends AbstractController {
 
 	private ModelAndView createEditModelAndView(final BrotherhoodForm brotherhoodForm, final String message) {
 		final ModelAndView res = new ModelAndView("brotherhood/edit");
+		final Boolean isPrincipalAuthorizedEdit = this.isPrincipalAuthorizedEdit(brotherhoodForm);
 		res.addObject("brotherhoodForm", brotherhoodForm);
 		res.addObject("message", message);
+		res.addObject("isPrincipalAuthorizedEdit", isPrincipalAuthorizedEdit);
 		return res;
 	}
 
+	private Boolean isPrincipalAuthorizedEdit(final BrotherhoodForm brotherhoodForm) {
+		Boolean res = false;
+		Actor principal = null;
+		try {
+			principal = this.actorService.findPrincipal();
+		} catch (final IllegalArgumentException e) {
+			principal = null;
+		}
+		if (brotherhoodForm.getId() > 0)
+			res = principal.getId() == brotherhoodForm.getId();
+		else if (brotherhoodForm.getId() == 0)
+			res = principal == null;
+		return res;
+	}
 }

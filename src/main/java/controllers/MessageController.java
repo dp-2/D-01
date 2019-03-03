@@ -3,8 +3,6 @@ package controllers;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -76,15 +74,14 @@ public class MessageController extends AbstractController {
 	}
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "save")
-	private ModelAndView save(@Valid final Message message, final BindingResult binding) {
+	private ModelAndView save(Message message, final BindingResult binding) {
 		ModelAndView res = null;
+		message = this.messageService.deconstruct(message, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(message, false);
 		else
 			try {
 				this.messageService.save(message);
-				System.out.println(message.getBox().getName());
-				System.out.println(message.getBox().getId());
 				res = new ModelAndView("redirect:/box/actor/list.do");
 			} catch (final Throwable t) {
 				res = this.createEditModelAndView(message, "cannot.commit.error", false);
@@ -94,8 +91,9 @@ public class MessageController extends AbstractController {
 
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "broadcast")
-	private ModelAndView broadcast(@Valid final Message message, final BindingResult binding) {
+	private ModelAndView broadcast(Message message, final BindingResult binding) {
 		ModelAndView res = null;
+		message = this.messageService.deconstruct(message, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(message, true);
 		else
@@ -129,17 +127,18 @@ public class MessageController extends AbstractController {
 		return this.createEditModelAndView(messageObject, null, isBroadcast);
 	}
 
-	private ModelAndView createEditModelAndView(final Message messageObject, final String message, Boolean isBroadcast) {
+	private ModelAndView createEditModelAndView(final Message message, final String messageError, Boolean isBroadcast) {
 		final ModelAndView res = new ModelAndView("message/edit");
 		final Actor principal = this.actorService.findPrincipal();
-		res.addObject("messageObject", messageObject);
 		res.addObject("message", message);
+		res.addObject("messageError", messageError);
 		res.addObject("actors", this.actorService.findAll());
 		res.addObject("boxs", this.boxService.findAllByActor(principal));
+		res.addObject("notUseMessage", 0);
 		if (!(this.actorService.findPrincipal() instanceof Administrator))
 			isBroadcast = false;
 		res.addObject("isBroadcast", isBroadcast);
-		this.isPrincipalAuthorizedEdit(res, messageObject.getBox());
+		this.isPrincipalAuthorizedEdit(res, message.getBox());
 		return res;
 	}
 	private void isPrincipalAuthorizedEdit(final ModelAndView modelAndView, final Box box) {

@@ -30,39 +30,39 @@
 
 
 	<form:label path="nick">
-		<spring:message code="profile.nick" />
+		<spring:message code="socialProfile.nick" />
 	</form:label>
-	<form:input path="nick" readonly="${isRead }"/>
+	<form:input path="nick" readonly="${isRead }" />
 	<form:errors cssClass="error" path="nick" />
+	<br />
 	<br />
 
 	<form:label path="nameSN">
-		<spring:message code="profile.name" />
+		<spring:message code="socialProfile.name" />
 	</form:label>
-	<form:input path="nameSN" readonly="${isRead }"/>
+	<form:input path="nameSN" readonly="${isRead }" />
 	<form:errors cssClass="error" path="nameSN" />
+	<br />
 	<br />
 
 	<form:label path="linkSN">
-		<spring:message code="profile.link" />
+		<spring:message code="socialProfile.link" />
 	</form:label>
-	<form:input path="linkSN" readonly="${isRead }"/>
+	<form:input path="linkSN" readonly="${isRead }" />
 	<form:errors cssClass="error" path="linkSN" />
 	<br />
+	<br />
 
-	<jstl:if test="${isRead==false }">		
-		<acme:submit code="profile.save" name="save"/>
-	
-		<br />
-
-		<acme:cancel code="profile.cancel" url="/socialProfile/list.do"/>
-	
-		<br />
-		
+	<jstl:if test="${isRead==false }">
+		<acme:submit code="socialProfile.save" name="save" />
+		<acme:cancel code="socialProfile.cancel" url="/socialProfile/list.do" />
+		<jstl:if test="${socialProfile.id!=0}">
+			<acme:submit code="socialProfile.delete" name="delete" />
+		</jstl:if>
 	</jstl:if>
 
 	<jstl:if test="${isRead == true }">
-		<acme:cancel code="profile.cancel" url="/socialProfile/list.do"/>
+		<acme:cancel code="socialProfile.cancel" url="/socialProfile/list.do" />
 	</jstl:if>
 
 </form:form>

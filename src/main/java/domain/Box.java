@@ -45,7 +45,7 @@ public class Box extends DomainEntity {
 
 
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Box getRootBox() {
 		return this.rootBox;
 	}

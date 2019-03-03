@@ -28,6 +28,8 @@
 <%@ attribute name="fieldsetMessage" required="true" %>
 <%@ attribute name="removeCode" required="true" %>
 <%@ attribute name="addCode" required="true" %>
+<%@ attribute name="urlRemove" required="true" %>
+<%@ attribute name="urlAdd" required="true" %>
 
 <jstl:if test="${readonly == null}">
 	<jstl:set var="readonly" value="false" />
@@ -37,11 +39,11 @@
 
 <div>
 	<fieldset><legend><spring:message code="${fieldsetMessage}" /></legend>
-		<jstl:forEach begin="0" end="${items.size}" var="iter">
-			<acme:textbox path="${path}[${iter}]" code="${code}" />
-			<button onclick=""  >${removeCode}</button>
+		<jstl:forEach begin="0" end="${items.size}" var="iter" varStatus="iterStatus">
+			<acme:textbox path="${path}[${iterStatus.index}]" code="${code}" />
+			<button onclick="${urlRemove + '?position=' + iter}" >${removeCode}</button>
 			<br>
 		</jstl:forEach>
-		<button onclick=""  >${addCode}</button>
+		<button onclick="${urlAdd}" >${addCode}</button>
 	</fieldset>
 </div>

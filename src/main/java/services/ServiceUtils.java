@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Actor;
-import domain.DomainEntity;
 import repositories.DomainEntityRepository;
 import security.Authority;
 import security.LoginService;
+import domain.Actor;
+import domain.DomainEntity;
 
 @Service
 @Transactional
@@ -92,7 +92,12 @@ public class ServiceUtils {
 	}
 
 	public void checkNoActor() {
-		final Actor principal = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		Actor principal = null;
+		try {
+			principal = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		} catch (final IllegalArgumentException exc) {
+
+		}
 		Assert.isNull(principal);
 	}
 
@@ -147,9 +152,9 @@ public class ServiceUtils {
 	}
 
 	public DomainEntity checkObjectExists(final DomainEntity object) {
-		DomainEntity res = object;
-		if (object.getId() > 0)
-			res = this.domainEntityRepository.findOne(object.getId());
+		DomainEntity res = this.domainEntityRepository.findOne(object.getId());
+		if (res == null)
+			res = object;
 		return res;
 	}
 

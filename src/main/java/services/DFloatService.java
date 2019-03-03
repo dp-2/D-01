@@ -2,16 +2,17 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.DFloatRepository;
-import security.LoginService;
 import domain.Brotherhood;
 import domain.DFloat;
+import repositories.DFloatRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -68,6 +69,10 @@ public class DFloatService {
 
 	public Collection<DFloat> findAllDFloatsWithoutBrotherhood() {
 		return this.dfloatRepository.SearchDFloatsWithoutBrotherhood();
+	}
+
+	public List<DFloat> findDFloatsByProcessionId(final int processionId) {
+		return this.dfloatRepository.findDFloatsByProcessionId(processionId);
 	}
 
 }
