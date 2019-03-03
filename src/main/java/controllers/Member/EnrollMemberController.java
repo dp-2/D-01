@@ -17,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.BrotherhoodService;
 import services.EnrollService;
 import services.MemberService;
 import services.PositionService;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
 import domain.Position;
@@ -33,16 +35,19 @@ public class EnrollMemberController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private EnrollService	enrollService;
+	private EnrollService		enrollService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private PositionService	positionService;
+	private PositionService		positionService;
 
 	@Autowired
-	private MemberService	memberService;
+	private MemberService		memberService;
+
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
 
 
 	// Constructor---------------------------------------------------------
@@ -63,6 +68,22 @@ public class EnrollMemberController extends AbstractController {
 		result = new ModelAndView("enroll/list");
 		result.addObject("enrolls", enrolls);
 		result.addObject("requestURI", "/enroll/member/list.do");
+		result.addObject("memberId", a.getId());
+		return result;
+	}
+
+	// List ---------------------------------------------------------------
+	@RequestMapping(value = "/listBrotherhood", method = RequestMethod.GET)
+	public ModelAndView listBrotherhood() {
+		ModelAndView result;
+		final Collection<Brotherhood> enrolls2;
+
+		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		enrolls2 = this.brotherhoodService.findAll();
+
+		result = new ModelAndView("enroll/list");
+		result.addObject("enrolls2", enrolls2);
+		result.addObject("requestURI", "/enroll/member/listBrotherhood.do");
 		result.addObject("memberId", a.getId());
 		return result;
 	}

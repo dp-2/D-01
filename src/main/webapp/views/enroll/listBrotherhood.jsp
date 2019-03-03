@@ -10,16 +10,17 @@
 
 <display:table name="enrolls2" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
-		<display:column property="brotherhood.name"
+	
+		<display:column property="name"
 			titleKey="enroll.brotherhood" />
-
 
 		<jstl:if test="${row.endMoment == null}">
 			<display:column titleKey="enroll.out">
-				<a href="enroll/member/goOut.do?enrollId=${row.id}"><spring:message
-						code="enroll.getout" /></a>
+				<a href="enroll/member/create.do?enrollId=${row.id}"><spring:message
+						code="enroll.unirse" /></a>
 			</display:column>
 		</jstl:if>
+		
 </display:table>
 <br />
 <br />
