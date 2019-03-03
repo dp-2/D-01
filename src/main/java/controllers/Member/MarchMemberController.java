@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.ConfigurationService;
 import services.MarchService;
 import controllers.AbstractController;
 import domain.Actor;
@@ -28,10 +29,13 @@ public class MarchMemberController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private MarchService	marchService;
+	private MarchService			marchService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -51,11 +55,12 @@ public class MarchMemberController extends AbstractController {
 
 		result = new ModelAndView("march/list");
 		result.addObject("marchs", marchs);
-		result.addObject("requestURI", "/list.do?memberId=" + a.getId());
+		result.addObject("banner", this.configurationService.findOne().getBanner());
+		result.addObject("requestURI", "march/member/list.do?memberId=" + a.getId());
 		result.addObject("memberId", a.getId());
+
 		return result;
 	}
-
 	// Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int processionId) {
@@ -103,15 +108,14 @@ public class MarchMemberController extends AbstractController {
 	}
 
 	// DELETE
-	@RequestMapping(value = "/delete", method = RequestMethod.GET, params = "delete")
-	public ModelAndView delete(@RequestParam final int marchId, final BindingResult binding) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int marchId) {
 
 		ModelAndView result;
 		final March march = this.marchService.findOne(marchId);
-		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		try {
 			this.marchService.delete(march);
-			result = new ModelAndView("redirect:list.do?memberId=" + a.getId());
+			result = this.list();
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(march, "march.commit.error");
 		}
@@ -135,6 +139,7 @@ public class MarchMemberController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 		result.addObject("memberId", a.getId());
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		result.addObject("requestURI", "march/member/edit.do");
 
 		return result;

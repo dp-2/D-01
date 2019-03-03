@@ -1,6 +1,8 @@
 
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -10,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 
-import domain.Brotherhood;
-import domain.DFloat;
-import domain.Finder;
-import domain.Procession;
-import forms.ProcessionForm;
 import repositories.ProcessionRepository;
 import security.LoginService;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Procession;
+import forms.ProcessionForm;
 
 @Service
 @Transactional
@@ -37,13 +39,15 @@ public class ProcessionService {
 	private ConfigurationService	configurationService;
 
 	@Autowired
+	private ActorService			actorService;
+	@Autowired
 	private FinderService			finderService;
 
 	@Autowired
 	private DFloatService			dFloatService;
 
-	//	@Autowired
-	//	private Validator				validator;
+	@Autowired(required = false)
+	private Validator				validator;
 
 
 	//Methods--------------------------------------------------------------------
@@ -86,7 +90,7 @@ public class ProcessionService {
 	public void delete(final Procession procession) {
 		this.checkPrincipal(procession);
 		this.checkNoFinalMode(procession);
-		this.deleteDFloatsOfProcession(procession);
+		//this.deleteDFloatsOfProcession(procession);
 		this.processionRepository.delete(procession);
 	}
 
@@ -127,10 +131,6 @@ public class ProcessionService {
 			procession.setDescription(processionForm.getDescription());
 			procession.setFfinal(processionForm.isFfinal());
 			procession.setBrotherhood(brotherhood);
-			if (processionForm.getFinderId() != 0) {
-				final Finder finder = this.finderService.findOne(processionForm.getFinderId());
-				procession.setFinder(finder);
-			}
 
 			//			this.validator.validate(procession, bindingResult);
 		}
@@ -155,11 +155,24 @@ public class ProcessionService {
 		return this.processionRepository.findProcessionOfMember(memberId);
 	}
 
-	private void deleteDFloatsOfProcession(final Procession procession) {
-		final List<DFloat> dFloats = this.dFloatService.findDFloatsByProcessionId(procession.getId());
+	//	private void deleteDFloatsOfProcession(final Procession procession) {
+	//		final List<DFloat> dFloats = this.dFloatService.findDFloatsByProcessionId(procession.getId());
+	//
+	//		if (!dFloats.isEmpty())
+	//			for (final DFloat dFloat : dFloats)
+	//				this.dFloatService.delete(dFloat);
+	//	}
 
-		if (!dFloats.isEmpty())
-			for (final DFloat dFloat : dFloats)
-				this.dFloatService.delete(dFloat);
+	public List<Actor> getActorsByProcession(final int processionId) {
+		final Collection<Actor> res = new ArrayList<Actor>();
+		final Collection<Actor> actors = this.actorService.findAll();
+		final Procession proces = this.findOne(processionId);
+		for (final Actor a : actors) {
+			final List<Procession> pros = this.findProcessionOfMember(a.getId());
+			for (final Procession pr : pros)
+				if (pros.contains(proces))
+					res.add(a);
+		}
+		return (List<Actor>) res;
 	}
 }

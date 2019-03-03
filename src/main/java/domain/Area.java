@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -46,8 +45,7 @@ public class Area extends DomainEntity {
 
 	// Relationships
 
-	private Brotherhood	brotherhood;
-	private Finder		finder;
+	private Brotherhood brotherhood;
 
 
 	@NotNull
@@ -58,16 +56,6 @@ public class Area extends DomainEntity {
 	}
 	public void setBrotherhood(final Brotherhood brotherhood) {
 		this.brotherhood = brotherhood;
-	}
-
-	@NotNull
-	@Valid
-	@ManyToOne(optional = false)
-	public Finder getFinder() {
-		return this.finder;
-	}
-	public void setFinder(final Finder finder) {
-		this.finder = finder;
 	}
 
 }

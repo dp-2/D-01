@@ -35,4 +35,7 @@ public interface MarchRepository extends JpaRepository<March, Integer> {
 	@Query("select m from Member m where (((select count(mm) from March mm where mm.member.id=m.id and mm.status = 'APPROVED' )*1.0 /(select count(mmm) from March mmm ))>=(select count(mmmm) from March mmmm ))")
 	List<Member> members10PerMarchAccepted();
 
+	@Query("select (count(m)*1.0)/(select count(mm) from March mm) from March m group by m.status")
+	public Double queryC6c();
+
 }

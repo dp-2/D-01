@@ -29,6 +29,8 @@
 	<form:hidden path="version" />
 	<form:hidden path="spammer" />
 	<form:hidden path="userAccount" />
+	<form:hidden path="position" />
+	
 
 
 	<jstl:if test="${isRead==true}">

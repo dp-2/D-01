@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -64,19 +66,37 @@ public class PositionService {
 		this.positionRepository.delete(position);
 	}
 
-	//	public Collection<Position> findPositionName() {
-	//		final Collection<Position> pos = this.positionRepository.findPositionName();
-	//		return pos;
-	//	}
-	//
-	//	public Collection<Position> findPositionLanguage() {
-	//		final Collection<Position> pos = this.positionRepository.findPositionLanguage();
-	//		return pos;
-	//	}
-	//
-	//	public Collection<Position> findPositionByLanguage(final String lng) {
-	//		final Collection<Position> pos = this.positionRepository.findPositionByLanguage(lng);
-	//		return pos;
-	//	}
+	public Collection<Position> findPositionES() {
+		final Collection<Position> pos = this.positionRepository.findPositionES();
+		return pos;
+	}
 
+	public Collection<Position> findPositionEN() {
+		final Collection<Position> pos = this.positionRepository.findPositionEN();
+		return pos;
+	}
+
+	public Map<String, Double> computeStatistics() {
+		Map<String, Double> result;
+		double countTotal, countPresident, countVicepresident, countSecretary, countTreasurer, countHistorian, countOfficer;
+
+		countTotal = this.positionRepository.countTotal();
+		countPresident = this.positionRepository.countPresident();
+		countVicepresident = this.positionRepository.countVicepresident();
+		countSecretary = this.positionRepository.countSecretary();
+		countTreasurer = this.positionRepository.countTreasurer();
+		countHistorian = this.positionRepository.countHistorian();
+		countOfficer = this.positionRepository.countOfficer();
+
+		result = new HashMap<String, Double>();
+		result.put("count.total", countTotal);
+		result.put("count.president", countPresident);
+		result.put("count.vicepresident", countVicepresident);
+		result.put("count.secretary", countSecretary);
+		result.put("count.treasurer", countTreasurer);
+		result.put("count.historian", countHistorian);
+		result.put("count.officer", countOfficer);
+
+		return result;
+	}
 }

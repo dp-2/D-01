@@ -37,7 +37,7 @@ public class MessageService {
 	private ServiceUtils			serviceUtils;
 	@Autowired
 	private LoginService			loginService;
-	@Autowired
+	@Autowired(required = false)
 	private Validator				validator;
 
 

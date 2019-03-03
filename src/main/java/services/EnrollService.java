@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Enroll;
 import repositories.EnrollRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Enroll;
 
 @Service
 @Transactional
@@ -21,14 +21,14 @@ public class EnrollService {
 
 	// Managed repository ----------------------------------------------------------------
 	@Autowired
-	private EnrollRepository enrollRepository;
+	private EnrollRepository	enrollRepository;
+
 
 	//	@Autowired
 	//	private MemberService		memberService;
 	//
 	//	@Autowired
 	//	private BrotherhoodService	brotherhoodService;
-
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -37,10 +37,12 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create(final int memberId, final int brotherhoodId) {
+	public Enroll create() {
+		//		final int memberId, final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
 		//		enroll.setMember(this.memberService.findOne(memberId));
 		//		enroll.setBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
+		enroll.setIsAccepted(false);
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 
 		return enroll;
@@ -82,5 +84,34 @@ public class EnrollService {
 		final UserAccount u = enroll.getBrotherhood().getUserAccount();
 		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con esta hermandad");
 		return true;
+	}
+
+	public Collection<Enroll> findEnrollByMember(final int memberId) {
+		return this.enrollRepository.findEnrollByMember(memberId);
+	}
+
+	public Collection<Enroll> findEnrollByBrotherhood(final int brotherhoodId) {
+		return this.enrollRepository.findEnrollByBrotherhood(brotherhoodId);
+	}
+
+	public Collection<Enroll> findEnrollByBrotherhood2(final int brotherhoodId) {
+		return this.enrollRepository.findEnrollByBrotherhood2(brotherhoodId);
+	}
+
+	public Enroll goOut(final int enrollId) {
+		Enroll enroll;
+		enroll = this.enrollRepository.findOne(enrollId);
+		final Date fechaActual = new Date(System.currentTimeMillis() - 1000);
+
+		enroll.setEndMoment(fechaActual);
+		//		enroll.setBrotherhood(enroll.getBrotherhood());
+		//		enroll.setIsAccepted(enroll.getIsAccepted());
+		//		enroll.setMember(enroll.getMember());
+		//		enroll.setPosition(enroll.getPosition());
+		//		enroll.setStartMoment(enroll.getStartMoment());
+		//		enroll.setId(enroll.getId());
+		//		enroll.setVersion(enroll.getVersion());
+		enroll = this.enrollRepository.save(enroll);
+		return enroll;
 	}
 }

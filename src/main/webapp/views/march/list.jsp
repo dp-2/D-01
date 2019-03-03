@@ -25,10 +25,10 @@
 	<security:authorize access="hasRole('MEMBER')">
 		<jstl:if test="${memberId==row.member.id}">
 			<display:column>
-				<jstl:if test="${row.id != 0 && row.status=='PENDING'}">
+				<jstl:if test="${row.status=='PENDING'}">
 
-					<a href="march/member/delete.do?marchId=${row.id}">
-						<spring:message code="march.delete" />
+					<a href="march/member/delete.do?marchId=${row.id}"> <spring:message
+							code="march.delete" />
 					</a>
 
 				</jstl:if>
@@ -54,7 +54,7 @@
 
 	<jstl:if test="${row.status=='APPROVED' }">
 		<display:column property="status" titleKey="march.status"
-			style="background-color:Green" sortable="true "/>
+			style="background-color:Green" sortable="true " />
 	</jstl:if>
 
 	<jstl:if test="${row.status=='REJECTED'}">
@@ -63,9 +63,18 @@
 	</jstl:if>
 
 	<display:column property="reason" titleKey="march.reason" />
-	<display:column property="location" titleKey="march.location" />
 
-
+	<display:column titleKey="march.location">
+		<jstl:if test="${row.location.isEmpty() }">
+			<acme:out code="location.noPosition" value=""/>
+		</jstl:if>
+		<jstl:if test="${!row.location.isEmpty()}">
+		<acme:out code="location.row" value="${row.location.get(0)}"/>
+		<acme:out code="location.column" value="${row.location.get(1)}"/>
+		</jstl:if>
+	</display:column>
+		
+	
 
 
 

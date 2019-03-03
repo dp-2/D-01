@@ -19,7 +19,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <display:table name="processions" id="row" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
+	pagesize="${numResults}" class="displaytag">
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
 
@@ -51,6 +51,14 @@
 
 		</display:column>
 	</security:authorize>
+
+	<display:column titleKey="brotherhood.members">
+	
+				<a href="member/list.do?processionId=${row.id}"><spring:message
+				code="procession.show" />
+		</a>
+	</display:column>
+
 	<display:column>
 
 		<a href="procession/brotherhood/show.do?processionId=${row.id}"> <spring:message
@@ -58,6 +66,8 @@
 		</a>
 
 	</display:column>
+
+
 
 	<security:authorize access="hasRole('MEMBER')">
 
@@ -75,9 +85,17 @@
 
 <br />
 <security:authorize access="hasRole('BROTHERHOOD')">
-	<a href="procession/brotherhood/create.do"> <spring:message
-			code="procession.create" />
-	</a>
+	<jstl:if test="${hasArea != null}">
+		<a href="procession/brotherhood/create.do"> <spring:message
+				code="procession.create" />
+		</a>
+	</jstl:if>
+
+	<jstl:if test="${hasArea == null}">
+		<p>
+			<spring:message code="procession.area.null" />
+		</p>
+	</jstl:if>
 </security:authorize>
 
 

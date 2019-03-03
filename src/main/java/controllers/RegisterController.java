@@ -59,9 +59,10 @@ public class RegisterController extends AbstractController {
 
 		ModelAndView result;
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+			System.out.println(binding.getAllErrors());
 			result = this.createEditModelAndView(actor);
-		else
+		} else
 			try {
 				final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 				actor.getUserAccount().setPassword(encoder.encodePassword(actor.getUserAccount().getPassword(), null));

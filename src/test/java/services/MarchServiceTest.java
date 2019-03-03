@@ -3,8 +3,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -63,7 +62,7 @@ public class MarchServiceTest extends AbstractTest {
 		this.authenticate("member1");
 		final int memberId = this.getEntityId("member1");
 		final int processionId = this.getEntityId("procession1");
-		final Map<Integer, Integer> a = new HashMap<>();
+		final List<Integer> a = new ArrayList<>();
 		try {
 			march = this.marchService.create(processionId, memberId);
 			march.setReason("aaa");

@@ -50,7 +50,6 @@ public class AreaService {
 
 		final Collection<Url> pictures = new ArrayList<>();
 		res.setPictures(pictures);
-		res.setFinder(this.finderService.create());
 
 		return res;
 	}
@@ -74,7 +73,7 @@ public class AreaService {
 		Assert.isTrue(area.getId() > 0);
 		//cogemos el customer de la base de datos
 		areaDB = this.areaRepository.findOne(area.getId());
-		//Si al guardar detecta que lo he puesto en final mode ,pues le meto la fecha 
+		//Si al guardar detecta que lo he puesto en final mode ,pues le meto la fecha
 		if ((area.getId() != 0 && area.getName().equals(areaDB.getName())) || a.getUserAccount().getAuthorities().contains("ADMIN") || area.getId() == 0)
 			res = this.areaRepository.save(area);
 		else
@@ -83,8 +82,12 @@ public class AreaService {
 	}
 
 	public void delete(final Area area) {
+		Actor actor;
+		actor = this.actorService.findByUserAccount(LoginService.getPrincipal());
+
 		Assert.notNull(area);
 		Assert.isTrue(area.getBrotherhood() == null);
+		Assert.isTrue(actor.getUserAccount().getAuthorities().contains("ADMIN"));
 		this.areaRepository.delete(area);
 	}
 
@@ -101,4 +104,22 @@ public class AreaService {
 		res.put("STD", statistics[4]);
 		return res;
 	}
+	public Area findAreaByBrotherhoodId(final int brotherhoodId) {
+		return this.areaRepository.findAreaByBrotherhoodId(brotherhoodId);
+	}
+
+	public Double avgHermandadesPorArea() {
+		return this.areaRepository.avgHermandadesPorArea();
+	}
+
+	public Double minHermandadesPorArea() {
+		return this.areaRepository.minHermandadesPorArea();
+	}
+	public Double maxHermandadesPorArea() {
+		return this.areaRepository.maxHermandadesPorArea();
+	}
+	public Double stddevHermandadesPorArea() {
+		return this.areaRepository.stddevHermandadesPorArea();
+	}
+
 }

@@ -36,7 +36,7 @@ public class BoxService {
 	@Autowired
 	private ServiceUtils	serviceUtils;
 
-	@Autowired
+	@Autowired(required = false)
 	private Validator		validator;
 
 

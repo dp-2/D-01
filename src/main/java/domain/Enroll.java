@@ -24,6 +24,7 @@ public class Enroll extends DomainEntity {
 
 	private Date	startMoment;
 	private Date	endMoment;
+	private boolean	isAccepted;
 
 
 	@NotNull
@@ -46,6 +47,15 @@ public class Enroll extends DomainEntity {
 
 	public void setEndMoment(final Date endMoment) {
 		this.endMoment = endMoment;
+	}
+
+	@NotNull
+	public boolean getIsAccepted() {
+		return this.isAccepted;
+	}
+
+	public void setIsAccepted(final boolean isAccepted) {
+		this.isAccepted = isAccepted;
 	}
 
 

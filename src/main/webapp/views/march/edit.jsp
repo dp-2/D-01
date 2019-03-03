@@ -25,8 +25,10 @@
 	<form:hidden path="member" />
 	<form:hidden path="procession" />
 	<security:authorize access="hasRole('MEMBER')">
-	<form:hidden path="status" />
-
+		<form:hidden path="status" />
+		<h1>
+			<b><spring:message code="march.create1"></spring:message>${march.procession.title}</b>
+		</h1>
 	</security:authorize>
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<jstl:if test="${march.status=='PENDING'}">
@@ -42,10 +44,10 @@
 
 		</jstl:if>
 		<jstl:if test="${march.status!='PENDING'}">
-		<form:hidden path="status"/>
+			<form:hidden path="status" />
 		</jstl:if>
 		<br />
-		<br/>
+		<br />
 
 		<jstl:if test="${march.status=='REJECTED'}">
 			<acme:textbox code="march.reason" path="reason" />

@@ -1,18 +1,19 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import domain.Brotherhood;
-import domain.DFloat;
 import repositories.DFloatRepository;
 import security.LoginService;
+import domain.Brotherhood;
+import domain.DFloat;
+import domain.Procession;
 
 @Service
 @Transactional
@@ -32,9 +33,11 @@ public class DFloatService {
 	public DFloat create() {
 		DFloat res;
 		Brotherhood brotherhood;
+		final Collection<Procession> processions = new ArrayList<>();
 		brotherhood = (Brotherhood) this.actorService.findByUserAccount(LoginService.getPrincipal());
 		res = new DFloat();
 		res.setBrotherhood(brotherhood);
+		res.setProcessions(processions);
 
 		return res;
 	}
@@ -71,8 +74,8 @@ public class DFloatService {
 		return this.dfloatRepository.SearchDFloatsWithoutBrotherhood();
 	}
 
-	public List<DFloat> findDFloatsByProcessionId(final int processionId) {
-		return this.dfloatRepository.findDFloatsByProcessionId(processionId);
-	}
+	//	public List<DFloat> findDFloatsByProcessionId(final int processionId) {
+	//		return this.dfloatRepository.findDFloatsByProcessionId(processionId);
+	//	}
 
 }

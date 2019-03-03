@@ -24,14 +24,63 @@
 	<form:hidden path="version" />
 	<form:hidden path="member" />
 	<form:hidden path="brotherhood" />
-	<form:hidden path="startMoment"/>
-	<form:hidden path="endMoment"/>
+	<form:hidden path="startMoment" />
+	<form:hidden path="endMoment" />
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<acme:select code="enroll.position" path="position" items="${positions}"
-			itemLabel="position" />
 
+		<%-- <jstl:if test="${idioma}=='es'">
+			<form:label path="position">
+				<spring:message code="enroll.position" />:
+  		</form:label>
+			<form:select id="positions" path="position">
+				<form:options items="${positionsES}" itemValue="id" itemLabel="name" />
+			</form:select>
+			<form:errors cssClass="error" path="position" />
+			<br />
+			<br />
+		</jstl:if>
+
+		<jstl:if test="${idioma}=='en'">
+			<form:label path="position">
+				<spring:message code="enroll.position" />:
+  		</form:label>
+			<form:select id="positions" path="position">
+				<form:options items="${positionsEN}" itemValue="id" itemLabel="name" />
+			</form:select>
+			<form:errors cssClass="error" path="position" />
+			<br />
+			<br />
+		</jstl:if> --%>
+
+		<acme:select code="enroll.position" path="position"
+			items="${positions}" itemLabel="name" />
+		<%-- <form:label path="position">
+			<spring:message code="enroll.position" />:
+  		</form:label>
+		<form:select id="positions" path="position">
+			<form:options items="${positions}" itemValue="id" itemLabel="name" />
+		</form:select>
+		<form:errors cssClass="error" path="position" /> --%>
+		<br />
+		<br />
+
+		<form:label path="member">
+			<spring:message code="enroll.member" />:
+  		</form:label>
+		<form:select id="members" path="member">
+			<form:options items="${members}" itemValue="id" itemLabel="name" />
+		</form:select>
+		<form:errors cssClass="error" path="member" />
+		<br />
 		<br />
 	</security:authorize>
+
+	<acme:submit name="save" code="enroll.save" />
+	<acme:cancel code="enroll.cancel" url="/enroll/brotherhood/list.do" />
+	<jstl:if test="${position.id!=0}">
+		<acme:submit code="enroll.delete" name="delete" />
+	</jstl:if>
+
 </form:form>
 

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 import domain.Procession;
 import security.LoginService;
+import services.AreaService;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.ProcessionService;
@@ -35,6 +36,9 @@ public class ProcessionBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private AreaService				areaService;
 
 
 	//Constructor---------------------------------------------------------
@@ -55,6 +59,8 @@ public class ProcessionBrotherhoodController extends AbstractController {
 		modelAndView.addObject("processions", processions);
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 		modelAndView.addObject("requestURI", "procession/brotherhood/myList.do");
+		modelAndView.addObject("numResults", this.configurationService.findOne().getNumResults());
+		modelAndView.addObject("hasArea", this.areaService.findAreaByBrotherhoodId(brotherhoodId));
 
 		return modelAndView;
 	}

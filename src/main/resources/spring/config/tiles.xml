@@ -29,12 +29,12 @@
 		<value>/views/enroll/tiles.xml</value>
 		<value>/views/position/tiles.xml</value>
 		<value>/views/socialProfile/tiles.xml</value>
-
+		<value>/views/finder/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
 		<value>/views/box/tiles.xml</value>
 		<value>/views/brotherhood/tiles.xml</value>
-
-		
+		<value>/views/area/tiles.xml</value>
+	
 	</util:list>
 
 </beans>

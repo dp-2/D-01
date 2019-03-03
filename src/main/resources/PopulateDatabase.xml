@@ -158,23 +158,30 @@
 	<!-- Area -->
 
 	<bean id="area1" class="domain.Area">
-		<property name="name" value="Nombre del area 1" />
+		<property name="name" value="Catedral de sevilla" />
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="finder" ref="finder1" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1area1" class="domain.Url">
 					<property name="url"
-						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+						value="http://www.andalucia.org/media/fotos/image_249310_jpeg_800x600_q85.jpg" />
+				</bean>
+				<bean id="picture2area1" class="domain.Url">
+					<property name="url"
+						value="https://cometeelmundo.net/sites/default/files/styles/originalwatermark/public/field/image/impresionante-feretro-de-colon-en-la-catedral-de-sevilla.jpg?itok=3MFclXH-" />
+				</bean>
+
+				<bean id="picture3area1" class="domain.Url">
+					<property name="url"
+						value="https://sevilla.abc.es/media/sevilla/2018/11/14/s/calles-catedral-sevilla-kg9D--510x287@abc.jpg" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
 	<bean id="area2" class="domain.Area">
-		<property name="name" value="Nombre del area 2" />
+		<property name="name" value="Capilla del cristo de la serenidad" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="finder" ref="finder2" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1area2" class="domain.Url">
@@ -295,6 +302,151 @@
 
 	</bean>
 
+
+	<!-- Boxes del member1 -->
+
+	<bean id="folder1Member1" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Member1" />
+		<property name="actor" ref="member1" />
+
+	</bean>
+
+	<bean id="folder2Member1" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Member1" />
+		<property name="actor" ref="member1" />
+
+	</bean>
+
+	<bean id="folder3Member1" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Member1" />
+		<property name="actor" ref="member1" />
+
+	</bean>
+
+
+	<bean id="folder4Member1" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Member1" />
+		<property name="actor" ref="member1" />
+
+	</bean>
+
+
+	<!-- Boxes del member2 -->
+
+	<bean id="folder1Member2" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Member2" />
+		<property name="actor" ref="member2" />
+
+	</bean>
+
+	<bean id="folder2Member2" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Member2" />
+		<property name="actor" ref="member2" />
+
+	</bean>
+
+	<bean id="folder3Member2" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Member2" />
+		<property name="actor" ref="member2" />
+
+	</bean>
+
+
+	<bean id="folder4Member2" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Member2" />
+		<property name="actor" ref="member2" />
+
+	</bean>
+
+
+	<!-- Boxes del brotherhood1 -->
+
+	<bean id="folder1Brotherhood1" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+
+	</bean>
+
+	<bean id="folder2Brotherhood1" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+
+	</bean>
+
+	<bean id="folder3Brotherhood1" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+
+	</bean>
+
+
+	<bean id="folder4Brotherhood1" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+
+	</bean>
+
+
+	<!-- Boxes del brotherhood2 -->
+
+	<bean id="folder1Brotherhood2" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+
+	</bean>
+
+	<bean id="folder2Brotherhood2" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+
+	</bean>
+
+	<bean id="folder3Brotherhood2" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+
+	</bean>
+
+
+	<bean id="folder4Brotherhood2" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+
+	</bean>
+
+
 	<!-- Positions -->
 
 	<bean id="f_1" class="domain.Position">
@@ -306,7 +458,7 @@
 		<property name="name" value="Presidente" />
 		<property name="language" value="es" />
 	</bean>
-	
+
 	<!-- Enroll -->
 
 	<bean id="enroll1" class="domain.Enroll">
@@ -315,6 +467,7 @@
 		<property name="member" ref="member1" />
 		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood1" />
+		<property name="isAccepted" value="true" />
 	</bean>
 
 	<bean id="enroll2" class="domain.Enroll">
@@ -322,6 +475,7 @@
 		<property name="member" ref="member2" />
 		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood2" />
+		<property name="isAccepted" value="true" />
 	</bean>
 
 	<!-- Float -->
@@ -332,7 +486,11 @@
 		<property name="pictures"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="procession" ref="procession1" />
+		<property name="processions">
+			<list>
+				<ref bean="procession1" />
+			</list>
+		</property>
 	</bean>
 
 	<bean id="dfloat2" class="domain.DFloat">
@@ -342,7 +500,11 @@
 		<property name="pictures"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="procession" ref="procession2" />
+		<property name="processions">
+			<list>
+				<ref bean="procession2" />
+			</list>
+		</property>
 	</bean>
 
 
@@ -492,10 +654,13 @@
 
 	<bean id="finder1" class="domain.Finder">
 		<property name="member" ref="member1" />
-	</bean>
-
-	<bean id="finder2" class="domain.Finder">
-		<property name="member" ref="member2" />
+		<property name="processions">
+			<list></list>
+		</property>
+		<property name="lastUpdate" value="Feb 1, 2019" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder1" />
 	</bean>
 
 
@@ -503,7 +668,7 @@
 
 	<bean id="member1" class="domain.Member">
 		<property name="name" value="Juan" />
-		<property name="middleName" value="" />
+		<property name="middleName" value="Manuel" />
 		<property name="surname" value="Montes" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -522,7 +687,7 @@
 
 	<bean id="member2" class="domain.Member">
 		<property name="name" value="Alfonso" />
-		<property name="middleName" value="" />
+		<property name="middleName" value="Arturo" />
 		<property name="surname" value="Del rio" />
 		<property name="photo"
 			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
@@ -628,15 +793,10 @@
 	<bean id="march3" class="domain.March">
 		<property name="status" value="APPROVED" />
 		<property name="location">
-			<map>
-				<entry>
-					<key>
-						<value>1</value>
-					</key>
-					<value>1
-					</value>
-				</entry>
-			</map>
+			<list>
+				<value>1</value>
+				<value>1</value>
+			</list>
 		</property>
 		<property name="member" ref="member2" />
 		<property name="procession" ref="procession1" />

@@ -15,9 +15,14 @@
 		<put-attribute name="body" value="/views/enroll/list.jsp" />
 	</definition>
 
-	<definition name="administrator/action-2" extends="master.page">
+	<definition name="enroll/edit" extends="master.page">
 		<put-attribute name="title" value="Edit" />
 		<put-attribute name="body" value="/views/enroll/edit.jsp" />
+	</definition>
+	
+	<definition name="enroll/listBrotherhood" extends="master.page">
+		<put-attribute name="title" value="List Brotherhood" />
+		<put-attribute name="body" value="/views/enroll/listBrotherhood.jsp" />
 	</definition>
 
 </tiles-definitions>

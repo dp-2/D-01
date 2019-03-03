@@ -1,13 +1,3 @@
-<%--
- * action-2.jsp
- *
- * Copyright (C) 2019 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- --%>
-
 <%@page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -22,28 +12,45 @@
 	pagesize="5" class="displaytag">
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<jstl:if test="${brotherhoodId==row.enrolls.brotherhood.id}">
+		<jstl:if test="${brotherhoodId==row.brotherhood.id}">
 			<display:column>
 
-				<a href="enroll/brotherhood/edit.do?Id=${row.id}"> <spring:message
+				<a href="enroll/brotherhood/edit.do?enrollId=${row.id}"> <spring:message
 						code="enroll.edit" />
 				</a>
 
 			</display:column>
 		</jstl:if>
 	</security:authorize>
-	
+
 	<display:column property="startMoment" titleKey="enroll.start" />
 	<display:column property="endMoment" titleKey="enroll.end" />
+	<display:column property="isAccepted" titleKey="enroll.accepted" />
+
+	<security:authorize access="hasRole('BROTHERHOOD')">
+		<display:column property="member.name" titleKey="enroll.member" />
+	</security:authorize>
+
+	<security:authorize access="hasRole('MEMBER')">
+		<display:column property="brotherhood.name"
+			titleKey="enroll.brotherhood" />
 
 
+		<jstl:if test="${row.endMoment == null}">
+			<display:column titleKey="enroll.out">
+				<a href="enroll/member/goOut.do?enrollId=${row.id}"><spring:message
+						code="enroll.getout" /></a>
+			</display:column>
+		</jstl:if>
+	</security:authorize>
 </display:table>
-<security:authorize access="hasRole('BROTHERHOOD')">
-	<a href="enroll/brotherhood/create.do"> <spring:message
-			code="enroll.create" />
+<security:authorize access="hasRole('MEMBER')">
+	<a href="enroll/member/listBrotherhood.do"> <spring:message
+			code="enroll.enroll" />
 	</a>
 </security:authorize>
 <br />
-
 <br />
+
+
 
