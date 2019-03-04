@@ -93,10 +93,6 @@ public class EnrollService {
 		return this.enrollRepository.findEnrollByBrotherhood(brotherhoodId);
 	}
 
-	public Collection<Enroll> findEnrollByBrotherhood2(final int brotherhoodId) {
-		return this.enrollRepository.findEnrollByBrotherhood2(brotherhoodId);
-	}
-
 	public Collection<Brotherhood> findBrotherhoodByMember(final int memberId) {
 		return this.enrollRepository.findBrotherhoodByMember(memberId);
 
