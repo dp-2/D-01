@@ -40,7 +40,7 @@ public class EnrollService {
 	// Simple CRUD methods -------------------------------------------------------------------
 	public Enroll create() {
 		final Enroll enroll = new Enroll();
-		enroll.setIsAccepted(false);
+		enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 
 		return enroll;

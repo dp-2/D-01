@@ -90,6 +90,7 @@ public class EnrollMemberController extends AbstractController {
 		result.addObject("memberId", memberId);
 		return result;
 	}
+
 	//Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
