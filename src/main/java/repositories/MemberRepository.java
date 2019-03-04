@@ -1,10 +1,13 @@
 
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import domain.Brotherhood;
 import domain.Member;
 
 @Repository
@@ -28,5 +31,8 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	@Query("select stddev(1.0 * (select count(*) from Enroll a where a.brotherhood = b.id)) from Brotherhood b")
 	Double stdevMembersPerBrotherhood();
+
+	@Query("select e.brotherhood.id,e.brotherhood.title, count(e) from Enroll e group by e.brotherhood order by 1 desc")
+	Collection<Brotherhood> listBrotherhoodByMembers();
 
 }
