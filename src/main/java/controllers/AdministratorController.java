@@ -34,28 +34,33 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------		
+	// Dashboard---------------------------------------------------------------		
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public ModelAndView action1() {
 		ModelAndView result;
+		result = new ModelAndView("administrator/dashboard");
 		Map<String, Double> statistics;
 
 		statistics = this.positionService.computeStatistics();
-
-		result = new ModelAndView("administrator/dashboard");
 		result.addObject("statistics", statistics);
 
-		return result;
-	}
+		//-----------------------Position Statics
+		final Double positionCountTotal = this.positionService.computeStatistics().get("count.total");
+		final Double positionCountPresident = this.positionService.computeStatistics().get("count.president");
+		final Double positionCountVicepresident = this.positionService.computeStatistics().get("count.vicepresident");
+		final Double positionCountSecretary = this.positionService.computeStatistics().get("count.secretary");
+		final Double positionCountTreasurer = this.positionService.computeStatistics().get("count.treasurer");
+		final Double positionCountHistorian = this.positionService.computeStatistics().get("count.historian");
+		final Double positionCountOfficer = this.positionService.computeStatistics().get("count.officer");
 
-	// Action-2 ---------------------------------------------------------------
-
-	@RequestMapping("/action-2")
-	public ModelAndView action2() {
-		ModelAndView result;
-
-		result = new ModelAndView("administrator/action-2");
+		result.addObject("positionCountTotal", positionCountTotal);
+		result.addObject("positionCountPresident", positionCountPresident);
+		result.addObject("positionCountVicepresident", positionCountVicepresident);
+		result.addObject("positionCountSecretary", positionCountSecretary);
+		result.addObject("positionCountTreasurer", positionCountTreasurer);
+		result.addObject("positionCountHistorian", positionCountHistorian);
+		result.addObject("positionCountOfficer", positionCountOfficer);
 
 		return result;
 	}

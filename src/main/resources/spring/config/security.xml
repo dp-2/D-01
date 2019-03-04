@@ -192,6 +192,10 @@
 			access="!isAuthenticated() || hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/brotherhood/any/**"
 			access="permitAll()" />
+			
+			
+			<security:intercept-url pattern="/administrator/**"
+			access="hasRole('ADMIN')" />
 		
 
 
