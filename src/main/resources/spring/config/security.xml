@@ -145,6 +145,8 @@
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enroll/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
+			<security:intercept-url pattern="/enroll/brotherhood/requests.do"
+			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/area/display.do"
 			access="hasAnyRole('BROTHERHOOD','ADMIN')" />
 
