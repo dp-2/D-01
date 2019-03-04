@@ -24,8 +24,23 @@
 	</security:authorize>
 
 	<display:column property="startMoment" titleKey="enroll.start" />
-	<display:column property="endMoment" titleKey="enroll.end" />
-	<display:column property="isAccepted" titleKey="enroll.accepted" />
+	<display:column property="endMoment" titleKey="enroll.end" />	
+	
+	<jstl:if test="${row.status=='PENDING'}">
+		<display:column property="status" titleKey="enroll.status"
+			style="background-color:Yellow" sortable="true" />
+	</jstl:if>
+
+	<jstl:if test="${row.status=='APPROVED' }">
+		<display:column property="status" titleKey="march.status"
+			style="background-color:Blue" sortable="true " />
+	</jstl:if>
+
+	<jstl:if test="${row.status=='REJECTED'}">
+		<display:column property="status" titleKey="march.status"
+			style="background-color:Red" sortable="true" />
+	</jstl:if>
+	
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<display:column property="member.name" titleKey="enroll.member" />
