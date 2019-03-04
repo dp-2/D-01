@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -157,6 +159,22 @@ public class MemberService {
 
 	public Member findMemberByEnrollId(final int enrollId) {
 		return this.memberRepository.findMemberByEnrollId(enrollId);
+	}
+
+	public Map<String, Double> membersBrotherhoodStats() {
+		final Double max = this.memberRepository.maxMembersPerBrotherhood();
+		final Double min = this.memberRepository.minMembersPerBrotherhood();
+		final Double avg = this.memberRepository.avgMembersPerBrotherhood();
+		final Double stdev = this.memberRepository.stdevMembersPerBrotherhood();
+
+		final Map<String, Double> res = new HashMap<>();
+
+		res.put("MIN", min);
+		res.put("MAX", max);
+		res.put("AVG", avg);
+		res.put("STD", stdev);
+
+		return res;
 	}
 
 }

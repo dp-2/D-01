@@ -15,4 +15,18 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	@Query("select e.member from Enroll e where e.id =?1")
 	Member findMemberByEnrollId(int enrollId);
+
+	//Stats number of members per brotherhood
+	@Query("select max(1.0*(select count(e.member) from Enroll e where e.brotherhood.id = b.id) ) from Brotherhood b")
+	Double maxMembersPerBrotherhood();
+
+	@Query("select min(1.0*(select count(e.member) from Enroll e where e.brotherhood.id = b.id) ) from Brotherhood b")
+	Double minMembersPerBrotherhood();
+
+	@Query("select avg(1.0*(select count(e.member) from Enroll e where e.brotherhood.id = b.id) ) from Brotherhood b")
+	Double avgMembersPerBrotherhood();
+
+	@Query("select stddev(1.0 * (select count(*) from Enroll a where a.brotherhood = b.id)) from Brotherhood b")
+	Double stdevMembersPerBrotherhood();
+
 }
