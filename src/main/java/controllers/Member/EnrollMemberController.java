@@ -96,8 +96,8 @@ public class EnrollMemberController extends AbstractController {
 	public ModelAndView create(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
 		Enroll enroll;
-		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
-		enroll = this.enrollService.create(brotherhoodId, a.getId());
+
+		enroll = this.enrollService.create(brotherhoodId);
 		Assert.notNull(enroll);
 		result = this.createEditModelAndView(enroll);
 		return result;

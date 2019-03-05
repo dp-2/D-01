@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.EnrollRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
@@ -45,10 +46,10 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create(final int brotherhoodId, final int memberId) {
+	public Enroll create(final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
-
-		final Member member = this.memberService.findOne(memberId);
+		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		final Member member = this.memberService.findOne(a.getId());
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 
 		enroll.setStatus("PENDING");
