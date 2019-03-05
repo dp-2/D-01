@@ -45,10 +45,9 @@ public class Area extends DomainEntity {
 
 	// Relationships
 
-	private Brotherhood brotherhood;
+	private Brotherhood	brotherhood;
 
 
-	@NotNull
 	@Valid
 	@OneToOne(optional = false)
 	public Brotherhood getBrotherhood() {
