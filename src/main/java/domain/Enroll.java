@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -51,7 +50,6 @@ public class Enroll extends DomainEntity {
 		this.endMoment = endMoment;
 	}
 
-	@NotBlank
 	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$")
 	public String getStatus() {
 		return this.status;
@@ -91,7 +89,7 @@ public class Enroll extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Position getPosition() {
 		return this.position;
 
