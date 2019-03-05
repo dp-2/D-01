@@ -99,9 +99,9 @@
 
 	<acme:submit name="save" code="enroll.save" />
 	<acme:cancel code="enroll.cancel" url="/enroll/brotherhood/list.do" />
-	<jstl:if test="${position.id!=0}">
+	<%-- <jstl:if test="${position.id!=0}">
 		<acme:submit code="enroll.delete" name="delete" />
 	</jstl:if>
-
+ --%>
 </form:form>
 

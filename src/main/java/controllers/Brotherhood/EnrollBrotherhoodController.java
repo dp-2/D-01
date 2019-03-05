@@ -131,6 +131,17 @@ public class EnrollBrotherhoodController extends AbstractController {
 		return result;
 	}
 
+	// kickOut
+	@RequestMapping(value = "/kickOut", method = RequestMethod.GET)
+	public ModelAndView goOut(@RequestParam final int enrollId) {
+
+		ModelAndView result;
+		this.enrollService.goOut(enrollId);
+		result = this.list();
+
+		return result;
+	}
+
 	// Delete----------------------------------------------------------------------
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(@Valid final Enroll enroll, final BindingResult binding) {

@@ -19,7 +19,7 @@ public interface EnrollRepository extends JpaRepository<Enroll, Integer> {
 	@Query("select e from Enroll e where e.brotherhood.id = ?1")
 	Collection<Enroll> findEnrollByBrotherhood(int brotherhoodId);
 
-	@Query("select e.brotherhood from Enroll e where e.member.id != ?1")
+	@Query("select e.brotherhood from Enroll e where (e.member.id = ?1 and e.endMoment != null) or e.member.id != ?1")
 	Collection<Brotherhood> findBrotherhoodByMember(int memberId);
 
 	@Query("select e from Enroll e where e.brotherhood.id = ?1 and e.status='PENDING'")

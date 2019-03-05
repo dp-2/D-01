@@ -107,6 +107,8 @@ public class EnrollMemberController extends AbstractController {
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(enroll, "enroll.commit.error");
 		}
+
+		Assert.notNull(enroll);
 		return result;
 	}
 	// Edit
