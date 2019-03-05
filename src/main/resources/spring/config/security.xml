@@ -164,7 +164,7 @@
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enroll/member/cancel.do"
 			access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/enroll/member/show.do"
+		<security:intercept-url pattern="/enroll/member/create.do"
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enroll/member/goOut.do"
 			access="hasRole('MEMBER')" />

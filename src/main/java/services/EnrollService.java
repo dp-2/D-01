@@ -15,6 +15,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Brotherhood;
 import domain.Enroll;
+import domain.Member;
 
 @Service
 @Transactional
@@ -26,10 +27,13 @@ public class EnrollService {
 
 
 	//	@Autowired
-	//	private MemberService		memberService;
+	//	private ActorService		actorService;
 	//
 	//	@Autowired
 	//	private BrotherhoodService	brotherhoodService;
+	//
+	//	@Autowired
+	//	private MemberService		memberService;
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -38,10 +42,13 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create() {
+	public Enroll create(final Brotherhood brotherhood, final Member member) {
 		final Enroll enroll = new Enroll();
+
 		enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
+		enroll.setMember(member);
+		enroll.setBrotherhood(brotherhood);
 
 		return enroll;
 	}
@@ -80,8 +87,8 @@ public class EnrollService {
 	}
 	//Other Methods-----------------------------------------------------------------
 	public Boolean checkPrincipal(final Enroll enroll) {
-		final UserAccount u = enroll.getBrotherhood().getUserAccount();
-		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con esta hermandad");
+		final UserAccount u = enroll.getMember().getUserAccount();
+		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con esta miembro");
 		return true;
 	}
 
@@ -91,6 +98,10 @@ public class EnrollService {
 
 	public Collection<Enroll> findEnrollByBrotherhood(final int brotherhoodId) {
 		return this.enrollRepository.findEnrollByBrotherhood(brotherhoodId);
+	}
+
+	public Collection<Enroll> findEnrollsPendingByBrotherhood(final int brotherhoodId) {
+		return this.enrollRepository.findEnrollsPendingByBrotherhood(brotherhoodId);
 	}
 
 	public Collection<Enroll> findEnrollsAprovedByBrotherhood(final int brotherhoodId) {

@@ -53,8 +53,7 @@
 			<br />
 		</jstl:if> --%>
 
-		<acme:select code="enroll.position" path="position"
-			items="${positions}" itemLabel="name" />
+
 		<%-- <form:label path="position">
 			<spring:message code="enroll.position" />:
   		</form:label>
@@ -62,18 +61,40 @@
 			<form:options items="${positions}" itemValue="id" itemLabel="name" />
 		</form:select>
 		<form:errors cssClass="error" path="position" /> --%>
-		<br />
-		<br />
+		<security:authorize access="hasRole('BROTHERHOOD')">
+			<jstl:if test="${enroll.status=='PENDING'}">
+				<form:label path="status">
+					<spring:message code="enroll.status"></spring:message>
+				</form:label>
+				<form:select id="status" path="status">
+					<option value="PENDING">PENDING</option>
+					<option value="APPROVED">APPROVED</option>
+					<option value="REJECTED">REJECTED</option>
 
-		<form:label path="member">
-			<spring:message code="enroll.member" />:
-  		</form:label>
-		<form:select id="members" path="member">
-			<form:options items="${members}" itemValue="id" itemLabel="name" />
-		</form:select>
-		<form:errors cssClass="error" path="member" />
-		<br />
-		<br />
+				</form:select>
+			</jstl:if>
+
+			<jstl:if test="${enroll.status!='PENDING'}">
+				<form:hidden path="status" />
+			</jstl:if>
+			<br />
+
+			<jstl:if test="${enroll.status=='REJECTED'}">
+				<form:hidden path="status" />
+				<br />
+			</jstl:if>
+
+			<jstl:if test="${enroll.status=='APPROVED'}">
+
+				<acme:select code="enroll.position" path="position"
+					items="${positions}" itemLabel="name" />
+				<br />
+			</jstl:if>
+
+
+		</security:authorize>
+
+
 	</security:authorize>
 
 	<acme:submit name="save" code="enroll.save" />
