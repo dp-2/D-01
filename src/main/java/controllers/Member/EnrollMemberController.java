@@ -93,17 +93,24 @@ public class EnrollMemberController extends AbstractController {
 
 	//Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
-		final Enroll enroll;
+		Enroll enroll;
 
-		enroll = this.enrollService.create();
+		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		final Member member = this.memberService.findOne(a.getId());
+		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+
+		enroll = this.enrollService.create(brotherhood, member);
+		try {
+			result = this.list();
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(enroll, "enroll.commit.error");
+		}
+
 		Assert.notNull(enroll);
-		result = this.createEditModelAndView(enroll);
-
 		return result;
 	}
-
 	// Edit
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int enrollId) {

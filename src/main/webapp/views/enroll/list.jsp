@@ -44,6 +44,13 @@
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<display:column property="member.name" titleKey="enroll.member" />
+		
+		<jstl:if test="${row.endMoment == null}">
+			<display:column titleKey="enroll.out">
+				<a href="enroll/brotherhood/kickOut.do?enrollId=${row.id}"><spring:message
+						code="enroll.kickout" /></a>
+			</display:column>
+		</jstl:if>
 	</security:authorize>
 
 	<security:authorize access="hasRole('MEMBER')">

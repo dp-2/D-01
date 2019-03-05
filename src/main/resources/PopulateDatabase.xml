@@ -475,7 +475,7 @@
 		<property name="member" ref="member2" />
 		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="status" value="APPROVED" />
+		<property name="status" value="PENDING" />
 	</bean>
 
 	<!-- Float -->

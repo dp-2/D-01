@@ -115,7 +115,7 @@
 						code="master.page.enroll" /></a>
 			<ul>
 					<li class="arrow"></li>
-					<li><a href="finder/brotherhood/requests.do"><spring:message
+					<li><a href="enroll/brotherhood/requests.do"><spring:message
 								code="master.page.enroll.request" /></a></li>
 				</ul></li>
 			<li><a class="fNiv" href="dfloat/brotherhood/list.do"><spring:message

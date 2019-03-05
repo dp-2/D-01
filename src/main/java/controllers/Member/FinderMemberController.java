@@ -72,7 +72,7 @@ public class FinderMemberController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST, params = "save")
 	public ModelAndView updateFinder(@Valid final Finder finder, final BindingResult binding) {
 		ModelAndView result;
 
@@ -83,7 +83,10 @@ public class FinderMemberController extends AbstractController {
 				this.finderService.save(finder);
 				result = this.list();
 			} catch (final Exception e) {
-				result = this.createEditModelAndView(finder, "finder.commit.error");
+				if (e.getMessage().equals("dateError"))
+					result = this.createEditModelAndView(finder, "date.commit.error");
+				else
+					result = this.createEditModelAndView(finder, "finder.commit.error");
 			}
 		return result;
 	}
@@ -96,12 +99,7 @@ public class FinderMemberController extends AbstractController {
 		final Finder finder = this.finderService.findOneByPrincipal();
 		List<Procession> processions = new ArrayList<>();
 
-		if (finder == null)
-			processions = this.processionService.findProcessionsFinal();
-		else if (this.finderService.checkCache(finder) == true)
-			processions = this.processionService.findProcessionsFinal();
-		else
-			processions = finder.getProcessions();
+		processions = this.finderService.updateCache(finder);
 
 		modelAndView.addObject("processions", processions);
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
@@ -127,6 +125,7 @@ public class FinderMemberController extends AbstractController {
 		result = new ModelAndView("finder/update");
 		result.addObject("finder", finder);
 		result.addObject("areas", areas);
+		result.addObject("message", message);
 		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
