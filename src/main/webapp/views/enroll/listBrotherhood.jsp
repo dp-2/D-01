@@ -13,7 +13,6 @@
 
 	<display:column property="name" titleKey="enroll.brotherhood" />
 	<display:column titleKey="enroll.unir">
-		<%-- <a href="enroll/member/create.do?brotherhoodId=${row.id}"><spring:message --%>
 		<a href="enroll/member/create.do?brotherhoodId=${row.id}"><spring:message
 				code="enroll.unirse" /></a>
 

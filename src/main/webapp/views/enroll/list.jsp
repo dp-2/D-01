@@ -68,7 +68,7 @@
 			titleKey="enroll.brotherhood" />
 
 		<display:column titleKey="enroll.out">
-			<jstl:if test="${row.endMoment == null}">
+			<jstl:if test="${row.status == 'APPROVED' && row.endMoment == null}">
 
 				<a href="enroll/member/goOut.do?enrollId=${row.id}"><spring:message
 						code="enroll.getout" /></a>
