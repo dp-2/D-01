@@ -25,15 +25,18 @@ public class EnrollService {
 	@Autowired
 	private EnrollRepository	enrollRepository;
 
+	@Autowired
+	private ActorService		actorService;
 
-	//	@Autowired
-	//	private ActorService		actorService;
-	//
-	//	@Autowired
-	//	private BrotherhoodService	brotherhoodService;
-	//
-	//	@Autowired
-	//	private MemberService		memberService;
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private MemberService		memberService;
+
+	@Autowired
+	private PositionService		positionService;
+
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -42,14 +45,16 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create(final Brotherhood brotherhood, final Member member) {
+	public Enroll create(final int brotherhoodId, final int memberId) {
 		final Enroll enroll = new Enroll();
+
+		final Member member = this.memberService.findOne(memberId);
+		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 
 		enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
-		enroll.setMember(member);
+		//		enroll.setMember(member);
 		enroll.setBrotherhood(brotherhood);
-
 		return enroll;
 	}
 	public Collection<Enroll> findAll() {
