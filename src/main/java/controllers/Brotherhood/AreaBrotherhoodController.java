@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
@@ -65,6 +66,40 @@ public class AreaBrotherhoodController extends AbstractController {
 		result = new ModelAndView("area/list");
 		result.addObject("areas", areas);
 		result.addObject("requestURI", "area/list.do");
+
+		return result;
+	}
+
+	@RequestMapping(value = "/assign", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final int areaId) {
+
+		ModelAndView result;
+		final Area area = this.areaService.findOne(areaId);
+		try {
+			this.areaService.assign(area);
+			result = this.list();
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(area, "area.commit.error");
+		}
+		return result;
+	}
+	protected ModelAndView createEditModelAndView(final Area area) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(area, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Area area, final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("area/edit");
+		result.addObject("area", area);
+		result.addObject("message", message);
+		result.addObject("isRead", false);
+
+		result.addObject("requestURI", "area/edit.do");
 
 		return result;
 	}

@@ -43,8 +43,3 @@
 	<a href="brotherhood/brotherhood/edit.do?brotherhoodId=${brotherhood.id}"><spring:message code="brotherhood.edit" /></a>
 </jstl:if>
 
-<a href=""><spring:message code='brotherhood.listmembers' /></a>
-	
-<a href=""><spring:message code='brotherhood.listprocessions' /></a>
-	
-<a href=""><spring:message code='brotherhood.listfloats' /></a>

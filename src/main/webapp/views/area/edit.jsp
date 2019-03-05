@@ -8,43 +8,47 @@
  * http://www.tdg-seville.info/License.html
  --%>
 
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 
-<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-<%@taglib prefix="acme" uri="/WEB-INF/tags" %>
+<%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<jstl:if test="${isPrincipalAuthorizedEdit}">
-	<jstl:choose>
-	<jstl:when test="${isBrotherhood}">
-		<form:form action="brotherhood/brotherhood-none/edit.do" method="post" id="formEdit"
-			name="formEdit" modelAttribute="brotherhoodForm">
-			
-			<form:hidden path="id" />
-			<form:hidden path="version" />
-			
-			<acme:userAccount code="actor.userAccount" />
-			
-			<acme:textbox path="name" code="brotherhood.name" />
-			<acme:textbox path="surname" code="brotherhood.surname" />
-			<acme:textbox path="email" code="brotherhood.email" />
-			<acme:textbox path="phone" code="brotherhood.phone" />
-			<acme:textbox path="photo" code="brotherhood.photo" />
-			<acme:textbox path="title" code="brotherhood.title" />
+<form:form action="${requestURI}" modelAttribute="area">
 
-			<acme:list-textbox items="${brotherhoodForm.pictures}" path="picture" 
-				code="brotherhood.picture" fieldsetMessage="brotherhood.pictures" 
-				addCode="brotherhood.addPicture" removeCode="brotherhood.removePicture" />
-				
-			
-			
-		</form:form>
-	</jstl:when>
-	<jstl:when test="${isAdmin}">
-	
-	</jstl:when>
-	</jstl:choose>
-</jstl:if>
+	<form:hidden path="id" />
+	<form:hidden path="version" />
+
+
+	<acme:textbox path="name" code="area.title" />
+
+	<acme:textarea code="area.pictures" path="pictures"/>
+
+
+
+
+</form:form>
+<acme:submit name="save" code="area.save" />
+
+<security:authorize access="hasRole('ADMIN')">
+	<jstl:if test="${area.id != 0 && area.brotherhood==null}">
+		<acme:submit name="delete" code="area.delete" />
+	</jstl:if>
+	<acme:cancel url="/area/list.do" code="area.cancel" />
+
+	<br />
+</security:authorize>
+
+<security:authorize access="hasRole('BROTHERHOOD')">
+	<acme:cancel url="/area/list.do}" code="area.cancel" />
+
+	<br />
+</security:authorize>
+
+<br />
+
