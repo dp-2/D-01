@@ -102,6 +102,7 @@ public class EnrollMemberController extends AbstractController {
 		result = this.createEditModelAndView(enroll);
 		return result;
 	}
+
 	// Edit
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int enrollId) {
@@ -120,9 +121,10 @@ public class EnrollMemberController extends AbstractController {
 	public ModelAndView save(@Valid final Enroll enroll, final BindingResult binding) {
 
 		ModelAndView result;
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+			System.out.println(enroll.getStatus());
 			result = this.createEditModelAndView(enroll, "enroll.commit.error");
-		else
+		} else
 			try {
 
 				this.enrollService.save(enroll);

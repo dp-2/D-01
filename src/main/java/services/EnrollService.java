@@ -35,9 +35,6 @@ public class EnrollService {
 	@Autowired
 	private MemberService		memberService;
 
-	@Autowired
-	private PositionService		positionService;
-
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -53,8 +50,9 @@ public class EnrollService {
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 
 		enroll.setStatus("PENDING");
+		enroll.getStatus();
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
-		//		enroll.setMember(member);
+		enroll.setMember(member);
 		enroll.setBrotherhood(brotherhood);
 		return enroll;
 	}
@@ -78,6 +76,8 @@ public class EnrollService {
 		Assert.notNull(enroll);
 		this.checkPrincipal(enroll);
 		Enroll result;
+		if (enroll.getStatus() == null)
+			enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 		result = this.enrollRepository.save(enroll);
 
