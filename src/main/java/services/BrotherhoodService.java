@@ -102,7 +102,8 @@ public class BrotherhoodService {
 			if (this.actorService.findPrincipal() instanceof Brotherhood) {
 				this.serviceUtils.checkActor(brotherhood);
 				b.setBanned(brotherhood.getBanned());
-				if (brotherhood.getUserAccount().getPassword() != b.getUserAccount().getPassword())
+				b.setSpammer(brotherhood.getSpammer());
+				if (brotherhood.getUserAccount().getPassword() != hash)
 					b.getUserAccount().setPassword(hash);
 			} else {
 				b.setEmail(brotherhood.getEmail());
@@ -113,13 +114,17 @@ public class BrotherhoodService {
 				b.setSurname(brotherhood.getSurname());
 				b.setTitle(brotherhood.getTitle());
 				b.setUserAccount(brotherhood.getUserAccount());
+				b.setAddress(brotherhood.getAddress());
+				b.setMiddleName(brotherhood.getMiddleName());
+				b.setScore(brotherhood.getScore());
 			}
 			b.setEstablishedMoment(brotherhood.getEstablishedMoment());
 		}
 		final UserAccount userAccount = this.userAccountRepository.save(b.getUserAccount());
 		brotherhood.setUserAccount(userAccount);
 		final Brotherhood res = this.repository.save(b);
-		this.boxService.createIsSystemBoxs(res);
+		if (b.getId() == 0)
+			this.boxService.createIsSystemBoxs(res);
 		return res;
 	}
 
@@ -139,7 +144,10 @@ public class BrotherhoodService {
 		res.setSurname(b.getSurname());
 		res.setTitle(b.getTitle());
 		res.setUsername(b.getUserAccount().getUsername());
-		res.setPassword(b.getUserAccount().getPassword());
+		res.setId(b.getId());
+		res.setVersion(b.getVersion());
+		res.setMiddleName(b.getMiddleName());
+		res.setAddress(b.getAddress());
 		return res;
 	}
 
@@ -167,6 +175,8 @@ public class BrotherhoodService {
 			res = this.findOne(form.getId());
 			Assert.notNull(res);
 		}
+		res.setAddress(form.getAddress());
+		res.setMiddleName(form.getMiddleName());
 		res.setEmail(form.getEmail());
 		res.setName(form.getName());
 		res.setPhone(form.getPhone());

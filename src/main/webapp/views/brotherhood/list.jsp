@@ -21,8 +21,8 @@
 	pagesize="5" class="displaytag">
 	
 	<acme:column value="${row.title}" code="brotherhood.title" sortable="true" />
-	
-	<acme:column value="${row.establishedMoment}" code="brotherhood.establishedMoment" formatDate="yyyy-MM-dd" sortable="true" />
+
+	<acme:column value="${row.establishedMoment}" code="brotherhood.establishedMoment" />
 	
 	<acme:column value="${row.email}" code="brotherhood.email" />
 	

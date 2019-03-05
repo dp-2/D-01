@@ -62,6 +62,13 @@
 				</jstl:if>
 			</display:column>
 		</jstl:when>
+		<jstl:when test="${formatDate != null}">
+			<display:column title="${titleKey}" sortable="${sortable}">
+				<jstl:if test="${test}">
+					<fmt:formatDate value="${value}" pattern="${formatDate}" var="dateValue" />
+				</jstl:if>
+			</display:column>
+		</jstl:when>
 		<jstl:otherwise>
 			<display:column title="${titleKey}" sortable="${sortable}">
 				<jstl:if test="${test}">

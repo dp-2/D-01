@@ -89,13 +89,13 @@ public class BoxService {
 		final Box box = (Box) this.serviceUtils.checkObject(object);
 		this.serviceUtils.checkActor(box.getActor());
 		Assert.isTrue(!box.getIsSystem());
+		box.setRootBox(null);
+		this.save(box);
+		this.flush();
 		for (final Message m : this.messageService.findByBox(box))
 			this.messageService.delete(m);
 		for (final Box f : this.findByActorAndRoot(box.getActor(), box))
 			this.delete(f);
-		box.setRootBox(null);
-		this.save(box);
-		this.flush();
 		this.repository.delete(box);
 	}
 
@@ -113,7 +113,7 @@ public class BoxService {
 		if (actor.getId() > 0)
 			Assert.notNull(this.actorService.findOne(actor.getId()));
 		final String[] names = new String[] {
-			"inbox", "outbox", "spambox", "trashbox"
+			"inBox", "outBox", "spamBox", "trashBox"
 		};
 		for (final String name : names) {
 			final Box newBox = this.create(actor);

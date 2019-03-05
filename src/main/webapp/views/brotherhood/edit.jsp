@@ -25,8 +25,8 @@
 			<form:hidden path="version" />
 			
 			<acme:textbox path="username" code="useraccount.username" />
-			<acme:textbox path="password" code="useraccount.password" />
-			<acme:textbox path="confirmPassword" code="useraccount.confirmPassword" />
+			<acme:password path="password" code="useraccount.password" />
+			<acme:password path="confirmPassword" code="useraccount.confirmPassword" />
 			
 			<acme:textbox path="name" code="brotherhood.name" />
 			<acme:textbox path="middleName" code="brotherhood.middlename" />

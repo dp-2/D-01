@@ -64,7 +64,7 @@ public class BrotherhoodController extends AbstractController {
 		else
 			try {
 				this.brotherhoodService.save(brotherhood);
-				res = new ModelAndView("redirect:list.do");
+				res = new ModelAndView("redirect:/brotherhood/brotherhood/display.do");
 			} catch (final Throwable oops) {
 				res = this.createEditModelAndView(brotherhoodForm, "cannot.commit.error");
 			}
@@ -96,6 +96,16 @@ public class BrotherhoodController extends AbstractController {
 		final ModelAndView res = new ModelAndView("brotherhood/display");
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 		res.addObject("brotherhood", brotherhood);
+		res.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(brotherhood));
+		return res;
+	}
+
+	@RequestMapping("brotherhood/display")
+	public ModelAndView display() {
+		final ModelAndView res = new ModelAndView("brotherhood/display");
+		final Brotherhood brotherhood = (Brotherhood) this.actorService.findPrincipal();
+		res.addObject("brotherhood", brotherhood);
+		res.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(brotherhood));
 		return res;
 	}
 
@@ -123,6 +133,21 @@ public class BrotherhoodController extends AbstractController {
 		if (brotherhoodForm.getId() > 0)
 			res = principal.getId() == brotherhoodForm.getId();
 		else if (brotherhoodForm.getId() == 0)
+			res = principal == null;
+		return res;
+	}
+
+	private Boolean isPrincipalAuthorizedEdit(final Brotherhood brotherhood) {
+		Boolean res = false;
+		Actor principal = null;
+		try {
+			principal = this.actorService.findPrincipal();
+		} catch (final IllegalArgumentException e) {
+			principal = null;
+		}
+		if (brotherhood.getId() > 0)
+			res = principal.getId() == brotherhood.getId();
+		else if (brotherhood.getId() == 0)
 			res = principal == null;
 		return res;
 	}

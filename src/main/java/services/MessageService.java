@@ -101,7 +101,6 @@ public class MessageService {
 			this.serviceUtils.checkPermisionActor(message.getBox().getActor(), null);
 			for (final Message m : this.findCopies(message))
 				this.repository.delete(m);
-			this.repository.delete(message);
 		} else {
 			message.setBox(this.boxService.findBoxByActorAndName(object.getBox().getActor(), "trashbox"));
 			this.save(message);
