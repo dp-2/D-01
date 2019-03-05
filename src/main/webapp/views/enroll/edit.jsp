@@ -98,7 +98,13 @@
 	</security:authorize>
 
 	<acme:submit name="save" code="enroll.save" />
+	<security:authorize access="hasRole('BROTHERHOOD')">
 	<acme:cancel code="enroll.cancel" url="/enroll/brotherhood/list.do" />
+	</security:authorize>
+	
+	<security:authorize access="hasRole('MEMBER')">
+	<acme:cancel code="enroll.cancel" url="/enroll/member/list.do" />
+	</security:authorize>
 	<%-- <jstl:if test="${position.id!=0}">
 		<acme:submit code="enroll.delete" name="delete" />
 	</jstl:if>

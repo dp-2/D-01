@@ -10,6 +10,9 @@
 
 package controllers;
 
+import java.text.ParseException;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.AdministratorService;
 import services.PositionService;
+import services.ProcessionService;
+import domain.Actor;
+import domain.Procession;
 
 @Controller
 @RequestMapping("/administrator")
 public class AdministratorController extends AbstractController {
 
 	@Autowired
-	private PositionService	positionService;
+	private PositionService			positionService;
+
+	@Autowired
+	private ProcessionService		processionService;
+
+	@Autowired
+	private AdministratorService	administratorService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -34,10 +51,19 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 
+	@RequestMapping(value = "/scores", method = RequestMethod.GET)
+	public ModelAndView scores() {
+		ModelAndView result;
+		this.administratorService.generateAllScore();
+		result = new ModelAndView("administrator/scores");
+		final Collection<Actor> actors = this.actorService.findAllTypes();
+		result.addObject("actors", actors);
+		return result;
+	}
 	// Dashboard---------------------------------------------------------------		
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-	public ModelAndView action1() {
+	public ModelAndView action1() throws ParseException {
 		ModelAndView result;
 		result = new ModelAndView("administrator/dashboard");
 		Map<String, Double> statistics;
@@ -62,9 +88,12 @@ public class AdministratorController extends AbstractController {
 		result.addObject("positionCountHistorian", positionCountHistorian);
 		result.addObject("positionCountOfficer", positionCountOfficer);
 
+		//-----------------------Processions Statics
+		final List<Procession> processionsIn30Days = this.processionService.findProcessionsIn30Days();
+		result.addObject("processionsIn30Days", processionsIn30Days);
+
 		return result;
 	}
-
 	//	@RequestMapping(value = "/administrator/dashboard", method = RequestMethod.GET)
 	//	public ModelAndView dashboard() {
 	//

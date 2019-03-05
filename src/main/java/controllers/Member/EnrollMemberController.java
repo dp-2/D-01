@@ -96,19 +96,10 @@ public class EnrollMemberController extends AbstractController {
 	public ModelAndView create(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
 		Enroll enroll;
-
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
-		final Member member = this.memberService.findOne(a.getId());
-		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
-
-		enroll = this.enrollService.create(brotherhood, member);
-		try {
-			result = this.list();
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(enroll, "enroll.commit.error");
-		}
-
+		enroll = this.enrollService.create(brotherhoodId, a.getId());
 		Assert.notNull(enroll);
+		result = this.createEditModelAndView(enroll);
 		return result;
 	}
 	// Edit
@@ -135,7 +126,7 @@ public class EnrollMemberController extends AbstractController {
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:enroll/brotherhood/list.do");
+				result = new ModelAndView("redirect:enroll/member/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
 
@@ -160,7 +151,7 @@ public class EnrollMemberController extends AbstractController {
 
 		try {
 			this.enrollService.delete(enroll);
-			result = new ModelAndView("redirect:enroll/brotherhood/list.do");
+			result = new ModelAndView("redirect:enroll/member/list.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(enroll, "enroll.commit.error");
 		}
@@ -201,7 +192,7 @@ public class EnrollMemberController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 		//		result.addObject("brotherhoodId", a.getId());
-		result.addObject("requestURI", "enroll/brotherhood/edit.do");
+		result.addObject("requestURI", "enroll/member/edit.do");
 
 		return result;
 	}
