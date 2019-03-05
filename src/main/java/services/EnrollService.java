@@ -34,6 +34,9 @@ public class EnrollService {
 	@Autowired
 	private MemberService		memberService;
 
+	@Autowired
+	private PositionService		positionService;
+
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -50,9 +53,8 @@ public class EnrollService {
 
 		enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
-		enroll.setMember(member);
+		//		enroll.setMember(member);
 		enroll.setBrotherhood(brotherhood);
-
 		return enroll;
 	}
 	public Collection<Enroll> findAll() {
