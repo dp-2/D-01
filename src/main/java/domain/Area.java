@@ -49,7 +49,7 @@ public class Area extends DomainEntity {
 
 
 	@Valid
-	@OneToOne(optional = false)
+	@OneToOne(optional = true)
 	public Brotherhood getBrotherhood() {
 		return this.brotherhood;
 	}
