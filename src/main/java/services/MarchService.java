@@ -12,9 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.MarchRepository;
-import repositories.MemberRepository;
-import repositories.ProcessionRepository;
 import security.LoginService;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.March;
 import domain.Member;
@@ -25,15 +24,18 @@ public class MarchService {
 
 	// Managed repository ------------------------------
 	@Autowired
-	private MarchRepository			marchRepository;
+	private MarchRepository		marchRepository;
 
 	//Servicios externos(cambiar los repositorios por servicios cuando se creen)
 
 	@Autowired
-	private ProcessionRepository	processionRepository;
+	private ProcessionService	processionService;
 
 	@Autowired
-	private MemberRepository		memberRepository;
+	private MemberService		memberService;
+
+	@Autowired
+	private ActorService		actorService;
 
 
 	//Constructor----------------------------------------------------------------------------
@@ -47,8 +49,8 @@ public class MarchService {
 		March march;
 
 		march = new March();
-		march.setMember(this.memberRepository.findOne(MemberId));
-		march.setProcession(this.processionRepository.findOne(processionId));
+		march.setMember(this.memberService.findOne(MemberId));
+		march.setProcession(this.processionService.findOne(processionId));
 		march.setStatus("PENDING");
 		final List<Integer> a = new ArrayList<>();
 		march.setLocation(a);
@@ -122,6 +124,11 @@ public class MarchService {
 
 	public Collection<March> findMarchsByMember(final int memberId) {
 		return this.marchRepository.findMarchsByMember(memberId);
+	}
+
+	public Double findMatchByProcessionidAndMemberid(final int processionId, final int memberId) {
+		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		return this.marchRepository.findMatchByProcessionidAndMemberid(processionId, a.getId());
 	}
 
 	private List<Integer> generarNum() {

@@ -70,13 +70,13 @@
 
 
 	<security:authorize access="hasRole('MEMBER')">
-
+	
 		<display:column>
-
+		<jstl:if test="${marchService.findMatchByProcessionidAndMemberid(row.id,memberId)==0}">
 			<a href="march/member/create.do?processionId=${row.id}"> <spring:message
 					code="procession.createMarch" />
 			</a>
-
+		</jstl:if>
 		</display:column>
 
 	</security:authorize>
