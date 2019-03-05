@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdministratorService;
+import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
 import domain.Actor;
@@ -43,6 +44,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private MemberService			memberService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -70,6 +74,18 @@ public class AdministratorController extends AbstractController {
 
 		statistics = this.positionService.computeStatistics();
 		result.addObject("statistics", statistics);
+
+		//-----------------------Members per brotherhood
+
+		final Double maxMembersPerBrotherhood = this.memberService.membersBrotherhoodStats().get("MAX");
+		final Double minMembersPerBrotherhood = this.memberService.membersBrotherhoodStats().get("MIN");
+		final Double avgMembersPerBrotherhood = this.memberService.membersBrotherhoodStats().get("AVG");
+		final Double stdevMembersPerBrotherhood = this.memberService.membersBrotherhoodStats().get("STD");
+
+		result.addObject("maxMembersPerBrotherhood", maxMembersPerBrotherhood);
+		result.addObject("minMembersPerBrotherhood", minMembersPerBrotherhood);
+		result.addObject("avgMembersPerBrotherhood", avgMembersPerBrotherhood);
+		result.addObject("stdevMembersPerBrotherhood", stdevMembersPerBrotherhood);
 
 		//-----------------------Position Statics
 		final Double positionCountTotal = this.positionService.computeStatistics().get("count.total");
