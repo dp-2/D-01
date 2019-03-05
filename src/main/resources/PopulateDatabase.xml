@@ -655,7 +655,11 @@
 	<bean id="finder1" class="domain.Finder">
 		<property name="member" ref="member1" />
 		<property name="processions">
-			<list></list>
+			<list>
+				<ref bean="procession1" />
+				<ref bean="procession2" />
+				<ref bean="procession3" />
+			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 1, 2019" />
 		<property name="minDate" value="Feb 1, 2020" />
@@ -663,6 +667,18 @@
 		<property name="keyword" value="finder1" />
 	</bean>
 
+	<bean id="finder2" class="domain.Finder">
+		<property name="member" ref="member2" />
+		<property name="processions">
+			<list>
+				<ref bean="procession4" />
+			</list>
+		</property>
+		<property name="lastUpdate" value="Feb 1, 2019" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder2" />
+	</bean>
 
 	<!-- Member -->
 
