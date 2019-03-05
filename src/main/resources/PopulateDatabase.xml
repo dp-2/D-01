@@ -449,13 +449,73 @@
 
 	<!-- Positions -->
 
-	<bean id="f_1" class="domain.Position">
+	<bean id="position1_1" class="domain.Position">
 		<property name="name" value="President" />
 		<property name="language" value="en" />
 	</bean>
 
 	<bean id="position1_2" class="domain.Position">
 		<property name="name" value="Presidente" />
+		<property name="language" value="es" />
+	</bean>
+
+	<bean id="position2_1" class="domain.Position">
+		<property name="name" value="Vicepresident" />
+		<property name="language" value="en" />
+	</bean>
+
+	<bean id="position2_2" class="domain.Position">
+		<property name="name" value="Vicepresidente" />
+		<property name="language" value="es" />
+	</bean>
+
+	<bean id="position3_1" class="domain.Position">
+		<property name="name" value="Secretary" />
+		<property name="language" value="en" />
+	</bean>
+
+	<bean id="position3_2" class="domain.Position">
+		<property name="name" value="Secretario" />
+		<property name="language" value="es" />
+	</bean>
+
+	<bean id="position4_1" class="domain.Position">
+		<property name="name" value="Treasurer" />
+		<property name="language" value="en" />
+	</bean>
+
+	<bean id="position4_2" class="domain.Position">
+		<property name="name" value="Tesorero" />
+		<property name="language" value="es" />
+	</bean>
+
+	<bean id="position5_1" class="domain.Position">
+		<property name="name" value="Historian" />
+		<property name="language" value="en" />
+	</bean>
+
+	<bean id="position5_2" class="domain.Position">
+		<property name="name" value="Historiador" />
+		<property name="language" value="es" />
+	</bean>
+
+	<bean id="position6_1" class="domain.Position">
+		<property name="name" value="Fundraiser" />
+		<property name="language" value="en" />
+	</bean>
+
+	<bean id="position6_2" class="domain.Position">
+		<property name="name" value="Recaudador de fondos" />
+		<property name="language" value="es" />
+	</bean>
+
+	<bean id="position7_1" class="domain.Position">
+		<property name="name" value="Officer" />
+		<property name="language" value="en" />
+	</bean>
+
+	<bean id="position7_2" class="domain.Position">
+		<property name="name" value="Funcionario" />
 		<property name="language" value="es" />
 	</bean>
 
