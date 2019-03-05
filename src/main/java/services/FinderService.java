@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Area;
-import domain.Configuration;
 import domain.Finder;
 import domain.Member;
 import domain.Procession;
@@ -36,6 +34,9 @@ public class FinderService {
 	@Autowired
 	private ConfigurationService	configurationService;
 
+	@Autowired
+	private ProcessionService		processionService;
+
 
 	//Methods-------------------------------------------------------------------
 
@@ -52,19 +53,22 @@ public class FinderService {
 		return finder;
 	}
 
-	public Finder save(Finder finder) {
+	public Finder crudSave(final Finder finder) {
 		Assert.notNull(finder);
-		finder.setLastUpdate(this.updateTime());
-		final List<Procession> processions = this.finalFilter(finder.getKeyword(), finder.getMinDate(), finder.getMaxDate(), finder.getArea());
+		return this.finderRepository.save(finder);
+	}
 
-		if (finder.getId() != 0)
-			this.checkPrincipal(finder);
-
-		finder = this.updateFinder(finder);
-		finder.setProcessions(processions);
-
-		final Finder saved = this.finderRepository.save(this.updateFinder(finder));
-		return saved;
+	public Finder save(final Finder finder) {
+		Assert.notNull(finder);
+		if (finder.getMinDate() != null && finder.getMaxDate() != null)
+			Assert.isTrue(finder.getMinDate().before(finder.getMaxDate()), "dateError");
+		Assert.isTrue(this.checkPrincipal(finder));
+		if (finder.getVersion() > 0) {
+			finder.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
+			final List<Procession> processions = this.findProcessionByFinder(finder);
+			finder.setProcessions(processions);
+		}
+		return this.finderRepository.save(finder);
 	}
 
 	public Finder findOneByPrincipal() {
@@ -83,84 +87,72 @@ public class FinderService {
 		return true;
 	}
 
-	public boolean checkCache(final Finder finder) {
-		boolean res = false;
-		if (finder != null) {
-			final long now = new Date().getTime();
-			final long last = finder.getLastUpdate().getTime();
-			final long cache = this.configurationService.findOne().getCacheFinder() * 3600000;
-
-			if ((now - last) >= cache)
-				res = true;
-		}
-		return res;
-	}
-
 	public List<Procession> searchProcessions(final String keyword, final Date dateMin, final Date dateMax) {
-		return this.finderRepository.searchProcessions(keyword, dateMin, dateMax);
-	}
+		final List<Procession> res = new ArrayList<>();
 
-	public List<Procession> finalFilter(final String keyword, final Date dateMin, final Date dateMax, final Area area) {
-		List<Procession> res = new ArrayList<>();
-
-		if ((!keyword.isEmpty() || dateMax == null || dateMin == null) && area == null)
-			res = this.searchProcessions(keyword, dateMin, dateMax);
-		else if ((!keyword.isEmpty() || dateMax == null || dateMin == null) && area != null)
-			for (final Procession procession : res)
-				if (area.getBrotherhood().getId() == procession.getBrotherhood().getId())
-					res.add(procession);
+		final List<Procession> processions = this.processionService.findProcessionsFinal();
+		for (final Procession procession : processions)
+			if ((procession.getTitle().toLowerCase().contains(keyword.toLowerCase()) || procession.getDescription().toLowerCase().contains(keyword.toLowerCase())) && procession.getMomentOrganised().after(dateMin)
+				&& procession.getMomentOrganised().before(dateMax))
+				res.add(procession);
 		return res;
-	}
-
-	public Finder updateFinder(final Finder finder) {
-		this.checkPrincipal(finder);
-		final Finder result = this.checkPrincipalFinder(finder);
-
-		final Configuration configuration = this.configurationService.findOne();
-
-		final Date currentDate = new Date();
-		final Date updateFinder = new Date(currentDate.getTime() - configuration.getCacheFinder() * 1000 * 60 * 60);
-		final Date lastUpdate = new Date(currentDate.getTime() - 1000);
-
-		if (!finder.getLastUpdate().after(updateFinder))
-			result.setLastUpdate(lastUpdate);
-		return result;
-	}
-
-	private Finder checkPrincipalFinder(final Finder f) {
-		Finder result;
-
-		final Date currentDate = new Date();
-
-		if (f.getKeyword() == null)
-			f.setKeyword("");
-
-		if (f.getMinDate() == null)
-			f.setMinDate(currentDate);
-
-		if (f.getMaxDate() == null)
-			f.setMaxDate(new Date(currentDate.getTime() + 315360000000L * 2));// 315360000000L
-																			// son
-																				// 10
-																				// años
-																				// en
-																				// milisegundos
-
-		result = f;
-
-		return result;
-	}
-
-	private Date updateTime() {
-		final Date currentDate = new Date();
-		final Date updateFinder = new Date(currentDate.getTime() - this.configurationService.findOne().getCacheFinder() * 1000 * 60 * 60);
-		final Date lastUpdate = new Date(updateFinder.getTime() - 1000);
-
-		return lastUpdate;
 	}
 
 	public Finder findFinderByMemberId(final int memberId) {
 		return this.finderRepository.findFinderByMemberId(memberId);
+	}
+
+	public List<Procession> updateCache(final Finder finder) {
+		final Integer timeCache = this.configurationService.findOne().getCacheFinder();
+		final Date dnow = new Date();
+
+		List<Procession> processions = new ArrayList<>();
+
+		if (finder.getLastUpdate() == null || dnow.getTime() - finder.getLastUpdate().getTime() > (timeCache * 3600000)) {
+			processions = this.findProcessionByFinder(finder);
+			finder.setLastUpdate(new Date(System.currentTimeMillis() - 1000));
+			finder.setProcessions(processions);
+			this.save(finder);
+		} else
+			processions = finder.getProcessions();
+
+		return processions;
+
+	}
+
+	public List<Procession> findProcessionByFinder(final Finder f) {
+		final Finder finder = new Finder();
+		finder.setMaxDate(f.getMaxDate());
+		finder.setMinDate(f.getMinDate());
+		finder.setKeyword(f.getKeyword());
+		finder.setArea(f.getArea());
+
+		if (finder.getMaxDate() == null) {
+			final Date dmax = new Date();
+			dmax.setYear(dmax.getYear() + 100);
+			finder.setMaxDate(dmax);
+		}
+
+		if (finder.getMinDate() == null) {
+			final Date dmin = new Date();
+			dmin.setYear(dmin.getYear() - 100);
+			finder.setMinDate(dmin);
+		}
+
+		if (finder.getKeyword() == null)
+			finder.setKeyword("");
+
+		if (finder.getArea() == null)
+			return this.searchProcessions(finder.getKeyword(), finder.getMinDate(), finder.getMaxDate());
+		else {
+			final List<Procession> res = new ArrayList<>();
+			final List<Procession> processions = this.searchProcessions(finder.getKeyword(), finder.getMinDate(), finder.getMaxDate());
+			for (final Procession procession : processions)
+				if (finder.getArea().getBrotherhood().getId() == procession.getBrotherhood().getId())
+					res.add(procession);
+			return res;
+		}
+
 	}
 
 }
