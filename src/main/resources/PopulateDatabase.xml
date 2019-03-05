@@ -538,7 +538,7 @@
 		<property name="status" value="PENDING" />
 	</bean>
 	
-	<bean id="enroll1" class="domain.Enroll">
+	<bean id="enroll3" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="endMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member2" />
@@ -547,7 +547,7 @@
 		<property name="status" value="PENDING" />
 	</bean>
 	
-	<bean id="enroll1" class="domain.Enroll">
+	<bean id="enroll4" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="endMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member1" />
