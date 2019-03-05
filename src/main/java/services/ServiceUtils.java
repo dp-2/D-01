@@ -70,6 +70,22 @@ public class ServiceUtils {
 		}
 	}
 
+	public Boolean checkAnyAuthorityBoolean(final String[] auths) {
+		Boolean res = false;
+		if (auths != null) {
+			Assert.notNull(auths);
+			Assert.notNull(LoginService.getPrincipal());
+			for (final Authority a : LoginService.getPrincipal().getAuthorities())
+				for (final String s : auths)
+					if (s.equals(a.getAuthority())) {
+						res = true;
+						break;
+					}
+
+		}
+		return res;
+	}
+
 	public void checkId(final Integer id) {
 		Assert.notNull(id);
 		Assert.isTrue(id > 0);
@@ -109,8 +125,25 @@ public class ServiceUtils {
 			Assert.notNull(this.actorService.findOne(a.getId()));
 			// Comprueba que el actor de entrada y el actor logueado son el mismo
 			final Actor principal = this.actorService.findByUserAccount(LoginService.getPrincipal());
+
 			Assert.isTrue(principal.equals(a));
 		}
+	}
+
+	public Boolean checkActorBoolean(final Actor a) {
+		Boolean res = false;
+		if (a != null) {
+			// Comprueba el id del Actor
+			this.checkId(a);
+			// Comprueba que el Actor está en la base de datos
+			Assert.notNull(this.actorService.findOne(a.getId()));
+			// Comprueba que el actor de entrada y el actor logueado son el mismo
+			final Actor principal = this.actorService.findByUserAccount(LoginService.getPrincipal());
+
+			if ((principal.equals(a)))
+				res = true;
+		}
+		return res;
 	}
 
 	public void checkAnyActor(final Actor[] as) {

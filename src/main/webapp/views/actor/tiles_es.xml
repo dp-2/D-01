@@ -30,6 +30,8 @@
 		<put-attribute name="title" value="Listado de actores" />
 		<put-attribute name="body" value="/views/actor/list.jsp" />
 	</definition>
+	
+	
 
 	
 </tiles-definitions>

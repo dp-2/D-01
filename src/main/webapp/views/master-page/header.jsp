@@ -77,6 +77,13 @@
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv" href="configuration/administrator/list.do"><spring:message
 						code="master.page.configuration" /></a></li>
+			<li><a class="fNiv" href="administrator/dashboard.do"><spring:message
+						code="master.page.dashboard" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="administrator/scores.do"><spring:message
+								code="master.page.administrator.calculateScores" /></a></li>
+				</ul></li>
 			<li><a href="actor/administrator/list.do"><spring:message
 						code="master.page.administrator.actors" /></a></li>
 			<li><a href="register/administrator/newActor.do?authority=ADMIN"><spring:message
@@ -85,6 +92,8 @@
 						code="master.page.position" /></a></li>
 			<li><a class="fNiv" href="area/list.do"><spring:message
 						code="master.page.area" /></a></li>
+			<li><a class="fNiv" href="message/actor/create.do?isBroadcast=true"><spring:message
+						code="master.page.broadcast" /></a></li>
 		</security:authorize>
 
 		<security:authorize access="hasRole('MEMBER')">
@@ -111,7 +120,7 @@
 
 			<li><a class="fNiv" href="enroll/brotherhood/list.do"><spring:message
 						code="master.page.enroll" /></a>
-			<ul>
+				<ul>
 					<li class="arrow"></li>
 					<li><a href="enroll/brotherhood/requests.do"><spring:message
 								code="master.page.enroll.request" /></a></li>
@@ -121,9 +130,9 @@
 
 			<li><a class="fNiv" href="area/display.do"><spring:message
 						code="master.page.areaBrotherhood" /></a></li>
-						
+
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
-						code="brotherhood.display"/></a></li>
+						code="brotherhood.display" /></a></li>
 
 
 		</security:authorize>

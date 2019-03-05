@@ -117,9 +117,12 @@ public class MemberService {
 			member.setUserAccount(memberDB.getUserAccount());
 
 			//Comprobamos que el actor sea un Member
-			this.serviceUtils.checkAuthority("MEMBER");
+			final String[] auths = new String[] {
+				"MEMBER", "ADMIN"
+			};
+			this.serviceUtils.checkAnyAuthority(auths);
 			//esto es para ver si el actor que está logueado es el mismo que se está editando
-			this.serviceUtils.checkActor(member);
+			Assert.isTrue(this.serviceUtils.checkActorBoolean(member) || this.serviceUtils.checkAuthorityBoolean("ADMIN"));
 
 		}
 
