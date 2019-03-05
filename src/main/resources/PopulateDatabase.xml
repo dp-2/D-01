@@ -523,7 +523,6 @@
 
 	<bean id="enroll1" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
-		<property name="endMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member1" />
 		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood1" />
