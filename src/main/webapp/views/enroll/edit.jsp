@@ -28,59 +28,43 @@
 	<form:hidden path="endMoment" />
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
+		<jstl:if test="${enroll.status=='PENDING'}">
+			<form:label path="status">
+				<spring:message code="enroll.status"></spring:message>
+			</form:label>
+			<form:select id="status" path="status">
+				<option value="PENDING">PENDING</option>
+				<option value="APPROVED">APPROVED</option>
+				<option value="REJECTED">REJECTED</option>
 
-		<%-- <jstl:if test="${idioma}=='es'">
-			<form:label path="position">
-				<spring:message code="enroll.position" />:
-  		</form:label>
-			<form:select id="positions" path="position">
-				<form:options items="${positionsES}" itemValue="id" itemLabel="name" />
 			</form:select>
-			<form:errors cssClass="error" path="position" />
-			<br />
+		</jstl:if>
+
+		<jstl:if test="${enroll.status!='PENDING'}">
+			<form:hidden path="status" />
 			<br />
 		</jstl:if>
 
-		<jstl:if test="${idioma}=='en'">
-			<form:label path="position">
-				<spring:message code="enroll.position" />:
-  		</form:label>
-			<form:select id="positions" path="position">
-				<form:options items="${positionsEN}" itemValue="id" itemLabel="name" />
-			</form:select>
-			<form:errors cssClass="error" path="position" />
+		<jstl:if test="${enroll.status=='APPROVED'}">
+			<acme:select code="enroll.position" path="position"
+				items="${positions}" itemLabel="name" />
 			<br />
-			<br />
-		</jstl:if> --%>
+		</jstl:if>
 
-		<acme:select code="enroll.position" path="position"
-			items="${positions}" itemLabel="name" />
-		<%-- <form:label path="position">
-			<spring:message code="enroll.position" />:
-  		</form:label>
-		<form:select id="positions" path="position">
-			<form:options items="${positions}" itemValue="id" itemLabel="name" />
-		</form:select>
-		<form:errors cssClass="error" path="position" /> --%>
-		<br />
-		<br />
 
-		<form:label path="member">
-			<spring:message code="enroll.member" />:
-  		</form:label>
-		<form:select id="members" path="member">
-			<form:options items="${members}" itemValue="id" itemLabel="name" />
-		</form:select>
-		<form:errors cssClass="error" path="member" />
-		<br />
-		<br />
+	</security:authorize>
+	<br />
+	<acme:submit name="save" code="enroll.save" />
+	<security:authorize access="hasRole('BROTHERHOOD')">
+		<acme:cancel code="enroll.cancel" url="enroll/brotherhood/list.do" />
 	</security:authorize>
 
-	<acme:submit name="save" code="enroll.save" />
-	<acme:cancel code="enroll.cancel" url="/enroll/brotherhood/list.do" />
-	<jstl:if test="${position.id!=0}">
+	<security:authorize access="hasRole('MEMBER')">
+		<acme:cancel code="enroll.cancel" url="enroll/member/list.do" />
+	</security:authorize>
+	<%-- <jstl:if test="${position.id!=0}">
 		<acme:submit code="enroll.delete" name="delete" />
 	</jstl:if>
-
+ --%>
 </form:form>
 

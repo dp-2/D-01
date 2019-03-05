@@ -93,14 +93,13 @@ public class EnrollMemberController extends AbstractController {
 
 	//Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
-		final Enroll enroll;
+		Enroll enroll;
 
-		enroll = this.enrollService.create();
+		enroll = this.enrollService.create(brotherhoodId);
 		Assert.notNull(enroll);
 		result = this.createEditModelAndView(enroll);
-
 		return result;
 	}
 
@@ -122,13 +121,14 @@ public class EnrollMemberController extends AbstractController {
 	public ModelAndView save(@Valid final Enroll enroll, final BindingResult binding) {
 
 		ModelAndView result;
-		if (binding.hasErrors())
+		if (binding.hasErrors()) {
+			System.out.println(enroll.getStatus());
 			result = this.createEditModelAndView(enroll, "enroll.commit.error");
-		else
+		} else
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:enroll/brotherhood/list.do");
+				result = new ModelAndView("redirect:enroll/member/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
 
@@ -153,7 +153,7 @@ public class EnrollMemberController extends AbstractController {
 
 		try {
 			this.enrollService.delete(enroll);
-			result = new ModelAndView("redirect:enroll/brotherhood/list.do");
+			result = new ModelAndView("redirect:enroll/member/list.do");
 		} catch (final Throwable oops) {
 			result = this.createEditModelAndView(enroll, "enroll.commit.error");
 		}
@@ -194,7 +194,7 @@ public class EnrollMemberController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 		//		result.addObject("brotherhoodId", a.getId());
-		result.addObject("requestURI", "enroll/brotherhood/edit.do");
+		result.addObject("requestURI", "enroll/member/edit.do");
 
 		return result;
 	}

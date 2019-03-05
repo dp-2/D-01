@@ -1,6 +1,9 @@
 
 package services;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -8,6 +11,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -174,5 +178,13 @@ public class ProcessionService {
 					res.add(a);
 		}
 		return (List<Actor>) res;
+	}
+
+	public List<Procession> findProcessionsIn30Days() throws ParseException {
+		//creo el formato de fecha para convertirlo luego
+		final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		//Creo la fecha sumándole directamente un mes y pasándola por el formato y conviritiendola a string para que la parsee a modo fecha
+		final Date date = dateFormat.parse(LocalDate.now().plusMonths(1).toString());
+		return this.processionRepository.findProcessionsIn30Days(date);
 	}
 }

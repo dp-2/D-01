@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -15,7 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -51,8 +49,8 @@ public class Enroll extends DomainEntity {
 		this.endMoment = endMoment;
 	}
 
-	@NotBlank
-	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$")
+	@NotNull
+	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$|^OUT$")
 	public String getStatus() {
 		return this.status;
 	}
@@ -70,7 +68,7 @@ public class Enroll extends DomainEntity {
 
 	@NotNull
 	@Valid
-	@OneToOne(optional = false)
+	@ManyToOne(optional = false)
 	public Member getMember() {
 		return this.member;
 	}
@@ -91,7 +89,7 @@ public class Enroll extends DomainEntity {
 	}
 
 	@Valid
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	public Position getPosition() {
 		return this.position;
 

@@ -14,9 +14,15 @@
 		<put-attribute name="title" value="Dashboard" />
 		<put-attribute name="body" value="/views/administrator/dashboard.jsp" />
 	</definition>
-	
-	
-		<definition name="administrator/admin" extends="master.page">
+
+
+	<definition name="administrator/scores" extends="master.page">
+		<put-attribute name="title" value="Scores" />
+		<put-attribute name="body" value="/views/administrator/listScores.jsp" />
+	</definition>
+
+
+	<definition name="administrator/admin" extends="master.page">
 		<put-attribute name="title" value="Register as a administrator" />
 		<put-attribute name="body" value="/views/administrator/register.jsp" />
 	</definition>

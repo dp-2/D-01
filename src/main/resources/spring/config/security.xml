@@ -90,8 +90,17 @@
 		<security:intercept-url pattern="/position/administrator/save.do"
 			access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/area/list.do"
+			access="hasAnyRole('ADMIN','BROTHERHOOD')" />
+		<security:intercept-url pattern="/area/administrator/create.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/area/administrator/edit.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/area/administrator/save.do"
+			access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/area/administrator/delete.do"
 			access="hasRole('ADMIN')" />
 
+		
 		<security:intercept-url pattern="/march/member/list.do"
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/march/member/edit.do"
@@ -116,7 +125,8 @@
 
 
 
-
+		<security:intercept-url pattern="/area/assign.do"
+			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/march/brotherhood/list.do"
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/march/brotherhood/edit.do"
@@ -145,7 +155,9 @@
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/enroll/brotherhood/create.do"
 			access="hasRole('BROTHERHOOD')" />
-			<security:intercept-url pattern="/enroll/brotherhood/requests.do"
+		<security:intercept-url pattern="/enroll/brotherhood/kickOut.do"
+			access="hasRole('BROTHERHOOD')" />
+		<security:intercept-url pattern="/enroll/brotherhood/requests.do"
 			access="hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/area/display.do"
 			access="hasAnyRole('BROTHERHOOD','ADMIN')" />
@@ -164,7 +176,7 @@
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enroll/member/cancel.do"
 			access="hasRole('MEMBER')" />
-		<security:intercept-url pattern="/enroll/member/show.do"
+		<security:intercept-url pattern="/enroll/member/create.do"
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enroll/member/goOut.do"
 			access="hasRole('MEMBER')" />
@@ -192,11 +204,11 @@
 			access="!isAuthenticated() || hasRole('BROTHERHOOD')" />
 		<security:intercept-url pattern="/brotherhood/any/**"
 			access="permitAll()" />
-			
-			
-			<security:intercept-url pattern="/administrator/**"
+
+
+		<security:intercept-url pattern="/administrator/**"
 			access="hasRole('ADMIN')" />
-		
+
 
 
 

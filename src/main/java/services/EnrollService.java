@@ -13,8 +13,10 @@ import org.springframework.util.Assert;
 import repositories.EnrollRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
+import domain.Member;
 
 @Service
 @Transactional
@@ -24,12 +26,15 @@ public class EnrollService {
 	@Autowired
 	private EnrollRepository	enrollRepository;
 
+	@Autowired
+	private ActorService		actorService;
 
-	//	@Autowired
-	//	private MemberService		memberService;
-	//
-	//	@Autowired
-	//	private BrotherhoodService	brotherhoodService;
+	@Autowired
+	private BrotherhoodService	brotherhoodService;
+
+	@Autowired
+	private MemberService		memberService;
+
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -38,11 +43,17 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create() {
+	public Enroll create(final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
-		enroll.setStatus("PENDING");
-		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
+		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		final Member member = this.memberService.findOne(a.getId());
+		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 
+		enroll.setStatus("PENDING");
+		enroll.getStatus();
+		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
+		enroll.setMember(member);
+		enroll.setBrotherhood(brotherhood);
 		return enroll;
 	}
 	public Collection<Enroll> findAll() {
@@ -63,8 +74,9 @@ public class EnrollService {
 
 	public Enroll save(final Enroll enroll) {
 		Assert.notNull(enroll);
-		this.checkPrincipal(enroll);
 		Enroll result;
+		if (enroll.getStatus() == null)
+			enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 		result = this.enrollRepository.save(enroll);
 
@@ -80,8 +92,8 @@ public class EnrollService {
 	}
 	//Other Methods-----------------------------------------------------------------
 	public Boolean checkPrincipal(final Enroll enroll) {
-		final UserAccount u = enroll.getBrotherhood().getUserAccount();
-		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con esta hermandad");
+		final UserAccount u = enroll.getMember().getUserAccount();
+		Assert.isTrue(u.equals(LoginService.getPrincipal()), "este perfil no corresponde con esta miembro");
 		return true;
 	}
 
@@ -91,6 +103,10 @@ public class EnrollService {
 
 	public Collection<Enroll> findEnrollByBrotherhood(final int brotherhoodId) {
 		return this.enrollRepository.findEnrollByBrotherhood(brotherhoodId);
+	}
+
+	public Collection<Enroll> findEnrollsPendingByBrotherhood(final int brotherhoodId) {
+		return this.enrollRepository.findEnrollsPendingByBrotherhood(brotherhoodId);
 	}
 
 	public Collection<Enroll> findEnrollsAprovedByBrotherhood(final int brotherhoodId) {
@@ -107,6 +123,7 @@ public class EnrollService {
 		final Date fechaActual = new Date(System.currentTimeMillis() - 1000);
 
 		enroll.setEndMoment(fechaActual);
+		enroll.setStatus("OUT");
 		enroll = this.enrollRepository.save(enroll);
 		return enroll;
 	}

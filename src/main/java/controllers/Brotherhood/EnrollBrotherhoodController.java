@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.AreaService;
 import services.EnrollService;
 import services.MemberService;
 import services.PositionService;
@@ -44,6 +45,9 @@ public class EnrollBrotherhoodController extends AbstractController {
 	@Autowired
 	private MemberService	memberService;
 
+	@Autowired
+	private AreaService		areaService;
+
 
 	// Constructor---------------------------------------------------------
 
@@ -60,10 +64,12 @@ public class EnrollBrotherhoodController extends AbstractController {
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		//		final Member m = this.memberService.findMemberByEnrollId(enrollId);
 		enrolls = this.enrollService.findEnrollByBrotherhood(a.getId());
+		//		hasArea = this.areaService.findAreaByBrotherhoodId(a.getId());
 
 		result = new ModelAndView("enroll/list");
 		result.addObject("enrolls", enrolls);
-		result.addObject("requestURI", "/enroll/brotherhood/list.do");
+		result.addObject("areaService", this.areaService);
+		result.addObject("requestURI", "enroll/brotherhood/list.do");
 		result.addObject("brotherhoodId", a.getId());
 		//		result.addObject("memberId", m.getId());
 		return result;
@@ -77,27 +83,27 @@ public class EnrollBrotherhoodController extends AbstractController {
 
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		final int brotherhoodId = a.getId();
-		requests = this.enrollService.findEnrollByBrotherhood(brotherhoodId);
+		requests = this.enrollService.findEnrollsPendingByBrotherhood(brotherhoodId);
 
-		result = new ModelAndView("enroll/requests");
+		result = new ModelAndView("enroll/request");
 		result.addObject("requests", requests);
-		result.addObject("requestURI", "/enroll/brotherhood/requests.do");
+		result.addObject("requestURI", "enroll/brotherhood/requests.do");
 		result.addObject("brotherhoodId", brotherhoodId);
 		return result;
 	}
 
-	//Create
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
-		ModelAndView result;
-		final Enroll enroll;
-
-		enroll = this.enrollService.create();
-		Assert.notNull(enroll);
-		result = this.createEditModelAndView(enroll);
-
-		return result;
-	}
+	//	//Create
+	//	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	//	public ModelAndView create() {
+	//		ModelAndView result;
+	//		final Enroll enroll;
+	//
+	//		enroll = this.enrollService.create();
+	//		Assert.notNull(enroll);
+	//		result = this.createEditModelAndView(enroll);
+	//
+	//		return result;
+	//	}
 
 	// Edit
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -123,11 +129,23 @@ public class EnrollBrotherhoodController extends AbstractController {
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:enroll/brotherhood/list.do");
+				result = new ModelAndView("redirect:/enroll/brotherhood/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
+				System.out.println(oops.getMessage());
 
 			}
+		return result;
+	}
+
+	// kickOut
+	@RequestMapping(value = "/kickOut", method = RequestMethod.GET)
+	public ModelAndView goOut(@RequestParam final int enrollId) {
+
+		ModelAndView result;
+		this.enrollService.goOut(enrollId);
+		result = this.list();
+
 		return result;
 	}
 
