@@ -533,25 +533,20 @@
 	<bean id="enroll2" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member2" />
-		<property name="position" ref="position3_2" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="status" value="PENDING" />
 	</bean>
 	
 	<bean id="enroll3" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
-		<property name="endMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member2" />
-		<property name="position" ref="position5_1" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="status" value="PENDING" />
 	</bean>
 	
 	<bean id="enroll4" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
-		<property name="endMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member1" />
-		<property name="position" ref="position2_1" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="status" value="REJECTED" />
 	</bean>
