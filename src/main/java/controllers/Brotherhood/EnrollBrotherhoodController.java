@@ -64,9 +64,11 @@ public class EnrollBrotherhoodController extends AbstractController {
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		//		final Member m = this.memberService.findMemberByEnrollId(enrollId);
 		enrolls = this.enrollService.findEnrollByBrotherhood(a.getId());
+		//		hasArea = this.areaService.findAreaByBrotherhoodId(a.getId());
 
 		result = new ModelAndView("enroll/list");
 		result.addObject("enrolls", enrolls);
+		result.addObject("areaService", this.areaService);
 		result.addObject("requestURI", "enroll/brotherhood/list.do");
 		result.addObject("brotherhoodId", a.getId());
 		//		result.addObject("memberId", m.getId());

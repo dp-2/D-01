@@ -14,7 +14,7 @@
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<display:column>
 			<jstl:if
-				test="${brotherhoodId==row.brotherhood.id && (row.status=='APPROVED'||row.status=='PENDING')}">
+				test="${brotherhoodId==row.brotherhood.id && (row.status=='APPROVED'||row.status=='PENDING') && areaService.findAreaByBrotherhoodId(row.brotherhood.id)!=null}">
 
 				<a href="enroll/brotherhood/edit.do?enrollId=${row.id}"> <spring:message
 						code="enroll.edit" />
