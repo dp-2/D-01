@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.EnrollRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Brotherhood;
 import domain.Enroll;
 
 @Service
@@ -38,11 +39,8 @@ public class EnrollService {
 
 	// Simple CRUD methods -------------------------------------------------------------------
 	public Enroll create() {
-		//		final int memberId, final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
-		//		enroll.setMember(this.memberService.findOne(memberId));
-		//		enroll.setBrotherhood(this.brotherhoodService.findOne(brotherhoodId));
-		enroll.setIsAccepted(false);
+		enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 
 		return enroll;
@@ -76,6 +74,7 @@ public class EnrollService {
 		Assert.notNull(enroll);
 		this.checkPrincipal(enroll);
 		Enroll result;
+
 		enroll.setEndMoment(new Date(System.currentTimeMillis() - 1000));
 		result = this.enrollRepository.save(enroll);
 	}
@@ -94,23 +93,20 @@ public class EnrollService {
 		return this.enrollRepository.findEnrollByBrotherhood(brotherhoodId);
 	}
 
-	public Collection<Enroll> findEnrollByBrotherhood2(final int brotherhoodId) {
-		return this.enrollRepository.findEnrollByBrotherhood2(brotherhoodId);
+	public Collection<Enroll> findEnrollsAprovedByBrotherhood(final int brotherhoodId) {
+		return this.enrollRepository.findEnrollsAprovedByBrotherhood(brotherhoodId);
 	}
 
+	public Collection<Brotherhood> findBrotherhoodByMember(final int memberId) {
+		return this.enrollRepository.findBrotherhoodByMember(memberId);
+
+	}
 	public Enroll goOut(final int enrollId) {
 		Enroll enroll;
 		enroll = this.enrollRepository.findOne(enrollId);
 		final Date fechaActual = new Date(System.currentTimeMillis() - 1000);
 
 		enroll.setEndMoment(fechaActual);
-		//		enroll.setBrotherhood(enroll.getBrotherhood());
-		//		enroll.setIsAccepted(enroll.getIsAccepted());
-		//		enroll.setMember(enroll.getMember());
-		//		enroll.setPosition(enroll.getPosition());
-		//		enroll.setStartMoment(enroll.getStartMoment());
-		//		enroll.setId(enroll.getId());
-		//		enroll.setVersion(enroll.getVersion());
 		enroll = this.enrollRepository.save(enroll);
 		return enroll;
 	}

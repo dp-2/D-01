@@ -8,19 +8,16 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="enrolls2" id="row" requestURI="${requestURI}"
-	pagesize="5" class="displaytag">
-	
-		<display:column property="name"
-			titleKey="enroll.brotherhood" />
+<display:table name="enrollBrotherhoods" id="row"
+	requestURI="${requestURI}" pagesize="5" class="displaytag">
 
-		<jstl:if test="${row.endMoment == null}">
-			<display:column titleKey="enroll.out">
-				<a href="enroll/member/create.do?enrollId=${row.id}"><spring:message
-						code="enroll.unirse" /></a>
-			</display:column>
-		</jstl:if>
-		
+	<display:column property="name" titleKey="enroll.brotherhood" />
+	<display:column titleKey="enroll.unir">
+		<a href="enroll/member/listBrotherhood.do"><spring:message
+				code="enroll.unirse" /></a>
+
+	</display:column>
+
 </display:table>
 <br />
 <br />

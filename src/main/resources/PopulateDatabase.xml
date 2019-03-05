@@ -467,7 +467,7 @@
 		<property name="member" ref="member1" />
 		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="isAccepted" value="true" />
+		<property name="status" value="APPROVED" />
 	</bean>
 
 	<bean id="enroll2" class="domain.Enroll">
@@ -475,7 +475,7 @@
 		<property name="member" ref="member2" />
 		<property name="position" ref="position1_2" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="isAccepted" value="true" />
+		<property name="status" value="APPROVED" />
 	</bean>
 
 	<!-- Float -->

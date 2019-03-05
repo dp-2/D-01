@@ -13,7 +13,9 @@ import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -24,7 +26,7 @@ public class Enroll extends DomainEntity {
 
 	private Date	startMoment;
 	private Date	endMoment;
-	private boolean	isAccepted;
+	private String	status;
 
 
 	@NotNull
@@ -49,13 +51,13 @@ public class Enroll extends DomainEntity {
 		this.endMoment = endMoment;
 	}
 
-	@NotNull
-	public boolean getIsAccepted() {
-		return this.isAccepted;
+	@NotBlank
+	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$")
+	public String getStatus() {
+		return this.status;
 	}
-
-	public void setIsAccepted(final boolean isAccepted) {
-		this.isAccepted = isAccepted;
+	public void setStatus(final String status) {
+		this.status = status;
 	}
 
 
