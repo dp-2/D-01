@@ -20,8 +20,8 @@ public interface MarchRepository extends JpaRepository<March, Integer> {
 	@Query("select a from March a where a.procession.id = ?1")
 	Collection<March> findMarchsByProcession(int processionId);
 
-	@Query("select id from March m where m.procession.id = ?1 and m. member.id = ?2")
-	March findMatchByProcessionidAndMemberid(int processionId, int memberId);
+	@Query("select count(m) from March m where m.procession.id = ?1 and m.member.id = ?2")
+	Double findMatchByProcessionidAndMemberid(int processionId, int memberId);
 
 	//Queries Dashboard-----------------------------------------------------------
 

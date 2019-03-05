@@ -10,7 +10,19 @@
 
 <display:table name="requests" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
+	
+	<security:authorize access="hasRole('BROTHERHOOD')">
+		<jstl:if test="${brotherhoodId==row.brotherhood.id}">
+			<display:column>
 
+				<a href="enroll/brotherhood/edit.do?enrollId=${row.id}"> <spring:message
+						code="enroll.edit" />
+				</a>
+
+			</display:column>
+		</jstl:if>
+	</security:authorize>
+	
 	<display:column property="startMoment" titleKey="enroll.start" />
 	<display:column property="endMoment" titleKey="enroll.end" />	
 	
