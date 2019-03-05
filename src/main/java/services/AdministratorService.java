@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,6 +17,7 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
 import domain.Configuration;
+import domain.Message;
 
 @Service
 @Transactional
@@ -39,6 +41,9 @@ public class AdministratorService {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private MessageService			messageService;
 
 
 	// --------------------------Constructor-----------------------
@@ -91,7 +96,7 @@ public class AdministratorService {
 			//Comprobamos que el actor sea un admin
 			this.serviceUtils.checkAuthority("ADMIN");
 			//esto es para ver si el actor que está logueado es el mismo que se está editando
-			this.serviceUtils.checkActor(administrator);
+			//this.serviceUtils.checkActor(administrator);
 
 		}
 		if ((!administrator.getPhone().startsWith("+")) && StringUtils.isNumeric(administrator.getPhone()) && administrator.getPhone().length() > 3) {
@@ -180,6 +185,48 @@ public class AdministratorService {
 		if (u.getAuthorities().contains(a))
 			res = true;
 		return res;
+	}
+
+	public void generateAllScore() {
+		this.serviceUtils.checkAuthority(Authority.ADMIN);
+		final Collection<Actor> res = this.actorService.findAllTypes();
+		for (final Actor a : res) {
+			final Double d = this.generateScore(a);
+			a.setScore(d);
+			this.actorService.save(a);
+		}
+
+	}
+
+	public Double generateScore(final Actor a) {
+		this.serviceUtils.checkAuthority(Authority.ADMIN);
+		Double res = 0.0;
+		Double cont = 0.0;
+
+		final Collection<Message> messages = new ArrayList<Message>();
+		final Collection<String> buenasEN = this.configurationService.findOne().getPositiveWordsEN();
+		final Collection<String> buenasES = this.configurationService.findOne().getPositiveWordsES();
+		final Collection<String> malasEN = this.configurationService.findOne().getNegativeWordsEN();
+		final Collection<String> malasES = this.configurationService.findOne().getNegativeWordsES();
+		messages.addAll(this.messageService.findReceivedMessages(a));
+		messages.addAll(this.messageService.findSendedMessages(a));
+		if (messages.isEmpty())
+			return res;
+		else
+			for (final Message m : messages) {
+				final String[] palabras = m.getBody().split(" ");
+				for (final String word : palabras) {
+
+					if (buenasEN.contains(word) || buenasES.contains(word))
+						res++;
+					if (malasEN.contains(word) || malasES.contains(word))
+						res--;
+					cont++;
+				}
+
+			}
+
+		return res / cont;
 	}
 
 }

@@ -77,6 +77,15 @@ public class ActorService {
 		return actors;
 	}
 
+	public Collection<Actor> findAllTypes() {
+		final Collection<Actor> actors = new ArrayList<>();
+		actors.addAll(this.administratorService.findAll());
+		actors.addAll(this.memberService.findAll());
+		actors.addAll(this.brotherhoodService.findAll());
+
+		return actors;
+	}
+
 	public Actor save(final Actor actor) {
 
 		Assert.notNull(actor);
@@ -132,7 +141,7 @@ public class ActorService {
 			member.setPhone(actor.getPhone());
 			member.setPhoto(actor.getPhoto());
 			member.setSurname(actor.getSurname());
-			member.setScore(0.0);
+			member.setScore(actor.getScore());
 			member.setAddress(actor.getAddress());
 
 			final Actor actor1 = this.memberService.save(member);
@@ -146,7 +155,7 @@ public class ActorService {
 				brotherhood = this.brotherhoodService.create();
 				brotherhood.setUserAccount(actor.getUserAccount());
 			}
-			brotherhood.setScore(0.0);
+			brotherhood.setScore(actor.getScore());
 			brotherhood.setEmail(actor.getEmail());
 			brotherhood.setBanned(actor.getBanned());
 			brotherhood.setSpammer(actor.getSpammer());
