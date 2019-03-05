@@ -95,14 +95,14 @@ public class MessageService {
 	public void delete(final Message object) {
 		final Message message = (Message) this.serviceUtils.checkObject(object);
 		final Actor principal = this.actorService.findPrincipal();
-		final Box trashboxPrincipal = this.boxService.findBoxByActorAndName(principal, "trashbox");
+		final Box trashboxPrincipal = this.boxService.findBoxByActorAndName(principal, "trashBox");
 		if (message.getBox().equals(trashboxPrincipal)) {
 			Assert.isTrue(message.getBox().getActor().equals(this.actorService.findPrincipal()));
 			this.serviceUtils.checkPermisionActor(message.getBox().getActor(), null);
 			for (final Message m : this.findCopies(message))
 				this.repository.delete(m);
 		} else {
-			message.setBox(this.boxService.findBoxByActorAndName(object.getBox().getActor(), "trashbox"));
+			message.setBox(this.boxService.findBoxByActorAndName(object.getBox().getActor(), "trashBox"));
 			this.save(message);
 		}
 	}

@@ -21,7 +21,7 @@ import domain.Box;
 import domain.Message;
 
 @Controller
-@RequestMapping("message/actor")
+@RequestMapping("message")
 public class MessageController extends AbstractController {
 
 	// Services
@@ -36,7 +36,7 @@ public class MessageController extends AbstractController {
 
 	// List
 
-	@RequestMapping("list")
+	@RequestMapping("actor/list")
 	public ModelAndView list(@RequestParam(required = true) final Integer boxId) {
 		final ModelAndView res = new ModelAndView("message/list");
 		final Box box = this.boxService.findOne(boxId);
@@ -51,7 +51,7 @@ public class MessageController extends AbstractController {
 	// Create
 
 	@SuppressWarnings("unused")
-	@RequestMapping("create")
+	@RequestMapping("actor/create")
 	private ModelAndView create(@RequestParam(required = false) final Boolean isBroadcast) {
 		final Actor principal = this.actorService.findPrincipal();
 		final Box box = this.boxService.findBoxByActorAndName(principal, "inBox");
@@ -62,10 +62,11 @@ public class MessageController extends AbstractController {
 		final ModelAndView res = this.createEditModelAndView(message, broadcast);
 		return res;
 	}
+
 	// Edit
 
 	@SuppressWarnings("unused")
-	@RequestMapping("edit")
+	@RequestMapping("actor/edit")
 	private ModelAndView edit(@RequestParam(required = true) final Integer messageId) {
 		final Message message = this.messageService.findOne(messageId);
 		Assert.notNull(message);
@@ -73,7 +74,7 @@ public class MessageController extends AbstractController {
 		return res;
 	}
 	@SuppressWarnings("unused")
-	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "actor/edit", method = RequestMethod.POST, params = "save")
 	private ModelAndView save(Message message, final BindingResult binding) {
 		ModelAndView res = null;
 		message = this.messageService.deconstruct(message, binding);
@@ -90,7 +91,7 @@ public class MessageController extends AbstractController {
 	}
 
 	@SuppressWarnings("unused")
-	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "broadcast")
+	@RequestMapping(value = "actor/edit", method = RequestMethod.POST, params = "broadcast")
 	private ModelAndView broadcast(Message message, final BindingResult binding) {
 		ModelAndView res = null;
 		message = this.messageService.deconstruct(message, binding);
