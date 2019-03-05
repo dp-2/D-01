@@ -159,7 +159,6 @@
 
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Catedral de sevilla" />
-		<property name="brotherhood" ref="brotherhood1" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1area1" class="domain.Url">
