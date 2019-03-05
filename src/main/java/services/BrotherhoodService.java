@@ -186,6 +186,8 @@ public class BrotherhoodService {
 		res.setTitle(form.getTitle());
 		res.getUserAccount().setUsername(form.getUsername());
 		res.getUserAccount().setPassword(form.getPassword());
+		if (res.getPictures() == null)
+			res.setPictures(new ArrayList<Url>());
 		final Collection<Authority> authorities = new ArrayList<Authority>();
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.BROTHERHOOD);
