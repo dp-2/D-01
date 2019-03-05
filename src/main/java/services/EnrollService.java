@@ -74,7 +74,6 @@ public class EnrollService {
 
 	public Enroll save(final Enroll enroll) {
 		Assert.notNull(enroll);
-		this.checkPrincipal(enroll);
 		Enroll result;
 		if (enroll.getStatus() == null)
 			enroll.setStatus("PENDING");
@@ -124,6 +123,7 @@ public class EnrollService {
 		final Date fechaActual = new Date(System.currentTimeMillis() - 1000);
 
 		enroll.setEndMoment(fechaActual);
+		enroll.setStatus("OUT");
 		enroll = this.enrollRepository.save(enroll);
 		return enroll;
 	}

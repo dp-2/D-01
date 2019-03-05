@@ -50,7 +50,7 @@ public class Enroll extends DomainEntity {
 	}
 
 	@NotNull
-	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$")
+	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$|^OUT$")
 	public String getStatus() {
 		return this.status;
 	}

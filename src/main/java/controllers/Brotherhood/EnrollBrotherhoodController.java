@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.AreaService;
 import services.EnrollService;
 import services.MemberService;
 import services.PositionService;
@@ -43,6 +44,9 @@ public class EnrollBrotherhoodController extends AbstractController {
 
 	@Autowired
 	private MemberService	memberService;
+
+	@Autowired
+	private AreaService		areaService;
 
 
 	// Constructor---------------------------------------------------------
@@ -123,9 +127,10 @@ public class EnrollBrotherhoodController extends AbstractController {
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:/enroll/brotherhood/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
+				System.out.println(oops.getMessage());
 
 			}
 		return result;
