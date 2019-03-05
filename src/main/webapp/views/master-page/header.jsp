@@ -92,7 +92,8 @@
 						code="master.page.position" /></a></li>
 			<li><a class="fNiv" href="area/list.do"><spring:message
 						code="master.page.area" /></a></li>
-			<li><a class="fNiv" href="message/actor/create.do?isBroadcast=true"><spring:message
+			<li><a class="fNiv"
+				href="message/actor/create.do?isBroadcast=true"><spring:message
 						code="master.page.broadcast" /></a></li>
 		</security:authorize>
 
@@ -133,16 +134,10 @@
 
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
 						code="brotherhood.display" /></a></li>
-
-
-		</security:authorize>
-
-		<security:authorize access="hasRole('BROTHERHOOD')">
-
+						
 			<li><a class="fNiv" href="march/member/list.do"><spring:message
 						code="master.page.march" /></a></li>
-			<li><a class="fNiv" href="member/edit.do"><spring:message
-						code="master.page.member" /></a></li>
+						
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
 						code="brotherhood.display" /></a></li>
 
