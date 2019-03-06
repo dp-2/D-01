@@ -76,21 +76,20 @@ public class EnrollMemberController extends AbstractController {
 	@RequestMapping(value = "/listBrotherhood", method = RequestMethod.GET)
 	public ModelAndView listBrotherhood() {
 		ModelAndView result;
-		final Collection<Brotherhood> enrollBrotherhoods;
-		final Collection<Brotherhood> brotherhoods;
+		final Collection<Brotherhood> brotherhoods, finalBrotherhoods;
 
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		final int memberId = a.getId();
-		enrollBrotherhoods = this.brotherhoodService.findAll();
+		finalBrotherhoods = this.brotherhoodService.findAll();
 		brotherhoods = this.enrollService.findBrotherhoodByMember(memberId);
+		finalBrotherhoods.removeAll(brotherhoods);
 
 		result = new ModelAndView("enroll/listBrotherhood");
-		result.addObject("enrollBrotherhoods", brotherhoods);
+		result.addObject("enrollBrotherhoods", finalBrotherhoods);
 		result.addObject("requestURI", "/enroll/member/listBrotherhood.do");
 		result.addObject("memberId", memberId);
 		return result;
 	}
-
 	//Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int brotherhoodId) {

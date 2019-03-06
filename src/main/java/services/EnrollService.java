@@ -114,10 +114,9 @@ public class EnrollService {
 	}
 
 	public Collection<Brotherhood> findBrotherhoodByMember(final int memberId) {
-		final Collection<Brotherhood> b = this.enrollRepository.findBrotherhoodByMember(memberId);
-		return b;
-
+		return this.enrollRepository.findBrotherhoodByMember(memberId);
 	}
+
 	public Enroll goOut(final int enrollId) {
 		Enroll enroll;
 		enroll = this.enrollRepository.findOne(enrollId);
