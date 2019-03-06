@@ -74,6 +74,10 @@ public class DFloatService {
 		return this.dfloatRepository.SearchDFloatsByBrotherhood(brotherhood.getId());
 	}
 
+	public Collection<DFloat> SearchDFloatsByBrotherhood(final int brotherhoodId) {
+		return this.dfloatRepository.SearchDFloatsByBrotherhood(brotherhoodId);
+	}
+
 	public Collection<DFloat> findAllDFloatsWithoutBrotherhood() {
 		return this.dfloatRepository.SearchDFloatsWithoutBrotherhood();
 	}

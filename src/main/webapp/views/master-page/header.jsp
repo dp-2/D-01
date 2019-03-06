@@ -177,7 +177,7 @@
 
 
 					
-			</security:authorize>
+			
 
 			<security:authorize access="isAnonymous()">
 				<li><a class="fNiv" href="security/login.do"><spring:message
