@@ -106,6 +106,30 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="member3" />
+		<property name="password" value="3ef4802d8a37022fd187fbd829d1c4d6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="member4" />
+		<property name="password" value="a998123003066ac9fa7de4b100e7c4bc" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MEMBER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
 
 	<!-- La contraseña de system es intencional, no se puede acceder a esta 
 		cuenta -->
@@ -572,6 +596,77 @@
 		<property name="actor" ref="member2" />
 
 	</bean>
+	
+		<!-- Boxes del member3 -->
+
+	<bean id="folder1Member3" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Member3" />
+		<property name="actor" ref="member3" />
+
+	</bean>
+
+	<bean id="folder2Member3" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Member3" />
+		<property name="actor" ref="member3" />
+
+	</bean>
+
+	<bean id="folder3Member3" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Member3" />
+		<property name="actor" ref="member3" />
+
+	</bean>
+
+
+	<bean id="folder4Member3" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Member3" />
+		<property name="actor" ref="member3" />
+
+	</bean>
+	
+	
+		<!-- Boxes del member2 -->
+
+	<bean id="folder1Member4" class="domain.Box">
+		<property name="name" value="inBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder1Member4" />
+		<property name="actor" ref="member4" />
+
+	</bean>
+
+	<bean id="folder2Member4" class="domain.Box">
+		<property name="name" value="outBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder2Member4" />
+		<property name="actor" ref="member4" />
+
+	</bean>
+
+	<bean id="folder3Member4" class="domain.Box">
+		<property name="name" value="trashBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder3Member4" />
+		<property name="actor" ref="member4" />
+
+	</bean>
+
+
+	<bean id="folder4Member4" class="domain.Box">
+		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Member4" />
+		<property name="actor" ref="member4" />
+
+	</bean>
 
 
 	<!-- Boxes del brotherhood1 -->
@@ -892,10 +987,10 @@
 
 	<bean id="procession1" class="domain.Procession">
 		<property name="ticker" value="123456-ASDGH" />
-		<property name="title" value="El Cacharro" />
+		<property name="title" value="El Cachorro" />
 		<property name="description"
-			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
-		<property name="momentOrganised" value="2020/09/02" />
+			value="El Cachorro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+		<property name="momentOrganised" value="2019/03/14" />
 		<property name="ffinal" value="false" />
 		<property name="brotherhood" ref="brotherhood1" />
 	</bean>
@@ -935,11 +1030,11 @@
 	<!-- Brotherhood -->
 
 	<bean id="brotherhood1" class="domain.Brotherhood">
-		<property name="name" value="Hermandad" />
+		<property name="name" value="El Cristo del Gran Poder" />
 		<property name="middleName" value="" />
-		<property name="surname" value="del Amor" />
+		<property name="surname" value="Christus magna potentia" />
 		<property name="photo"
-			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+			value="https://i2.wp.com/tabernacofrade.net/web/wp-content/uploads/2017/02/esc_dh_granpoder.jpg?resize=200%2C200" />
 		<property name="email" value="amor@gmail.com" />
 		<property name="phone" value="+34(456)323456749" />
 
@@ -950,13 +1045,13 @@
 		<property name="userAccount" ref="userAccount3" />
 
 
-		<property name="title" value="Hdad del amor" />
-		<property name="establishedMoment" value="May 29, 2012 15:00" />
+		<property name="title" value="El Cristo del Gran Poder" />
+		<property name="establishedMoment" value="May 19, 2010 12:00" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1brotherhood1" class="domain.Url">
 					<property name="url"
-						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+						value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMU29IdoFHILH_NGgV5um9C22yuv52wFETmew--_meYPlatM3D" />
 				</bean>
 			</list>
 		</property>
@@ -964,28 +1059,28 @@
 
 
 	<bean id="brotherhood2" class="domain.Brotherhood">
-		<property name="name" value="Hermandad del bracalete" />
+		<property name="name" value="Los gitanos" />
 		<property name="middleName" value="" />
-		<property name="surname" value="sin apellidos" />
+		<property name="surname" value="GB" />
 		<property name="photo"
-			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
-		<property name="email" value="amorYPaz@gmail.com" />
-		<property name="phone" value="+34(457)321456749" />
+			value="https://i.pinimg.com/originals/bc/b0/51/bcb0513585dced588872c820c4e3707e.jpg" />
+		<property name="email" value="losgitanos@gmail.com" />
+		<property name="phone" value="+34(457)421456749" />
 
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
-		<property name="score" value="0.2" />
+		<property name="score" value="0.1" />
 
 		<property name="userAccount" ref="userAccount5" />
 
 
-		<property name="title" value="Hermanos del amor" />
+		<property name="title" value="Hermandad de Los Gitanos" />
 		<property name="establishedMoment" value="May 19, 2010 12:00" />
 		<property name="pictures">
 			<list>
 				<bean id="picture1brotherhood2" class="domain.Url">
 					<property name="url"
-						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+						value="https://i.pinimg.com/originals/bc/b0/51/bcb0513585dced588872c820c4e3707e.jpg" />
 				</bean>
 			</list>
 		</property>
@@ -1115,6 +1210,45 @@
 		<property name="userAccount" ref="userAccount6" />
 
 		<property name="position" value="Fundraiser" />
+	</bean>
+	
+	
+	<bean id="member3" class="domain.Member">
+		<property name="name" value="Pablo" />
+		<property name="middleName" value="Jesús" />
+		<property name="surname" value="Pino" />
+		<property name="photo"
+			value="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Rocky_balboa.jpeg/200px-Rocky_balboa.jpeg" />
+		<property name="email" value="pinoDelBueno@gmail.com" />
+		<property name="phone" value="+34(456)458456749" />
+
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="score" value="0.5" />
+		<property name="address" value="Calle Pablo" />
+		<property name="userAccount" ref="userAccount8" />
+
+		<property name="position" value="Vocal" />
+	</bean>
+	
+	
+	
+	<bean id="member4" class="domain.Member">
+		<property name="name" value="Iñigo" />
+		<property name="middleName" value="" />
+		<property name="surname" value="Montoya" />
+		<property name="photo"
+			value="https://i.ytimg.com/vi/q5Hw6os7Mf4/maxresdefault.jpg" />
+		<property name="email" value="tumatasteAMiPadre@gmail.com" />
+		<property name="phone" value="+34(556)458446749" />
+
+		<property name="spammer" value="false" />
+		<property name="banned" value="false" />
+		<property name="score" value="0.5" />
+		<property name="address" value="Calle soy iñigo montoya,preparate a morir" />
+		<property name="userAccount" ref="userAccount9" />
+
+		<property name="position" value="Vocal" />
 	</bean>
 
 
