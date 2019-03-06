@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.EnrollRepository;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
+import domain.Position;
+import repositories.EnrollRepository;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -35,6 +36,9 @@ public class EnrollService {
 	@Autowired
 	private MemberService		memberService;
 
+	@Autowired
+	private PositionService		positionService;
+
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -48,12 +52,14 @@ public class EnrollService {
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		final Member member = this.memberService.findOne(a.getId());
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		final Position position = this.positionService.findAll().get(0);
 
 		enroll.setStatus("PENDING");
 		enroll.getStatus();
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 		enroll.setMember(member);
 		enroll.setBrotherhood(brotherhood);
+		enroll.setPosition(position);
 		return enroll;
 	}
 	public Collection<Enroll> findAll() {

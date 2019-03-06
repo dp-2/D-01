@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -11,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.PositionRepository;
 import domain.Position;
+import repositories.PositionRepository;
 
 @Service
 @Transactional
@@ -20,11 +21,11 @@ public class PositionService {
 
 	// Managed repository ----------------------------------------------------------------
 	@Autowired
-	private PositionRepository	positionRepository;
-
+	private PositionRepository positionRepository;
 
 	//	@Autowired
 	//	private EnrollService		enrollService;
+
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -38,8 +39,8 @@ public class PositionService {
 		return p;
 	}
 
-	public Collection<Position> findAll() {
-		final Collection<Position> positions;
+	public List<Position> findAll() {
+		final List<Position> positions;
 
 		positions = this.positionRepository.findAll();
 		Assert.notNull(positions);

@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.BrotherhoodService;
-import services.EnrollService;
-import services.MemberService;
-import services.PositionService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
 import domain.Position;
+import security.LoginService;
+import services.ActorService;
+import services.BrotherhoodService;
+import services.EnrollService;
+import services.MemberService;
+import services.PositionService;
 
 @Controller
 @RequestMapping("/enroll/member")
@@ -128,7 +128,7 @@ public class EnrollMemberController extends AbstractController {
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:enroll/member/list.do");
+				result = this.list();
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
 				System.out.println(oops.getMessage());
