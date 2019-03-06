@@ -75,36 +75,6 @@ public class EnrollBrotherhoodController extends AbstractController {
 		return result;
 	}
 
-	//Request-------------------------------------------------------------
-	@RequestMapping(value = "/requests", method = RequestMethod.GET)
-	public ModelAndView request() {
-		ModelAndView result;
-		final Collection<Enroll> requests;
-
-		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
-		final int brotherhoodId = a.getId();
-		requests = this.enrollService.findEnrollsPendingByBrotherhood(brotherhoodId);
-
-		result = new ModelAndView("enroll/request");
-		result.addObject("requests", requests);
-		result.addObject("requestURI", "enroll/brotherhood/requests.do");
-		result.addObject("brotherhoodId", brotherhoodId);
-		return result;
-	}
-
-	//	//Create
-	//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	//	public ModelAndView create() {
-	//		ModelAndView result;
-	//		final Enroll enroll;
-	//
-	//		enroll = this.enrollService.create();
-	//		Assert.notNull(enroll);
-	//		result = this.createEditModelAndView(enroll);
-	//
-	//		return result;
-	//	}
-
 	// Edit
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int enrollId) {
@@ -129,7 +99,7 @@ public class EnrollBrotherhoodController extends AbstractController {
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:/enroll/brotherhood/list.do");
+				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
 				System.out.println(oops.getMessage());
