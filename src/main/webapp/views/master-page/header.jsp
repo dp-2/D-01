@@ -125,8 +125,7 @@
 			<li><a class="fNiv" href="dfloat/brotherhood/list.do"><spring:message
 						code="master.page.dfloat" /></a></li>
 
-			<li><a class="fNiv" href="area/display.do"><spring:message
-						code="master.page.areaBrotherhood" /></a></li>
+			
 
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
 						code="brotherhood.display" /></a></li>
