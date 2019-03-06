@@ -121,32 +121,27 @@
 			<li><a class="fNiv" href="area/list.do"><spring:message
 						code="master.page.area" /></a></li>
 			<li><a class="fNiv" href="enroll/brotherhood/list.do"><spring:message
-						code="master.page.enroll" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="enroll/brotherhood/requests.do"><spring:message
-								code="master.page.enroll.request" /></a></li>
-				</ul></li>
+						code="master.page.enroll" /></a></li>
 			<li><a class="fNiv" href="dfloat/brotherhood/list.do"><spring:message
 						code="master.page.dfloat" /></a></li>
-			
+
 			<li><a class="fNiv" href="area/display.do"><spring:message
 						code="master.page.areaBrotherhood" /></a></li>
-			
+
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
 						code="brotherhood.display" /></a></li>
-						
+
 			<li><a class="fNiv" href="march/member/list.do"><spring:message
 						code="master.page.march" /></a></li>
-						
-			
+
+
 
 		</security:authorize>
 
 
 		<security:authorize access="permitAll">
 			<li><a href="brotherhood/any/list.do"><spring:message
-								code="master.page.listbrotherhood" /></a></li>
+						code="master.page.listbrotherhood" /></a></li>
 			<li><a class="fNiv" href="procession/list.do"><spring:message
 						code="master.page.processions" /></a>
 				<ul>
@@ -160,7 +155,7 @@
 						<li><a href="procession/brotherhood/myList.do"><spring:message
 									code="master.page.processions.brotherhood" /></a></li>
 					</security:authorize>
-					
+
 				</ul>
 		</security:authorize>
 
