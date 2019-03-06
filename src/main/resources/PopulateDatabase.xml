@@ -890,6 +890,7 @@
 	<bean id="enroll5" class="domain.Enroll">
 		<property name="startMoment" value="December 29, 2017 11:00" />
 		<property name="member" ref="member3" />
+		<property name="position" ref="position3" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="status" value="APPROVED" />
 	</bean>
@@ -897,6 +898,7 @@
 	<bean id="enroll6" class="domain.Enroll">
 		<property name="startMoment" value="January 29, 2016 11:00" />
 		<property name="member" ref="member4" />
+		<property name="position" ref="position6" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="status" value="APPROVED" />
 	</bean>
@@ -1258,7 +1260,6 @@
 		<property name="address" value="" />
 		<property name="userAccount" ref="userAccount2" />
 
-		<property name="position" value="President" />
 	</bean>
 
 
@@ -1277,7 +1278,6 @@
 		<property name="address" value="" />
 		<property name="userAccount" ref="userAccount6" />
 
-		<property name="position" value="Fundraiser" />
 	</bean>
 	
 	
@@ -1296,7 +1296,6 @@
 		<property name="address" value="Calle Pablo" />
 		<property name="userAccount" ref="userAccount8" />
 
-		<property name="position" value="Vocal" />
 	</bean>
 	
 	
@@ -1316,7 +1315,6 @@
 		<property name="address" value="Calle soy iñigo montoya,preparate a morir" />
 		<property name="userAccount" ref="userAccount9" />
 
-		<property name="position" value="Vocal" />
 	</bean>
 
 

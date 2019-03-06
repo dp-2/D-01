@@ -8,6 +8,26 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<%
+String languageValue;
+try{
+Cookie[] cookies = request.getCookies();
+Cookie languageCookie = null;
+for(Cookie c : cookies) {
+	if(c.getName().equals("language")) {
+		languageCookie = c;
+	}
+}
+
+languageValue = languageCookie.getValue();}
+catch(NullPointerException e){
+	languageValue = "en";	
+}
+
+
+%>
+
+
 <display:table name="enrolls" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
@@ -27,7 +47,17 @@
 
 	<display:column property="startMoment" titleKey="enroll.start" />
 	<display:column property="endMoment" titleKey="enroll.end" />
-	<display:column property="position.name" titleKey="enroll.position" />
+	
+		<spring:message code="enroll.position" var="enrollPosition"></spring:message>
+		<display:column title="${enrollPosition}" sortable="true" >
+			<% if(languageValue.equals("en")) { %>
+				<jstl:out value="${row.position.nameEnglish}" />
+			<% } else if (languageValue.equals("es")) { %>
+				<jstl:out value="${row.position.nameSpanish}" />
+			<% } %>
+		</display:column>
+		
+		
 
 	<jstl:if test="${row.status=='PENDING'}">
 		<display:column property="status" titleKey="enroll.status"
