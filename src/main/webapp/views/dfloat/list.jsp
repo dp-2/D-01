@@ -21,7 +21,7 @@
 
 
 
-<display:table name="dfloats" id="dfloat" requestURI="${requestURI}" pagesize="5" class="displaytag">
+<display:table name="dfloats" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
 	<%--  Primero compruebo que es un brotherhood --%>
 	<security:authorize access="hasRole('BROTHERHOOD')">
@@ -42,11 +42,11 @@
 
 
 
-		<acme:column code="dfloat.title" value="${ dfloat.title}"></acme:column>
-		<acme:column code="dfloat.description" value="${ dfloat.description}"></acme:column>
-		<acme:column code="dfloat.pictures" value="${ dfloat.pictures}"></acme:column>
-		<acme:column code="dfloat.brotherhood" value="${dfloat.brotherhood.name}"></acme:column>
-		<%-- <acme:column code="dfloat.procession" value="${ dfloat.procession.title}" ></acme:column> --%>
+		<acme:column code="dfloat.title" value="${ row.title}"></acme:column>
+		<acme:column code="dfloat.description" value="${ row.description}"></acme:column>
+		<acme:column code="dfloat.pictures" value="${ row.pictures}"></acme:column>
+		<acme:column code="dfloat.brotherhood" value="${row.brotherhood.title}"></acme:column>
+		
 
 
 

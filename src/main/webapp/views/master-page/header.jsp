@@ -130,9 +130,6 @@
 
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
 						code="brotherhood.display" /></a></li>
-
-			<li><a class="fNiv" href="march/member/list.do"><spring:message
-						code="master.page.march" /></a></li>
 		</security:authorize>
 
 
@@ -146,19 +143,18 @@
 									code="master.page.mybrotherhood" /></a>
 					</security:authorize>
 				</ul></li>
+				<security:authorize access="hasRole('BROTHERHOOD')">
 			<li><a class="fNiv" href="procession/list.do"><spring:message
 						code="master.page.processions" /></a>
 				<ul>
-					<security:authorize access="hasRole('BROTHERHOOD')">
-						<li class="arrow"></li>
-						<li><a href="procession/member/list.do"><spring:message
-									code="master.page.processions.brotherhood" /></a></li>
+						
 						<li class="arrow"></li>
 						<li><a href="procession/brotherhood/myList.do"><spring:message
 									code="master.page.processions.brotherhood" /></a></li>
-					</security:authorize>
+					
 
 				</ul>
+				</security:authorize>
 		</security:authorize>
 
 
