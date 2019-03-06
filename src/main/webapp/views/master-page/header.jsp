@@ -141,7 +141,13 @@
 
 		<security:authorize access="permitAll">
 			<li><a href="brotherhood/any/list.do"><spring:message
-						code="master.page.listbrotherhood" /></a></li>
+						code="master.page.listbrotherhood" /></a>
+			<ul>
+					<security:authorize access="hasRole('MEMBER')">
+						<li class="arrow"></li>
+						<li><a href="brotherhood/member/myList.do"><spring:message
+									code="master.page.processions.brotherhood" /></a>
+					</security:authorize></li>
 			<li><a class="fNiv" href="procession/list.do"><spring:message
 						code="master.page.processions" /></a>
 				<ul>
