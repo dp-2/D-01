@@ -22,17 +22,11 @@
 
 
 <display:table name="members" id="member"
-	requestURI="member/brotherhood/list.do" pagesize="5"
+	requestURI="member/list.do" pagesize="5"
 	class="displaytag">
 
 
-		<%--  La columna que va a la vista display de las member --%>
-<%-- 		<display:column>
-			<a
-				href="member/display.do?memberId=${member.id}"><spring:message
-					code="member.display"></spring:message></a>
-		</display:column>
- --%>
+
 			
 		<acme:column code="member.name" value="${ member.name}"></acme:column>
 		<acme:column code="member.middleName" value="${ member.middleName}" ></acme:column>	
@@ -46,7 +40,7 @@
 
 </display:table>
 
-		<acme:cancel url="procession/list.do" code="member.back" />
+		<acme:cancel url="brotherhood/any/list.do" code="member.back" />
 
 
 

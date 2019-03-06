@@ -93,14 +93,19 @@ public class AreaService {
 	//--------------Other Methods-------------------------------
 
 	public Map<String, Double> StatsBrotherhoodPerArea() {
-		final Double[] statistics = this.areaRepository.queryC2AVG();
+		final Double min = this.areaRepository.minHermandadesPorArea();
+		final Double count = this.areaRepository.countHermandadesPorArea();
+		final Double max = this.areaRepository.maxHermandadesPorArea();
+		final Double avg = this.areaRepository.avgHermandadesPorArea();
+		final Double stdev = this.areaRepository.stddevHermandadesPorArea();
+
 		final Map<String, Double> res = new HashMap<>();
 
-		res.put("COUNT", statistics[0]);
-		res.put("AVG", statistics[1]);
-		res.put("MIN", statistics[2]);
-		res.put("MAX", statistics[3]);
-		res.put("STD", statistics[4]);
+		res.put("COUNT", count);
+		res.put("MIN", min);
+		res.put("MAX", max);
+		res.put("AVG", avg);
+		res.put("STD", stdev);
 		return res;
 	}
 	public Area findAreaByBrotherhoodId(final int brotherhoodId) {

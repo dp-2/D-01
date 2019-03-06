@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -162,6 +163,10 @@ public class MemberService {
 
 	public Member findMemberByEnrollId(final int enrollId) {
 		return this.memberRepository.findMemberByEnrollId(enrollId);
+	}
+
+	public List<Member> listMembersByBrotherhood(final int brotherhoodId) {
+		return this.memberRepository.listMembersByBrotherhood(brotherhoodId);
 	}
 
 	public Map<String, Double> membersBrotherhoodStats() {

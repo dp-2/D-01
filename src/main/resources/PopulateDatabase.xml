@@ -1423,4 +1423,32 @@
 		<property name="procession" ref="procession1" />
 	</bean>
 	
+	
+	<bean id="march5" class="domain.March">
+		<property name="status" value="APPROVED" />
+		<property name="location">
+			<list>
+				<value>2</value>
+				<value>2</value>
+			</list>
+		</property>
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession3" />
+	</bean>
+	
+	<bean id="march6" class="domain.March">
+		<property name="status" value="APPROVED" />
+		<property name="location">
+			<list>
+				<value>2</value>
+				<value>2</value>
+			</list>
+		</property>
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession4" />
+	</bean>
+	
+	
+	
+	
 </beans>

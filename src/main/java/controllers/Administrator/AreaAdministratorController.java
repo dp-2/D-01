@@ -108,7 +108,7 @@ public class AreaAdministratorController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 
-		result.addObject("requestURI", "area/edit.do");
+		result.addObject("requestURI", "area/administrator/edit.do");
 
 		return result;
 	}
