@@ -45,7 +45,7 @@
 		alt="${titleListProcessions}" />
 	
 	<spring:message code='brotherhood.listfloats' var="titleListFloats" />
-	<acme:column value="" url="true" 
+	<acme:column value="dfloat/list.do?brotherhoodId=${row.id}" url="true" 
 		alt="${titleListFloats}" />
 	
 </display:table>
