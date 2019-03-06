@@ -49,7 +49,6 @@ public class Enroll extends DomainEntity {
 		this.endMoment = endMoment;
 	}
 
-	@NotNull
 	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$|^OUT$")
 	public String getStatus() {
 		return this.status;

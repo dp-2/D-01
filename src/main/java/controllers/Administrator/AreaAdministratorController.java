@@ -53,7 +53,7 @@ public class AreaAdministratorController extends AbstractController {
 		area = this.areaService.findOne(areaId);
 		Assert.notNull(area);
 		result = this.createEditModelAndView(area);
-
+		result.addObject("requestURI", "area/administrator/edit.do");
 		return result;
 	}
 

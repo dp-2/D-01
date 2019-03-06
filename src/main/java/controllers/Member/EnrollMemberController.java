@@ -120,6 +120,7 @@ public class EnrollMemberController extends AbstractController {
 	public ModelAndView save(@Valid final Enroll enroll, final BindingResult binding) {
 
 		ModelAndView result;
+		enroll.setStatus("PENDING");
 		if (binding.hasErrors()) {
 			System.out.println(enroll.getStatus());
 			result = this.createEditModelAndView(enroll, "enroll.commit.error");
@@ -130,11 +131,10 @@ public class EnrollMemberController extends AbstractController {
 				result = new ModelAndView("redirect:enroll/member/list.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
-
+				System.out.println(oops.getMessage());
 			}
 		return result;
 	}
-
 	// GoOut
 	@RequestMapping(value = "/goOut", method = RequestMethod.GET)
 	public ModelAndView goOut(@RequestParam final int enrollId) {

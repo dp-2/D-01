@@ -226,11 +226,28 @@
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="spamboxSystem" />
 		<property name="actor" ref="system" />
-
+ 
 	</bean>
 
-
-
+	<!-- Messages -->
+	
+	<bean id="message1System" class="domain.Message" >
+		<property name="subject" value="Subjeto" />
+		<property name="body" value="Cuerpo" />
+		<property name="moment" value="June 29, 2015 15:00" />
+		<property name="priority" value="HIGH" />
+		<property name="tags" value="tgs" />
+		<property name="box">
+			<ref bean="inboxSystem" />
+		</property>
+		<property name="sender">
+			<ref bean="system" />
+		</property>
+		<property name="recipient">
+			<ref bean="administrator1" />
+		</property>
+	</bean>
+	
 	<!-- Boxes del admin1 -->
 
 	<bean id="folder1Admin1" class="domain.Box">
