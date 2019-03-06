@@ -48,7 +48,8 @@ public class BrotherhoodService {
 	private UserAccountRepository	userAccountRepository;
 	@Autowired
 	private EnrollService			enrollService;
-
+	@Autowired
+	private FinderService			finderService;
 	@Autowired
 	private ServiceUtils			serviceUtils;
 
@@ -208,6 +209,6 @@ public class BrotherhoodService {
 			if (e.getBrotherhood() == brother)
 				members.add(e.getMember());
 		return members;
-
 	}
+
 }

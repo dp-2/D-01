@@ -2,6 +2,7 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.FinderRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Finder;
 import domain.Member;
 import domain.Procession;
-import repositories.FinderRepository;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -36,6 +38,9 @@ public class FinderService {
 
 	@Autowired
 	private ProcessionService		processionService;
+
+	@Autowired
+	private ServiceUtils			serviceUtils;
 
 
 	//Methods-------------------------------------------------------------------
@@ -152,7 +157,15 @@ public class FinderService {
 					res.add(procession);
 			return res;
 		}
+	}
 
+	public Collection<Double> finderStats() {
+		// 1er dato mínimo
+		// 2o dato máximo
+		// 3er dato media
+		// 4o dato desviación estándar
+		this.serviceUtils.checkAuthority(Authority.ADMIN);
+		return this.finderRepository.finderStats();
 	}
 
 }

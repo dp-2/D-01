@@ -15,7 +15,7 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 	@Query("select f from Finder f where f.member.id = ?1")
 	Finder findFinderByMemberId(int memberId);
 
-	@Query("select min(i),max(i),avg(i) from Finder f join f.processions.size i")
+	@Query("select min(f.processions.size),max(f.processions.size),avg(f.processions.size),sqrt(((select sum(f1.processions.size) from Finder f1) - (select avg(f2.processions.size) from Finder f2)) * ((select sum(f1.processions.size) from Finder f1) - (select avg(f2.processions.size) from Finder f2)) / count(f)) from Finder f")
 	Collection<Double> finderStats();
 
 	//Query: "The ratio of the empty versus non-empty finders" Vamos a considerar un finder vacío cuando no tiene lastUpdate
