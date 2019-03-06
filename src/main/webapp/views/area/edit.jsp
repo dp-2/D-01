@@ -16,7 +16,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="${requestURI}" modelAttribute="area">
@@ -24,10 +24,12 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
+	<security:authorize access="hasRole('ADMIN')">
+		<form:hidden path="brotherhood" />
+	</security:authorize>
+	<acme:textbox code="area.title" path="name" />
 
-	<acme:textbox path="name" code="area.title" />
-
-	<acme:textarea code="area.pictures" path="pictures"/>
+	<acme:textarea code="area.pictures" path="pictures" />
 
 
 
