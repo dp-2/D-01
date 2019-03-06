@@ -32,25 +32,26 @@
 	<acme:textarea code="area.pictures" path="pictures" />
 
 
+	<acme:submit name="save" code="area.save" />
+
+	<security:authorize access="hasRole('ADMIN')">
+		<jstl:if test="${area.id != 0 && area.brotherhood==null}">
+			<acme:submit name="delete" code="area.delete" />
+		</jstl:if>
+		<acme:cancel url="/area/list.do" code="area.cancel" />
+
+		<br />
+	</security:authorize>
+
+	<security:authorize access="hasRole('BROTHERHOOD')">
+		<acme:cancel url="/area/list.do}" code="area.cancel" />
+
+		<br />
+	</security:authorize>
 
 
 </form:form>
-<acme:submit name="save" code="area.save" />
 
-<security:authorize access="hasRole('ADMIN')">
-	<jstl:if test="${area.id != 0 && area.brotherhood==null}">
-		<acme:submit name="delete" code="area.delete" />
-	</jstl:if>
-	<acme:cancel url="/area/list.do" code="area.cancel" />
-
-	<br />
-</security:authorize>
-
-<security:authorize access="hasRole('BROTHERHOOD')">
-	<acme:cancel url="/area/list.do}" code="area.cancel" />
-
-	<br />
-</security:authorize>
 
 <br />
 
