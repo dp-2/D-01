@@ -46,7 +46,11 @@ catch(NullPointerException e){
 	<form:hidden path="brotherhood" />
 	<form:hidden path="startMoment" />
 	<form:hidden path="endMoment" />
-
+	<security:authorize access="hasRole('MEMBER')">
+		<h1>
+			<b><spring:message code="enroll.create1"></spring:message>${enroll.brotherhood.title}</b>
+		</h1>
+	</security:authorize>
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<jstl:if test="${enroll.status=='PENDING'}">
 			<form:label path="status">
