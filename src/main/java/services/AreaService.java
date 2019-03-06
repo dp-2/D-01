@@ -25,33 +25,25 @@ public class AreaService {
 	//Managed Repository
 
 	@Autowired
-	private AreaRepository			areaRepository;
+	private AreaRepository		areaRepository;
 
 	//Supporting Service
 	@Autowired
-	private ActorService			actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private FinderService			finderService;
-
-	@Autowired
-	private BrotherhoodService		brotherHoodService;
-
-	@Autowired
-	private ConfigurationService	configurationService;
+	private BrotherhoodService	brotherhoodService;
 
 
 	// Simple CRUD methods
 	public Area create() {
-		final Area res = new Area();
-		Brotherhood bh;
-		bh = (Brotherhood) this.actorService.findByUserAccount(LoginService.getPrincipal());
-		res.setBrotherhood(bh);
+		Area area;
 
-		final Collection<Url> pictures = new ArrayList<>();
-		res.setPictures(pictures);
-
-		return res;
+		area = new Area();
+		area.setBrotherhood(null);
+		final Collection<Url> a = new ArrayList<>();
+		area.setPictures(a);
+		return area;
 	}
 	public Collection<Area> findAll() {
 		return this.areaRepository.findAll();
@@ -64,7 +56,6 @@ public class AreaService {
 	public Area save(final Area area) {
 		Area res = null;
 		Assert.notNull(area);
-		System.out.println(area.getName());
 
 		final Actor a;
 		a = this.actorService.findByUserAccount(LoginService.getPrincipal());
@@ -91,6 +82,14 @@ public class AreaService {
 		this.areaRepository.delete(area);
 	}
 
+	public void assign(final Area area) {
+
+		Assert.isTrue(area.getBrotherhood() == null);
+		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		final Brotherhood bro = this.brotherhoodService.findOne(a.getId());
+		area.setBrotherhood(bro);
+		this.areaRepository.save(area);
+	}
 	//--------------Other Methods-------------------------------
 
 	public Map<String, Double> StatsBrotherhoodPerArea() {

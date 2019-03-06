@@ -21,46 +21,47 @@
 
 
 
-<display:table name="areas" id="area"
-	requestURI="area/list.do" pagesize="5"
-	class="displaytag">
+<display:table name="areas" id="row" requestURI="${requestURI}"
+	pagesize="5" class="displaytag">
 
 	<%--  Primero compruebo que es un brotherhood --%>
 	<security:authorize access="hasRole('ADMIN')">
 
 
-		<%--  La columna que va a la vista edit de las area --%>
-<%-- 		<display:column>
-			<a
-				href="area/brotherhood/edit.do?areaId=${area.id}"><spring:message
-					code="area.edit"></spring:message></a>
-		</display:column> --%>
-		
 
-		<%--  La columna que va a la vista display de las area --%>
-<%-- 		<display:column>
-			<a
-				href="area/display.do?areaId=${area.id}"><spring:message
-					code="area.display"></spring:message></a>
-		</display:column> --%>
 
-	
-			
-		<acme:column code="area.title" value="${ area.name}"></acme:column>	
-		<acme:column code="area.brotherhood" value="${ area.brotherhood.title}" ></acme:column>
-		<%-- <acme:column code="area.procession" value="${ area.procession.title}" ></acme:column> --%>
-	
+		<display:column>
+			<a href="area/administrator/edit.do?areaId=${row.id}"> <spring:message
+					code="area.edit" />
+			</a>
+		</display:column>
+
+		<acme:column code="area.title" value="${row.name}"></acme:column>
+		<acme:column code="area.brotherhood" value="${row.brotherhood.title}"></acme:column>
+
+
+
+
+	</security:authorize>
+	<security:authorize access="hasRole('BROTHERHOOD')">
+		<acme:column code="area.title" value="${row.name}"></acme:column>
+		<acme:column code="area.brotherhood" value="${row.brotherhood.title}"></acme:column>
+		<display:column>
+			<jstl:if test="${row.brotherhood==null}">
+				<a href="area/assign.do?areaId=${row.id}"> <spring:message
+						code="area.assign" />
+				</a>
+			</jstl:if>
+		</display:column>
 	</security:authorize>
 </display:table>
 
 
-<%--  Boton de creacion --%>
-<%-- <security:authorize access="hasRole('BROTHERHOOD')">
-
-	<input type="button" name="create"
-		value="<spring:message code="area.create"></spring:message>"
-		onclick="javascript:relativeRedir('area/brotherhood/create.do')" />
-</security:authorize> --%>
+<security:authorize access="hasRole('ADMIN')">
+	<a href="area/administrator/create.do"> <spring:message
+			code="area.create" />
+	</a>
+</security:authorize>
 
 
 

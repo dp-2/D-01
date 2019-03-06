@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.EnrollRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
@@ -34,9 +35,6 @@ public class EnrollService {
 	@Autowired
 	private MemberService		memberService;
 
-	@Autowired
-	private PositionService		positionService;
-
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -45,15 +43,16 @@ public class EnrollService {
 	}
 
 	// Simple CRUD methods -------------------------------------------------------------------
-	public Enroll create(final int brotherhoodId, final int memberId) {
+	public Enroll create(final int brotherhoodId) {
 		final Enroll enroll = new Enroll();
-
-		final Member member = this.memberService.findOne(memberId);
+		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		final Member member = this.memberService.findOne(a.getId());
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 
 		enroll.setStatus("PENDING");
+		enroll.getStatus();
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
-		//		enroll.setMember(member);
+		enroll.setMember(member);
 		enroll.setBrotherhood(brotherhood);
 		return enroll;
 	}
@@ -75,8 +74,9 @@ public class EnrollService {
 
 	public Enroll save(final Enroll enroll) {
 		Assert.notNull(enroll);
-		this.checkPrincipal(enroll);
 		Enroll result;
+		if (enroll.getStatus() == null)
+			enroll.setStatus("PENDING");
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 		result = this.enrollRepository.save(enroll);
 
@@ -114,7 +114,8 @@ public class EnrollService {
 	}
 
 	public Collection<Brotherhood> findBrotherhoodByMember(final int memberId) {
-		return this.enrollRepository.findBrotherhoodByMember(memberId);
+		final Collection<Brotherhood> b = this.enrollRepository.findBrotherhoodByMember(memberId);
+		return b;
 
 	}
 	public Enroll goOut(final int enrollId) {
@@ -123,6 +124,7 @@ public class EnrollService {
 		final Date fechaActual = new Date(System.currentTimeMillis() - 1000);
 
 		enroll.setEndMoment(fechaActual);
+		enroll.setStatus("OUT");
 		enroll = this.enrollRepository.save(enroll);
 		return enroll;
 	}

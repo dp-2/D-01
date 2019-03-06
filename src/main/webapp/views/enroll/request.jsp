@@ -10,43 +10,72 @@
 
 <display:table name="requests" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
-	
+
 	<security:authorize access="hasRole('BROTHERHOOD')">
-		<jstl:if test="${brotherhoodId==row.brotherhood.id}">
-			<display:column>
+		<display:column>
+			<jstl:if
+				test="${brotherhoodId==row.brotherhood.id && (row.status=='APPROVED'||row.status=='PENDING') && areaService.findAreaByBrotherhoodId(row.brotherhood.id)!=null}">
 
 				<a href="enroll/brotherhood/edit.do?enrollId=${row.id}"> <spring:message
 						code="enroll.edit" />
 				</a>
 
-			</display:column>
-		</jstl:if>
+
+			</jstl:if>
+		</display:column>
 	</security:authorize>
-	
+
 	<display:column property="startMoment" titleKey="enroll.start" />
-	<display:column property="endMoment" titleKey="enroll.end" />	
-	
+	<display:column property="endMoment" titleKey="enroll.end" />
+	<display:column property="position.name" titleKey="enroll.position" />
+
 	<jstl:if test="${row.status=='PENDING'}">
 		<display:column property="status" titleKey="enroll.status"
 			style="background-color:Yellow" sortable="true" />
 	</jstl:if>
 
 	<jstl:if test="${row.status=='APPROVED' }">
-		<display:column property="status" titleKey="march.status"
+		<display:column property="status" titleKey="enroll.status"
 			style="background-color:Blue" sortable="true " />
 	</jstl:if>
 
 	<jstl:if test="${row.status=='REJECTED'}">
-		<display:column property="status" titleKey="march.status"
+		<display:column property="status" titleKey="enroll.status"
 			style="background-color:Red" sortable="true" />
 	</jstl:if>
-	
+
+	<jstl:if test="${row.status=='OUT'}">
+		<display:column property="status" titleKey="enroll.status"
+			style="background-color:VIOLET" sortable="true" />
+	</jstl:if>
+
 
 	<security:authorize access="hasRole('BROTHERHOOD')">
 		<display:column property="member.name" titleKey="enroll.member" />
+
+		<display:column titleKey="enroll.out">
+			<jstl:if test="${row.status == 'APPROVED' && row.endMoment == null}">
+
+				<a href="enroll/brotherhood/kickOut.do?enrollId=${row.id}"><spring:message
+						code="enroll.kickout" /></a>
+
+			</jstl:if>
+		</display:column>
 	</security:authorize>
 
+	<security:authorize access="hasRole('MEMBER')">
+		<display:column property="brotherhood.name"
+			titleKey="enroll.brotherhood" />
 
+		<display:column titleKey="enroll.out">
+			<jstl:if test="${row.status == 'APPROVED' && row.endMoment == null}">
+
+				<a href="enroll/member/goOut.do?enrollId=${row.id}"><spring:message
+						code="enroll.getout" /></a>
+			</jstl:if>
+		</display:column>
+
+	</security:authorize>
 </display:table>
 <br />
 <br />
