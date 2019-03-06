@@ -24,11 +24,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.AdministratorService;
 import services.BrotherhoodService;
+import services.EnrollService;
 import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.Enroll;
 import domain.Procession;
 
 @Controller
@@ -52,6 +54,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private EnrollService			enrollService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -93,10 +98,14 @@ public class AdministratorController extends AbstractController {
 		result.addObject("stdevMembersPerBrotherhood", stdevMembersPerBrotherhood);
 
 		//--------------Largest and smallest brotherhood
-		final Brotherhood largestBrotherhood = this.brotherhoodService.BrotherhoodWithMoreMembers().firstKey();
-		final Brotherhood smallestBrotherhood = this.brotherhoodService.BrotherhoodWithLessMembers().firstKey();
-		final Integer largestBrotherhoodNumMembers = this.brotherhoodService.BrotherhoodWithMoreMembers().get(largestBrotherhood);
-		final Integer smallestBrotherhoodNumMembers = this.brotherhoodService.BrotherhoodWithMoreMembers().get(smallestBrotherhood);
+		final Brotherhood largestBrotherhood = this.brotherhoodService.BrotherhoodWithMoreMembers();
+		final Brotherhood smallestBrotherhood = this.brotherhoodService.BrotherhoodWithLessMembers();
+
+		final List<Enroll> enrollsLarg = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
+		final int largestBrotherhoodNumMembers = enrollsLarg.size();
+
+		final List<Enroll> enrollsSmall = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
+		final int smallestBrotherhoodNumMembers = enrollsSmall.size();
 
 		result.addObject("largestBrotherhood", largestBrotherhood);
 		result.addObject("smallestBrotherhood", smallestBrotherhood);

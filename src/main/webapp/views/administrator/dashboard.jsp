@@ -23,6 +23,19 @@
 		<acme:out code="dashboard.membersPerBrotherhood.avg" value="${avgMembersPerBrotherhood}" />
 		<acme:out code="dashboard.membersPerBrotherhood.stdev" value="${stdevMembersPerBrotherhood}" />
 	</fieldset>
+	
+	<fieldset>
+		<legend>
+		<spring:message code="dashboard.largestSmallestBrotherhood">
+			</spring:message>
+		</legend>
+		<acme:out code="dashboard.largestBrotherhood" value="${largestBrotherhood.title}" />
+		<acme:out code="dashboard.numberOfMembers" value="${largestBrotherhoodNumMembers}" />
+		<br/>
+		<br/>
+		<acme:out code="dashboard.smallestBrotherhood" value="${smallestBrotherhood.title}" />
+		<acme:out code="dashboard.numberOfMembers" value="${smallestBrotherhoodNumMembers}" />
+	</fieldset>
 
 		<fieldset>
 			<legend>
@@ -30,20 +43,13 @@
 				</spring:message>
 			</legend>
 
-			<acme:out code="dashboard.positionStats.positionCountTotal"
-				value="${positionCountTotal}" />
-			<acme:out code="dashboard.positionStats.positionCountPresident"
-				value="${positionCountPresident}" />
-			<acme:out code="dashboard.positionStats.positionCountVicepresident"
-				value="${positionCountVicepresident}" />
-			<acme:out code="dashboard.positionStats.positionCountSecretary"
-				value="${positionCountSecretary}" />
-			<acme:out code="dashboard.positionStats.positionCountTreasurer"
-				value="${positionCountTreasurer}" />
-			<acme:out code="dashboard.positionStats.positionCountHistorian"
-				value="${positionCountHistorian}" />
-			<acme:out code="dashboard.positionStats.positionCountOfficer"
-				value="${positionCountOfficer}" />
+			<acme:out code="dashboard.positionStats.positionCountTotal" value="${positionCountTotal}" />
+			<acme:out code="dashboard.positionStats.positionCountPresident" value="${positionCountPresident}" />
+			<acme:out code="dashboard.positionStats.positionCountVicepresident" value="${positionCountVicepresident}" />
+			<acme:out code="dashboard.positionStats.positionCountSecretary" value="${positionCountSecretary}" />
+			<acme:out code="dashboard.positionStats.positionCountTreasurer" value="${positionCountTreasurer}" />
+			<acme:out code="dashboard.positionStats.positionCountHistorian" value="${positionCountHistorian}" />
+			<acme:out code="dashboard.positionStats.positionCountOfficer" value="${positionCountOfficer}" />
 
 		</fieldset>
 
