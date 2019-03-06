@@ -20,6 +20,6 @@ public interface FinderRepository extends JpaRepository<Finder, Integer> {
 
 	//Query: "The ratio of the empty versus non-empty finders" Vamos a considerar un finder vacío cuando no tiene lastUpdate
 
-	//	@Query("select (count(*)*1.0)/(select count(*) from Finder ff where ff.lastUpdate > '2000-1-1') from Finder f where f.lastUpdate <= '2000-1-1'")
-	//	Double emptyVSNonEmptyFinder();
+	@Query("select (count(*)*1.0)/(select count(*) from Finder ff where ff.lastUpdate = null) from Finder f where f.lastUpdate != null")
+	Double emptyVSNonEmptyFinder();
 }
