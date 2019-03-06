@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-import domain.Actor;
-import domain.Brotherhood;
-import domain.Enroll;
-import domain.Member;
-import domain.Position;
 import security.LoginService;
 import services.ActorService;
 import services.BrotherhoodService;
 import services.EnrollService;
 import services.MemberService;
 import services.PositionService;
+import controllers.AbstractController;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Enroll;
+import domain.Member;
+import domain.Position;
 
 @Controller
 @RequestMapping("/enroll/member")
@@ -67,7 +67,7 @@ public class EnrollMemberController extends AbstractController {
 
 		result = new ModelAndView("enroll/list");
 		result.addObject("enrolls", enrolls);
-		result.addObject("requestURI", "/enroll/member/list.do");
+		result.addObject("requestURI", "enroll/member/list.do");
 		result.addObject("memberId", a.getId());
 		return result;
 	}
@@ -86,7 +86,7 @@ public class EnrollMemberController extends AbstractController {
 
 		result = new ModelAndView("enroll/listBrotherhood");
 		result.addObject("enrollBrotherhoods", finalBrotherhoods);
-		result.addObject("requestURI", "/enroll/member/listBrotherhood.do");
+		result.addObject("requestURI", "enroll/member/listBrotherhood.do");
 		result.addObject("memberId", memberId);
 		return result;
 	}

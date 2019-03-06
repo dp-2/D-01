@@ -19,18 +19,41 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<%
+
+String languageValue;
+try{
+Cookie[] cookies = request.getCookies();
+Cookie languageCookie = null;
+for(Cookie c : cookies) {
+	if(c.getName().equals("language")) {
+		languageCookie = c;
+	}
+}
+
+languageValue = languageCookie.getValue();}
+catch(NullPointerException e){
+	languageValue = "en";	
+}
+
+%>
+
+
+
 <form:form action="${requestURI}" modelAttribute="position">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
 
-	<acme:textbox code="position.name" path="name" />
+	<acme:textbox code="position.nameEnglish" path="nameEnglish" />
+	<br />
+	<acme:textbox code="position.nameSpanish" path="nameSpanish" />
 	<br />
 
 	<%-- <acme:select items="EN, ES" itemLabel="EN, ES" code="position.language" path="language"/>
 	<br /> --%>
 
-	<form:label path="language">
+	<%-- <form:label path="language">
 		<spring:message code="position.language"></spring:message>
 	</form:label>
 	<form:select id="language" path="language">
@@ -38,7 +61,7 @@
 		<option value="ES">ES</option>
 
 	</form:select>
-	<br /><br />
+	<br /><br /> --%>
 
 
 	<acme:submit name="save" code="position.save" />

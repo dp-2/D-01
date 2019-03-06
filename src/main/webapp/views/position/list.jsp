@@ -17,6 +17,24 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%
+String languageValue;
+try{
+Cookie[] cookies = request.getCookies();
+Cookie languageCookie = null;
+for(Cookie c : cookies) {
+	if(c.getName().equals("language")) {
+		languageCookie = c;
+	}
+}
+
+languageValue = languageCookie.getValue();}
+catch(NullPointerException e){
+	languageValue = "en";	
+}
+
+
+%>
 
 <display:table name="positions" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
@@ -30,9 +48,17 @@
 
 			</display:column>
 	</security:authorize>
+	
+	<spring:message code="position.name" var="positionName"></spring:message>
+		<display:column title="${positionName}" sortable="true" >
+			<% if(languageValue.equals("en")) { %>
+				<jstl:out value="${row.nameEnglish}" />
+			<% } else if (languageValue.equals("es")) { %>
+				<jstl:out value="${row.nameSpanish}" />
+			<% } %>
+		</display:column>
 
-	<display:column property="name" titleKey="position.name" />
-	<display:column property="language" titleKey="position.language" />
+
 
 </display:table>
 

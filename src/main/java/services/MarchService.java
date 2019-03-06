@@ -156,4 +156,11 @@ public class MarchService {
 
 	//queryc ratio of request to march grouped by status
 
+	//The listing of members who have got at least 10% the maximum number of request to march accepted.
+	public List<Member> members10PerMarchAccepted() {
+		List<Member> members10RequestAccepted = new ArrayList<>();
+		members10RequestAccepted = this.marchRepository.members10PerMarchAccepted();
+		return members10RequestAccepted;
+	}
+
 }

@@ -62,15 +62,25 @@
 			</legend>
 
 			<display:table name="processionsIn30Days" id="procession">
-
 				<acme:column code="dashboard.procession.title"
 					value="${ procession.title}"></acme:column>
 				<acme:column code="dashboard.procession.momentOrganised"
 					value="${ procession.momentOrganised}"></acme:column>
-
-
 			</display:table>
+			
+		</fieldset>
+		<fieldset>
+			<legend>
+				<spring:message code="dashboard.members10RequestAccepted">
+				</spring:message>
+			</legend>
 
-
+			<display:table name="members10RequestAccepted" id="member">
+				<acme:column code="dashboard.march.member"
+					value="${member.name}"></acme:column>
+				<acme:column code="dashboard.march.position"
+					value="${ member.position}"></acme:column>
+			</display:table>
+			
 		</fieldset>
 </security:authorize>

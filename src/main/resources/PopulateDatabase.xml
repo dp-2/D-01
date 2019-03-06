@@ -814,82 +814,54 @@
 
 	<!-- Positions -->
 
-	<bean id="position1_1" class="domain.Position">
-		<property name="name" value="President" />
-		<property name="language" value="en" />
+	<bean id="position1" class="domain.Position">
+		<property name="nameEnglish" value="President" />
+		<property name="nameSpanish" value="Presidente" />
 	</bean>
 
-	<bean id="position1_2" class="domain.Position">
-		<property name="name" value="Presidente" />
-		<property name="language" value="es" />
+
+	<bean id="position2" class="domain.Position">
+		<property name="nameEnglish" value="Vicepresident" />
+		<property name="nameSpanish" value="Vicepresidente" />
 	</bean>
 
-	<bean id="position2_1" class="domain.Position">
-		<property name="name" value="Vicepresident" />
-		<property name="language" value="en" />
+
+	<bean id="position3" class="domain.Position">
+		<property name="nameEnglish" value="Secretary" />
+		<property name="nameSpanish" value="Secretario" />
 	</bean>
 
-	<bean id="position2_2" class="domain.Position">
-		<property name="name" value="Vicepresidente" />
-		<property name="language" value="es" />
+
+	<bean id="position4" class="domain.Position">
+		<property name="nameEnglish" value="Treasurer" />
+		<property name="nameSpanish" value="Tesorero" />
 	</bean>
 
-	<bean id="position3_1" class="domain.Position">
-		<property name="name" value="Secretary" />
-		<property name="language" value="en" />
+
+	<bean id="position5" class="domain.Position">
+		<property name="nameEnglish" value="Historian" />
+		<property name="nameSpanish" value="Historiador" />
 	</bean>
 
-	<bean id="position3_2" class="domain.Position">
-		<property name="name" value="Secretario" />
-		<property name="language" value="es" />
+
+	<bean id="position6" class="domain.Position">
+		<property name="nameEnglish" value="Fundraiser" />
+		<property name="nameSpanish" value="Recaudador de fondos" />
 	</bean>
 
-	<bean id="position4_1" class="domain.Position">
-		<property name="name" value="Treasurer" />
-		<property name="language" value="en" />
+
+	<bean id="position7" class="domain.Position">
+		<property name="nameEnglish" value="Officer" />
+		<property name="nameSpanish" value="Funcionario" />
 	</bean>
 
-	<bean id="position4_2" class="domain.Position">
-		<property name="name" value="Tesorero" />
-		<property name="language" value="es" />
-	</bean>
-
-	<bean id="position5_1" class="domain.Position">
-		<property name="name" value="Historian" />
-		<property name="language" value="en" />
-	</bean>
-
-	<bean id="position5_2" class="domain.Position">
-		<property name="name" value="Historiador" />
-		<property name="language" value="es" />
-	</bean>
-
-	<bean id="position6_1" class="domain.Position">
-		<property name="name" value="Fundraiser" />
-		<property name="language" value="en" />
-	</bean>
-
-	<bean id="position6_2" class="domain.Position">
-		<property name="name" value="Recaudador de fondos" />
-		<property name="language" value="es" />
-	</bean>
-
-	<bean id="position7_1" class="domain.Position">
-		<property name="name" value="Officer" />
-		<property name="language" value="en" />
-	</bean>
-
-	<bean id="position7_2" class="domain.Position">
-		<property name="name" value="Funcionario" />
-		<property name="language" value="es" />
-	</bean>
 
 	<!-- Enroll -->
 
 	<bean id="enroll1" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member1" />
-		<property name="position" ref="position1_2" />
+		<property name="position" ref="position1" />
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="status" value="APPROVED" />
 	</bean>
@@ -913,6 +885,63 @@
 		<property name="member" ref="member1" />
 		<property name="brotherhood" ref="brotherhood2" />
 		<property name="status" value="REJECTED" />
+	</bean>
+	
+	<bean id="enroll5" class="domain.Enroll">
+		<property name="startMoment" value="December 29, 2017 11:00" />
+		<property name="member" ref="member3" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="status" value="APPROVED" />
+	</bean>
+	
+	<bean id="enroll6" class="domain.Enroll">
+		<property name="startMoment" value="January 29, 2016 11:00" />
+		<property name="member" ref="member4" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="status" value="APPROVED" />
+	</bean>
+	
+	<bean id="enroll7" class="domain.Enroll">
+		<property name="startMoment" value="January 29, 2016 11:00" />
+		<property name="member" ref="member1" />
+		<property name="brotherhood" ref="brotherhood3" />
+		<property name="status" value="REJECTED" />
+	</bean>
+	
+	<bean id="enroll8" class="domain.Enroll">
+		<property name="startMoment" value="February 10, 2012 11:50" />
+		<property name="member" ref="member2" />
+		<property name="brotherhood" ref="brotherhood3" />
+		<property name="status" value="REJECTED" />
+	</bean>
+	
+	<bean id="enroll9" class="domain.Enroll">
+		<property name="startMoment" value="May 10, 2012 11:50" />
+		<property name="member" ref="member3" />
+		<property name="brotherhood" ref="brotherhood3" />
+		<property name="status" value="REJECTED" />
+	</bean>
+
+	
+	<bean id="enroll10" class="domain.Enroll">
+		<property name="startMoment" value="May 10, 2016 11:50" />
+		<property name="member" ref="member4" />
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="status" value="PENDING" />
+	</bean>
+	
+	<bean id="enroll11" class="domain.Enroll">
+		<property name="startMoment" value="May 10, 2016 11:50" />
+		<property name="member" ref="member3" />
+		<property name="brotherhood" ref="brotherhood2" />
+		<property name="status" value="PENDING" />
+	</bean>
+		
+	<bean id="enroll12" class="domain.Enroll">
+		<property name="startMoment" value="May 10, 2012 11:50" />
+		<property name="member" ref="member4" />
+		<property name="brotherhood" ref="brotherhood3" />
+		<property name="status" value="PENDING" />
 	</bean>
 
 	<!-- Float -->
@@ -1000,7 +1029,7 @@
 		<property name="title" value="La pasion de Cristo" />
 		<property name="description"
 			value="La pasion de Cristo es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
-		<property name="momentOrganised" value="2018/09/02" />
+		<property name="momentOrganised" value="2019/09/02" />
 		<property name="ffinal" value="true" />
 		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
@@ -1172,6 +1201,45 @@
 		<property name="maxDate" value="Feb 1, 2022" />
 		<property name="keyword" value="finder2" />
 	</bean>
+	
+		<bean id="finder3" class="domain.Finder">
+		<property name="member" ref="member3" />
+		<property name="processions">
+			<list>
+			</list>
+		</property>
+		<property name="lastUpdate" value="Feb 2, 2018" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder3" />
+	</bean>
+	
+	<bean id="finder4" class="domain.Finder">
+		<property name="member" ref="member4" />
+		<property name="processions">
+			<list>
+			</list>
+		</property>
+		<property name="lastUpdate" value="Feb 2, 2018" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder4" />
+	</bean>
+	
+<!-- 	<bean id="finder4" class="domain.Finder">
+		<property name="member" ref="member4" />
+		<property name="processions">
+			<list>
+				<ref bean="procession4" />
+			</list>
+		</property>
+		<property name="lastUpdate" value="Feb 2, 2018" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder3" />
+	</bean> -->
+	
+
 
 	<!-- Member -->
 
@@ -1356,5 +1424,33 @@
 		<property name="member" ref="member1" />
 		<property name="procession" ref="procession1" />
 	</bean>
+	
+	
+	<bean id="march5" class="domain.March">
+		<property name="status" value="APPROVED" />
+		<property name="location">
+			<list>
+				<value>2</value>
+				<value>2</value>
+			</list>
+		</property>
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession3" />
+	</bean>
+	
+	<bean id="march6" class="domain.March">
+		<property name="status" value="APPROVED" />
+		<property name="location">
+			<list>
+				<value>2</value>
+				<value>2</value>
+			</list>
+		</property>
+		<property name="member" ref="member1" />
+		<property name="procession" ref="procession4" />
+	</bean>
+	
+	
+	
 	
 </beans>
