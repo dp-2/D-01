@@ -22,7 +22,7 @@
 
 
 <display:table name="dfloats" id="dfloat"
-	requestURI="dfloat/brotherhood/list.do" pagesize="5"
+	requestURI="${requestURI}"pagesize="5"
 	class="displaytag">
 
 	<%--  Primero compruebo que es un brotherhood --%>

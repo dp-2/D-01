@@ -58,7 +58,8 @@
 			access="permitAll" />
 		<security:intercept-url pattern="/procession/listBrotherhood.do"
 			access="permitAll" />
-
+		<security:intercept-url pattern="/procession/listBrotherhoodAllUsers.do"
+			access="permitAll" />
 		
 
 		<security:intercept-url pattern="/register/administrator/newActor.do"

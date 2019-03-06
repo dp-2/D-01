@@ -11,16 +11,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Brotherhood;
-import domain.Procession;
 import security.Authority;
 import security.LoginService;
 import services.AreaService;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.ProcessionService;
+import domain.Brotherhood;
+import domain.Procession;
 
 @Controller
 @RequestMapping("/procession")
@@ -87,6 +88,19 @@ public class ProcessionController extends AbstractController {
 		modelAndView.addObject("processions", processions);
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 		//modelAndView.addObject("requestURI", "procession/listBrotherhood.do");
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/listBrotherhoodAllUsers", method = RequestMethod.GET)
+	public ModelAndView listBrotherhoodAllUsers(@RequestParam final int brotherhoodId) {
+		final ModelAndView modelAndView;
+
+		final List<Procession> processions = this.processionService.findProcessionsFinalByBrotherhoodId(brotherhoodId);
+
+		modelAndView = new ModelAndView("procession/list");
+		modelAndView.addObject("requestURI", "procession/listBrotherhoodAllUsers.do");
+		modelAndView.addObject("processions", processions);
 
 		return modelAndView;
 	}

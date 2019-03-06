@@ -41,7 +41,7 @@
 		alt="${titleListMembers}" />
 	
 	<spring:message code='brotherhood.listprocessions' var="titleListProcessions" />
-	<acme:column value="" url="true" 
+	<acme:column value="procession/listBrotherhoodAllUsers.do?brotherhoodId=${row.id}" url="true" 
 		alt="${titleListProcessions}" />
 	
 	<spring:message code='brotherhood.listfloats' var="titleListFloats" />

@@ -52,12 +52,7 @@
 		</display:column>
 	</security:authorize>
 
-	<display:column titleKey="brotherhood.members">
 	
-				<a href="member/list.do?processionId=${row.id}"><spring:message
-				code="procession.show" />
-		</a>
-	</display:column>
 
 	<display:column>
 
