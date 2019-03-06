@@ -865,6 +865,8 @@
 		<property name="brotherhood" ref="brotherhood1" />
 		<property name="status" value="APPROVED" />
 	</bean>
+	
+
 
 	<bean id="enroll2" class="domain.Enroll">
 		<property name="startMoment" value="June 29, 2015 15:00" />
@@ -944,6 +946,14 @@
 		<property name="member" ref="member4" />
 		<property name="brotherhood" ref="brotherhood3" />
 		<property name="status" value="PENDING" />
+	</bean>
+	
+	<bean id="enroll13" class="domain.Enroll">
+		<property name="startMoment" value="June 29, 2015 15:00" />
+		<property name="member" ref="member2" />
+		<property name="position" ref="position1" />
+		<property name="brotherhood" ref="brotherhood1" />
+		<property name="status" value="APPROVED" />
 	</bean>
 
 	<!-- Float -->
