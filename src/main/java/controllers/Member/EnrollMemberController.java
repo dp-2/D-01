@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -174,7 +173,6 @@ public class EnrollMemberController extends AbstractController {
 		ModelAndView result;
 		final Collection<Position> positions;
 		final Collection<Member> members;
-		idioma = LocaleContextHolder.getLocale().getLanguage().toLowerCase();
 		positions = this.positionService.findAll();
 		members = this.memberService.findAll();
 

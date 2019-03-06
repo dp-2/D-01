@@ -143,7 +143,7 @@
 					<security:authorize access="hasRole('MEMBER')">
 						<li class="arrow"></li>
 						<li><a href="brotherhood/member/myList.do"><spring:message
-									code="master.page.processions.brotherhood" /></a>
+									code="master.page.mybrotherhood" /></a>
 					</security:authorize>
 				</ul></li>
 			<li><a class="fNiv" href="procession/list.do"><spring:message
