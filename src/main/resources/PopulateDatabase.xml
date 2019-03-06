@@ -238,7 +238,7 @@
 		<property name="priority" value="HIGH" />
 		<property name="tags" value="tgs" />
 		<property name="box">
-			<ref bean="inboxSystem" />
+			<ref bean="outboxSystem" />
 		</property>
 		<property name="sender">
 			<ref bean="system" />
@@ -247,6 +247,97 @@
 			<ref bean="administrator1" />
 		</property>
 	</bean>
+	
+	<bean id="message2System" class="domain.Message" >
+		<property name="subject" value="Subjeto" />
+		<property name="body" value="Cuerpo" />
+		<property name="moment" value="June 29, 2015 15:00" />
+		<property name="priority" value="HIGH" />
+		<property name="tags" value="tgs" />
+		<property name="box">
+			<ref bean="folder1Admin1" />
+		</property>
+		<property name="sender">
+			<ref bean="administrator1" />
+		</property>
+		<property name="recipient">
+			<ref bean="system" />
+		</property>
+	</bean>
+	
+		
+	<bean id="message3System" class="domain.Message" >
+		<property name="subject" value="Ayuda" />
+		<property name="body" value="He perdido el cirio , lo deje un rato cuando estaba comiendo y me lo han robado ,salgo mañana y lo necesito " />
+		<property name="moment" value="January 14, 2018 10:45" />
+		<property name="priority" value="HIGH" />
+		<property name="tags" value="robo,cirio,nazareno,cacharro" />
+		<property name="box">
+			<ref bean="folder2Member1" />
+		</property>
+		<property name="sender">
+			<ref bean="member1" />
+		</property>
+		<property name="recipient">
+			<ref bean="administrator1" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="message4System" class="domain.Message" >
+		<property name="subject" value="Ayuda" />
+		<property name="body" value="He perdido el cirio , lo deje un rato cuando estaba comiendo y me lo han robado ,salgo mañana y lo necesito " />
+		<property name="moment" value="January 14, 2018 10:45" />
+		<property name="priority" value="HIGH" />
+		<property name="tags" value="robo,cirio,nazareno,cacharro" />
+		<property name="box">
+			<ref bean="folder1Admin1" />
+		</property>
+		<property name="sender">
+			<ref bean="administrator1" />
+		</property>
+		<property name="recipient">
+			<ref bean="member1" />
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="message5System" class="domain.Message" >
+		<property name="subject" value="VIAGRA" />
+		<property name="body" value="BUY NOW 70% AND HAVE A CHANCE OF BEING CHOSEN FOR A MILLION DOLAR PRICE IT´S 'Fabuloso' " />
+		<property name="moment" value="February 14, 2014 14:22" />
+		<property name="priority" value="LOW" />
+		<property name="tags" value="VIAGRA,SEX,CIALIS,MILLON" />
+		<property name="box">
+			<ref bean="folder2Member2" />
+		</property>
+		<property name="sender">
+			<ref bean="member2" />
+		</property>
+		<property name="recipient">
+			<ref bean="administrator1" />
+		</property>
+	</bean>
+	
+	<bean id="message6System" class="domain.Message" >
+		<property name="subject" value="VIAGRA" />
+		<property name="body" value="BUY NOW 70% AND HAVE A CHANCE OF BEING CHOSEN FOR A MILLION DOLAR PRICE IT´S 'Fabuloso' " />
+		<property name="moment" value="February 14, 2014 14:22" />
+		<property name="priority" value="LOW" />
+		<property name="tags" value="VIAGRA,SEX,CIALIS,MILLON" />
+		<property name="box">
+			<ref bean="folder4Admin1" />
+		</property>
+		<property name="sender">
+			<ref bean="member2" />
+		</property>
+		<property name="recipient">
+			<ref bean="administrator1" />
+		</property>
+	</bean>
+
 	
 	<!-- Boxes del admin1 -->
 
