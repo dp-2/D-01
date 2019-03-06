@@ -14,18 +14,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+import domain.Actor;
 import security.Authority;
 import security.UserAccount;
 import services.ActorService;
-import controllers.AbstractController;
-import domain.Actor;
+import services.ConfigurationService;
 
 @Controller
 @RequestMapping("/register/administrator")
 public class RegisterAdministratorController extends AbstractController {
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	//Register handyWorker
@@ -110,6 +114,7 @@ public class RegisterAdministratorController extends AbstractController {
 		result.addObject("actor", actor);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		return result;
 	}
 

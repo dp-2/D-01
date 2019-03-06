@@ -19,6 +19,26 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<%
+
+String languageValue;
+try{
+Cookie[] cookies = request.getCookies();
+Cookie languageCookie = null;
+for(Cookie c : cookies) {
+	if(c.getName().equals("language")) {
+		languageCookie = c;
+	}
+}
+
+languageValue = languageCookie.getValue();}
+catch(NullPointerException e){
+	languageValue = "en";	
+}
+
+%>
+
+
 <form:form action="${requestURI}" modelAttribute="enroll">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -46,8 +66,28 @@
 		</jstl:if>
 
 		<jstl:if test="${enroll.status=='APPROVED'}">
-			<acme:select code="enroll.position" path="position"
-				items="${positions}" itemLabel="name" />
+				
+				<form:label path="position">
+					<b><spring:message code="enroll.position"></spring:message>:</b>
+				</form:label>
+				<form:select id="position" path="position">
+					<form:option value="${positions}" label="------"></form:option>
+
+					<%
+						if (languageValue.equals("en")) {
+					%>
+					<form:options items="${positions}" itemLabel="nameEnglish"
+						itemValue="id" />
+					<%
+						} else if (languageValue.equals("es")) {
+					%>
+					<form:options items="${positions}" itemLabel="nameSpanish"
+						itemValue="id" />
+					<%
+						}
+					%>
+
+				</form:select>
 			<br />
 		</jstl:if>
 

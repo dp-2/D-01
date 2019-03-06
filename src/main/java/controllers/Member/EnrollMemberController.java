@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -90,6 +89,7 @@ public class EnrollMemberController extends AbstractController {
 		result.addObject("memberId", memberId);
 		return result;
 	}
+
 	//Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int brotherhoodId) {
@@ -171,28 +171,17 @@ public class EnrollMemberController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Enroll enroll, final String message) {
 		ModelAndView result;
-		final Collection<Position> positionsES;
-		final Collection<Position> positionsEN;
 		final Collection<Position> positions;
 		final Collection<Member> members;
-		final String idioma;
-		//		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
-		idioma = LocaleContextHolder.getLocale().getLanguage().toLowerCase();
-		positionsES = this.positionService.findPositionES();
-		positionsEN = this.positionService.findPositionEN();
 		positions = this.positionService.findAll();
 		members = this.memberService.findAll();
 
 		result = new ModelAndView("enroll/edit");
 		result.addObject("enroll", enroll);
-		result.addObject("positionsES", positionsES);
-		result.addObject("positionsEN", positionsEN);
 		result.addObject("positions", positions);
-		result.addObject("idioma", idioma);
 		result.addObject("members", members);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
-		//		result.addObject("brotherhoodId", a.getId());
 		result.addObject("requestURI", "enroll/member/edit.do");
 
 		return result;

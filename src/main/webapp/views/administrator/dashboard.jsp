@@ -78,8 +78,6 @@
 			<display:table name="members10RequestAccepted" id="member">
 				<acme:column code="dashboard.march.member"
 					value="${member.name}"></acme:column>
-				<acme:column code="dashboard.march.position"
-					value="${ member.position}"></acme:column>
 			</display:table>
 			
 		</fieldset>

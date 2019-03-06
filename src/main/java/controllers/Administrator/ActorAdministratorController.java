@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import services.ActorService;
 import controllers.AbstractController;
 import domain.Actor;
+import services.ActorService;
+import services.ConfigurationService;
 
 @Controller
 @RequestMapping("/actor/administrator")
@@ -23,7 +24,10 @@ public class ActorAdministratorController extends AbstractController {
 	// Service---------------------------------------------------------
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor-----------------------------------------------------
@@ -42,6 +46,7 @@ public class ActorAdministratorController extends AbstractController {
 
 		modelAndView = new ModelAndView("actor/list");
 		modelAndView.addObject("actors", actors);
+		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 		modelAndView.addObject("requestURI", "/actor/administrator/list.do");
 
 		return modelAndView;
@@ -63,6 +68,7 @@ public class ActorAdministratorController extends AbstractController {
 			modelAndView.addObject("actor", actor);
 			modelAndView.addObject("isRead", true);
 			modelAndView.addObject("isProfile", true);
+			modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 			modelAndView.addObject("score", score);
 			modelAndView.addObject("requestURI", "/actor/administrator/show.do?actorId=" + actorId);
 		} catch (final Throwable e) {
