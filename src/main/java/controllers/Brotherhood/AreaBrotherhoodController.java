@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.AreaService;
 import controllers.AbstractController;
 import domain.Area;
 import domain.Brotherhood;
 import domain.Url;
+import security.LoginService;
+import services.ActorService;
+import services.AreaService;
+import services.ConfigurationService;
 
 @Controller
 @RequestMapping("/area")
@@ -32,10 +33,13 @@ public class AreaBrotherhoodController extends AbstractController {
 	//-----------------Services-------------------------
 
 	@Autowired
-	AreaService		areaService;
+	AreaService						areaService;
 
 	@Autowired
-	ActorService	actorService;
+	ActorService					actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	//display creado para mostrar al member logueado
@@ -52,6 +56,7 @@ public class AreaBrotherhoodController extends AbstractController {
 		result = new ModelAndView("area/display");
 		result.addObject("area", area);
 		result.addObject("pictures", pictures);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}
@@ -66,6 +71,7 @@ public class AreaBrotherhoodController extends AbstractController {
 		result = new ModelAndView("area/list");
 		result.addObject("areas", areas);
 		result.addObject("requestURI", "area/list.do");
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}
@@ -98,6 +104,7 @@ public class AreaBrotherhoodController extends AbstractController {
 		result.addObject("area", area);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		result.addObject("requestURI", "area/edit.do");
 

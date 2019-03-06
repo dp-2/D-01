@@ -15,17 +15,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.AreaService;
-import services.EnrollService;
-import services.MemberService;
-import services.PositionService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Enroll;
 import domain.Member;
 import domain.Position;
+import security.LoginService;
+import services.ActorService;
+import services.AreaService;
+import services.ConfigurationService;
+import services.EnrollService;
+import services.MemberService;
+import services.PositionService;
 
 @Controller
 @RequestMapping("/enroll/brotherhood")
@@ -34,19 +35,22 @@ public class EnrollBrotherhoodController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private EnrollService	enrollService;
+	private EnrollService			enrollService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private PositionService	positionService;
+	private PositionService			positionService;
 
 	@Autowired
-	private MemberService	memberService;
+	private MemberService			memberService;
 
 	@Autowired
-	private AreaService		areaService;
+	private AreaService				areaService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -70,6 +74,7 @@ public class EnrollBrotherhoodController extends AbstractController {
 		result.addObject("enrolls", enrolls);
 		result.addObject("areaService", this.areaService);
 		result.addObject("requestURI", "enroll/brotherhood/list.do");
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		result.addObject("brotherhoodId", a.getId());
 		//		result.addObject("memberId", m.getId());
 		return result;
@@ -159,6 +164,7 @@ public class EnrollBrotherhoodController extends AbstractController {
 		result.addObject("idioma", idioma);
 		result.addObject("members", members);
 		result.addObject("message", message);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		result.addObject("isRead", false);
 		//		result.addObject("brotherhoodId", a.getId());
 		result.addObject("requestURI", "enroll/brotherhood/edit.do");
