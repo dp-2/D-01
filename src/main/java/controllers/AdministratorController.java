@@ -25,12 +25,14 @@ import services.ActorService;
 import services.AdministratorService;
 import services.BrotherhoodService;
 import services.EnrollService;
+import services.MarchService;
 import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
+import domain.Member;
 import domain.Procession;
 
 @Controller
@@ -57,6 +59,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private EnrollService			enrollService;
+
+	@Autowired
+	private MarchService			marchService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -132,6 +137,10 @@ public class AdministratorController extends AbstractController {
 		//-----------------------Processions Statics
 		final List<Procession> processionsIn30Days = this.processionService.findProcessionsIn30Days();
 		result.addObject("processionsIn30Days", processionsIn30Days);
+
+		//-----------------------March Statics
+		final List<Member> members10RequestAccepted = this.marchService.members10PerMarchAccepted();
+		result.addObject("members10RequestAccepted", members10RequestAccepted);
 
 		return result;
 	}
