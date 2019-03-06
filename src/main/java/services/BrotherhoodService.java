@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.transaction.Transactional;
 
@@ -48,8 +50,7 @@ public class BrotherhoodService {
 	private UserAccountRepository	userAccountRepository;
 	@Autowired
 	private EnrollService			enrollService;
-	@Autowired
-	private FinderService			finderService;
+
 	@Autowired
 	private ServiceUtils			serviceUtils;
 
@@ -209,6 +210,32 @@ public class BrotherhoodService {
 			if (e.getBrotherhood() == brother)
 				members.add(e.getMember());
 		return members;
+	}
+
+	public SortedMap<Brotherhood, Integer> BrotherhoodWithMoreMembers() {
+
+		final SortedMap<Brotherhood, Integer> res = new TreeMap<>();
+		List<Brotherhood> result;
+		result = (List<Brotherhood>) this.repository.listBrotherhoodByMembers();
+		final Brotherhood bh = result.get(0);
+		final List<Enroll> enrolls = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(bh.getId());
+		final int numbers = enrolls.size();
+		res.put(bh, numbers);
+
+		return res;
+	}
+
+	public SortedMap<Brotherhood, Integer> BrotherhoodWithLessMembers() {
+
+		final SortedMap<Brotherhood, Integer> res = new TreeMap<>();
+		List<Brotherhood> result;
+		result = (List<Brotherhood>) this.repository.listBrotherhoodByMembers();
+		final Brotherhood bh = result.get(result.size() - 1);
+		final List<Enroll> enrolls = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(bh.getId());
+		final int numbers = enrolls.size();
+		res.put(bh, numbers);
+
+		return res;
 	}
 
 }

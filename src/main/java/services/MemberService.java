@@ -3,7 +3,6 @@ package services;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -16,9 +15,7 @@ import org.springframework.util.Assert;
 import repositories.MemberRepository;
 import security.Authority;
 import security.UserAccount;
-import domain.Brotherhood;
 import domain.Configuration;
-import domain.Enroll;
 import domain.Member;
 
 @Service
@@ -37,9 +34,6 @@ public class MemberService {
 
 	@Autowired
 	private ServiceUtils			serviceUtils;
-
-	@Autowired
-	private EnrollService			enrollService;
 
 	@Autowired
 	private ConfigurationService	configurationService;
@@ -182,34 +176,6 @@ public class MemberService {
 		res.put("MAX", max);
 		res.put("AVG", avg);
 		res.put("STD", stdev);
-
-		return res;
-	}
-
-	public Map<String, Integer> BrotherhoodWithMoreMembers() {
-
-		final Map<String, Integer> res = new HashMap<>();
-		List<Brotherhood> result;
-		result = (List<Brotherhood>) this.memberRepository.listBrotherhoodByMembers();
-		final Brotherhood bh = result.get(0);
-		final String name = bh.getName();
-		final List<Enroll> enrolls = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(bh.getId());
-		final int numbers = enrolls.size();
-		res.put(name, numbers);
-
-		return res;
-	}
-
-	public Map<String, Integer> BrotherhoodWithLessMembers() {
-
-		final Map<String, Integer> res = new HashMap<>();
-		List<Brotherhood> result;
-		result = (List<Brotherhood>) this.memberRepository.listBrotherhoodByMembers();
-		final Brotherhood bh = result.get(result.size() - 1);
-		final String name = bh.getName();
-		final List<Enroll> enrolls = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(bh.getId());
-		final int numbers = enrolls.size();
-		res.put(name, numbers);
 
 		return res;
 	}

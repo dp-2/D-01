@@ -28,6 +28,9 @@ public class DFloatService {
 	@Autowired
 	ActorService				actorService;
 
+	@Autowired
+	ServiceUtils				serviceUtils;
+
 
 	// Simple CRUD methods
 	public DFloat create() {
@@ -53,6 +56,7 @@ public class DFloatService {
 	public DFloat save(final DFloat dfloat) {
 		DFloat res = null;
 		Assert.notNull(dfloat);
+		this.serviceUtils.checkObjectSave(dfloat);
 
 		res = this.dfloatRepository.save(dfloat);
 

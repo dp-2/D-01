@@ -23,10 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdministratorService;
+import services.BrotherhoodService;
 import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
 import domain.Actor;
+import domain.Brotherhood;
 import domain.Procession;
 
 @Controller
@@ -47,6 +49,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private MemberService			memberService;
+
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -86,6 +91,17 @@ public class AdministratorController extends AbstractController {
 		result.addObject("minMembersPerBrotherhood", minMembersPerBrotherhood);
 		result.addObject("avgMembersPerBrotherhood", avgMembersPerBrotherhood);
 		result.addObject("stdevMembersPerBrotherhood", stdevMembersPerBrotherhood);
+
+		//--------------Largest and smallest brotherhood
+		final Brotherhood largestBrotherhood = this.brotherhoodService.BrotherhoodWithMoreMembers().firstKey();
+		final Brotherhood smallestBrotherhood = this.brotherhoodService.BrotherhoodWithLessMembers().firstKey();
+		final Integer largestBrotherhoodNumMembers = this.brotherhoodService.BrotherhoodWithMoreMembers().get(largestBrotherhood);
+		final Integer smallestBrotherhoodNumMembers = this.brotherhoodService.BrotherhoodWithMoreMembers().get(smallestBrotherhood);
+
+		result.addObject("largestBrotherhood", largestBrotherhood);
+		result.addObject("smallestBrotherhood", smallestBrotherhood);
+		result.addObject("largestBrotherhoodNumMembers", largestBrotherhoodNumMembers);
+		result.addObject("smallestBrotherhoodNumMembers", smallestBrotherhoodNumMembers);
 
 		//-----------------------Position Statics
 		final Double positionCountTotal = this.positionService.computeStatistics().get("count.total");
