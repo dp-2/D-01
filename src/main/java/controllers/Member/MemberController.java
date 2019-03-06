@@ -14,15 +14,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+import domain.Member;
 import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
+import services.ConfigurationService;
 import services.EnrollService;
 import services.MemberService;
 import services.ProcessionService;
 import services.SocialProfileService;
-import controllers.AbstractController;
-import domain.Member;
 
 @Controller
 @RequestMapping("/member")
@@ -38,25 +39,28 @@ public class MemberController extends AbstractController {
 	//-----------------Services-------------------------
 
 	@Autowired
-	MemberService			memberService;
+	MemberService					memberService;
 
 	@Autowired
-	ActorService			actorService;
+	ActorService					actorService;
 
 	@Autowired
-	EnrollService			enrollService;
+	EnrollService					enrollService;
 
 	@Autowired
-	ProcessionService		processionService;
+	ProcessionService				processionService;
 
 	@Autowired
-	SocialProfileService	socialProfileService;
+	SocialProfileService			socialProfileService;
 
+	@Autowired
+	private ConfigurationService	configurationService;
 
 	//	@Autowired
 	//	UserAccount				userAccountService;
 
-	// Action-1 ---------------------------------------------------------------		
+
+	// Action-1 ---------------------------------------------------------------
 
 	@RequestMapping("/action-1")
 	public ModelAndView action1() {
@@ -67,7 +71,7 @@ public class MemberController extends AbstractController {
 		return result;
 	}
 
-	// Action-2 ---------------------------------------------------------------		
+	// Action-2 ---------------------------------------------------------------
 
 	@RequestMapping("/action-2")
 	public ModelAndView action2() {
@@ -89,6 +93,7 @@ public class MemberController extends AbstractController {
 		member = (Member) this.actorService.findByUserAccount(LoginService.getPrincipal());
 		result = new ModelAndView("member/edit");
 		result.addObject("member", member);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}

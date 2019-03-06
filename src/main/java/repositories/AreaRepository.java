@@ -28,7 +28,7 @@ public interface AreaRepository extends JpaRepository<Area, Integer> {
 	@Query("select stddev(1.0 * (select count(*) from Area a where a.brotherhood = b.id)) from Brotherhood b")
 	Double stddevHermandadesPorArea();
 
-	//	@Query("(select count(a.brotherhood) from Area a)/(select count(*) from Area a)")
-	//	Double countHermandadesPorArea();
+	@Query("select count(a.brotherhood) from Area a)/(select count(*) from Area a)")
+	Double countHermandadesPorArea();
 
 }

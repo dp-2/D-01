@@ -14,18 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.BrotherhoodService;
-import services.EnrollService;
-import services.MemberService;
-import services.PositionService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
 import domain.Position;
+import security.LoginService;
+import services.ActorService;
+import services.BrotherhoodService;
+import services.ConfigurationService;
+import services.EnrollService;
+import services.MemberService;
+import services.PositionService;
 
 @Controller
 @RequestMapping("/enroll/member")
@@ -34,19 +35,22 @@ public class EnrollMemberController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private EnrollService		enrollService;
+	private EnrollService			enrollService;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private PositionService		positionService;
+	private PositionService			positionService;
 
 	@Autowired
-	private MemberService		memberService;
+	private MemberService			memberService;
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -66,6 +70,7 @@ public class EnrollMemberController extends AbstractController {
 
 		result = new ModelAndView("enroll/list");
 		result.addObject("enrolls", enrolls);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		result.addObject("requestURI", "enroll/member/list.do");
 		result.addObject("memberId", a.getId());
 		return result;
@@ -87,6 +92,7 @@ public class EnrollMemberController extends AbstractController {
 		result.addObject("enrollBrotherhoods", finalBrotherhoods);
 		result.addObject("requestURI", "enroll/member/listBrotherhood.do");
 		result.addObject("memberId", memberId);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		return result;
 	}
 
@@ -183,6 +189,7 @@ public class EnrollMemberController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 		result.addObject("requestURI", "enroll/member/edit.do");
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}
