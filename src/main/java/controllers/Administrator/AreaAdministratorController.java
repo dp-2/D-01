@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.AreaService;
 import controllers.AbstractController;
 import domain.Area;
+import services.AreaService;
+import services.ConfigurationService;
 
 @Controller
 @RequestMapping("/area/administrator")
@@ -23,7 +24,10 @@ public class AreaAdministratorController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private AreaService	areaService;
+	private AreaService				areaService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -107,6 +111,7 @@ public class AreaAdministratorController extends AbstractController {
 		result.addObject("area", area);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		result.addObject("requestURI", "area/administrator/edit.do");
 
