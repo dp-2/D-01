@@ -94,12 +94,14 @@ public class AreaService {
 
 	public Map<String, Double> StatsBrotherhoodPerArea() {
 		final Double min = this.areaRepository.minHermandadesPorArea();
+		final Double count = this.areaRepository.countHermandadesPorArea();
 		final Double max = this.areaRepository.maxHermandadesPorArea();
 		final Double avg = this.areaRepository.avgHermandadesPorArea();
 		final Double stdev = this.areaRepository.stddevHermandadesPorArea();
 
 		final Map<String, Double> res = new HashMap<>();
 
+		res.put("COUNT", count);
 		res.put("MIN", min);
 		res.put("MAX", max);
 		res.put("AVG", avg);

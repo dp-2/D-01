@@ -22,7 +22,6 @@ import services.MemberService;
 import services.ProcessionService;
 import services.SocialProfileService;
 import controllers.AbstractController;
-import domain.Actor;
 import domain.Member;
 
 @Controller
@@ -148,9 +147,9 @@ public class MemberController extends AbstractController {
 	//-----------------List----------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(required = true) final Integer processionId) {
+	public ModelAndView list(@RequestParam final int brotherhoodId) {
 		ModelAndView result;
-		final List<Actor> members = this.processionService.getActorsByProcession(processionId);
+		final List<Member> members = this.memberService.listMembersByBrotherhood(brotherhoodId);
 
 		result = new ModelAndView("member/list");
 		result.addObject("requestURI", "member/list.do");

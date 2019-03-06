@@ -131,8 +131,10 @@
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
 						code="brotherhood.display" /></a></li>
 
+
 			<li><a class="fNiv" href="march/member/list.do"><spring:message
 						code="master.page.march" /></a></li>
+
 
 
 
@@ -148,6 +150,22 @@
 						<li><a href="brotherhood/member/myList.do"><spring:message
 									code="master.page.processions.brotherhood" /></a>
 					</security:authorize></li>
+
+						code="master.page.listbrotherhood" /></a></li>
+
+			
+					
+						<security:authorize access="hasRole('MEMBER')">
+							<li class="arrow"></li>
+							<li><a href="procession/member/list.do"><spring:message
+										code="master.page.processions.brotherhood" /></a></li>
+						</security:authorize>
+						<security:authorize access="hasRole('BROTHERHOOD')">
+							<li class="arrow"></li>
+							<li><a href="procession/brotherhood/myList.do"><spring:message
+										code="master.page.processions.brotherhood" /></a></li>
+						</security:authorize>
+
 			<li><a class="fNiv" href="procession/list.do"><spring:message
 						code="master.page.processions" /></a>
 				<ul>
@@ -165,43 +183,47 @@
 				</ul>
 		</security:authorize>
 
-		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message
-						code="master.page.login" /></a></li>
-			<li><a class="fNiv"><spring:message
-						code="master.page.register" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="register/actor.do?authority=MEMBER"><spring:message
-								code="master.page.register.member" /></a></li>
 
-					<li><a href="brotherhood/none/create.do"><spring:message
-								code="master.page.register.brotherhood" /></a></li>
+					
+			</security:authorize>
 
-				</ul></li>
+			<security:authorize access="isAnonymous()">
+				<li><a class="fNiv" href="security/login.do"><spring:message
+							code="master.page.login" /></a></li>
+				<li><a class="fNiv"><spring:message
+							code="master.page.register" /></a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="register/actor.do?authority=MEMBER"><spring:message
+									code="master.page.register.member" /></a></li>
 
-		</security:authorize>
+						<li><a href="brotherhood/none/create.do"><spring:message
+									code="master.page.register.brotherhood" /></a></li>
 
-		<security:authorize access="isAuthenticated()">
-			<li><a href="socialProfile/list.do"> <spring:message
-						code="master.page.socialProfile" />
-			</a>
-			<li><a class="fNiv"> <spring:message
-						code="master.page.profile" /> (<security:authentication
-						property="principal.username" />)
-			</a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="box/actor/list.do"><spring:message
-								code="master.page.listboxes" /> </a></li>
-					<li><a href="message/actor/create.do"><spring:message
-								code="master.page.messagecreate" /></a></li>
-					<li><a href="actor/edit.do"><spring:message
-								code="master.page.profile.edit" /></a></li>
-					<li><a href="j_spring_security_logout"><spring:message
-								code="master.page.logout" /> </a></li>
-				</ul></li>
-		</security:authorize>
+					</ul></li>
+
+			</security:authorize>
+
+			<security:authorize access="isAuthenticated()">
+				<li><a href="socialProfile/list.do"> <spring:message
+							code="master.page.socialProfile" />
+				</a>
+				<li><a class="fNiv"> <spring:message
+							code="master.page.profile" /> (<security:authentication
+							property="principal.username" />)
+				</a>
+					<ul>
+						<li class="arrow"></li>
+						<li><a href="box/actor/list.do"><spring:message
+									code="master.page.listboxes" /> </a></li>
+						<li><a href="message/actor/create.do"><spring:message
+									code="master.page.messagecreate" /></a></li>
+						<li><a href="actor/edit.do"><spring:message
+									code="master.page.profile.edit" /></a></li>
+						<li><a href="j_spring_security_logout"><spring:message
+									code="master.page.logout" /> </a></li>
+					</ul></li>
+			</security:authorize>
 	</ul>
 </div>
 

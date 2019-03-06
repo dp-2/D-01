@@ -53,7 +53,7 @@ public class ProcessionMemberController extends AbstractController {
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 		modelAndView.addObject("requestURI", "procession/list.do");
 		modelAndView.addObject("marchService", this.marchService);
-
+		modelAndView.addObject("memberId", a.getId());
 		return modelAndView;
 	}
 
