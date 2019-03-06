@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 
 <!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
 	* * The use of this project is hereby constrained to the conditions of the 
@@ -337,6 +336,13 @@
 
 	</bean>
 
+	<bean id="folder5Member1" class="domain.Box">
+		<property name="name" value="testBox" />
+		<property name="isSystem" value="false" />
+		<property name="rootBox" ref="folder5Member1" />
+		<property name="actor" ref="member1" />
+
+	</bean>
 
 	<!-- Boxes del member2 -->
 
@@ -895,4 +901,5 @@
 		<property name="member" ref="member1" />
 		<property name="procession" ref="procession1" />
 	</bean>
+	
 </beans>
