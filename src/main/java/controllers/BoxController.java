@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.BoxService;
 import domain.Actor;
 import domain.Box;
+import services.ActorService;
+import services.BoxService;
+import services.ConfigurationService;
 
 @Controller
 @RequestMapping("box/actor")
@@ -24,9 +25,12 @@ public class BoxController extends AbstractController {
 	// Services
 
 	@Autowired
-	private BoxService		boxService;
+	private BoxService				boxService;
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// List
@@ -40,6 +44,7 @@ public class BoxController extends AbstractController {
 			boxs = this.boxService.findByActorWithoutRoot(actor);
 			res.addObject("showBack", false);
 			res.addObject("isPrincipalAuthorizedEdit", true);
+
 		} else {
 			final Box root = this.boxService.findOne(rootId);
 			boxs = this.boxService.findByActorAndRoot(actor, root);
@@ -49,6 +54,8 @@ public class BoxController extends AbstractController {
 			this.isPrincipalAuthorizedEdit(res, root, false);
 		}
 		res.addObject("boxs", boxs);
+		res.addObject("banner", this.configurationService.findOne().getBanner());
+
 		if (rootId == null)
 			res.addObject("requestURI", "box/actor/list.do");
 		else
@@ -126,6 +133,7 @@ public class BoxController extends AbstractController {
 		res.addObject("box", box);
 		res.addObject("message", message);
 		res.addObject("boxs", boxs);
+		res.addObject("banner", this.configurationService.findOne().getBanner());
 		this.isPrincipalAuthorizedEdit(res, box, true);
 		return res;
 	}

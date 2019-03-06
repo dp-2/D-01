@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.DFloat;
 import services.ActorService;
+import services.ConfigurationService;
 import services.DFloatService;
 import services.ProcessionService;
-import domain.DFloat;
 
 @Controller
 @RequestMapping("/dfloat")
@@ -21,13 +22,16 @@ public class DFloatController extends AbstractController {
 
 	//-----------------Services-------------------------
 	@Autowired
-	DFloatService		dfloatService;
+	DFloatService					dfloatService;
 
 	@Autowired
-	ActorService		actorService;
+	ActorService					actorService;
 
 	@Autowired
-	ProcessionService	processionService;
+	ProcessionService				processionService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	//-------------------------- List ----------------------------------
@@ -41,6 +45,7 @@ public class DFloatController extends AbstractController {
 		result = new ModelAndView("dfloat/list");
 		result.addObject("dfloats", dfloats);
 		result.addObject("requestURI", "dfloat/list.do");
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}

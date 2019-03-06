@@ -1,8 +1,8 @@
 /*
  * SocialProfileController.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -23,11 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.SocialProfileService;
 import domain.Actor;
 import domain.SocialProfile;
+import security.LoginService;
+import services.ActorService;
+import services.ConfigurationService;
+import services.SocialProfileService;
 
 @Controller
 @RequestMapping("/socialProfile")
@@ -38,6 +39,9 @@ public class SocialProfileController extends AbstractController {
 
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	//List------------------------------------------------------
@@ -51,6 +55,7 @@ public class SocialProfileController extends AbstractController {
 		modelAndView = new ModelAndView("socialProfile/list");
 		modelAndView.addObject("socialProfiles", socialProfiles);
 		modelAndView.addObject("requestURI", "/socialProfile/list.do");
+		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 		modelAndView.addObject("username", a.getUserAccount().getUsername());
 
 		return modelAndView;
@@ -150,6 +155,7 @@ public class SocialProfileController extends AbstractController {
 		result.addObject("socialProfile", socialProfile);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		result.addObject("requestURI", "socialProfile/edit.do");
 
