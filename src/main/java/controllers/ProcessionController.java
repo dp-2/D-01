@@ -4,13 +4,21 @@ package controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Brotherhood;
 import domain.Procession;
+import security.Authority;
+import security.LoginService;
+import services.AreaService;
+import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.ProcessionService;
 
@@ -26,6 +34,12 @@ public class ProcessionController extends AbstractController {
 	@Autowired
 	private ConfigurationService	configurationService;
 
+	@Autowired
+	private AreaService				areaService;
+
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
+
 
 	//Constructor-----------------------------------------------------------------
 
@@ -38,6 +52,19 @@ public class ProcessionController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		final ModelAndView modelAndView = new ModelAndView("procession/list");
+
+		final SecurityContext context = SecurityContextHolder.getContext();
+		Assert.notNull(context);
+		final Authentication authentication = context.getAuthentication();
+
+		if (!authentication.getPrincipal().equals("anonymousUser")) {
+			final Authority authority = new Authority();
+			authority.setAuthority("BROTHERHOOD");
+			if (LoginService.getPrincipal().getAuthorities().contains(authority)) {
+				final int brotherhoodId = this.brotherhoodService.findBrotherhoodByUserAcountId(LoginService.getPrincipal().getId()).getId();
+				modelAndView.addObject("hasArea", this.areaService.findAreaByBrotherhoodId(brotherhoodId));
+			}
+		}
 
 		final List<Procession> processions = this.processionService.findProcessionsFinal();
 
