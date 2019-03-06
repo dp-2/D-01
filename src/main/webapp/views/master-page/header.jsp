@@ -149,12 +149,10 @@
 			<li><a class="fNiv" href="procession/list.do"><spring:message
 						code="master.page.processions" /></a>
 				<ul>
-					<security:authorize access="hasRole('MEMBER')">
+					<security:authorize access="hasRole('BROTHERHOOD')">
 						<li class="arrow"></li>
 						<li><a href="procession/member/list.do"><spring:message
 									code="master.page.processions.brotherhood" /></a></li>
-					</security:authorize>
-					<security:authorize access="hasRole('BROTHERHOOD')">
 						<li class="arrow"></li>
 						<li><a href="procession/brotherhood/myList.do"><spring:message
 									code="master.page.processions.brotherhood" /></a></li>
@@ -162,20 +160,6 @@
 
 				</ul>
 		</security:authorize>
-
-		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message
-						code="master.page.login" /></a></li>
-			<li><a class="fNiv"><spring:message
-						code="master.page.register" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="register/actor.do?authority=MEMBER"><spring:message
-								code="master.page.register.member" /></a></li>
-
-				</ul></li>
-		</security:authorize>
-
 
 
 		<security:authorize access="isAnonymous()">
