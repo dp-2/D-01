@@ -879,7 +879,7 @@
 		<property name="startMoment" value="June 29, 2015 15:00" />
 		<property name="member" ref="member2" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="status" value="PENDING" />
+		<property name="status" value="APPROVED" />
 	</bean>
 	
 	<bean id="enroll4" class="domain.Enroll">
