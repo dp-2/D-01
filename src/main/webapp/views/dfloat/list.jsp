@@ -23,23 +23,22 @@
 
 <display:table name="dfloats" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
-	<%--  Primero compruebo que es un brotherhood --%>
-	<security:authorize access="hasRole('BROTHERHOOD')">
+	
 
-
+<security:authorize access="hasRole('BROTHERHOOD')">
 		<%--  La columna que va a la vista edit de las dfloat --%>
 		<display:column>
-			<a href="dfloat/brotherhood/edit.do?dfloatId=${dfloat.id}"><spring:message
+			<a href="dfloat/brotherhood/edit.do?dfloatId=${row.id}"><spring:message
 					code="dfloat.edit"></spring:message></a>
 		</display:column>
 
 
 		<%--  La columna que va a la vista display de las dfloat --%>
 		<display:column>
-			<a href="dfloat/brotherhood/display.do?dfloatId=${dfloat.id}"><spring:message
+			<a href="dfloat/brotherhood/display.do?dfloatId=${row.id}"><spring:message
 					code="dfloat.display"></spring:message></a>
 		</display:column>
-
+</security:authorize>
 
 
 		<acme:column code="dfloat.title" value="${ row.title}"></acme:column>
@@ -50,9 +49,6 @@
 
 
 
-
-
-	</security:authorize>
 </display:table>
 
 

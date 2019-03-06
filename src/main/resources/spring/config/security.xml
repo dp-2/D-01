@@ -164,7 +164,7 @@
 			access="hasAnyRole('BROTHERHOOD','ADMIN')" />
 
 
-
+		
 		<security:intercept-url pattern="/enroll/member/list.do"
 			access="hasRole('MEMBER')" />
 		<security:intercept-url pattern="/enroll/member/listBrotherhood.do"
