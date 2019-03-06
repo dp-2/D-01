@@ -174,8 +174,6 @@ public class EnrollMemberController extends AbstractController {
 		ModelAndView result;
 		final Collection<Position> positions;
 		final Collection<Member> members;
-		final String idioma;
-		//		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		idioma = LocaleContextHolder.getLocale().getLanguage().toLowerCase();
 		positions = this.positionService.findAll();
 		members = this.memberService.findAll();
@@ -183,11 +181,9 @@ public class EnrollMemberController extends AbstractController {
 		result = new ModelAndView("enroll/edit");
 		result.addObject("enroll", enroll);
 		result.addObject("positions", positions);
-		result.addObject("idioma", idioma);
 		result.addObject("members", members);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
-		//		result.addObject("brotherhoodId", a.getId());
 		result.addObject("requestURI", "enroll/member/edit.do");
 
 		return result;
