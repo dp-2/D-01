@@ -99,4 +99,5 @@ public class PositionService {
 
 		return result;
 	}
+
 }
