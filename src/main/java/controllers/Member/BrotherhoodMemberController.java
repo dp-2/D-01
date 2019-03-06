@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.EnrollService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
+import security.LoginService;
+import services.ActorService;
+import services.ConfigurationService;
+import services.EnrollService;
 
 @Controller
 @RequestMapping("/brotherhood/member")
@@ -23,10 +24,13 @@ public class BrotherhoodMemberController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private EnrollService	enrollService;
+	private EnrollService			enrollService;
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -46,6 +50,7 @@ public class BrotherhoodMemberController extends AbstractController {
 
 		result = new ModelAndView("brotherhood/list");
 		result.addObject("brotherhoods", brotherhoods);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		result.addObject("requestURI", "brotherhood/member/myList.do");
 		result.addObject("memberId", a.getId());
 		return result;
