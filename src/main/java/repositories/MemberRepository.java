@@ -1,6 +1,8 @@
 
 package repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -29,4 +31,6 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	@Query("select stddev(1.0 * (select count(*) from Enroll a where a.brotherhood = b.id)) from Brotherhood b")
 	Double stdevMembersPerBrotherhood();
 
+	@Query("select distinct e.member from Enroll e where e.brotherhood.id = ?1 and e.status='APPROVED'")
+	List<Member> listMembersByBrotherhood(int brotherhoodId);
 }
