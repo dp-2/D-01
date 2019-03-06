@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Position;
 import repositories.PositionRepository;
+import domain.Position;
 
 @Service
 @Transactional
@@ -21,11 +20,11 @@ public class PositionService {
 
 	// Managed repository ----------------------------------------------------------------
 	@Autowired
-	private PositionRepository positionRepository;
+	private PositionRepository	positionRepository;
+
 
 	//	@Autowired
 	//	private EnrollService		enrollService;
-
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -67,15 +66,15 @@ public class PositionService {
 		this.positionRepository.delete(position);
 	}
 
-	public Collection<Position> findPositionES() {
-		final Collection<Position> pos = this.positionRepository.findPositionES();
-		return pos;
-	}
-
-	public Collection<Position> findPositionEN() {
-		final Collection<Position> pos = this.positionRepository.findPositionEN();
-		return pos;
-	}
+	//	public Collection<Position> findPositionES() {
+	//		final Collection<Position> pos = this.positionRepository.findPositionES();
+	//		return pos;
+	//	}
+	//
+	//	public Collection<Position> findPositionEN() {
+	//		final Collection<Position> pos = this.positionRepository.findPositionEN();
+	//		return pos;
+	//	}
 
 	public Map<String, Double> computeStatistics() {
 		Map<String, Double> result;
