@@ -1436,7 +1436,7 @@
 		<property name="procession" ref="procession3" />
 	</bean>
 	
-	<bean id="march6" class="domain.March">
+	<!-- <bean id="march6" class="domain.March">
 		<property name="status" value="APPROVED" />
 		<property name="location">
 			<list>
@@ -1446,7 +1446,7 @@
 		</property>
 		<property name="member" ref="member1" />
 		<property name="procession" ref="procession4" />
-	</bean>
+	</bean> -->
 	
 	
 	
