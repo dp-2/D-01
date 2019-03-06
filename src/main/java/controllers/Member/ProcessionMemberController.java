@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
@@ -44,10 +45,10 @@ public class ProcessionMemberController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam final int brotherhoodId) {
 		final ModelAndView modelAndView = new ModelAndView("procession/list");
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
-		final List<Procession> processions = this.processionService.findProcessionOfMember(a.getId());
+		final List<Procession> processions = this.processionService.findProcessionsFinalByBrotherhoodId(brotherhoodId);
 
 		modelAndView.addObject("processions", processions);
 		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
