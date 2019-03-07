@@ -143,6 +143,12 @@
 		<b><spring:message code="dfloat.permissions"></spring:message></b>
 	</h1>
 	
+	<img src="https://cdn.shopify.com/s/files/1/1061/1924/products/Very_Angry_Emoji_7f7bb8df-d9dc-4cda-b79f-5453e764d4ea_large.png?v=1480481058" alt="Cuestionario Picture"
+			style="width: 10%; height: 10%;">
+
+		<br />
+		<br />
+	
 	<button type="button"
 				onclick="javascript: relativeRedir('dfloat/brotherhood/list.do')">
 				<spring:message code="dfloat.cancel" />
