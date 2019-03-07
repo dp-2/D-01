@@ -211,6 +211,17 @@ public class AdministratorService {
 
 	}
 
+	public void generateAllSpammers() {
+		this.serviceUtils.checkAuthority(Authority.ADMIN);
+		final Collection<Actor> res = this.actorService.findAllTypes();
+		for (final Actor a : res) {
+			final Boolean spammer = this.actorService.isSpammer(a);
+			a.setSpammer(spammer);
+			this.actorService.save(a);
+		}
+
+	}
+
 	public Double generateScore(final Actor a) {
 		this.serviceUtils.checkAuthority(Authority.ADMIN);
 		Double res = 0.0;

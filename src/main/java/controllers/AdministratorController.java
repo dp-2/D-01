@@ -97,6 +97,17 @@ public class AdministratorController extends AbstractController {
 		result.addObject("banner", this.configurationService.findOne().getBanner());
 		return result;
 	}
+
+	@RequestMapping(value = "/spammers", method = RequestMethod.GET)
+	public ModelAndView spammers() {
+		ModelAndView result;
+		this.administratorService.generateAllSpammers();
+		result = new ModelAndView("administrator/spammers");
+		final Collection<Actor> actors = this.actorService.findAllTypes();
+		result.addObject("actors", actors);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
+		return result;
+	}
 	// Dashboard---------------------------------------------------------------
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
