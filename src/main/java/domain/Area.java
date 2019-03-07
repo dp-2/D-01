@@ -5,8 +5,11 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -20,6 +23,7 @@ public class Area extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -29,6 +33,7 @@ public class Area extends DomainEntity {
 
 	@URL
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPictures() {
 		return this.pictures;
 	}
@@ -42,6 +47,7 @@ public class Area extends DomainEntity {
 	private Brotherhood	brotherhood;
 
 
+	@Valid
 	@OneToOne(optional = true)
 	public Brotherhood getBrotherhood() {
 		return this.brotherhood;

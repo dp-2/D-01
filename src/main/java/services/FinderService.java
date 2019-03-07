@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.FinderRepository;
-import security.Authority;
-import security.LoginService;
 import domain.Finder;
 import domain.Member;
 import domain.Procession;
+import repositories.FinderRepository;
+import security.Authority;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -130,6 +130,7 @@ public class FinderService {
 		finder.setMinDate(f.getMinDate());
 		finder.setKeyword(f.getKeyword());
 		finder.setArea(f.getArea());
+		List<Procession> res = new ArrayList<>();
 
 		if (finder.getMaxDate() == null) {
 			final Date dmax = new Date();
@@ -147,15 +148,18 @@ public class FinderService {
 			finder.setKeyword("");
 
 		if (finder.getArea() == null)
-			return this.searchProcessions(finder.getKeyword(), finder.getMinDate(), finder.getMaxDate());
+			res = this.searchProcessions(finder.getKeyword(), finder.getMinDate(), finder.getMaxDate());
 		else {
-			final List<Procession> res = new ArrayList<>();
 			final List<Procession> processions = this.searchProcessions(finder.getKeyword(), finder.getMinDate(), finder.getMaxDate());
 			for (final Procession procession : processions)
 				if (finder.getArea().getBrotherhood().getId() == procession.getBrotherhood().getId())
 					res.add(procession);
-			return res;
 		}
+
+		if (f.getArea() == null && f.getMinDate() == null && f.getMaxDate() == null && f.getMaxDate() == null)
+			res = this.processionService.findProcessionsFinal();
+
+		return res;
 	}
 
 	public List<Double> finderStats() {

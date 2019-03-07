@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -35,6 +37,7 @@ public class Configuration extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getNameSys() {
 		return this.nameSys;
 	}
@@ -44,6 +47,7 @@ public class Configuration extends DomainEntity {
 
 	@URL
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBanner() {
 		return this.banner;
 	}
@@ -52,6 +56,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getWelcomeMessageEN() {
 		return this.welcomeMessageEN;
 	}
@@ -87,6 +92,7 @@ public class Configuration extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getWelcomeMessageES() {
 		return this.welcomeMessageES;
 	}

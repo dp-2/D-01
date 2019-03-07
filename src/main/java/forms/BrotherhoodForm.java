@@ -9,6 +9,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
 import domain.DomainEntity;
@@ -41,6 +43,7 @@ public class BrotherhoodForm extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTitle() {
 		return this.title;
 	}
@@ -58,6 +61,7 @@ public class BrotherhoodForm extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -66,6 +70,7 @@ public class BrotherhoodForm extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return this.surname;
 	}
@@ -74,6 +79,7 @@ public class BrotherhoodForm extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhoto() {
 		return this.photo;
 	}
@@ -81,6 +87,7 @@ public class BrotherhoodForm extends DomainEntity {
 		this.photo = photo;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhone() {
 		return this.phone;
 	}
@@ -89,6 +96,7 @@ public class BrotherhoodForm extends DomainEntity {
 	}
 
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getUsername() {
 		return this.username;
 	}
@@ -97,6 +105,7 @@ public class BrotherhoodForm extends DomainEntity {
 	}
 
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPassword() {
 		return this.password;
 	}
@@ -105,6 +114,7 @@ public class BrotherhoodForm extends DomainEntity {
 	}
 
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getConfirmPassword() {
 		return this.confirmPassword;
 	}
@@ -119,6 +129,7 @@ public class BrotherhoodForm extends DomainEntity {
 		this.accept = accept;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getMiddleName() {
 		return this.middleName;
 	}
@@ -126,6 +137,7 @@ public class BrotherhoodForm extends DomainEntity {
 		this.middleName = middleName;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddress() {
 		return this.address;
 	}

@@ -6,6 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import domain.Actor;
 import domain.DomainEntity;
@@ -20,6 +22,7 @@ public class MessageForm extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSubject() {
 		return this.subject;
 	}
@@ -28,6 +31,7 @@ public class MessageForm extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getBody() {
 		return this.body;
 	}
@@ -37,6 +41,7 @@ public class MessageForm extends DomainEntity {
 
 	@NotBlank
 	@Pattern(regexp = "^((HIGH)|(NEUTRAL)|(LOW))$", message = "The priority only can be 'LOW', 'NEUTRAL' or 'HIGH'.")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPriority() {
 		return this.priority;
 	}
@@ -44,6 +49,7 @@ public class MessageForm extends DomainEntity {
 		this.priority = priority;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTags() {
 		return this.tags;
 	}

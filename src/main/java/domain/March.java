@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -34,6 +36,7 @@ public class March extends DomainEntity {
 
 	@NotBlank
 	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getStatus() {
 		return this.status;
 	}
@@ -41,6 +44,7 @@ public class March extends DomainEntity {
 		this.status = status;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getReason() {
 		return this.reason;
 	}

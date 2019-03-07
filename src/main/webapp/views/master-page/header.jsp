@@ -76,8 +76,10 @@
 <form:form action="${requestURI}" modelAttribute="warning">
 	<security:authorize access="isAuthenticated()">
 		<jstl:if test="${warning.isWarning == true}">
-		<img src="https://www.pngkey.com/png/full/133-1338651_svg-black-and-white-library-icon-clip-art.png" height="50px" width="50px" />
-		
+			<img
+				src="https://www.pngkey.com/png/full/133-1338651_svg-black-and-white-library-icon-clip-art.png"
+				height="50px" width="50px" />
+
 			<h3>
 				<span style='font-family: "Arial", "sans-serif"; color: black'><spring:message
 						code="master.page.warning" /> </span>
@@ -224,8 +226,15 @@
 								code="master.page.listboxes" /> </a></li>
 					<li><a href="message/actor/create.do"><spring:message
 								code="master.page.messagecreate" /></a></li>
-					<li><a href="actor/edit.do"><spring:message
-								code="master.page.profile.edit" /></a></li>
+					<security:authorize access="hasRole('MEMBER')">
+						<li><a href="actor/edit.do"><spring:message
+									code="master.page.profile.edit" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('ADMIN')">
+						<li><a href="actor/edit.do"><spring:message
+									code="master.page.profile.edit" /></a></li>
+					</security:authorize>
+					
 					<li><a href="j_spring_security_logout"><spring:message
 								code="master.page.logout" /> </a></li>
 				</ul></li>

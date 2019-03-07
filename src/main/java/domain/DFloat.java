@@ -12,6 +12,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
 @Entity
@@ -26,6 +28,7 @@ public class DFloat extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getTitle() {
 		return this.title;
 	}
@@ -34,6 +37,7 @@ public class DFloat extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getDescription() {
 		return this.description;
 	}
@@ -42,6 +46,7 @@ public class DFloat extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPictures() {
 		return this.pictures;
 	}

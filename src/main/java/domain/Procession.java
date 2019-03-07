@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -29,6 +30,7 @@ public class Procession extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml
 	public String getTicker() {
 		return this.ticker;
 	}
@@ -37,6 +39,7 @@ public class Procession extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getTitle() {
 		return this.title;
 	}
@@ -45,6 +48,7 @@ public class Procession extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml
 	public String getDescription() {
 		return this.description;
 	}
@@ -72,7 +76,7 @@ public class Procession extends DomainEntity {
 
 	//Relationships
 
-	private Brotherhood brotherhood;
+	private Brotherhood	brotherhood;
 
 
 	@Valid
