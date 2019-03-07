@@ -32,11 +32,13 @@ import services.MarchService;
 import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
+import services.WarningService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
 import domain.Procession;
+import domain.Warning;
 
 @Controller
 @RequestMapping("/administrator")
@@ -74,6 +76,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private FinderService			finderService;
+
+	@Autowired
+	public WarningService			warningService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -297,5 +302,45 @@ public class AdministratorController extends AbstractController {
 	//		return result;
 	//
 	//	}
+
+	@RequestMapping("/adviseTrue")
+	public ModelAndView adviseTrue() {
+		ModelAndView result;
+		Warning war = this.warningService.giveWarning();
+		war = this.warningService.setWarningTrue();
+		result = new ModelAndView("welcome/index");
+		System.out.println("Se ha alertado de una brecha?" + war.getIsWarning());
+
+		return result;
+	}
+
+	@RequestMapping("/adviseFalse")
+	public ModelAndView adviseFalse() {
+		ModelAndView result;
+		Warning war = this.warningService.giveWarning();
+		war = this.warningService.setWarningFalse();
+		result = new ModelAndView("welcome/index");
+		System.out.println("Se ha alertado de una brecha?" + war.getIsWarning());
+
+		return result;
+	}
+	//
+	protected ModelAndView createEditModelAndView2(final Warning war) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView2(war, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView2(final Warning warning, final String messageCode) {
+		final ModelAndView result;
+
+		result = new ModelAndView("welcome/index");
+		result.addObject("warning", warning);
+		result.addObject("message", messageCode);
+
+		return result;
+	}
 
 }

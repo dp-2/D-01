@@ -1549,7 +1549,12 @@
 		<property name="procession" ref="procession4" />
 	</bean> -->
 	
+		<!-- Other domain beans come here -->	
 	
+		<bean id="warning" class="domain.Warning">
+		<property name="isWarning" value="false" />
+
+	</bean>
 	
 	
 </beans>
