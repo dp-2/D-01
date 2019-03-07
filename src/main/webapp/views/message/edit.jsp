@@ -98,8 +98,7 @@
 	</jstl:if>
 		
 	<jstl:if test="${message.id > 0}">
-		<form:form action="message/actor/edit.do" method="post" id="formEdit"
-			name="formEdit" modelAttribute="message">
+		<form:form action="message/actor/edit.do" modelAttribute="message">
 				
 				<form:hidden path="id" />
 				<form:hidden path="version" />
@@ -122,6 +121,7 @@
 				<input type="submit" name="delete"
 					value="<spring:message code="message.delete"></spring:message>" />
 			</jstl:if>
+			
 		</form:form>
 	</jstl:if>
 	</div>

@@ -114,7 +114,7 @@ public class MessageController extends AbstractController {
 	// Delete
 
 	@SuppressWarnings("unused")
-	@RequestMapping(value = "edit", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "actor/edit", method = RequestMethod.POST, params = "delete")
 	private ModelAndView delete(Message message, final BindingResult binding) {
 		ModelAndView res = null;
 		message = this.messageService.deconstruct(message, binding);
