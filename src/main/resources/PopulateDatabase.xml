@@ -1323,10 +1323,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="lastUpdate" value="Feb 2, 2018" />
-		<property name="minDate" value="Feb 2, 2020" />
-		<property name="maxDate" value="Feb 2, 2022" />
-		<property name="keyword" value="finder4" />
 	</bean>
 	
 <!-- 	<bean id="finder4" class="domain.Finder">
