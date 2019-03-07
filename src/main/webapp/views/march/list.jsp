@@ -74,6 +74,8 @@
 		</jstl:if>
 	</display:column>
 		
+		<display:column property="procession.title" titleKey="march.procession" />
+		
 	
 
 

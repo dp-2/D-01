@@ -48,8 +48,7 @@ public class BrotherhoodService {
 	private UserAccountRepository	userAccountRepository;
 	@Autowired
 	private EnrollService			enrollService;
-	@Autowired
-	private FinderService			finderService;
+
 	@Autowired
 	private ServiceUtils			serviceUtils;
 
@@ -220,6 +219,22 @@ public class BrotherhoodService {
 			if (e.getBrotherhood() == brother)
 				members.add(e.getMember());
 		return members;
+	}
+
+	public Brotherhood BrotherhoodWithMoreMembers() {
+
+		final List<Brotherhood> result;
+		result = this.repository.listBrotherhoodByMembers();
+		final Brotherhood bh = result.get(0);
+		return bh;
+	}
+
+	public Brotherhood BrotherhoodWithLessMembers() {
+
+		List<Brotherhood> result;
+		result = this.repository.listBrotherhoodByMembers();
+		final Brotherhood bh = result.get(result.size() - 1);
+		return bh;
 	}
 
 }

@@ -6,7 +6,6 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
@@ -15,18 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import security.LoginService;
-import services.ActorService;
-import services.BrotherhoodService;
-import services.EnrollService;
-import services.MemberService;
-import services.PositionService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
 import domain.Position;
+import security.LoginService;
+import services.ActorService;
+import services.BrotherhoodService;
+import services.ConfigurationService;
+import services.EnrollService;
+import services.MemberService;
+import services.PositionService;
 
 @Controller
 @RequestMapping("/enroll/member")
@@ -35,19 +35,22 @@ public class EnrollMemberController extends AbstractController {
 	// Services-----------------------------------------------------------
 
 	@Autowired
-	private EnrollService		enrollService;
+	private EnrollService			enrollService;
 
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
 
 	@Autowired
-	private PositionService		positionService;
+	private PositionService			positionService;
 
 	@Autowired
-	private MemberService		memberService;
+	private MemberService			memberService;
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructor---------------------------------------------------------
@@ -67,7 +70,8 @@ public class EnrollMemberController extends AbstractController {
 
 		result = new ModelAndView("enroll/list");
 		result.addObject("enrolls", enrolls);
-		result.addObject("requestURI", "/enroll/member/list.do");
+		result.addObject("banner", this.configurationService.findOne().getBanner());
+		result.addObject("requestURI", "enroll/member/list.do");
 		result.addObject("memberId", a.getId());
 		return result;
 	}
@@ -86,10 +90,12 @@ public class EnrollMemberController extends AbstractController {
 
 		result = new ModelAndView("enroll/listBrotherhood");
 		result.addObject("enrollBrotherhoods", finalBrotherhoods);
-		result.addObject("requestURI", "/enroll/member/listBrotherhood.do");
+		result.addObject("requestURI", "enroll/member/listBrotherhood.do");
 		result.addObject("memberId", memberId);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		return result;
 	}
+
 	//Create
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int brotherhoodId) {
@@ -128,7 +134,7 @@ public class EnrollMemberController extends AbstractController {
 			try {
 
 				this.enrollService.save(enroll);
-				result = new ModelAndView("redirect:enroll/member/list.do");
+				result = this.list();
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(enroll, "enroll.commit.error");
 				System.out.println(oops.getMessage());
@@ -171,29 +177,19 @@ public class EnrollMemberController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Enroll enroll, final String message) {
 		ModelAndView result;
-		final Collection<Position> positionsES;
-		final Collection<Position> positionsEN;
 		final Collection<Position> positions;
 		final Collection<Member> members;
-		final String idioma;
-		//		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
-		idioma = LocaleContextHolder.getLocale().getLanguage().toLowerCase();
-		positionsES = this.positionService.findPositionES();
-		positionsEN = this.positionService.findPositionEN();
 		positions = this.positionService.findAll();
 		members = this.memberService.findAll();
 
 		result = new ModelAndView("enroll/edit");
 		result.addObject("enroll", enroll);
-		result.addObject("positionsES", positionsES);
-		result.addObject("positionsEN", positionsEN);
 		result.addObject("positions", positions);
-		result.addObject("idioma", idioma);
 		result.addObject("members", members);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
-		//		result.addObject("brotherhoodId", a.getId());
 		result.addObject("requestURI", "enroll/member/edit.do");
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}

@@ -48,9 +48,6 @@ public class MemberService {
 	private ServiceUtils			serviceUtils;
 
 	@Autowired
-	private EnrollService			enrollService;
-
-	@Autowired
 	private ConfigurationService	configurationService;
 
 	@Autowired(required = false)
@@ -58,6 +55,9 @@ public class MemberService {
 
 	@Autowired
 	private MessageSource			messageSource;
+
+	@Autowired
+	private EnrollService			enrollService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -183,6 +183,10 @@ public class MemberService {
 
 	public Member findMemberByEnrollId(final int enrollId) {
 		return this.memberRepository.findMemberByEnrollId(enrollId);
+	}
+
+	public List<Member> listMembersByBrotherhood(final int brotherhoodId) {
+		return this.memberRepository.listMembersByBrotherhood(brotherhoodId);
 	}
 
 	public Map<String, Double> membersBrotherhoodStats() {

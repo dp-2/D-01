@@ -17,6 +17,7 @@ import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
+import domain.Position;
 
 @Service
 @Transactional
@@ -35,6 +36,9 @@ public class EnrollService {
 	@Autowired
 	private MemberService		memberService;
 
+	@Autowired
+	private PositionService		positionService;
+
 
 	//Constructor----------------------------------------------------------------------------
 
@@ -48,12 +52,14 @@ public class EnrollService {
 		final Actor a = this.actorService.findByUserAccount(LoginService.getPrincipal());
 		final Member member = this.memberService.findOne(a.getId());
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		final Position position = this.positionService.findAll().get(0);
 
 		enroll.setStatus("PENDING");
 		enroll.getStatus();
 		enroll.setStartMoment(new Date(System.currentTimeMillis() - 1000));
 		enroll.setMember(member);
 		enroll.setBrotherhood(brotherhood);
+		enroll.setPosition(position);
 		return enroll;
 	}
 	public Collection<Enroll> findAll() {
@@ -115,6 +121,10 @@ public class EnrollService {
 
 	public Collection<Brotherhood> findBrotherhoodByMember(final int memberId) {
 		return this.enrollRepository.findBrotherhoodByMember(memberId);
+	}
+
+	public Collection<Brotherhood> findBrotherhoodByMemberId(final int memberId) {
+		return this.enrollRepository.findBrotherhoodByMemberId(memberId);
 	}
 
 	public Enroll goOut(final int enrollId) {

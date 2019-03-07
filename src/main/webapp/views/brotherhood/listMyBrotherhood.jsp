@@ -36,18 +36,19 @@
 
 	<acme:column value="${row.address}" code="brotherhood.address" />
 
-	
+
 
 	<spring:message code='brotherhood.listmembers' var="titleListMembers" />
 	<acme:column value="member/list.do?brotherhoodId=${row.id}" url="true"
 		alt="${titleListMembers}" />
 
-	<spring:message code='brotherhood.listprocessions'
-		var="titleListProcessions" />
-	<acme:column
-		value="procession/listBrotherhoodAllUsers.do?brotherhoodId=${row.id}"
-		url="true" alt="${titleListProcessions}" />
-	
+	<security:authorize access="hasRole('MEMBER')">
+		<spring:message code='brotherhood.listMyprocessions'
+			var="titleListProcessions" />
+		<acme:column
+			value="procession/member/list.do?brotherhoodId=${row.id}"
+			url="true" alt="${titleListProcessions}" />
+	</security:authorize>
 
 	<spring:message code='brotherhood.listfloats' var="titleListFloats" />
 	<acme:column value="dfloat/list.do?brotherhoodId=${row.id}" url="true"

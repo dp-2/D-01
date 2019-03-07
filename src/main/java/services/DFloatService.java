@@ -28,6 +28,9 @@ public class DFloatService {
 	@Autowired
 	ActorService				actorService;
 
+	@Autowired
+	ServiceUtils				serviceUtils;
+
 
 	// Simple CRUD methods
 	public DFloat create() {
@@ -53,6 +56,7 @@ public class DFloatService {
 	public DFloat save(final DFloat dfloat) {
 		DFloat res = null;
 		Assert.notNull(dfloat);
+		this.serviceUtils.checkObjectSave(dfloat);
 
 		res = this.dfloatRepository.save(dfloat);
 
@@ -68,6 +72,10 @@ public class DFloatService {
 
 	public Collection<DFloat> findAllDFloatsByBrotherhood(final Brotherhood brotherhood) {
 		return this.dfloatRepository.SearchDFloatsByBrotherhood(brotherhood.getId());
+	}
+
+	public Collection<DFloat> SearchDFloatsByBrotherhood(final int brotherhoodId) {
+		return this.dfloatRepository.SearchDFloatsByBrotherhood(brotherhoodId);
 	}
 
 	public Collection<DFloat> findAllDFloatsWithoutBrotherhood() {

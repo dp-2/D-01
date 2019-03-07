@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.BoxService;
-import services.MessageService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Box;
 import domain.Message;
+import services.ActorService;
+import services.BoxService;
+import services.ConfigurationService;
+import services.MessageService;
 
 @Controller
 @RequestMapping("message")
@@ -27,11 +28,13 @@ public class MessageController extends AbstractController {
 	// Services
 
 	@Autowired
-	private MessageService	messageService;
+	private MessageService			messageService;
 	@Autowired
-	private BoxService		boxService;
+	private BoxService				boxService;
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// List
@@ -44,6 +47,7 @@ public class MessageController extends AbstractController {
 		res.addObject("messages", messages);
 		System.out.println(messages);
 		res.addObject("requestURI", "message/actor/list.do");
+		res.addObject("banner", this.configurationService.findOne().getBanner());
 		this.isPrincipalAuthorizedEdit(res, box);
 		return res;
 	}
@@ -137,6 +141,7 @@ public class MessageController extends AbstractController {
 		res.addObject("actors", this.actorService.findAll());
 		res.addObject("boxs", this.boxService.findAllByActor(principal));
 		res.addObject("notUseMessage", 0);
+		res.addObject("banner", this.configurationService.findOne().getBanner());
 		if (!(this.actorService.findPrincipal() instanceof Administrator))
 			isBroadcast = false;
 		res.addObject("isBroadcast", isBroadcast);

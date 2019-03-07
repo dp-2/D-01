@@ -4,8 +4,8 @@ package domain;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -13,28 +13,26 @@ public class Position extends DomainEntity {
 
 	// Properties
 
-	private String	name;
-	private String	language;
+	private String	nameEnglish;
+	private String	nameSpanish;
 
 
-	@NotNull
-	@Valid
-	public String getName() {
-		return this.name;
+	@NotBlank
+	public String getNameEnglish() {
+		return this.nameEnglish;
 	}
 
-	public void setName(final String name) {
-		this.name = name;
+	public void setNameEnglish(final String nameEnglish) {
+		this.nameEnglish = nameEnglish;
 	}
 
-	@NotNull
-	@Valid
-	public String getLanguage() {
-		return this.language;
+	@NotBlank
+	public String getNameSpanish() {
+		return this.nameSpanish;
 	}
 
-	public void setLanguage(final String language) {
-		this.language = language;
+	public void setNameSpanish(final String nameSpanish) {
+		this.nameSpanish = nameSpanish;
 	}
 
 }

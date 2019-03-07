@@ -1,8 +1,8 @@
 /*
  * AdministratorController.java
- * 
+ *
  * Copyright (C) 2019 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -21,13 +21,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Enroll;
+import domain.Member;
+import domain.Procession;
 import services.ActorService;
 import services.AdministratorService;
+import services.BrotherhoodService;
+import services.ConfigurationService;
+import services.EnrollService;
+import services.MarchService;
 import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
-import domain.Actor;
-import domain.Procession;
 
 @Controller
 @RequestMapping("/administrator")
@@ -48,6 +55,18 @@ public class AdministratorController extends AbstractController {
 	@Autowired
 	private MemberService			memberService;
 
+	@Autowired
+	private BrotherhoodService		brotherhoodService;
+
+	@Autowired
+	private EnrollService			enrollService;
+
+	@Autowired
+	private MarchService			marchService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -62,9 +81,10 @@ public class AdministratorController extends AbstractController {
 		result = new ModelAndView("administrator/scores");
 		final Collection<Actor> actors = this.actorService.findAllTypes();
 		result.addObject("actors", actors);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		return result;
 	}
-	// Dashboard---------------------------------------------------------------		
+	// Dashboard---------------------------------------------------------------
 
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public ModelAndView action1() throws ParseException {
@@ -74,6 +94,7 @@ public class AdministratorController extends AbstractController {
 
 		statistics = this.positionService.computeStatistics();
 		result.addObject("statistics", statistics);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		//-----------------------Members per brotherhood
 
@@ -86,6 +107,21 @@ public class AdministratorController extends AbstractController {
 		result.addObject("minMembersPerBrotherhood", minMembersPerBrotherhood);
 		result.addObject("avgMembersPerBrotherhood", avgMembersPerBrotherhood);
 		result.addObject("stdevMembersPerBrotherhood", stdevMembersPerBrotherhood);
+
+		//--------------Largest and smallest brotherhood
+		final Brotherhood largestBrotherhood = this.brotherhoodService.BrotherhoodWithMoreMembers();
+		final Brotherhood smallestBrotherhood = this.brotherhoodService.BrotherhoodWithLessMembers();
+
+		final List<Enroll> enrollsLarg = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
+		final int largestBrotherhoodNumMembers = enrollsLarg.size();
+
+		final List<Enroll> enrollsSmall = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
+		final int smallestBrotherhoodNumMembers = enrollsSmall.size();
+
+		result.addObject("largestBrotherhood", largestBrotherhood);
+		result.addObject("smallestBrotherhood", smallestBrotherhood);
+		result.addObject("largestBrotherhoodNumMembers", largestBrotherhoodNumMembers);
+		result.addObject("smallestBrotherhoodNumMembers", smallestBrotherhoodNumMembers);
 
 		//-----------------------Position Statics
 		final Double positionCountTotal = this.positionService.computeStatistics().get("count.total");
@@ -107,6 +143,10 @@ public class AdministratorController extends AbstractController {
 		//-----------------------Processions Statics
 		final List<Procession> processionsIn30Days = this.processionService.findProcessionsIn30Days();
 		result.addObject("processionsIn30Days", processionsIn30Days);
+
+		//-----------------------March Statics
+		final List<Member> members10RequestAccepted = this.marchService.members10PerMarchAccepted();
+		result.addObject("members10RequestAccepted", members10RequestAccepted);
 
 		return result;
 	}

@@ -57,6 +57,7 @@
 			<input type="submit" name="save"
 				value="<spring:message code="brotherhood.save"></spring:message>"
 				onclick="return patternPhone(document.getElementById('phone').value, '${confirmPhoneMessage}');" />
+			<a href="law/terminosYCondiciones.do"><spring:message code="brotherhood.consultTermsAndConditions" /></a><br/><br/> 
 				
 		</form:form>
 		

@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Actor;
 import domain.Position;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,21 +26,16 @@ public class PositionServiceTest extends AbstractTest {
 	@Autowired
 	private PositionService	positionService;
 
-	@Autowired
-	private ActorService	actorService;
-
 
 	//Test
 	@Test
 	public void testCreate() {
 		System.out.println("========== testCreate() ==========");
-		final int actorId = this.getEntityId("admin");
-		final Actor actor = this.actorService.findOne(actorId);
 		try {
 			final Position position = this.positionService.create();
 
-			position.setName("Nombre1");
-			position.setLanguage("Espa�ol");
+			position.setNameEnglish("Name1");
+			position.setNameEnglish("Nombre1");
 
 			Assert.notNull(position);
 
@@ -75,8 +69,8 @@ public class PositionServiceTest extends AbstractTest {
 		final Collection<Position> positions;
 		try {
 			position = this.positionService.create();
-			position.setName("Antonia");
-			position.setLanguage("Ingl�s");
+			position.setNameEnglish("Antonia");
+			position.setNameSpanish("Ingl�s");
 			saved = this.positionService.save(position);
 
 			positions = this.positionService.findAll();
@@ -92,7 +86,7 @@ public class PositionServiceTest extends AbstractTest {
 	@Test
 	public void testFindAll() {
 		System.out.println("========== testFindAll() ==========");
-		final int positionId = this.getEntityId("Position1");
+		final int positionId = this.getEntityId("position1");
 		try {
 			final Position position = this.positionService.findOne(positionId);
 			final Collection<Position> positions = this.positionService.findAll();
@@ -108,8 +102,8 @@ public class PositionServiceTest extends AbstractTest {
 	@Test
 	public void testDelete() {
 		System.out.println("========== testDelete() ==========");
-		this.authenticate("referee1");
-		final int positionId = this.getEntityId("Position1");
+		this.authenticate("admin1");
+		final int positionId = this.getEntityId("position1");
 
 		try {
 			final Position position = this.positionService.findOne(positionId);

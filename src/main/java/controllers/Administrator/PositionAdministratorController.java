@@ -14,16 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.PositionService;
 import controllers.AbstractController;
 import domain.Position;
+import services.ConfigurationService;
+import services.PositionService;
 
 @Controller
 @RequestMapping("/position/administrator")
 public class PositionAdministratorController extends AbstractController {
 
 	@Autowired
-	private PositionService	positionService;
+	private PositionService			positionService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	//List------------------------------------------------------
@@ -35,6 +39,7 @@ public class PositionAdministratorController extends AbstractController {
 
 		modelAndView = new ModelAndView("position/list");
 		modelAndView.addObject("positions", positions);
+		modelAndView.addObject("banner", this.configurationService.findOne().getBanner());
 		modelAndView.addObject("requestURI", "/position/administrator/list.do");
 
 		return modelAndView;
@@ -118,6 +123,7 @@ public class PositionAdministratorController extends AbstractController {
 		result.addObject("position", position);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		//		result.addObject("position", lista);
 
 		result.addObject("requestURI", "position/administrator/edit.do");

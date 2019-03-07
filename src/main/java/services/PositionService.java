@@ -1,8 +1,8 @@
 
 package services;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.transaction.Transactional;
@@ -38,8 +38,8 @@ public class PositionService {
 		return p;
 	}
 
-	public Collection<Position> findAll() {
-		final Collection<Position> positions;
+	public List<Position> findAll() {
+		final List<Position> positions;
 
 		positions = this.positionRepository.findAll();
 		Assert.notNull(positions);
@@ -66,15 +66,15 @@ public class PositionService {
 		this.positionRepository.delete(position);
 	}
 
-	public Collection<Position> findPositionES() {
-		final Collection<Position> pos = this.positionRepository.findPositionES();
-		return pos;
-	}
-
-	public Collection<Position> findPositionEN() {
-		final Collection<Position> pos = this.positionRepository.findPositionEN();
-		return pos;
-	}
+	//	public Collection<Position> findPositionES() {
+	//		final Collection<Position> pos = this.positionRepository.findPositionES();
+	//		return pos;
+	//	}
+	//
+	//	public Collection<Position> findPositionEN() {
+	//		final Collection<Position> pos = this.positionRepository.findPositionEN();
+	//		return pos;
+	//	}
 
 	public Map<String, Double> computeStatistics() {
 		Map<String, Double> result;
@@ -99,4 +99,5 @@ public class PositionService {
 
 		return result;
 	}
+
 }

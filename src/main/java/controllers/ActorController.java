@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.ConfigurationService;
 import domain.Actor;
 import forms.ActorForm;
 
@@ -31,7 +32,10 @@ import forms.ActorForm;
 public class ActorController extends AbstractController {
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Edit ---------------------------------------------------------------
@@ -91,6 +95,7 @@ public class ActorController extends AbstractController {
 		result.addObject("isRead", false);
 		result.addObject("requestURI", "actor/edit.do");
 		result.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(actorForm));
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}

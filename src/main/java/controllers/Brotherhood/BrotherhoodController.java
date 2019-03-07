@@ -16,22 +16,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
-import services.BrotherhoodService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Url;
 import forms.BrotherhoodForm;
+import services.ActorService;
+import services.BrotherhoodService;
+import services.ConfigurationService;
 
 @Controller
 @RequestMapping("brotherhood")
 public class BrotherhoodController extends AbstractController {
 
 	@Autowired
-	private BrotherhoodService	brotherhoodService;
+	private BrotherhoodService		brotherhoodService;
 	@Autowired
-	private ActorService		actorService;
+	private ActorService			actorService;
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	@RequestMapping("any/list")
@@ -39,6 +42,7 @@ public class BrotherhoodController extends AbstractController {
 		final ModelAndView res = new ModelAndView("brotherhood/list");
 		final Collection<Brotherhood> brotherhoods = this.brotherhoodService.findAll();
 		res.addObject("brotherhoods", brotherhoods);
+		res.addObject("banner", this.configurationService.findOne().getBanner());
 		return res;
 	}
 
@@ -100,6 +104,7 @@ public class BrotherhoodController extends AbstractController {
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
 		res.addObject("brotherhood", brotherhood);
 		res.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(brotherhood));
+		res.addObject("banner", this.configurationService.findOne().getBanner());
 		return res;
 	}
 
@@ -109,6 +114,7 @@ public class BrotherhoodController extends AbstractController {
 		final Brotherhood brotherhood = (Brotherhood) this.actorService.findPrincipal();
 		res.addObject("brotherhood", brotherhood);
 		res.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(brotherhood));
+		res.addObject("banner", this.configurationService.findOne().getBanner());
 		return res;
 	}
 
@@ -121,6 +127,7 @@ public class BrotherhoodController extends AbstractController {
 		final Boolean isPrincipalAuthorizedEdit = this.isPrincipalAuthorizedEdit(brotherhoodForm);
 		res.addObject("brotherhoodForm", brotherhoodForm);
 		res.addObject("message", message);
+		res.addObject("banner", this.configurationService.findOne().getBanner());
 		res.addObject("isPrincipalAuthorizedEdit", isPrincipalAuthorizedEdit);
 		return res;
 	}

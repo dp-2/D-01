@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
 import services.ActorService;
+import services.ConfigurationService;
 import domain.Actor;
 import domain.Administrator;
 import forms.ActorForm;
@@ -23,7 +24,10 @@ import forms.ActorForm;
 public class RegisterController extends AbstractController {
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService			actorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Register handyWorker
@@ -106,6 +110,7 @@ public class RegisterController extends AbstractController {
 		result.addObject("message", message);
 		result.addObject("isRead", false);
 		result.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(actorForm));
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 		return result;
 	}
 	private Boolean isPrincipalAuthorizedEdit(final ActorForm form) {

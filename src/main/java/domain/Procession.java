@@ -52,6 +52,7 @@ public class Procession extends DomainEntity {
 		this.description = description;
 	}
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	public Date getMomentOrganised() {
