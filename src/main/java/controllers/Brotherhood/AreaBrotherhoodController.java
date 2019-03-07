@@ -10,14 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-import domain.Area;
-import domain.Brotherhood;
-import domain.Url;
-import security.LoginService;
 import services.ActorService;
 import services.AreaService;
 import services.ConfigurationService;
+import controllers.AbstractController;
+import domain.Area;
 
 @Controller
 @RequestMapping("/area")
@@ -41,25 +38,6 @@ public class AreaBrotherhoodController extends AbstractController {
 	@Autowired
 	private ConfigurationService	configurationService;
 
-
-	//display creado para mostrar al member logueado
-	@RequestMapping(value = "/display", method = RequestMethod.GET)
-	public ModelAndView display() {
-		ModelAndView result;
-		Brotherhood actor;
-		Area area;
-		actor = (Brotherhood) this.actorService.findByUserAccount(LoginService.getPrincipal());
-
-		area = this.areaService.findAreaByBrotherhoodId(actor.getId());
-		final Collection<Url> pictures = area.getPictures();
-
-		result = new ModelAndView("area/display");
-		result.addObject("area", area);
-		result.addObject("pictures", pictures);
-		result.addObject("banner", this.configurationService.findOne().getBanner());
-
-		return result;
-	}
 
 	//-------------------------- List ----------------------------------
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

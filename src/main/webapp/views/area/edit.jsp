@@ -29,8 +29,18 @@
 	</security:authorize>
 	<acme:textbox code="area.title" path="name" />
 
-	<acme:textarea code="area.pictures" path="pictures" />
+	
+	
+	<jstl:if test="${isRead == false}">
+		<acme:textarea code="area.pictures" path="pictures" />
+	</jstl:if>
 
+	<jstl:if test="${isRead == true}">
+		<jstl:forEach var="pic" items="${tutorial.pictures}">
+			<img src="${pic}" height="100px" width="100px" />
+		</jstl:forEach>
+		<br />
+	</jstl:if>
 
 	<acme:submit name="save" code="area.save" />
 
