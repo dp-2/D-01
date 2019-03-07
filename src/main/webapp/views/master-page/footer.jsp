@@ -28,6 +28,10 @@
 		width="20" height="20" /> <a href="law/avisoLegal.do"><spring:message
 			code="master.page.avisoLegal" /></a> <img src="images/law.ico"
 		width="15" height="15" />
+		
+	<a href="law/normativaGDPR.do"><spring:message
+			code="master.page.normativaGDPR" /></a> <img src="images/GDPR.ico"
+		width="15" height="15" />
 
 </div>
 

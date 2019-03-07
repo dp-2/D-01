@@ -31,4 +31,11 @@
 		<put-attribute name="body" value="/views/law/avisoLegal.jsp" />
 	</definition>
 	
+	<definition name="law/normativaGDPR" extends="master.page">	
+		<put-attribute name="title" value="Política de Privacidad de Acme-Madrugá" />
+		<put-attribute name="body" value="/views/law/normativaGDPR.jsp" />
+	</definition>
+	
+	
+	
 </tiles-definitions>
