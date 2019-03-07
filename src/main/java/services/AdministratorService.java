@@ -216,6 +216,7 @@ public class AdministratorService {
 		final Collection<Actor> res = this.actorService.findAllTypes();
 		for (final Actor a : res) {
 			final Boolean spammer = this.actorService.isSpammer(a);
+			System.out.println(a.getUserAccount().getUsername() + "-----spammer----->" + spammer);
 			a.setSpammer(spammer);
 			this.actorService.save(a);
 		}

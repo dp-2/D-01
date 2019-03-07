@@ -26,5 +26,5 @@
 	
 </display:table>
 
-<input type="button" name="refresh" value="<spring:message code="administrator.refresh"></spring:message>" onclick="javascript:relativeRedir('administrator/scores.do')"/>	
+<input type="button" name="refresh" value="<spring:message code="administrator.refresh"></spring:message>" onclick="javascript:relativeRedir('administrator/spammers.do')"/>	
 </security:authorize>

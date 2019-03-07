@@ -24,11 +24,9 @@ import security.UserAccount;
 import security.UserAccountRepository;
 import domain.Actor;
 import domain.Administrator;
-import domain.Box;
 import domain.Brotherhood;
 import domain.Member;
 import domain.Message;
-import domain.SocialProfile;
 import forms.ActorForm;
 
 @Service
@@ -319,14 +317,12 @@ public class ActorService {
 		final List<String> negativeWords = new ArrayList<>();
 		negativeWords.addAll(this.configurationService.findOne().getNegativeWordsEN());
 		negativeWords.addAll(this.configurationService.findOne().getNegativeWordsES());
-		System.out.println(negativeWords);
-		for (final String spamWord : negativeWords) {
-			System.out.println(spamWord);
+		for (final String spamWord : negativeWords)
 			if (s.contains(spamWord)) {
+				System.out.println(spamWord);
 				res = true;
 				break;
 			}
-		}
 		return res;
 	}
 	public boolean isSpammer(final Actor a) {
@@ -335,12 +331,7 @@ public class ActorService {
 		this.serviceUtils.checkId(a.getId());
 		final Actor actor = this.actorRepository.findOne(a.getId());
 		Assert.notNull(actor);
-		if (!res)
-			for (final Box f : this.boxService.findAllByActor(actor)) {
-				res = this.containsSpam(f.getName());
-				if (res)
-					break;
-			}
+
 		if (!res)
 			for (final Message m : this.messageService.findSendedMessages(actor)) {
 				res = this.containsSpam(m.getBody()) || this.containsSpam(m.getSubject());
@@ -351,14 +342,6 @@ public class ActorService {
 				else
 					break;
 			}
-		if (!res)
-			for (final SocialProfile sp : this.socialProfileService.findProfileByActorId(actor.getId())) {
-				res = this.containsSpam(sp.getNameSN()) || this.containsSpam(sp.getNick());
-				if (res)
-					break;
-			}
-		if (!res)
-			res = this.containsSpam(actor.getUserAccount().getUsername());
 
 		return res;
 	}
