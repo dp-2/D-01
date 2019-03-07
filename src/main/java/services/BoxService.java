@@ -113,7 +113,7 @@ public class BoxService {
 		if (actor.getId() > 0)
 			Assert.notNull(this.actorService.findOne(actor.getId()));
 		final String[] names = new String[] {
-			"inBox", "outBox", "spamBox", "trashBox"
+			"inBox", "outBox", "spamBox", "trashBox", "notificationBox"
 		};
 		for (final String name : names) {
 			final Box newBox = this.create(actor);

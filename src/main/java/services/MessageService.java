@@ -68,7 +68,7 @@ public class MessageService {
 		return res;
 	}
 
-	public Message save(final Message object) {
+	public Message save(final Message object, final Boolean isBroadcast) {
 		final Message message = (Message) this.serviceUtils.checkObjectSave(object);
 		final Administrator system = (Administrator) this.actorService.findByUserAccount((UserAccount) this.loginService.loadUserByUsername("system"));
 		Message message1 = null;
@@ -86,6 +86,8 @@ public class MessageService {
 			message1.setVersion(0);
 			if (this.containsSpam(message1))
 				message1.setBox(this.boxService.findBoxByActorAndName(message1.getRecipient(), "spamBox"));
+			else if (isBroadcast)
+				message1.setBox(this.boxService.findBoxByActorAndName(message1.getRecipient(), "notificationBox"));
 			else
 				message1.setBox(this.boxService.findBoxByActorAndName(message1.getRecipient(), "inBox"));
 			this.repository.save(message1);
@@ -103,7 +105,7 @@ public class MessageService {
 				this.repository.delete(m);
 		} else {
 			message.setBox(this.boxService.findBoxByActorAndName(object.getBox().getActor(), "trashBox"));
-			this.save(message);
+			this.save(message, false);
 		}
 	}
 
@@ -131,13 +133,13 @@ public class MessageService {
 		this.serviceUtils.checkAuthority(Authority.ADMIN);
 		final Actor principal = this.actorService.findPrincipal();
 		for (final Actor a : this.actorService.findAllExceptMe()) {
-			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "inBox"));
+			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "notificationBox"));
 			mes.setBody(message.getBody());
 			mes.setPriority(message.getPriority());
 			mes.setSubject(message.getSubject());
 			mes.setTags(message.getTags());
 			mes.setRecipient(a);
-			this.save(mes);
+			this.save(mes, true);
 		}
 	}
 

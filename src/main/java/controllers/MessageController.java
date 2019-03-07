@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Actor;
-import domain.Administrator;
-import domain.Box;
-import domain.Message;
 import services.ActorService;
 import services.BoxService;
 import services.ConfigurationService;
 import services.MessageService;
+import domain.Actor;
+import domain.Administrator;
+import domain.Box;
+import domain.Message;
 
 @Controller
 @RequestMapping("message")
@@ -58,7 +58,7 @@ public class MessageController extends AbstractController {
 	@RequestMapping("actor/create")
 	private ModelAndView create(@RequestParam(required = false) final Boolean isBroadcast) {
 		final Actor principal = this.actorService.findPrincipal();
-		final Box box = this.boxService.findBoxByActorAndName(principal, "inBox");
+		final Box box = this.boxService.findBoxByActorAndName(principal, "notificationBox");
 		final Message message = this.messageService.create(box);
 		Boolean broadcast = false;
 		if (isBroadcast != null)
@@ -86,7 +86,7 @@ public class MessageController extends AbstractController {
 			res = this.createEditModelAndView(message, false);
 		else
 			try {
-				this.messageService.save(message);
+				this.messageService.save(message, false);
 				res = new ModelAndView("redirect:/box/actor/list.do");
 			} catch (final Throwable t) {
 				res = this.createEditModelAndView(message, "cannot.commit.error", false);
