@@ -12,14 +12,14 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.MessageRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
 import domain.Box;
 import domain.Message;
+import repositories.MessageRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 
 @Service
 @Transactional
@@ -138,6 +138,19 @@ public class MessageService {
 			mes.setPriority(message.getPriority());
 			mes.setSubject(message.getSubject());
 			mes.setTags(message.getTags());
+			mes.setRecipient(a);
+			this.save(mes, true);
+		}
+	}
+
+	public void broadcast2(final Message m) {
+		final Message message = (Message) this.serviceUtils.checkObjectSave(m);
+		final Actor principal = this.actorService.findPrincipal();
+		for (final Actor a : this.actorService.findAllExceptMe()) {
+			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "notificationBox"));
+			mes.setBody(message.getBody());
+			mes.setPriority(message.getPriority());
+			mes.setSubject(message.getSubject());
 			mes.setRecipient(a);
 			this.save(mes, true);
 		}

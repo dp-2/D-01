@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import controllers.AbstractController;
-import domain.Actor;
 import services.ActorService;
 import services.ConfigurationService;
+import controllers.AbstractController;
+import domain.Actor;
 
 @Controller
 @RequestMapping("/actor/administrator")
@@ -115,7 +115,7 @@ public class ActorAdministratorController extends AbstractController {
 		final Actor actor = this.actorService.findOne(actorId);
 		try {
 			Assert.notNull(actor);
-			Assert.isTrue((actor.getBanned() == false) && (actor.getSpammer() == true));
+			Assert.isTrue((actor.getBanned() == true) && (actor.getSpammer() == true));
 			this.actorService.unban(actor);
 			modelAndView = new ModelAndView("redirect:list.do");
 

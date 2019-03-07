@@ -52,6 +52,7 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	private String					password;
 	private Collection<Authority>	authorities;
 	private Boolean					enabled;
+	private boolean					banned;
 
 
 	public void setEnabled(final Boolean enabled) {
@@ -119,7 +120,7 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	@Transient
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return !this.getBanned();
 	}
 
 	@Transient
@@ -131,7 +132,15 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	@Transient
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return !this.getBanned();
+	}
+
+	public boolean getBanned() {
+		return this.banned;
+	}
+
+	public void setBanned(final boolean banned) {
+		this.banned = banned;
 	}
 
 }

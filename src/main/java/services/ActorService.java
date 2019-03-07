@@ -135,6 +135,7 @@ public class ActorService {
 
 	public void ban(final Actor actor) {
 		actor.setBanned(true);
+		actor.getUserAccount().setBanned(true);
 		actor.getUserAccount().setEnabled(false);
 		this.save(actor);
 	}
