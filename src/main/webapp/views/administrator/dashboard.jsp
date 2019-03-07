@@ -164,4 +164,37 @@
 		</display:table>
 
 	</fieldset>
+	
+	<fieldset>
+		<legend>
+			<spring:message code="dashboard.brotherhoodsPerArea">
+			</spring:message>
+		</legend>
+		<acme:out code="dashboard.countHermandadesPorArea"
+			value="${countHermandadesPorArea}" />
+		<acme:out code="dashboard.maxHermandadesPorArea.max"
+			value="${maxHermandadesPorArea}" />
+		<acme:out code="dashboard.minHermandadesPorArea.min"
+			value="${minHermandadesPorArea}" />
+		<acme:out code="dashboard.avgHermandadesPorArea.avg"
+			value="${avgHermandadesPorArea}" />
+		<acme:out code="dashboard.stddevHermandadesPorArea.stdev"
+			value="${stddevHermandadesPorArea}" />
+	</fieldset>
+	
+		<fieldset>
+		<legend>
+			<spring:message code="dashboard.resultsInFinder">
+			</spring:message>
+		</legend>
+		
+		<acme:out code="dashboard.maxResultsInFinder.max"
+			value="${maxResultsInFinder}" />
+		<acme:out code="dashboard.minResultsInFinder.min"
+			value="${minResultsInFinder}" />
+		<acme:out code="dashboard.avgResultsInFinder.avg"
+			value="${avgResultsInFinder}" />
+		<acme:out code="dashboard.stdResultsInFinder.stdev"
+			value="${stdResultsInFinder}" />
+	</fieldset>
 </security:authorize>

@@ -2,7 +2,6 @@
 package services;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -159,13 +158,14 @@ public class FinderService {
 		}
 	}
 
-	public Collection<Double> finderStats() {
+	public List<Double> finderStats() {
 		// 1er dato mínimo
 		// 2o dato máximo
 		// 3er dato media
 		// 4o dato desviación estándar
 		this.serviceUtils.checkAuthority(Authority.ADMIN);
-		return this.finderRepository.finderStats();
+		List<Double> res = new ArrayList<>();
+		res = this.finderRepository.finderStats();
+		return res;
 	}
-
 }

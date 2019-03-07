@@ -23,9 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.AdministratorService;
+import services.AreaService;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.EnrollService;
+import services.FinderService;
 import services.MarchService;
 import services.MemberService;
 import services.PositionService;
@@ -66,6 +68,12 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private AreaService				areaService;
+
+	@Autowired
+	private FinderService			finderService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -113,7 +121,6 @@ public class AdministratorController extends AbstractController {
 		final Brotherhood smallestBrotherhood = this.brotherhoodService.BrotherhoodWithLessMembers();
 
 		final List<Enroll> enrollsLarg = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
-		System.out.println(enrollsLarg);
 		final int largestBrotherhoodNumMembers = enrollsLarg.size();
 
 		final List<Enroll> enrollsSmall = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(smallestBrotherhood.getId());
@@ -148,6 +155,31 @@ public class AdministratorController extends AbstractController {
 		//-----------------------March Statics
 		final List<Member> members10RequestAccepted = this.marchService.members10PerMarchAccepted();
 		result.addObject("members10RequestAccepted", members10RequestAccepted);
+
+		//-----------------------Brotherhoods per area
+		final Double countHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("COUNT");
+		final Double maxHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("MAX");
+		final Double minHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("MIN");
+		final Double avgHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("AVG");
+		final Double stddevHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("STD");
+
+		result.addObject("countHermandadesPorArea", countHermandadesPorArea);
+		result.addObject("maxHermandadesPorArea", maxHermandadesPorArea);
+		result.addObject("minHermandadesPorArea", minHermandadesPorArea);
+		result.addObject("avgHermandadesPorArea", avgHermandadesPorArea);
+		result.addObject("stddevHermandadesPorArea", stddevHermandadesPorArea);
+
+		//-----------------------Results in finder
+		System.out.println(this.finderService.finderStats().get(0));
+		final Double minResultsInFinder = this.finderService.finderStats().get(0);
+		final Double maxResultsInFinder = this.finderService.finderStats().get(1);
+		final Double avgResultsInFinder = this.finderService.finderStats().get(2);
+		final Double stdResultsInFinder = this.finderService.finderStats().get(3);
+
+		result.addObject("minResultsInFinder", minResultsInFinder);
+		result.addObject("maxResultsInFinder", maxResultsInFinder);
+		result.addObject("avgResultsInFinder", avgResultsInFinder);
+		result.addObject("stdResultsInFinder", stdResultsInFinder);
 
 		return result;
 	}
