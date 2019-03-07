@@ -239,14 +239,16 @@
 
 	<bean id="area5" class="domain.Area">
 		<property name="name" value="Capilla del pueblo" />
-		<property name="pictures" value="https://205015-618768-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/06/basilica-san-pedro-interior.jpeg,https://static8.depositphotos.com/1004999/906/i/950/depositphotos_9062415-stock-photo-interior-of-st-peters-basilica.jpg"/>
-		
+		<property name="pictures"
+			value="https://205015-618768-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/06/basilica-san-pedro-interior.jpeg,https://static8.depositphotos.com/1004999/906/i/950/depositphotos_9062415-stock-photo-interior-of-st-peters-basilica.jpg" />
+
 	</bean>
 
 	<bean id="area6" class="domain.Area">
 		<property name="name" value="Capilla del pueblo" />
-		<property name="pictures" value="https://www.informador.mx/__export/1506032862276/sites/elinformador/img/historico/0/618383.jpg_1970638775.jpg"/>
-			
+		<property name="pictures"
+			value="https://www.informador.mx/__export/1506032862276/sites/elinformador/img/historico/0/618383.jpg_1970638775.jpg" />
+
 	</bean>
 
 
@@ -888,7 +890,7 @@
 		<property name="nameEnglish" value="Officer" />
 		<property name="nameSpanish" value="Funcionario" />
 	</bean>
-	
+
 	<bean id="position8" class="domain.Position">
 		<property name="nameEnglish" value="Vocal" />
 		<property name="nameSpanish" value="Vocal" />
@@ -1237,28 +1239,18 @@
 		<property name="member" ref="member1" />
 		<property name="processions">
 			<list>
-				<ref bean="procession1" />
-				<ref bean="procession2" />
-				<ref bean="procession3" />
 			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 1, 2019" />
-		<property name="minDate" value="Feb 1, 2020" />
-		<property name="maxDate" value="Feb 1, 2022" />
-		<property name="keyword" value="finder1" />
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
 		<property name="member" ref="member2" />
 		<property name="processions">
 			<list>
-				<ref bean="procession4" />
 			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 1, 2019" />
-		<property name="minDate" value="Feb 1, 2020" />
-		<property name="maxDate" value="Feb 1, 2022" />
-		<property name="keyword" value="finder2" />
 	</bean>
 
 	<bean id="finder3" class="domain.Finder">
@@ -1268,9 +1260,6 @@
 			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 2, 2018" />
-		<property name="minDate" value="Feb 1, 2020" />
-		<property name="maxDate" value="Feb 1, 2022" />
-		<property name="keyword" value="finder3" />
 	</bean>
 
 	<bean id="finder4" class="domain.Finder">
@@ -1278,6 +1267,7 @@
 		<property name="processions">
 			<list>
 			</list>
+			<property name="lastUpdate" value="Feb 2, 2018" />
 		</property>
 	</bean>
 
