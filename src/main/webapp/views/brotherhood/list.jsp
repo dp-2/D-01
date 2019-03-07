@@ -36,8 +36,6 @@
 
 	<acme:column value="${row.address}" code="brotherhood.address" />
 
-	
-
 	<spring:message code='brotherhood.listmembers' var="titleListMembers" />
 	<acme:column value="member/list.do?brotherhoodId=${row.id}" url="true"
 		alt="${titleListMembers}" />

@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Brotherhood;
-import domain.Procession;
 import security.Authority;
 import security.LoginService;
 import services.AreaService;
 import services.BrotherhoodService;
 import services.ConfigurationService;
 import services.ProcessionService;
+import domain.Brotherhood;
+import domain.Procession;
 
 @Controller
 @RequestMapping("/procession")
@@ -105,4 +105,5 @@ public class ProcessionController extends AbstractController {
 
 		return modelAndView;
 	}
+
 }

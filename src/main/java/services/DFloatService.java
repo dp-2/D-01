@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 import repositories.DFloatRepository;
 import security.LoginService;
+import domain.Actor;
 import domain.Brotherhood;
 import domain.DFloat;
 import domain.Procession;
@@ -84,6 +85,17 @@ public class DFloatService {
 
 	//	public List<DFloat> findDFloatsByProcessionId(final int processionId) {
 	//		return this.dfloatRepository.findDFloatsByProcessionId(processionId);
-	//	}
+	//	
 
+	public Collection<DFloat> searchFloatNotInProcessionByIdByActorId(final Procession procession, final Actor actor) {
+		this.serviceUtils.checkObject(procession);
+		this.serviceUtils.checkObject(actor);
+		return this.dfloatRepository.searchFloatNotInProcessionByIdByActorId(procession.getId(), actor.getId());
+	}
+
+	public Collection<DFloat> searchFloatInProcessionByIdByActorId(final Procession procession, final Actor actor) {
+		this.serviceUtils.checkObject(procession);
+		this.serviceUtils.checkObject(actor);
+		return this.dfloatRepository.searchFloatInProcessionByIdByActorId(procession.getId(), actor.getId());
+	}
 }

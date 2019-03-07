@@ -38,10 +38,7 @@
 				<!-------------------Form ------------------------------------>
 				<acme:labelForm code="dfloat.title" path="title" />
 				<acme:textarea code="dfloat.description" path="description" />
-				<acme:labelForm code="dfloat.pictures" path="pictures" />
-
-
-
+				<acme:labelForm code="dfloat.pictures" path="pictures" />	
 
 
 

@@ -22,6 +22,7 @@ import repositories.ProcessionRepository;
 import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
+import domain.DFloat;
 import domain.Procession;
 import forms.ProcessionForm;
 
@@ -49,6 +50,8 @@ public class ProcessionService {
 
 	@Autowired
 	private DFloatService			dFloatService;
+	@Autowired
+	private ServiceUtils			serviceUtils;
 
 	@Autowired(required = false)
 	private Validator				validator;
@@ -187,4 +190,15 @@ public class ProcessionService {
 		final Date date = dateFormat.parse(LocalDate.now().plusMonths(1).toString());
 		return this.processionRepository.findProcessionsIn30Days(date);
 	}
+
+	public List<Procession> findProcessionsForRemove(final DFloat dfloat) {
+		this.serviceUtils.checkObject(dfloat);
+		return this.processionRepository.findProcessionsForRemove(dfloat.getId());
+	}
+
+	public List<Procession> findProcessionsForAdd(final DFloat dfloat) {
+		this.serviceUtils.checkObject(dfloat);
+		return this.processionRepository.findProcessionsForAdd(dfloat.getId());
+	}
+
 }

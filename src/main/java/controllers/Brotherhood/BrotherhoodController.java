@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.BrotherhoodService;
+import services.ConfigurationService;
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Url;
 import forms.BrotherhoodForm;
-import services.ActorService;
-import services.BrotherhoodService;
-import services.ConfigurationService;
 
 @Controller
 @RequestMapping("brotherhood")
@@ -102,7 +102,11 @@ public class BrotherhoodController extends AbstractController {
 	public ModelAndView display(@RequestParam(required = true) final Integer brotherhoodId) {
 		final ModelAndView res = new ModelAndView("brotherhood/display");
 		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+		Collection<Url> brotherhoodPictures = brotherhood.getPictures();
+		if (brotherhoodPictures == null)
+			brotherhoodPictures = new ArrayList<Url>();
 		res.addObject("brotherhood", brotherhood);
+		res.addObject("brotherhoodPictures", brotherhoodPictures);
 		res.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(brotherhood));
 		res.addObject("banner", this.configurationService.findOne().getBanner());
 		return res;

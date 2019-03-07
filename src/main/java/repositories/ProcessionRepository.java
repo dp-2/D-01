@@ -29,4 +29,11 @@ public interface ProcessionRepository extends JpaRepository<Procession, Integer>
 	//The processions that are going to be organised in 30 days or less.
 	@Query("select p from Procession p where p.momentOrganised BETWEEN CURRENT_DATE and :currentDayPlus30Days")
 	List<Procession> findProcessionsIn30Days(@Param("currentDayPlus30Days") Date date);
+
+	@Query("select p from Procession p, DFloat f where p.brotherhood.id = f.brotherhood.id and p in f.processions and f.id = ?1")
+	List<Procession> findProcessionsForRemove(Integer dfloatId);
+
+	@Query("select p from Procession p, DFloat f where p.brotherhood.id = f.brotherhood.id and p not in f.processions and f.id = ?1")
+	List<Procession> findProcessionsForAdd(Integer dfloatId);
+
 }

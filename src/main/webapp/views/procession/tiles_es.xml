@@ -19,5 +19,15 @@
 		<put-attribute name="title" value="Editar una Procesion" />
 		<put-attribute name="body" value="/views/procession/edit.jsp" />
 	</definition>
+	
+	<definition name="procession/add" extends="master.page">
+		<put-attribute name="title" value="Añadir un paso" />
+		<put-attribute name="body" value="/views/procession/addFloat.jsp" />
+	</definition>
+	
+	<definition name="procession/remove" extends="master.page">
+		<put-attribute name="title" value="Quitar un paso" />
+		<put-attribute name="body" value="/views/procession/removeFloat.jsp" />
+	</definition>
 
 </tiles-definitions>

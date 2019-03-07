@@ -28,6 +28,15 @@
 				<a href="procession/brotherhood/edit.do?processionId=${row.id}">
 					<spring:message code="procession.edit" />
 				</a>
+				<br>
+				<a href="procession/brotherhood/addFloat.do?processionId=${row.id}">
+					<spring:message code="procession.addFloat" />
+				</a>
+				<br>
+				<a href="procession/brotherhood/removeFloat.do?processionId=${row.id}">
+					<spring:message code="procession.removeFloat" />
+				</a>
+				
 			</jstl:if>
 		</display:column>
 	</security:authorize>
