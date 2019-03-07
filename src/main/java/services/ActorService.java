@@ -3,21 +3,30 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.Validator;
 
 import repositories.ActorRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountRepository;
 import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
 import domain.Member;
+import forms.ActorForm;
 
 @Service
 @Transactional
@@ -26,6 +35,9 @@ public class ActorService {
 	// Managed repository ----------------------------------------------------------------
 	@Autowired
 	private ActorRepository			actorRepository;
+
+	@Autowired
+	private UserAccountRepository	userAccountRepository;
 
 	//Service-----------------------------------------------------------------------------
 	@Autowired
@@ -39,6 +51,12 @@ public class ActorService {
 
 	@Autowired
 	private BoxService				boxService;
+
+	@Autowired(required = false)
+	private Validator				validator;
+
+	@Autowired
+	private MessageSource			messageSource;
 
 
 	public Actor create(final String authority) {
@@ -143,9 +161,10 @@ public class ActorService {
 			member.setSurname(actor.getSurname());
 			member.setScore(actor.getScore());
 			member.setAddress(actor.getAddress());
+			member.setMiddleName(actor.getMiddleName());
 
 			final Actor actor1 = this.memberService.save(member);
-			this.boxService.createIsSystemBoxs(actor1);
+			//this.boxService.createIsSystemBoxs(actor1);
 		} else if (authorities.contains(bro)) {
 			Brotherhood brotherhood = null;
 			if (actor.getId() != 0)
@@ -164,9 +183,10 @@ public class ActorService {
 			brotherhood.setPhoto(actor.getPhoto());
 			brotherhood.setSurname(actor.getSurname());
 			brotherhood.setAddress(actor.getAddress());
+			brotherhood.setMiddleName(actor.getMiddleName());
 
 			final Actor actor1 = this.brotherhoodService.save(brotherhood);
-			this.boxService.createIsSystemBoxs(actor1);
+			//this.boxService.createIsSystemBoxs(actor1);
 
 		} else if (authorities.contains(admin)) {
 			Administrator administrator = null;
@@ -178,6 +198,7 @@ public class ActorService {
 			}
 
 			administrator.setSurname(actor.getSurname());
+			administrator.setMiddleName(actor.getMiddleName());
 			administrator.setEmail(actor.getEmail());
 			administrator.setBanned(actor.getBanned());
 			administrator.setSpammer(actor.getSpammer());
@@ -187,7 +208,7 @@ public class ActorService {
 			administrator.setAddress(actor.getAddress());
 
 			final Actor actor1 = this.administratorService.save(administrator);
-			this.boxService.createIsSystemBoxs(actor1);
+			//this.boxService.createIsSystemBoxs(actor1);
 		}
 
 	}
@@ -205,6 +226,75 @@ public class ActorService {
 	public Collection<Actor> findAllExceptMe() {
 		final Collection<Actor> res = this.findAll();
 		res.remove(this.findPrincipal());
+		return res;
+	}
+
+	public ActorForm construct(final Actor b) {
+		final ActorForm res = new ActorForm();
+		res.setEmail(b.getEmail());
+		res.setName(b.getName());
+		res.setPhone(b.getPhone());
+		res.setPhoto(b.getPhoto());
+		res.setSurname(b.getSurname());
+		res.setUsername(b.getUserAccount().getUsername());
+		res.setId(b.getId());
+		res.setVersion(b.getVersion());
+		res.setMiddleName(b.getMiddleName());
+		res.setAddress(b.getAddress());
+		final Authority auth = ((List<Authority>) b.getUserAccount().getAuthorities()).get(0);
+		res.setAuthority(auth.getAuthority());
+		return res;
+	}
+
+	public void validateForm(final ActorForm form, final BindingResult binding) {
+		if (form.getId() == 0 && !form.getAccept()) {
+			/*
+			 * binding.addError(new FieldError("brotherhoodForm", "accept", form.getAccept(), false, new String[] {
+			 * "brotherhoodForm.accept", "accept"
+			 * }, new Object[] {
+			 * new DefaultMessageSourceResolvable(new String[] {
+			 * "brotherhoodForm.accept", "accept"
+			 * }, new Object[] {}, "accept")
+			 * }, "brotherhood.mustaccept"));
+			 */
+			final Locale locale = LocaleContextHolder.getLocale();
+			final String errorMessage = this.messageSource.getMessage("brotherhood.mustaccept", null, locale);
+			binding.addError(new FieldError("actorForm", "accept", errorMessage));
+		}
+		if (!form.getConfirmPassword().equals(form.getPassword())) {
+			final Locale locale = LocaleContextHolder.getLocale();
+			final String errorMessage = this.messageSource.getMessage("brotherhood.mustmatch", null, locale);
+			binding.addError(new FieldError("actorForm", "confirmPassword", errorMessage));
+		}
+		if ((form.getEmail().endsWith("@") || form.getEmail().endsWith("@>")) && !form.getAuthority().equals(Authority.ADMIN)) {
+			final Locale locale = LocaleContextHolder.getLocale();
+			final String errorMessage = this.messageSource.getMessage("actor.bademail", null, locale);
+			binding.addError(new FieldError("actorForm", "email", errorMessage));
+		}
+	}
+	public Actor deconstruct(final ActorForm form, final BindingResult binding) {
+		Actor res = null;
+		if (form.getId() == 0)
+			res = this.create(form.getAuthority());
+		else {
+			res = this.findOne(form.getId());
+			Assert.notNull(res);
+		}
+		res.setAddress(form.getAddress());
+		res.setMiddleName(form.getMiddleName());
+		res.setEmail(form.getEmail());
+		res.setName(form.getName());
+		res.setPhone(form.getPhone());
+		res.setPhoto(form.getPhoto());
+		res.setSurname(form.getSurname());
+		res.getUserAccount().setUsername(form.getUsername());
+		res.getUserAccount().setPassword(form.getPassword());
+		final Collection<Authority> authorities = new ArrayList<Authority>();
+		final Authority auth = new Authority();
+		auth.setAuthority(form.getAuthority());
+		authorities.add(auth);
+		res.getUserAccount().setAuthorities(authorities);
+		this.validator.validate(form, binding);
 		return res;
 	}
 

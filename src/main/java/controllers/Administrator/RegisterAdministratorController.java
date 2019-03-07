@@ -1,8 +1,6 @@
 
 package controllers.Administrator;
 
-import java.util.Collection;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.Authority;
-import security.UserAccount;
 import services.ActorService;
 import controllers.AbstractController;
 import domain.Actor;
+import domain.Administrator;
+import forms.ActorForm;
 
 @Controller
 @RequestMapping("/register/administrator")
@@ -45,7 +44,8 @@ public class RegisterAdministratorController extends AbstractController {
 				throw new NullPointerException();
 			}
 
-			modelAndView = this.createEditModelAndView(actor);
+			final ActorForm actorForm = this.actorService.construct(actor);
+			modelAndView = this.createEditModelAndView(actorForm);
 
 		} catch (final Exception e) {
 			modelAndView = new ModelAndView("redirect:/welcome/index.do");
@@ -56,61 +56,77 @@ public class RegisterAdministratorController extends AbstractController {
 
 	//Save
 	@RequestMapping(value = "/newActor", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Actor actor, final BindingResult binding) {
+	public ModelAndView save(@Valid final ActorForm actorForm, final BindingResult binding) {
 
 		ModelAndView result;
 
+		this.actorService.validateForm(actorForm, binding);
+
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(actor);
+			result = this.createEditModelAndView(actorForm);
 		else
 			try {
-				final UserAccount userAccount = actor.getUserAccount();
-
+				final Actor actor = this.actorService.deconstruct(actorForm, binding);
 				final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
-				userAccount.setPassword(encoder.encodePassword(userAccount.getPassword(), null));
-				userAccount.setEnabled(true);
-				actor.setUserAccount(userAccount);
+				actor.getUserAccount().setPassword(encoder.encodePassword(actor.getUserAccount().getPassword(), null));
+				actor.getUserAccount().setEnabled(true);
 				this.actorService.update(actor);
 
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable oops) {
 				System.out.println("=======" + oops.getMessage() + "=======");
-				final Actor test = this.actorService.findActorByUsername(actor.getUserAccount().getUsername());
+				final Actor test = this.actorService.findActorByUsername(actorForm.getUsername());
 				if (test != null)
-					result = this.createEditModelAndView(actor, "actor.userExists");
+					result = this.createEditModelAndView(actorForm, "actor.userExists");
 				else
-					result = this.createEditModelAndView(actor, "message.commit.error");
+					result = this.createEditModelAndView(actorForm, "message.commit.error");
 			}
 		return result;
 	}
 
 	//CreateModelAndView
-	protected ModelAndView createEditModelAndView(final Actor actor) {
+	protected ModelAndView createEditModelAndView(final ActorForm actorForm) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(actor, null);
+		result = this.createEditModelAndView(actorForm, null);
 
 		return result;
 
 	}
 
-	protected ModelAndView createEditModelAndView(final Actor actor, final String message) {
+	protected ModelAndView createEditModelAndView(final ActorForm actorForm, final String message) {
 		ModelAndView result = null;
 
 		//TODO faltan actores
-		final Collection<Authority> authorities = actor.getUserAccount().getAuthorities();
-		final Authority admin = new Authority();
-		admin.setAuthority("ADMIN");
 
-		if (authorities.contains(admin))
+		actorForm.setAuthority("ADMIN");
+
+		if (actorForm.getAuthority().equals(Authority.ADMIN))
 			result = new ModelAndView("administrator/admin");
 		else
 			throw new NullPointerException();
 
-		result.addObject("actor", actor);
+		result.addObject("actorForm", actorForm);
 		result.addObject("message", message);
 		result.addObject("isRead", false);
+		result.addObject("isPrincipalAuthorizedEdit", this.isPrincipalAuthorizedEdit(actorForm));
+
 		return result;
+	}
+
+	private Boolean isPrincipalAuthorizedEdit(final ActorForm form) {
+		Boolean res = false;
+		Actor principal = null;
+		try {
+			principal = this.actorService.findPrincipal();
+		} catch (final Throwable oops) {
+			principal = null;
+		}
+		if (principal == null && form.getAuthority().equals(Authority.MEMBER))
+			res = true;
+		if (principal instanceof Administrator && form.getAuthority().equals(Authority.ADMIN))
+			res = true;
+		return res;
 	}
 
 }

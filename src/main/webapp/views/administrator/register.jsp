@@ -19,65 +19,36 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="register/administrator/newActor.do"
-	modelAttribute="actor">
+<spring:message code="confirm.phone" var="confirmPhoneMessage" />
 
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="spammer" />
-	<form:hidden path="banned" />
-	<form:hidden path="userAccount.authorities" />
-	<form:hidden path="userAccount.enabled" />
-
-
-	<acme:textbox code="actor.userAccount.username"
-		path="userAccount.username" />
-	<br />
-
-	<acme:password code="actor.userAccount.password"
-		path="userAccount.password" />
-	<br />
-
-	<acme:textbox code="actor.name" path="name" />
-	<br />
-
-	<acme:textbox code="actor.middleName" path="middleName" />
-	<br />
-
-	<acme:textbox code="actor.surname" path="surname" />
-	<br />
-
-	<acme:textbox code="actor.photo" path="photo" />
-	<br />
-
-	<acme:textbox code="actor.email" path="email" />
-	<br />
-
-	<acme:textbox code="actor.address" path="address" />
-	<br />
-
-	<acme:textbox code="actor.phone" path="phone" id="tlf"/>
-	<br />
-
-	<script type="text/javascript">
-		function isValid() {
-			var phoneRe = /^(((\+[1-9][0-9]{0,2}) \(([1-9][0-9]{0,2})\) (\d\d\d\d+))|((\+[1-9][0-9]{0,2}) (\d\d\d\d+))|((\d\d\d\d+)))$/;
-			var digits = document.getElementById('tlf').value;
-			var res = phoneRe.test(digits);
-			if (res) {
-				return true;
-			} else {
-				return confirm('<spring:message code="phone.confirm" />');
-			}
-		}
-	</script>
-
-	<input type="submit" name="save"
-		value='<spring:message code="actor.save"/>'
-		onclick=" javascript: return isValid();">
-
-	<acme:cancel url="welcome/index.do" code="actor.cancel" />
-
-
-
-</form:form>
+<jstl:if test="${isPrincipalAuthorizedEdit}">
+		<form:form action="register/administrator/newActor.do" method="post" id="formEdit"
+			name="formEdit" modelAttribute="actorForm">
+			
+			<form:hidden path="id" />
+			<form:hidden path="version" />
+			<form:hidden path="authority" />
+			
+			<acme:textbox path="username" code="useraccount.username" />
+			<acme:password path="password" code="useraccount.password" />
+			<acme:password path="confirmPassword" code="useraccount.confirmPassword" />
+			
+			<acme:textbox path="name" code="brotherhood.name" />
+			<acme:textbox path="middleName" code="brotherhood.middlename" />
+			<acme:textbox path="surname" code="brotherhood.surname" />
+			<acme:textbox path="email" code="brotherhood.email" />
+			<acme:textbox path="phone" code="brotherhood.phone" id="phone" />
+			<acme:textbox path="address" code="brotherhood.address" />
+			<acme:textbox path="photo" code="brotherhood.photo" />
+				
+			<acme:checkbox code="brotherhood.accept" path="accept" />
+				
+			<input type="submit" name="save"
+				value="<spring:message code="brotherhood.save"></spring:message>"
+				onclick="return patternPhone(document.getElementById('phone').value, '${confirmPhoneMessage}');" />
+				
+		</form:form>
+		
+		<acme:cancel url="" code="brotherhood.cancel" />	
+		
+</jstl:if>

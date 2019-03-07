@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -48,21 +50,23 @@ public class BrotherhoodController extends AbstractController {
 	}
 
 	@RequestMapping("brotherhood/edit")
-	public ModelAndView edit(@RequestParam(required = true) final Integer brotherhoodId) {
-		final Brotherhood brotherhood = this.brotherhoodService.findOne(brotherhoodId);
+	public ModelAndView edit() {
+		final Actor principal = this.actorService.findPrincipal();
+		final Brotherhood brotherhood = this.brotherhoodService.findOne(principal.getId());
 		Assert.notNull(brotherhood);
 		final BrotherhoodForm brotherhoodForm = this.brotherhoodService.construct(brotherhood);
 		return this.createEditModelAndView(brotherhoodForm);
 	}
 
 	@RequestMapping(value = "brotherhood-none/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
+	public ModelAndView save(@Valid final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
 		ModelAndView res = null;
-		final Brotherhood brotherhood = this.brotherhoodService.deconstruct(brotherhoodForm, binding);
+		this.brotherhoodService.validateForm(brotherhoodForm, binding);
 		if (binding.hasErrors())
 			res = this.createEditModelAndView(brotherhoodForm);
 		else
 			try {
+				final Brotherhood brotherhood = this.brotherhoodService.deconstruct(brotherhoodForm);
 				this.brotherhoodService.save(brotherhood);
 				res = new ModelAndView("redirect:/brotherhood/brotherhood/display.do");
 			} catch (final Throwable oops) {
@@ -70,7 +74,6 @@ public class BrotherhoodController extends AbstractController {
 			}
 		return res;
 	}
-
 	@RequestMapping(value = "brotherhood-none/edit", method = RequestMethod.POST, params = "addPicture")
 	public ModelAndView addPicture(final BrotherhoodForm brotherhoodForm, final BindingResult binding) {
 		ModelAndView res = null;
@@ -145,7 +148,7 @@ public class BrotherhoodController extends AbstractController {
 		} catch (final IllegalArgumentException e) {
 			principal = null;
 		}
-		if (brotherhood.getId() > 0)
+		if (brotherhood.getId() > 0 && principal != null)
 			res = principal.getId() == brotherhood.getId();
 		else if (brotherhood.getId() == 0)
 			res = principal == null;
