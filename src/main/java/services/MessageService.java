@@ -143,19 +143,6 @@ public class MessageService {
 		}
 	}
 
-	public void broadcast2(final Message m) {
-		final Message message = (Message) this.serviceUtils.checkObjectSave(m);
-		final Actor principal = this.actorService.findPrincipal();
-		for (final Actor a : this.actorService.findAllExceptMe()) {
-			final Message mes = this.create(this.boxService.findBoxByActorAndName(principal, "notificationBox"));
-			mes.setBody(message.getBody());
-			mes.setPriority(message.getPriority());
-			mes.setSubject(message.getSubject());
-			mes.setRecipient(a);
-			this.save(mes, true);
-		}
-	}
-
 	public Collection<Message> findSendedMessages(final Actor a) {
 		Assert.notNull(a);
 		Assert.isTrue(a.getId() > 0);
