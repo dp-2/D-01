@@ -51,7 +51,7 @@
 			</div>
 				
 			<acme:checkbox code="brotherhood.accept" path="accept" />
-				
+			<a href="law/terminosYCondiciones.do"><spring:message code="brotherhood.consultTermsAndConditions" /></a><br/><br/> 
 			<acme:submit name="save" code="brotherhood.save" />
 				
 		</form:form>

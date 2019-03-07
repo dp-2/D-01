@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.LoginService;
 import services.ActorService;
+import services.ConfigurationService;
 import services.DFloatService;
 import services.ProcessionService;
 import controllers.AbstractController;
@@ -29,13 +30,16 @@ public class DFloatBrotherhoodController extends AbstractController {
 
 	//-----------------Services-------------------------
 	@Autowired
-	DFloatService		dfloatService;
+	DFloatService			dfloatService;
 
 	@Autowired
-	ActorService		actorService;
+	ActorService			actorService;
 
 	@Autowired
-	ProcessionService	processionService;
+	ProcessionService		processionService;
+
+	@Autowired
+	ConfigurationService	configurationService;
 
 
 	//-------------------------- List ----------------------------------
@@ -52,6 +56,7 @@ public class DFloatBrotherhoodController extends AbstractController {
 		result = new ModelAndView("dfloat/list");
 		result.addObject("dfloats", dfloats);
 		result.addObject("requestURI", "dfloat/brotherhood/list.do");
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}
@@ -68,6 +73,7 @@ public class DFloatBrotherhoodController extends AbstractController {
 		result = new ModelAndView("dfloat/display");
 		result.addObject("dfloat", dfloat);
 		result.addObject("myProcessions", myProcessions);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
 
 		return result;
 	}
@@ -122,13 +128,15 @@ public class DFloatBrotherhoodController extends AbstractController {
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final DFloat dfloat, final String messageCode) {
+	protected ModelAndView createEditModelAndView(final DFloat dfloat, final String message) {
 		final ModelAndView result;
 
 		result = new ModelAndView("dfloat/edit");
 
 		result.addObject("dfloat", dfloat);
-		result.addObject("message", messageCode);
+		result.addObject("banner", this.configurationService.findOne().getBanner());
+		result.addObject("message", message);
+		result.addObject("requestURI", "dfloat/brotherhood/edit.do");
 
 		return result;
 	}
