@@ -22,7 +22,7 @@
 	<div class="inner">
 		<spring:message code="aviso.cookies" />
 		<a href="javascript:void(0);" class="ok" onclick="PonerCookie();"><b>OK</b></a>
-		| <a href="law/politicaCookies.do" target="_blank" class="info"><spring:message
+		<a href="law/politicaCookies.do" target="_blank" class="info"><spring:message
 				code="aviso.cookies.information" /></a>
 	</div>
 </div>
