@@ -21,7 +21,7 @@
 
 <security:authentication property="principal.username" var="username" />
 <jstl:if
-		test='${dfloat.brotherhood.userAccount.username == username || cuestionario.id == 0}'>
+		test='${dfloat.brotherhood.userAccount.username == username || dfloat.id == 0}'>
 		
 
 <security:authorize access="hasRole('BROTHERHOOD')">
