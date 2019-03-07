@@ -1267,8 +1267,9 @@
 		<property name="processions">
 			<list>
 			</list>
-			<property name="lastUpdate" value="Feb 2, 2018" />
+
 		</property>
+		<property name="lastUpdate" value="Feb 2, 2018" />
 	</bean>
 
 	<!-- <bean id="finder4" class="domain.Finder"> <property name="member" ref="member4" 
