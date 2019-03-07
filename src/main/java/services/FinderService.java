@@ -163,9 +163,20 @@ public class FinderService {
 		// 2o dato máximo
 		// 3er dato media
 		// 4o dato desviación estándar
+		// 5º Empty vs not empty finders
+		final Double minResultsInFinder = this.finderRepository.minResultsInFinder();
+		final Double maxResultsInFinder = this.finderRepository.maxResultsInFinder();
+		final Double avgResultsInFinder = this.finderRepository.avgResultsInFinder();
+		final Double stdResultsInFinder = this.finderRepository.stdResultsInFinder();
+		final Double emptyVSNonEmptyFinder = this.finderRepository.emptyVSNonEmptyFinder();
+
 		this.serviceUtils.checkAuthority(Authority.ADMIN);
-		List<Double> res = new ArrayList<>();
-		res = this.finderRepository.finderStats();
+		final List<Double> res = new ArrayList<>();
+		res.add(minResultsInFinder);
+		res.add(maxResultsInFinder);
+		res.add(avgResultsInFinder);
+		res.add(stdResultsInFinder);
+		res.add(emptyVSNonEmptyFinder);
 		return res;
 	}
 }

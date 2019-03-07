@@ -196,5 +196,7 @@
 			value="${avgResultsInFinder}" />
 		<acme:out code="dashboard.stdResultsInFinder.stdev"
 			value="${stdResultsInFinder}" />
+			<acme:out code="dashboard.emptyVSNonEmptyFinderv"
+			value="${emptyVSNonEmptyFinderv}" />
 	</fieldset>
 </security:authorize>
