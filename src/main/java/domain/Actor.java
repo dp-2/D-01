@@ -11,6 +11,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.hibernate.validator.constraints.URL;
 
 import security.UserAccount;
@@ -33,6 +35,7 @@ public class Actor extends DomainEntity {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getName() {
 		return this.name;
 	}
@@ -42,6 +45,7 @@ public class Actor extends DomainEntity {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getSurname() {
 		return this.surname;
 	}
@@ -51,6 +55,7 @@ public class Actor extends DomainEntity {
 	}
 
 	@URL
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhoto() {
 		return this.photo;
 	}
@@ -59,6 +64,7 @@ public class Actor extends DomainEntity {
 		this.photo = photo;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getPhone() {
 		return this.phone;
 	}
@@ -92,6 +98,7 @@ public class Actor extends DomainEntity {
 		this.score = score;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getMiddleName() {
 		return this.middleName;
 	}
@@ -100,6 +107,7 @@ public class Actor extends DomainEntity {
 		this.middleName = middleName;
 	}
 
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getAddress() {
 		return this.address;
 	}
@@ -110,6 +118,7 @@ public class Actor extends DomainEntity {
 
 	@NotBlank
 	@Pattern(regexp = "^(\\w+@(\\w+(\\.\\w*)*)?)|(\\w+( \\w+)* <\\w+@(\\w+(\\.\\w*)*)?>)$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getEmail() {
 		return this.email;
 	}

@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -50,6 +52,7 @@ public class Enroll extends DomainEntity {
 	}
 
 	@Pattern(regexp = "^PENDING$|^APPROVED$|^REJECTED$|^OUT$")
+	@SafeHtml(whitelistType = WhiteListType.NONE)
 	public String getStatus() {
 		return this.status;
 	}
