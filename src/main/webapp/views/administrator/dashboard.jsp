@@ -64,6 +64,8 @@
 			value="${positionCountHistorian}" id="positionCountHistorian"/>
 		<acme:dashboard-out code="dashboard.positionStats.positionCountOfficer"
 			value="${positionCountOfficer}" id="positionCountOfficer"/>
+		<acme:dashboard-out code="dashboard.positionStats.positionCountVocal"
+			value="${positionCountVocal}" id="positionCountVocal"/>
 
 		<html>
 <head>
@@ -79,7 +81,6 @@
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
     	
-		var positionCountTotal = document.getElementById('positionCountTotal').innerHTML;
 		var positionCountPresident = document.getElementById('positionCountPresident').innerHTML;
 		var president = parseInt(positionCountPresident);
 		
@@ -97,6 +98,9 @@
 
 		var positionCountOfficer = document.getElementById('positionCountOfficer').innerHTML;
 		var officer = parseInt(positionCountOfficer);
+		
+		var positionCountVocal = document.getElementById('positionCountVocal').innerHTML;
+		var vocal = parseInt(positionCountVocal);
 
 		
       var data = google.visualization.arrayToDataTable([
@@ -107,6 +111,7 @@
         ["Treasurer", treasurer, "	#00FF00	"],
         ["Historian", historian, "	#FAEBD7"],
         ["Officer", officer, "#6495ED"],
+        ["Vocal", vocal, "red"],
 
       ]);
 

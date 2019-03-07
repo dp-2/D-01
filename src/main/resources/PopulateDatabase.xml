@@ -937,6 +937,11 @@
 		<property name="nameEnglish" value="Officer" />
 		<property name="nameSpanish" value="Funcionario" />
 	</bean>
+	
+	<bean id="position8" class="domain.Position">
+		<property name="nameEnglish" value="Vocal" />
+		<property name="nameSpanish" value="Vocal" />
+	</bean>
 
 
 	<!-- Enroll -->

@@ -144,6 +144,7 @@ public class AdministratorController extends AbstractController {
 		final Double positionCountTreasurer = this.positionService.computeStatistics().get("count.treasurer");
 		final Double positionCountHistorian = this.positionService.computeStatistics().get("count.historian");
 		final Double positionCountOfficer = this.positionService.computeStatistics().get("count.officer");
+		final Double positionCountVocal = this.positionService.computeStatistics().get("count.vocal");
 
 		result.addObject("positionCountTotal", positionCountTotal);
 		result.addObject("positionCountPresident", positionCountPresident);
@@ -152,6 +153,7 @@ public class AdministratorController extends AbstractController {
 		result.addObject("positionCountTreasurer", positionCountTreasurer);
 		result.addObject("positionCountHistorian", positionCountHistorian);
 		result.addObject("positionCountOfficer", positionCountOfficer);
+		result.addObject("positionCountVocal", positionCountVocal);
 
 		//-----------------------Processions Statics
 		final List<Procession> processionsIn30Days = this.processionService.findProcessionsIn30Days();
