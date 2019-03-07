@@ -19,6 +19,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<security:authentication property="principal.username" var="username" />
+<jstl:if
+		test='${dfloat.brotherhood.userAccount.username == username || cuestionario.id == 0}'>
+		
+
 <security:authorize access="hasRole('BROTHERHOOD')">
 	<div>
 
@@ -131,3 +136,15 @@
 
 
 </security:authorize>
+</jstl:if>
+<jstl:if
+	test='${dfloat.brotherhood.userAccount.username != username && dfloat.id != 0}'>
+	<h1 style="color: red;">
+		<b><spring:message code="dfloat.permissions"></spring:message></b>
+	</h1>
+	
+	<button type="button"
+				onclick="javascript: relativeRedir('dfloat/brotherhood/list.do')">
+				<spring:message code="dfloat.cancel" />
+			</button>
+</jstl:if>
