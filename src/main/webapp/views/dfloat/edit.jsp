@@ -19,6 +19,11 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<security:authentication property="principal.username" var="username" />
+<jstl:if
+		test='${dfloat.brotherhood.userAccount.username == username || cuestionario.id == 0}'>
+		
+
 <security:authorize access="hasRole('BROTHERHOOD')">
 	<div>
 
@@ -38,10 +43,7 @@
 				<!-------------------Form ------------------------------------>
 				<acme:labelForm code="dfloat.title" path="title" />
 				<acme:textarea code="dfloat.description" path="description" />
-				<acme:labelForm code="dfloat.pictures" path="pictures" />
-
-
-
+				<acme:labelForm code="dfloat.pictures" path="pictures" />	
 
 
 
@@ -134,3 +136,21 @@
 
 
 </security:authorize>
+</jstl:if>
+<jstl:if
+	test='${dfloat.brotherhood.userAccount.username != username && dfloat.id != 0}'>
+	<h1 style="color: red;">
+		<b><spring:message code="dfloat.permissions"></spring:message></b>
+	</h1>
+	
+	<img src="https://cdn.shopify.com/s/files/1/1061/1924/products/Very_Angry_Emoji_7f7bb8df-d9dc-4cda-b79f-5453e764d4ea_large.png?v=1480481058" alt="Cuestionario Picture"
+			style="width: 10%; height: 10%;">
+
+		<br />
+		<br />
+	
+	<button type="button"
+				onclick="javascript: relativeRedir('dfloat/brotherhood/list.do')">
+				<spring:message code="dfloat.cancel" />
+			</button>
+</jstl:if>

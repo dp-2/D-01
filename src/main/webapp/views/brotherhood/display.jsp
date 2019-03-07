@@ -34,7 +34,7 @@
 <p><spring:message code="brotherhood.establishedMoment" /> : <jstl:out value="${establishedMoment}" /></p>
 
 <fieldset><legend><spring:message code="brotherhood.pictures" /></legend>
-	<jstl:forEach items="${brotherhood.pictures}" var="picture">
+	<jstl:forEach items="${brotherhoodPictures}" var="picture">
 		<img src="<jstl:out value='${picture.url}' />" alt="<jstl:out value='${picture.url}' />" />
 	</jstl:forEach>
 </fieldset>

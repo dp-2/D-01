@@ -151,8 +151,7 @@ public class BrotherhoodService {
 		return res;
 	}
 
-	public Brotherhood deconstruct(final BrotherhoodForm form, final BindingResult binding) {
-		Brotherhood res = null;
+	public void validateForm(final BrotherhoodForm form, final BindingResult binding) {
 		if (form.getId() == 0 && !form.getAccept()) {
 			/*
 			 * binding.addError(new FieldError("brotherhoodForm", "accept", form.getAccept(), false, new String[] {
@@ -167,8 +166,22 @@ public class BrotherhoodService {
 			final String errorMessage = this.messageSource.getMessage("brotherhood.mustaccept", null, locale);
 			binding.addError(new FieldError("brotherhoodForm", "accept", errorMessage));
 		}
-		if (!form.getConfirmPassword().equals(form.getPassword()))
-			binding.addError(new FieldError("brotherhoodForm", "confirmPassword", "brotherhood.brotherhood.mustmatch"));
+		if (!form.getConfirmPassword().equals(form.getPassword())) {
+			final Locale locale = LocaleContextHolder.getLocale();
+			final String errorMessage = this.messageSource.getMessage("brotherhood.mustmatch", null, locale);
+			binding.addError(new FieldError("brotherhoodForm", "confirmPassword", errorMessage));
+		}
+		if (form.getEmail().endsWith("@") || form.getEmail().endsWith("@>")) {
+			final Locale locale = LocaleContextHolder.getLocale();
+			final String errorMessage = this.messageSource.getMessage("actor.bademail", null, locale);
+			binding.addError(new FieldError("brotherhoodForm", "email", errorMessage));
+		}
+	}
+
+	public Brotherhood deconstruct(final BrotherhoodForm form) {
+		Brotherhood res = null;
+		if (form.getPictures() == null)
+			form.setPictures(new ArrayList<Url>());
 		if (form.getId() == 0)
 			res = this.create();
 		else {
@@ -186,16 +199,14 @@ public class BrotherhoodService {
 		res.setTitle(form.getTitle());
 		res.getUserAccount().setUsername(form.getUsername());
 		res.getUserAccount().setPassword(form.getPassword());
-		if (res.getPictures() == null)
-			res.setPictures(new ArrayList<Url>());
 		final Collection<Authority> authorities = new ArrayList<Authority>();
 		final Authority auth = new Authority();
 		auth.setAuthority(Authority.BROTHERHOOD);
 		authorities.add(auth);
 		res.getUserAccount().setAuthorities(authorities);
-		this.validator.validate(form, binding);
 		return res;
 	}
+
 	public Brotherhood findBrotherhoodByUserAcountId(final int userAccountId) {
 		return this.repository.findBrotherhoodByUserAcountId(userAccountId);
 	}

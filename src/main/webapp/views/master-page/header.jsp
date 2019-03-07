@@ -12,6 +12,8 @@
 	pageEncoding="ISO-8859-1"%>
 
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 
@@ -20,7 +22,7 @@
 	<div class="inner">
 		<spring:message code="aviso.cookies" />
 		<a href="javascript:void(0);" class="ok" onclick="PonerCookie();"><b>OK</b></a>
-		| <a href="law/politicaCookies.do" target="_blank" class="info"><spring:message
+		<a href="law/politicaCookies.do" target="_blank" class="info"><spring:message
 				code="aviso.cookies.information" /></a>
 	</div>
 </div>
@@ -71,6 +73,23 @@
 		width="450px" height="200px" /></a>
 </div>
 
+<form:form action="${requestURI}" modelAttribute="warning">
+	<security:authorize access="isAuthenticated()">
+		<jstl:if test="${warning.isWarning == true}">
+		<img src="https://www.pngkey.com/png/full/133-1338651_svg-black-and-white-library-icon-clip-art.png" height="50px" width="50px" />
+		
+			<h3>
+				<span style='font-family: "Arial", "sans-serif"; color: black'><spring:message
+						code="master.page.warning" /> </span>
+
+			</h3>
+		</jstl:if>
+
+
+
+	</security:authorize>
+</form:form>
+
 <div align="center">
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
@@ -95,6 +114,21 @@
 			<li><a class="fNiv"
 				href="message/actor/create.do?isBroadcast=true"><spring:message
 						code="master.page.broadcast" /></a></li>
+			<jstl:if test="${warning.isWarning == true}">
+				<li><a href="administrator/adviseFalse.do"><spring:message
+							code="advise.unBreach" /></a></li>
+
+			</jstl:if>
+
+			<jstl:if test="${warning.isWarning == false}">
+				<li><a href="administrator/adviseTrue.do"><spring:message
+							code="advise.breach" /></a></li>
+
+
+			</jstl:if>
+
+
+
 		</security:authorize>
 
 		<security:authorize access="hasRole('MEMBER')">
@@ -125,7 +159,7 @@
 			<li><a class="fNiv" href="dfloat/brotherhood/list.do"><spring:message
 						code="master.page.dfloat" /></a></li>
 
-			
+
 
 			<li><a class="fNiv" href="brotherhood/brotherhood/display.do"><spring:message
 						code="brotherhood.display" /></a></li>
@@ -142,18 +176,18 @@
 									code="master.page.mybrotherhood" /></a>
 					</security:authorize>
 				</ul></li>
-				<security:authorize access="hasRole('BROTHERHOOD')">
-			<li><a class="fNiv" href="procession/list.do"><spring:message
-						code="master.page.processions" /></a>
-				<ul>
-						
+			<security:authorize access="hasRole('BROTHERHOOD')">
+				<li><a class="fNiv" href="procession/list.do"><spring:message
+							code="master.page.processions" /></a>
+					<ul>
+
 						<li class="arrow"></li>
 						<li><a href="procession/brotherhood/myList.do"><spring:message
 									code="master.page.processions.brotherhood" /></a></li>
-					
 
-				</ul>
-				</security:authorize>
+
+					</ul>
+			</security:authorize>
 		</security:authorize>
 
 

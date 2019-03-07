@@ -22,22 +22,25 @@ public interface PositionRepository extends JpaRepository<Position, Integer> {
 	@Query("select count(*) from Position")
 	Double countTotal();
 
-	@Query("select count(*) from Position where nameEnglish='President'")
+	@Query("select count(*) from Enroll e where e.position.nameEnglish='President'")
 	Double countPresident();
 
-	@Query("select count(*) from Position where nameEnglish='Picepresident'")
+	@Query("select count(*) from Enroll e where e.position.nameEnglish='Vicepresident'")
 	Double countVicepresident();
 
-	@Query("select count(*) from Position where nameEnglish='Secretary'")
+	@Query("select count(*) from Enroll e where e.position.nameEnglish='Secretary'")
 	Double countSecretary();
 
-	@Query("select count(*) from Position where nameEnglish='Treasurer'")
+	@Query("select count(*) from Enroll e where e.position.nameEnglish='Treasurer'")
 	Double countTreasurer();
 
-	@Query("select count(*) from Position where nameEnglish='Historian'")
+	@Query("select count(*) from Enroll e where e.position.nameEnglish='Historian'")
 	Double countHistorian();
 
-	@Query("select count(*) from Position where nameEnglish='Officer'")
+	@Query("select count(*) from Enroll e where e.position.nameEnglish='Officer'")
 	Double countOfficer();
+
+	@Query("select count(*) from Enroll e where e.position.nameEnglish='Vocal'")
+	Double countVocal();
 
 }

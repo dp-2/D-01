@@ -1,8 +1,8 @@
 /*
  * AdministratorController.java
- *
+ * 
  * Copyright (C) 2017 Universidad de Sevilla
- *
+ * 
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -22,7 +22,7 @@ import services.ConfigurationService;
 public class LawController extends AbstractController {
 
 	@Autowired
-	private ConfigurationService configurationService;
+	private ConfigurationService	configurationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -63,6 +63,17 @@ public class LawController extends AbstractController {
 
 		result = new ModelAndView("law/avisoLegal");
 		result.addObject("banner", this.configurationService.findOne().getBanner());
+
+		return result;
+	}
+
+	// Action-2 ---------------------------------------------------------------
+
+	@RequestMapping("/normativaGDPR")
+	public ModelAndView normativaGDPR() {
+		ModelAndView result;
+
+		result = new ModelAndView("law/normativaGDPR");
 
 		return result;
 	}

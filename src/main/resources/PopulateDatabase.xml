@@ -107,6 +107,8 @@
 		</property>
 	</bean>
 
+
+
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="member3" />
 		<property name="password" value="3ef4802d8a37022fd187fbd829d1c4d6" />
@@ -207,97 +209,44 @@
 	<bean id="area1" class="domain.Area">
 		<property name="name" value="Catedral de sevilla" />
 		<property name="brotherhood" ref="brotherhood1" />
-		<property name="pictures">
-			<list>
-				<bean id="picture1area1" class="domain.Url">
-					<property name="url"
-						value="http://www.andalucia.org/media/fotos/image_249310_jpeg_800x600_q85.jpg" />
-				</bean>
-				<bean id="picture2area1" class="domain.Url">
-					<property name="url"
-						value="https://cometeelmundo.net/sites/default/files/styles/originalwatermark/public/field/image/impresionante-feretro-de-colon-en-la-catedral-de-sevilla.jpg?itok=3MFclXH-" />
-				</bean>
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
 
-				<bean id="picture3area1" class="domain.Url">
-					<property name="url"
-						value="https://sevilla.abc.es/media/sevilla/2018/11/14/s/calles-catedral-sevilla-kg9D--510x287@abc.jpg" />
-				</bean>
-			</list>
-		</property>
+
 	</bean>
 
 	<bean id="area2" class="domain.Area">
 		<property name="name" value="Capilla del cristo de la serenidad" />
 		<property name="brotherhood" ref="brotherhood2" />
-		<property name="pictures">
-			<list>
-				<bean id="picture1area2" class="domain.Url">
-					<property name="url"
-						value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
-				</bean>
-			</list>
-		</property>
+		<property name="pictures"
+			value="https://cdn.pixabay.com/photo/2017/06/26/02/47/people-2442565_960_720.jpg" />
+
 	</bean>
 
 	<bean id="area3" class="domain.Area">
 		<property name="name" value="Capilla del pueblo" />
-		<property name="pictures">
-			<list>
-				<bean id="picture1area3" class="domain.Url">
-					<property name="url"
-						value="https://www.verpueblos.com/fotos_originales/1/5/0/00294150.jpg" />
-				</bean>
+		<property name="pictures"
+			value="https://www.verpueblos.com/fotos_originales/1/5/0/00294150.jpg,http://www.catedralalmeria.com/wp-content/uploads/2016/01/capilla_galeria.jpg" />
 
-				<bean id="picture2area3" class="domain.Url">
-					<property name="url"
-						value="http://www.catedralalmeria.com/wp-content/uploads/2016/01/capilla_galeria.jpg" />
-				</bean>
-			</list>
-		</property>
 	</bean>
 
 
 	<bean id="area4" class="domain.Area">
 		<property name="name" value="Area sin imagenes" />
-		<property name="pictures">
-			<list>
+		<property name="pictures" value="http://a.com" />
 
-			</list>
-		</property>
 	</bean>
 
 	<bean id="area5" class="domain.Area">
 		<property name="name" value="Capilla del pueblo" />
-		<property name="pictures">
-			<list>
-				<bean id="picture1area5" class="domain.Url">
-					<property name="url"
-						value="https://205015-618768-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/06/basilica-san-pedro-interior.jpeg" />
-				</bean>
-
-				<bean id="picture2area5" class="domain.Url">
-					<property name="url"
-						value="https://static8.depositphotos.com/1004999/906/i/950/depositphotos_9062415-stock-photo-interior-of-st-peters-basilica.jpg" />
-				</bean>
-			</list>
-		</property>
+		<property name="pictures" value="https://205015-618768-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2018/06/basilica-san-pedro-interior.jpeg,https://static8.depositphotos.com/1004999/906/i/950/depositphotos_9062415-stock-photo-interior-of-st-peters-basilica.jpg"/>
+		
 	</bean>
 
 	<bean id="area6" class="domain.Area">
 		<property name="name" value="Capilla del pueblo" />
-		<property name="pictures">
-			<list>
-				<bean id="picture1area6" class="domain.Url">
-					<property name="url"
-						value="https://www.informador.mx/__export/1506032862276/sites/elinformador/img/historico/0/618383.jpg_1970638775.jpg" />
-				</bean>
-
-				<bean id="picture2area6" class="domain.Url">
-					<property name="url"
-						value="https://media-cdn.tripadvisor.com/media/photo-s/0c/14/1d/e0/capilla-de-la-virgen.jpg" />
-				</bean>
-			</list>
-		</property>
+		<property name="pictures" value="https://www.informador.mx/__export/1506032862276/sites/elinformador/img/historico/0/618383.jpg_1970638775.jpg"/>
+			
 	</bean>
 
 
@@ -487,6 +436,14 @@
 
 	</bean>
 
+	<bean id="folder5Admin1" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Admin1" />
+		<property name="actor" ref="administrator1" />
+
+	</bean>
+
 	<!-- Boxes del admin2 -->
 
 	<bean id="folder1Admin2" class="domain.Box">
@@ -518,6 +475,14 @@
 		<property name="name" value="spamBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Admin2" />
+		<property name="actor" ref="administrator2" />
+
+	</bean>
+
+	<bean id="folder5Admin2" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Admin2" />
 		<property name="actor" ref="administrator2" />
 
 	</bean>
@@ -559,12 +524,22 @@
 	</bean>
 
 	<bean id="folder5Member1" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member1" />
+		<property name="actor" ref="member1" />
+
+	</bean>
+
+	<bean id="folder6Member1" class="domain.Box">
 		<property name="name" value="testBox" />
 		<property name="isSystem" value="false" />
 		<property name="rootBox" ref="folder5Member1" />
 		<property name="actor" ref="member1" />
 
 	</bean>
+
+
 
 	<!-- Boxes del member2 -->
 
@@ -597,6 +572,14 @@
 		<property name="name" value="spamBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Member2" />
+		<property name="actor" ref="member2" />
+
+	</bean>
+
+	<bean id="folder5Member2" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member2" />
 		<property name="actor" ref="member2" />
 
 	</bean>
@@ -636,8 +619,15 @@
 
 	</bean>
 
+	<bean id="folder5Member3" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member3" />
+		<property name="actor" ref="member3" />
 
-	<!-- Boxes del member2 -->
+	</bean>
+
+	<!-- Boxes del member4 -->
 
 	<bean id="folder1Member4" class="domain.Box">
 		<property name="name" value="inBox" />
@@ -672,6 +662,14 @@
 
 	</bean>
 
+	<bean id="folder5Member4" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member4" />
+		<property name="actor" ref="member4" />
+
+	</bean>
+
 
 	<!-- Boxes del brotherhood1 -->
 
@@ -702,6 +700,14 @@
 
 	<bean id="folder4Brotherhood1" class="domain.Box">
 		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+
+	</bean>
+
+	<bean id="folder5Brotherhood1" class="domain.Box">
+		<property name="name" value="notificationBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Brotherhood1" />
 		<property name="actor" ref="brotherhood1" />
@@ -744,6 +750,14 @@
 
 	</bean>
 
+	<bean id="folder5Brotherhood2" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+
+	</bean>
+
 
 	<!-- Boxes del brotherhood3 -->
 
@@ -774,6 +788,14 @@
 
 	<bean id="folder4Brotherhood3" class="domain.Box">
 		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood3" />
+		<property name="actor" ref="brotherhood3" />
+
+	</bean>
+
+	<bean id="folder5Brotherhood3" class="domain.Box">
+		<property name="name" value="notificationBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Brotherhood3" />
 		<property name="actor" ref="brotherhood3" />
@@ -811,6 +833,14 @@
 		<property name="name" value="spamBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Brotherhood4" />
+		<property name="actor" ref="brotherhood4" />
+
+	</bean>
+
+	<bean id="folder5Brotherhood4" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Brotherhood4" />
 		<property name="actor" ref="brotherhood4" />
 
 	</bean>
@@ -857,6 +887,11 @@
 	<bean id="position7" class="domain.Position">
 		<property name="nameEnglish" value="Officer" />
 		<property name="nameSpanish" value="Funcionario" />
+	</bean>
+	
+	<bean id="position8" class="domain.Position">
+		<property name="nameEnglish" value="Vocal" />
+		<property name="nameSpanish" value="Vocal" />
 	</bean>
 
 
@@ -1027,6 +1062,13 @@
 		<property name="actor" ref="member1" />
 	</bean>
 
+	<bean id="socialProfile6" class="domain.SocialProfile">
+		<property name="nick" value="ProofMaster"></property>
+		<property name="nameSN" value="Twitter"></property>
+		<property name="linkSN" value="https://twitter.com/Appa"></property>
+		<property name="actor" ref="member4" />
+	</bean>
+
 
 	<!-- Procession -->
 
@@ -1052,9 +1094,9 @@
 
 	<bean id="procession3" class="domain.Procession">
 		<property name="ticker" value="123456-ASDBH" />
-		<property name="title" value="El Cacharro" />
+		<property name="title" value="Procesion de los valientes" />
 		<property name="description"
-			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+			value=" es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="2020/09/02" />
 		<property name="ffinal" value="false" />
 		<property name="brotherhood" ref="brotherhood2" />
@@ -1069,6 +1111,7 @@
 		<property name="ffinal" value="true" />
 		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
+
 
 
 
@@ -1166,11 +1209,11 @@
 		<property name="photo"
 			value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Escudo_de_la_Hermandad_de_la_Macarena_%28Sevilla%29.svg/200px-Escudo_de_la_Hermandad_de_la_Macarena_%28Sevilla%29.svg.png " />
 		<property name="email" value="sevillaLaMacarena@gmail.com" />
-		<property name="phone" value="+34(447)458227565" />
+		<property name="phone" value="+34(447)458227465" />
 
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
-		<property name="score" value="0.5" />
+		<property name="score" value="0.45" />
 
 		<property name="userAccount" ref="userAccount8" />
 
@@ -1179,7 +1222,7 @@
 		<property name="establishedMoment" value="February 27, 1978 22:05" />
 		<property name="pictures">
 			<list>
-				<bean id="picture1brotherhood3" class="domain.Url">
+				<bean id="picture1brotherhood4" class="domain.Url">
 					<property name="url"
 						value="https://i.ytimg.com/vi/MyqFc0nG9l0/hqdefault.jpg" />
 				</bean>
@@ -1194,18 +1237,28 @@
 		<property name="member" ref="member1" />
 		<property name="processions">
 			<list>
+				<ref bean="procession1" />
+				<ref bean="procession2" />
+				<ref bean="procession3" />
 			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 1, 2019" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder1" />
 	</bean>
 
 	<bean id="finder2" class="domain.Finder">
 		<property name="member" ref="member2" />
 		<property name="processions">
 			<list>
+				<ref bean="procession4" />
 			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 1, 2019" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder2" />
 	</bean>
 
 	<bean id="finder3" class="domain.Finder">
@@ -1215,6 +1268,9 @@
 			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 2, 2018" />
+		<property name="minDate" value="Feb 1, 2020" />
+		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="keyword" value="finder3" />
 	</bean>
 
 	<bean id="finder4" class="domain.Finder">
@@ -1223,7 +1279,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="lastUpdate" value="Feb 2, 2018" />
 	</bean>
 
 	<!-- <bean id="finder4" class="domain.Finder"> <property name="member" ref="member4" 
@@ -1285,14 +1340,14 @@
 		<property name="banned" value="false" />
 		<property name="score" value="0.5" />
 		<property name="address" value="Calle Pablo" />
-		<property name="userAccount" ref="userAccount8" />
+		<property name="userAccount" ref="userAccount9" />
 
 	</bean>
 
 
 
 	<bean id="member4" class="domain.Member">
-		<property name="name" value="Iñigo" />
+		<property name="name" value="Inigo" />
 		<property name="middleName" value="" />
 		<property name="surname" value="Montoya" />
 		<property name="photo"
@@ -1304,7 +1359,7 @@
 		<property name="banned" value="false" />
 		<property name="score" value="0.5" />
 		<property name="address" value="Calle soy iñigo montoya,preparate a morir" />
-		<property name="userAccount" ref="userAccount9" />
+		<property name="userAccount" ref="userAccount10" />
 
 	</bean>
 
@@ -1432,7 +1487,12 @@
 		</property> <property name="member" ref="member1" /> <property name="procession" 
 		ref="procession4" /> </bean> -->
 
+	<!-- Other domain beans come here -->
 
+	<bean id="warning" class="domain.Warning">
+		<property name="isWarning" value="false" />
+
+	</bean>
 
 
 </beans>

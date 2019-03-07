@@ -26,4 +26,14 @@
 		<put-attribute name="body" value="/views/procession/edit.jsp" />
 	</definition>
 	
+	<definition name="procession/add" extends="master.page">
+		<put-attribute name="title" value="Add a float" />
+		<put-attribute name="body" value="/views/procession/addFloat.jsp" />
+	</definition>
+	
+	<definition name="procession/remove" extends="master.page">
+		<put-attribute name="title" value="Remove a float" />
+		<put-attribute name="body" value="/views/procession/removeFloat.jsp" />
+	</definition>
+	
 </tiles-definitions>

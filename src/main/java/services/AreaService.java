@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,6 @@ import security.LoginService;
 import domain.Actor;
 import domain.Area;
 import domain.Brotherhood;
-import domain.Url;
 
 @Service
 @Transactional
@@ -41,8 +39,6 @@ public class AreaService {
 
 		area = new Area();
 		area.setBrotherhood(null);
-		final Collection<Url> a = new ArrayList<>();
-		area.setPictures(a);
 		return area;
 	}
 	public Collection<Area> findAll() {
@@ -54,22 +50,13 @@ public class AreaService {
 	}
 
 	public Area save(final Area area) {
-		Area res = null;
 		Assert.notNull(area);
 
-		final Actor a;
-		a = this.actorService.findByUserAccount(LoginService.getPrincipal());
+		Area result;
 
-		Area areaDB;
-		Assert.isTrue(area.getId() > 0);
-		//cogemos el customer de la base de datos
-		areaDB = this.areaRepository.findOne(area.getId());
-		//Si al guardar detecta que lo he puesto en final mode ,pues le meto la fecha
-		if ((area.getId() != 0 && area.getName().equals(areaDB.getName())) || a.getUserAccount().getAuthorities().contains("ADMIN") || area.getId() == 0)
-			res = this.areaRepository.save(area);
-		else
-			throw new IllegalArgumentException("No se puede editar la plaza");
-		return res;
+		result = this.areaRepository.save(area);
+
+		return result;
 	}
 
 	public void delete(final Area area) {
@@ -92,7 +79,7 @@ public class AreaService {
 	}
 	//--------------Other Methods-------------------------------
 
-	public Map<String, Double> StatsBrotherhoodPerArea() {
+	public Map<String, Double> statsBrotherhoodPerArea() {
 		final Double min = this.areaRepository.minHermandadesPorArea();
 		final Double count = this.areaRepository.countHermandadesPorArea();
 		final Double max = this.areaRepository.maxHermandadesPorArea();

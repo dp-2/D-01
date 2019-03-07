@@ -62,6 +62,10 @@
 		
 		<bean class="converters.FinderToStringConverter" />
 		<bean class="converters.StringToFinderConverter" />
+		
+		<bean class="converters.DFloatToStringConverter" />
+		<bean class="converters.StringToDFloatConverter" />
+		
 	</util:list>
 
 </beans>
