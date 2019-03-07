@@ -1,8 +1,8 @@
 /*
  * AdministratorController.java
- *
+ * 
  * Copyright (C) 2019 Universidad de Sevilla
- *
+ * 
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -21,11 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Actor;
-import domain.Brotherhood;
-import domain.Enroll;
-import domain.Member;
-import domain.Procession;
 import services.ActorService;
 import services.AdministratorService;
 import services.BrotherhoodService;
@@ -35,6 +30,11 @@ import services.MarchService;
 import services.MemberService;
 import services.PositionService;
 import services.ProcessionService;
+import domain.Actor;
+import domain.Brotherhood;
+import domain.Enroll;
+import domain.Member;
+import domain.Procession;
 
 @Controller
 @RequestMapping("/administrator")
@@ -113,9 +113,10 @@ public class AdministratorController extends AbstractController {
 		final Brotherhood smallestBrotherhood = this.brotherhoodService.BrotherhoodWithLessMembers();
 
 		final List<Enroll> enrollsLarg = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
+		System.out.println(enrollsLarg);
 		final int largestBrotherhoodNumMembers = enrollsLarg.size();
 
-		final List<Enroll> enrollsSmall = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
+		final List<Enroll> enrollsSmall = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(smallestBrotherhood.getId());
 		final int smallestBrotherhoodNumMembers = enrollsSmall.size();
 
 		result.addObject("largestBrotherhood", largestBrotherhood);
