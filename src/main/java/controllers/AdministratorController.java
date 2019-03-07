@@ -1,8 +1,8 @@
 /*
  * AdministratorController.java
- *
+ * 
  * Copyright (C) 2019 Universidad de Sevilla
- *
+ * 
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -21,20 +21,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
+import services.AdministratorService;
+import services.AreaService;
+import services.BrotherhoodService;
+import services.ConfigurationService;
+import services.EnrollService;
+import services.FinderService;
+import services.MarchService;
+import services.MemberService;
+import services.PositionService;
+import services.ProcessionService;
+import services.WarningService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.Enroll;
 import domain.Member;
 import domain.Procession;
-import services.ActorService;
-import services.AdministratorService;
-import services.BrotherhoodService;
-import services.ConfigurationService;
-import services.EnrollService;
-import services.MarchService;
-import services.MemberService;
-import services.PositionService;
-import services.ProcessionService;
+import domain.Warning;
 
 @Controller
 @RequestMapping("/administrator")
@@ -66,6 +70,15 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private AreaService				areaService;
+
+	@Autowired
+	private FinderService			finderService;
+
+	@Autowired
+	public WarningService			warningService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -115,7 +128,7 @@ public class AdministratorController extends AbstractController {
 		final List<Enroll> enrollsLarg = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
 		final int largestBrotherhoodNumMembers = enrollsLarg.size();
 
-		final List<Enroll> enrollsSmall = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(largestBrotherhood.getId());
+		final List<Enroll> enrollsSmall = (List<Enroll>) this.enrollService.findEnrollsAprovedByBrotherhood(smallestBrotherhood.getId());
 		final int smallestBrotherhoodNumMembers = enrollsSmall.size();
 
 		result.addObject("largestBrotherhood", largestBrotherhood);
@@ -131,6 +144,7 @@ public class AdministratorController extends AbstractController {
 		final Double positionCountTreasurer = this.positionService.computeStatistics().get("count.treasurer");
 		final Double positionCountHistorian = this.positionService.computeStatistics().get("count.historian");
 		final Double positionCountOfficer = this.positionService.computeStatistics().get("count.officer");
+		final Double positionCountVocal = this.positionService.computeStatistics().get("count.vocal");
 
 		result.addObject("positionCountTotal", positionCountTotal);
 		result.addObject("positionCountPresident", positionCountPresident);
@@ -139,6 +153,7 @@ public class AdministratorController extends AbstractController {
 		result.addObject("positionCountTreasurer", positionCountTreasurer);
 		result.addObject("positionCountHistorian", positionCountHistorian);
 		result.addObject("positionCountOfficer", positionCountOfficer);
+		result.addObject("positionCountVocal", positionCountVocal);
 
 		//-----------------------Processions Statics
 		final List<Procession> processionsIn30Days = this.processionService.findProcessionsIn30Days();
@@ -146,123 +161,82 @@ public class AdministratorController extends AbstractController {
 
 		//-----------------------March Statics
 		final List<Member> members10RequestAccepted = this.marchService.members10PerMarchAccepted();
+		final Double ratioRequestByStatusAPPROVED = this.marchService.ratioRequestByStatus().get(0);
+		final Double ratioRequestByStatusPENDING = this.marchService.ratioRequestByStatus().get(1);
+		final Double ratioRequestByStatusREJECTED = this.marchService.ratioRequestByStatus().get(2);
 		result.addObject("members10RequestAccepted", members10RequestAccepted);
+		result.addObject("ratioRequestByStatusAPPROVED", ratioRequestByStatusAPPROVED);
+		result.addObject("ratioRequestByStatusPENDING", ratioRequestByStatusPENDING);
+		result.addObject("ratioRequestByStatusREJECTED", ratioRequestByStatusREJECTED);
+
+		//-----------------------Brotherhoods per area
+		final Double countHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("COUNT");
+		final Double maxHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("MAX");
+		final Double minHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("MIN");
+		final Double avgHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("AVG");
+		final Double stddevHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("STD");
+
+		result.addObject("countHermandadesPorArea", countHermandadesPorArea);
+		result.addObject("maxHermandadesPorArea", maxHermandadesPorArea);
+		result.addObject("minHermandadesPorArea", minHermandadesPorArea);
+		result.addObject("avgHermandadesPorArea", avgHermandadesPorArea);
+		result.addObject("stddevHermandadesPorArea", stddevHermandadesPorArea);
+
+		//-----------------------Results in finder
+		final Double minResultsInFinder = this.finderService.finderStats().get(0);
+		final Double maxResultsInFinder = this.finderService.finderStats().get(1);
+		final Double avgResultsInFinder = this.finderService.finderStats().get(2);
+		final Double stdResultsInFinder = this.finderService.finderStats().get(3);
+		final Double emptyVSNonEmptyFinder = this.finderService.finderStats().get(4);
+		System.out.println("--------------->" + emptyVSNonEmptyFinder);
+
+		result.addObject("minResultsInFinder", minResultsInFinder);
+		result.addObject("maxResultsInFinder", maxResultsInFinder);
+		result.addObject("avgResultsInFinder", avgResultsInFinder);
+		result.addObject("stdResultsInFinder", stdResultsInFinder);
+		result.addObject("emptyVSNonEmptyFinder", emptyVSNonEmptyFinder);
 
 		return result;
 	}
-	//	@RequestMapping(value = "/administrator/dashboard", method = RequestMethod.GET)
-	//	public ModelAndView dashboard() {
+
+	@RequestMapping("/adviseTrue")
+	public ModelAndView adviseTrue() {
+		ModelAndView result;
+		Warning war = this.warningService.giveWarning();
+		war = this.warningService.setWarningTrue();
+		result = new ModelAndView("welcome/index");
+		System.out.println("Se ha alertado de una brecha?" + war.getIsWarning());
+
+		return result;
+	}
+
+	@RequestMapping("/adviseFalse")
+	public ModelAndView adviseFalse() {
+		ModelAndView result;
+		Warning war = this.warningService.giveWarning();
+		war = this.warningService.setWarningFalse();
+		result = new ModelAndView("welcome/index");
+		System.out.println("Se ha alertado de una brecha?" + war.getIsWarning());
+
+		return result;
+	}
 	//
-	//		final ModelAndView result = new ModelAndView("administrator/dashboard");
-	//
-	//		//----------------------------------
-	//
-	//		//		final Double maxCuestionariosPerCustomer = this.cuestionarioService.cuestionariosStats().get("MAX");
-	//		//		final Double minCuestionariosPerCustomer = this.cuestionarioService.cuestionariosStats().get("MIN");
-	//		//		final Double avgCuestionariosPerCustomer = this.cuestionarioService.cuestionariosStats().get("AVG");
-	//		//		final Double stdCuestionariosPerCustomer = this.cuestionarioService.cuestionariosStats().get("STD");
-	//		//		final Double ratioPublishedCuestionarios = this.cuestionarioService.ratioPublishedCuestionarios();
-	//		//		final Double ratioUnpublishedCuestionarios = this.cuestionarioService.ratioUnpublishedCuestionarios();
-	//		//
-	//		//		final Double maxFixupTaskPerUser = this.actorService.fixupTasksStats().get("MAX");
-	//		//		final Double minFixupTaskPerUser = this.actorService.fixupTasksStats().get("MIN");
-	//		//		final Double avgFixupTaskPerUser = this.actorService.fixupTasksStats().get("AVG");
-	//		//		final Double stdFixupTaskPerUser = this.actorService.fixupTasksStats().get("STD");
-	//		//
-	//		//		final Double maxApplicationsPerFixupTask = this.fixupTaskService.appsStats().get("MAX");
-	//		//		final Double minApplicationsPerFixupTask = this.fixupTaskService.appsStats().get("MIN");
-	//		//		final Double avgApplicationsPerFixupTask = this.fixupTaskService.appsStats().get("AVG");
-	//		//		final Double stdApplicationsPerFixupTask = this.fixupTaskService.appsStats().get("STD");
-	//		//
-	//		//		final Double maxMaximumPriceOfFixupTasks = this.fixupTaskService.maxFixupStaskStats().get("MAX");
-	//		//		final Double minMaximumPriceOfFixupTasks = this.fixupTaskService.maxFixupStaskStats().get("MIN");
-	//		//		final Double avgMaximumPriceOfFixupTasks = this.fixupTaskService.maxFixupStaskStats().get("AVG");
-	//		//		final Double stdMaximumPriceOfFixupTasks = this.fixupTaskService.maxFixupStaskStats().get("STD");
-	//		//
-	//		//		final Double maxPriceOfApplications = this.applicationService.applicationPriceStats().get("MAX");
-	//		//		final Double minPriceOfApplications = this.applicationService.applicationPriceStats().get("MIN");
-	//		//		final Double avgPriceOfApplications = this.applicationService.applicationPriceStats().get("AVG");
-	//		//		final Double stdPriceOfApplications = this.applicationService.applicationPriceStats().get("STD");
-	//		//
-	//		//		final Double ratioPendingApplications = this.applicationService.pendingRatio().get("Ratio");
-	//		//		final Double ratioAcceptedApplications = this.applicationService.acceptedRatio().get("Ratio");
-	//		//		final Double ratioRejectedApplications = this.applicationService.appsRejectedRatio().get("Ratio");
-	//		//		final Double ratioLateApplications = this.applicationService.lateApplicationsRatio();
-	//		//
-	//		//		final Collection<Customer> customersMoreFixupTasksAverage = this.customerService.listCustomer10();
-	//		//		final Collection<HandyWorker> handyWorkersMoreFixupTasksAverage = this.handyWorkerService.listHandyWorkerApplication();
-	//		//
-	//		//		final Double maxComplaintsPerFixupTask = this.fixupTaskService.fixupComplaintsStats().get("MAX");
-	//		//		final Double minComplaintsPerFixupTask = this.fixupTaskService.fixupComplaintsStats().get("MIN");
-	//		//		final Double avgComplaintsPerFixupTask = this.fixupTaskService.fixupComplaintsStats().get("AVG");
-	//		//		final Double stdComplaintsPerFixupTask = this.fixupTaskService.fixupComplaintsStats().get("STD");
-	//		//
-	//		//		final Double maxNotesPerReport = this.reportService.refeeReportStats().get("MAX");
-	//		//		final Double minNotesPerReport = this.reportService.refeeReportStats().get("MIN");
-	//		//		final Double avgNotesPerReport = this.reportService.refeeReportStats().get("AVG");
-	//		//		final Double stdNotesPerReport = this.reportService.refeeReportStats().get("STD");
-	//		//
-	//		//		final Double ratioFixupTasksWithComplaints = this.fixupTaskService.getRatioFixupTasksWithComplaints().get("Ratio");
-	//		//
-	//		//		final Collection<Customer> top3CustomersWithMoreComplaints = this.customerService.getTop3CustomerWithMoreComplaints();
-	//		//		final Collection<HandyWorker> top3HandyWorkersWithMoreComplaints = this.handyWorkerService.getTop3HandyWorkerWithMoreComplaints();
-	//		//
-	//		//		result.addObject("minCuestionariosPerCustomer", minCuestionariosPerCustomer);
-	//		//		result.addObject("maxCuestionariosPerCustomer", maxCuestionariosPerCustomer);
-	//		//		result.addObject("avgCuestionariosPerCustomer", avgCuestionariosPerCustomer);
-	//		//		result.addObject("stdCuestionariosPerCustomer", stdCuestionariosPerCustomer);
-	//		//		result.addObject("ratioPublishedCuestionarios", ratioPublishedCuestionarios);
-	//		//		result.addObject("ratioUnpublishedCuestionarios", ratioUnpublishedCuestionarios);
-	//		//
-	//		//		result.addObject("maxFixupTaskPerUser", maxFixupTaskPerUser);
-	//		//		result.addObject("minFixupTaskPerUser", minFixupTaskPerUser);
-	//		//		result.addObject("avgFixupTaskPerUser", avgFixupTaskPerUser);
-	//		//		result.addObject("stdFixupTaskPerUser", stdFixupTaskPerUser);
-	//		//
-	//		//		result.addObject("maxApplicationsPerFixupTask", maxApplicationsPerFixupTask);
-	//		//		result.addObject("minApplicationsPerFixupTask", minApplicationsPerFixupTask);
-	//		//		result.addObject("avgApplicationsPerFixupTask", avgApplicationsPerFixupTask);
-	//		//		result.addObject("stdApplicationsPerFixupTask", stdApplicationsPerFixupTask);
-	//		//
-	//		//		result.addObject("maxMaximumPriceOfFixupTasks", maxMaximumPriceOfFixupTasks);
-	//		//		result.addObject("minMaximumPriceOfFixupTasks", minMaximumPriceOfFixupTasks);
-	//		//		result.addObject("avgMaximumPriceOfFixupTasks", avgMaximumPriceOfFixupTasks);
-	//		//		result.addObject("stdMaximumPriceOfFixupTasks", stdMaximumPriceOfFixupTasks);
-	//		//
-	//		//		result.addObject("maxPriceOfApplications", maxPriceOfApplications);
-	//		//		result.addObject("minPriceOfApplications", minPriceOfApplications);
-	//		//		result.addObject("avgPriceOfApplications", avgPriceOfApplications);
-	//		//		result.addObject("stdPriceOfApplications", stdPriceOfApplications);
-	//		//
-	//		//		result.addObject("ratioPendingApplications", ratioPendingApplications);
-	//		//		result.addObject("ratioAcceptedApplications", ratioAcceptedApplications);
-	//		//		result.addObject("ratioRejectedApplications", ratioRejectedApplications);
-	//		//		result.addObject("ratioLateApplications", ratioLateApplications);
-	//		//
-	//		//		result.addObject("customersMoreFixupTasksAverage", customersMoreFixupTasksAverage);
-	//		//		result.addObject("handyWorkersMoreFixupTasksAverage", handyWorkersMoreFixupTasksAverage);
-	//		//
-	//		//		result.addObject("maxComplaintsPerFixupTask", maxComplaintsPerFixupTask);
-	//		//		result.addObject("minComplaintsPerFixupTask", minComplaintsPerFixupTask);
-	//		//		result.addObject("avgComplaintsPerFixupTask", avgComplaintsPerFixupTask);
-	//		//		result.addObject("stdComplaintsPerFixupTask", stdComplaintsPerFixupTask);
-	//		//
-	//		//		result.addObject("maxNotesPerReport", maxNotesPerReport);
-	//		//		result.addObject("minNotesPerReport", minNotesPerReport);
-	//		//		result.addObject("avgNotesPerReport", avgNotesPerReport);
-	//		//		result.addObject("stdNotesPerReport", stdNotesPerReport);
-	//		//
-	//		//		result.addObject("ratioFixupTasksWithComplaints", ratioFixupTasksWithComplaints);
-	//		//
-	//		//		result.addObject("top3CustomersWithMoreComplaints", top3CustomersWithMoreComplaints);
-	//		//		result.addObject("top3HandyWorkerWithMoreComplaints", top3HandyWorkersWithMoreComplaints);
-	//		//
-	//		//		result.addObject("requestURI", "administrator/administrator/dashboard.do");
-	//		//
-	//		//		//---------------------------------
-	//
-	//		return result;
-	//
-	//	}
+	protected ModelAndView createEditModelAndView2(final Warning war) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView2(war, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView2(final Warning warning, final String messageCode) {
+		final ModelAndView result;
+
+		result = new ModelAndView("welcome/index");
+		result.addObject("warning", warning);
+		result.addObject("message", messageCode);
+
+		return result;
+	}
 
 }

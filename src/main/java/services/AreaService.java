@@ -92,7 +92,7 @@ public class AreaService {
 	}
 	//--------------Other Methods-------------------------------
 
-	public Map<String, Double> StatsBrotherhoodPerArea() {
+	public Map<String, Double> statsBrotherhoodPerArea() {
 		final Double min = this.areaRepository.minHermandadesPorArea();
 		final Double count = this.areaRepository.countHermandadesPorArea();
 		final Double max = this.areaRepository.maxHermandadesPorArea();

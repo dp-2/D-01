@@ -78,7 +78,7 @@ public class PositionService {
 
 	public Map<String, Double> computeStatistics() {
 		Map<String, Double> result;
-		double countTotal, countPresident, countVicepresident, countSecretary, countTreasurer, countHistorian, countOfficer;
+		double countTotal, countPresident, countVicepresident, countSecretary, countTreasurer, countHistorian, countOfficer, countVocal;
 
 		countTotal = this.positionRepository.countTotal();
 		countPresident = this.positionRepository.countPresident();
@@ -87,6 +87,7 @@ public class PositionService {
 		countTreasurer = this.positionRepository.countTreasurer();
 		countHistorian = this.positionRepository.countHistorian();
 		countOfficer = this.positionRepository.countOfficer();
+		countVocal = this.positionRepository.countVocal();
 
 		result = new HashMap<String, Double>();
 		result.put("count.total", countTotal);
@@ -96,6 +97,7 @@ public class PositionService {
 		result.put("count.treasurer", countTreasurer);
 		result.put("count.historian", countHistorian);
 		result.put("count.officer", countOfficer);
+		result.put("count.vocal", countVocal);
 
 		return result;
 	}
