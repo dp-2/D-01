@@ -24,30 +24,32 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 
-	<security:authorize access="hasRole('ADMIN')">
-		<form:hidden path="brotherhood" />
-	</security:authorize>
+
+
 	<acme:textbox code="area.title" path="name" />
 
-	<acme:textarea code="area.pictures" path="pictures" />
 
+
+
+	<jstl:if test="${isRead == false}">
+		<acme:textarea code="area.pictures" path="pictures" />
+	</jstl:if>
+
+	<jstl:if test="${isRead == true}">
+		<jstl:forEach var="pic" items="${tutorial.pictures}">
+			<img src="${pic}" height="100px" width="100px" />
+		</jstl:forEach>
+		<br />
+	</jstl:if>
 
 	<acme:submit name="save" code="area.save" />
 
-	<security:authorize access="hasRole('ADMIN')">
-		<jstl:if test="${area.id != 0 && area.brotherhood==null}">
-			<acme:submit name="delete" code="area.delete" />
-		</jstl:if>
-		<acme:cancel url="/area/list.do" code="area.cancel" />
+	<jstl:if test="${area.id != 0 && area.brotherhood==null}">
+		<acme:submit name="delete" code="area.delete" />
+	</jstl:if>
+	<acme:cancel url="/area/list.do" code="area.cancel" />
 
-		<br />
-	</security:authorize>
-
-	<security:authorize access="hasRole('BROTHERHOOD')">
-		<acme:cancel url="/area/list.do}" code="area.cancel" />
-
-		<br />
-	</security:authorize>
+	<br />
 
 
 </form:form>
