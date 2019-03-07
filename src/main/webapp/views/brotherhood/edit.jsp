@@ -17,6 +17,8 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<spring:message code="confirm.phone" var="confirmPhoneMessage" />
+
 <jstl:if test="${isPrincipalAuthorizedEdit}">
 		<form:form action="brotherhood/brotherhood-none/edit.do" method="post" id="formEdit"
 			name="formEdit" modelAttribute="brotherhoodForm">
@@ -32,7 +34,7 @@
 			<acme:textbox path="middleName" code="brotherhood.middlename" />
 			<acme:textbox path="surname" code="brotherhood.surname" />
 			<acme:textbox path="email" code="brotherhood.email" />
-			<acme:textbox path="phone" code="brotherhood.phone" />
+			<acme:textbox path="phone" code="brotherhood.phone" id="phone" />
 			<acme:textbox path="address" code="brotherhood.address" />
 			<acme:textbox path="photo" code="brotherhood.photo" />
 			<acme:textbox path="title" code="brotherhood.title" />
@@ -51,8 +53,11 @@
 			</div>
 				
 			<acme:checkbox code="brotherhood.accept" path="accept" />
+				
+			<input type="submit" name="save"
+				value="<spring:message code="brotherhood.save"></spring:message>"
+				onclick="return patternPhone(document.getElementById('phone').value, '${confirmPhoneMessage}');" />
 			<a href="law/terminosYCondiciones.do"><spring:message code="brotherhood.consultTermsAndConditions" /></a><br/><br/> 
-			<acme:submit name="save" code="brotherhood.save" />
 				
 		</form:form>
 		

@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
@@ -24,12 +24,12 @@ public class Actor extends DomainEntity {
 	private String	middleName;
 	private String	surname;
 	private String	photo;
-	private String	email;
 	private String	phone;
 	private String	address;
 	private boolean	spammer;
 	private boolean	banned;
 	private double	score;
+	private String	email;
 
 
 	@NotBlank
@@ -57,16 +57,6 @@ public class Actor extends DomainEntity {
 
 	public void setPhoto(final String photo) {
 		this.photo = photo;
-	}
-
-	@NotBlank
-	@Email
-	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
 	}
 
 	public String getPhone() {
@@ -116,6 +106,16 @@ public class Actor extends DomainEntity {
 
 	public void setAddress(final String address) {
 		this.address = address;
+	}
+
+	@NotBlank
+	@Pattern(regexp = "^(\\w+@(\\w+(\\.\\w*)*)?)|(\\w+( \\w+)* <\\w+@(\\w+(\\.\\w*)*)?>)$")
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
 	}
 
 

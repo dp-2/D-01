@@ -22,81 +22,36 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
+<spring:message code="confirm.phone" var="confirmPhoneMessage" />
 
-
-<form:form action="${requestURI}" modelAttribute="actor">
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="spammer" />
-	<form:hidden path="userAccount" />
-	
-
-
-	<jstl:if test="${isRead==true}">
-		<img src="${actor.photo}" height="200px" width="200px" />
-		<br />
-	</jstl:if>
-
-	<acme:textbox code="actor.name" path="name" />
-	<br />
-
-	<acme:textbox code="actor.middleName" path="middleName" />
-	<br />
-
-	<acme:textbox code="actor.surname" path="surname" />
-	<br />
-	<jstl:if test="${isRead == false}">
-	<acme:textbox code="actor.photo" path="photo" />
-	<br />
-	</jstl:if>
-
-	<acme:textbox code="actor.email" path="email" />
-	<br />
-
-	
-
-	<acme:textbox code="actor.phone" path="phone" />
-	<br />
-
-	<script type="text/javascript">
-		function isValid() {
-			var phoneRe = /^(((\+[1-9][0-9]{0,2}) \(([1-9][0-9]{0,2})\) (\d\d\d\d+))|((\+[1-9][0-9]{0,2}) (\d\d\d\d+))|((\d\d\d\d+)))$/;
-			var digits = document.getElementById('tlf').value;
-			var res = phoneRe.test(digits);
-			if (res) {
-				return true;
-			} else {
-				return confirm('<spring:message code="phone.confirm" />');
-			}
-		}
-	</script>
-	
-	
-	<jstl:if test="${isRead == true}">
-		<jstl:if test="${score != null}">
-			<h3>
-				<spring:message code="actor.score" />
-				:
-				<jstl:out value="${score}" />
-			</h3>
-		</jstl:if>
-	</jstl:if>
-
-
-	<jstl:if test="${isRead == false}">
-		<br />
-		<acme:submit name="save" code="actor.save" />
-
-		<acme:cancel url="welcome/index.do" code="actor.cancel" />
-	</jstl:if>
-
-	<jstl:if test="${isRead == true}">
-		<acme:cancel url="welcome/index.do" code="actor.back" />
-		<br />
-
-	</jstl:if>
-
-</form:form>
-
-
-
+<jstl:if test="${isPrincipalAuthorizedEdit}">
+		<form:form action="actor/edit.do" method="post" id="formEdit"
+			name="formEdit" modelAttribute="actorForm">
+			
+			<form:hidden path="id" />
+			<form:hidden path="version" />
+			<form:hidden path="authority" />
+			
+			<acme:textbox path="username" code="useraccount.username" />
+			<acme:password path="password" code="useraccount.password" />
+			<acme:password path="confirmPassword" code="useraccount.confirmPassword" />
+			
+			<acme:textbox path="name" code="brotherhood.name" />
+			<acme:textbox path="middleName" code="brotherhood.middlename" />
+			<acme:textbox path="surname" code="brotherhood.surname" />
+			<acme:textbox path="email" code="brotherhood.email" />
+			<acme:textbox path="phone" code="brotherhood.phone" id="phone" />
+			<acme:textbox path="address" code="brotherhood.address" />
+			<acme:textbox path="photo" code="brotherhood.photo" />
+				
+			<acme:checkbox code="brotherhood.accept" path="accept" />
+				
+			<input type="submit" name="save"
+				value="<spring:message code="brotherhood.save"></spring:message>"
+				onclick="return patternPhone(document.getElementById('phone').value, '${confirmPhoneMessage}');" />
+				
+		</form:form>
+		
+		<acme:cancel url="" code="brotherhood.cancel" />	
+		
+</jstl:if>
