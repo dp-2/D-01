@@ -18,13 +18,13 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
-import repositories.ProcessionRepository;
-import security.LoginService;
 import domain.Actor;
 import domain.Brotherhood;
 import domain.DFloat;
 import domain.Procession;
 import forms.ProcessionForm;
+import repositories.ProcessionRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -55,6 +55,9 @@ public class ProcessionService {
 
 	@Autowired(required = false)
 	private Validator				validator;
+
+	@Autowired
+	private MessageService			messageService;
 
 
 	//Methods--------------------------------------------------------------------
