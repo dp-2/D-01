@@ -158,10 +158,21 @@
 			<spring:message code="dashboard.members10RequestAccepted">
 			</spring:message>
 		</legend>
+		
+		
 
 		<display:table name="members10RequestAccepted" id="member">
 			<acme:column code="dashboard.march.member" value="${member.name}"></acme:column>
 		</display:table>
+		<br/>
+		<acme:out code="dashboard.march.ratioRequestByStatusAPPROVED"
+			value="${ratioRequestByStatusAPPROVED}" />
+			
+			<acme:out code="dashboard.march.ratioRequestByStatusPENDING"
+			value="${ratioRequestByStatusPENDING}" />
+			
+			<acme:out code="dashboard.march.ratioRequestByStatusREJECTED"
+			value="${ratioRequestByStatusREJECTED}" />
 
 	</fieldset>
 	

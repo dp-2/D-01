@@ -36,6 +36,6 @@ public interface MarchRepository extends JpaRepository<March, Integer> {
 	List<Member> members10PerMarchAccepted();
 
 	@Query("select (count(m)*1.0)/(select count(mm) from March mm) from March m group by m.status")
-	public Double queryC6c();
+	public List<Double> queryC6c();
 
 }

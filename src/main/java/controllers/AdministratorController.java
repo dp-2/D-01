@@ -159,7 +159,13 @@ public class AdministratorController extends AbstractController {
 
 		//-----------------------March Statics
 		final List<Member> members10RequestAccepted = this.marchService.members10PerMarchAccepted();
+		final Double ratioRequestByStatusAPPROVED = this.marchService.ratioRequestByStatus().get(0);
+		final Double ratioRequestByStatusPENDING = this.marchService.ratioRequestByStatus().get(1);
+		final Double ratioRequestByStatusREJECTED = this.marchService.ratioRequestByStatus().get(2);
 		result.addObject("members10RequestAccepted", members10RequestAccepted);
+		result.addObject("ratioRequestByStatusAPPROVED", ratioRequestByStatusAPPROVED);
+		result.addObject("ratioRequestByStatusPENDING", ratioRequestByStatusPENDING);
+		result.addObject("ratioRequestByStatusREJECTED", ratioRequestByStatusREJECTED);
 
 		//-----------------------Brotherhoods per area
 		final Double countHermandadesPorArea = this.areaService.statsBrotherhoodPerArea().get("COUNT");
