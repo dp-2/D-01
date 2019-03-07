@@ -89,7 +89,7 @@ public class AreaServiceTest extends AbstractTest {
 	@Test
 	public void testAreaPriceStats() {
 		this.authenticate("admin1");
-		final Map<String, Double> result = this.areaService.StatsBrotherhoodPerArea();
+		final Map<String, Double> result = this.areaService.statsBrotherhoodPerArea();
 		System.out.println("Las Estadisticas de las areas por hermandad son :" + result);
 
 	}
