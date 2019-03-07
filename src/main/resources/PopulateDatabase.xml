@@ -288,6 +288,14 @@
 		<property name="actor" ref="system" />
 
 	</bean>
+	
+	<bean id="notificationBoxSystem" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="notificationBoxSystem" />
+		<property name="actor" ref="system" />
+
+	</bean>
 
 	<!-- Messages -->
 
@@ -711,7 +719,7 @@
 	<bean id="folder5Brotherhood1" class="domain.Box">
 		<property name="name" value="notificationBox" />
 		<property name="isSystem" value="true" />
-		<property name="rootBox" ref="folder4Brotherhood1" />
+		<property name="rootBox" ref="folder5Brotherhood1" />
 		<property name="actor" ref="brotherhood1" />
 
 	</bean>
@@ -755,7 +763,7 @@
 	<bean id="folder5Brotherhood2" class="domain.Box">
 		<property name="name" value="notificationBox" />
 		<property name="isSystem" value="true" />
-		<property name="rootBox" ref="folder4Brotherhood2" />
+		<property name="rootBox" ref="folder5Brotherhood2" />
 		<property name="actor" ref="brotherhood2" />
 
 	</bean>
@@ -799,7 +807,7 @@
 	<bean id="folder5Brotherhood3" class="domain.Box">
 		<property name="name" value="notificationBox" />
 		<property name="isSystem" value="true" />
-		<property name="rootBox" ref="folder4Brotherhood3" />
+		<property name="rootBox" ref="folder5Brotherhood3" />
 		<property name="actor" ref="brotherhood3" />
 
 	</bean>
