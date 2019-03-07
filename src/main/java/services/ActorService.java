@@ -26,6 +26,7 @@ import domain.Actor;
 import domain.Administrator;
 import domain.Brotherhood;
 import domain.Member;
+import domain.Message;
 import forms.ActorForm;
 
 @Service
@@ -44,6 +45,12 @@ public class ActorService {
 	private MemberService			memberService;
 
 	@Autowired
+	private SocialProfileService	socialProfileService;
+
+	@Autowired
+	private MessageService			messageService;
+
+	@Autowired
 	private BrotherhoodService		brotherhoodService;
 
 	@Autowired
@@ -52,11 +59,17 @@ public class ActorService {
 	@Autowired
 	private BoxService				boxService;
 
+	@Autowired
+	private ConfigurationService	configurationService;
+
 	@Autowired(required = false)
 	private Validator				validator;
 
 	@Autowired
 	private MessageSource			messageSource;
+
+	@Autowired
+	private ServiceUtils			serviceUtils;
 
 
 	public Actor create(final String authority) {
@@ -299,4 +312,37 @@ public class ActorService {
 		return res;
 	}
 
+	public boolean containsSpam(final String s) {
+		boolean res = false;
+		final List<String> negativeWords = new ArrayList<>();
+		negativeWords.addAll(this.configurationService.findOne().getNegativeWordsEN());
+		negativeWords.addAll(this.configurationService.findOne().getNegativeWordsES());
+		for (final String spamWord : negativeWords)
+			if (s.contains(spamWord)) {
+				System.out.println(spamWord);
+				res = true;
+				break;
+			}
+		return res;
+	}
+	public boolean isSpammer(final Actor a) {
+		boolean res = false;
+		Assert.notNull(a);
+		this.serviceUtils.checkId(a.getId());
+		final Actor actor = this.actorRepository.findOne(a.getId());
+		Assert.notNull(actor);
+
+		if (!res)
+			for (final Message m : this.messageService.findSendedMessages(actor)) {
+				res = this.containsSpam(m.getBody()) || this.containsSpam(m.getSubject());
+				if (!res)
+
+					res = this.containsSpam(m.getTags());
+
+				else
+					break;
+			}
+
+		return res;
+	}
 }

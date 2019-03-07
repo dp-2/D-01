@@ -11,7 +11,6 @@
 package controllers.Member;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -120,7 +119,15 @@ public class FinderMemberController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Finder finder, final String message) {
 		ModelAndView result;
-		final Collection<Area> areas = this.areaService.findAll();
+
+		final List<Area> areas = new ArrayList<>();
+
+		final List<Procession> list = this.processionService.findProcessionsFinal();
+		for (final Procession procession : list) {
+			final Area area = this.areaService.findAreaByBrotherhoodId(procession.getBrotherhood().getId());
+			if (!areas.contains(area))
+				areas.add(area);
+		}
 
 		result = new ModelAndView("finder/update");
 		result.addObject("finder", finder);

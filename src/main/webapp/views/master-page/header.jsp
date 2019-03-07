@@ -104,6 +104,9 @@
 					<li class="arrow"></li>
 					<li><a href="administrator/scores.do"><spring:message
 								code="master.page.administrator.calculateScores" /></a></li>
+								
+					<li><a href="administrator/spammers.do"><spring:message
+								code="master.page.administrator.calculateSpammers" /></a></li>
 				</ul></li>
 			<li><a href="actor/administrator/list.do"><spring:message
 						code="master.page.administrator.actors" /></a></li>
