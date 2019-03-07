@@ -107,6 +107,8 @@
 		</property>
 	</bean>
 	
+
+	
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="member3" />
 		<property name="password" value="3ef4802d8a37022fd187fbd829d1c4d6" />
@@ -482,6 +484,14 @@
 		<property name="actor" ref="administrator1" />
 
 	</bean>
+	
+	<bean id="folder5Admin1" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Admin1" />
+		<property name="actor" ref="administrator1" />
+
+	</bean>
 
 	<!-- Boxes del admin2 -->
 
@@ -514,6 +524,14 @@
 		<property name="name" value="spamBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Admin2" />
+		<property name="actor" ref="administrator2" />
+
+	</bean>
+	
+	<bean id="folder5Admin2" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Admin2" />
 		<property name="actor" ref="administrator2" />
 
 	</bean>
@@ -553,14 +571,24 @@
 		<property name="actor" ref="member1" />
 
 	</bean>
-
+	
 	<bean id="folder5Member1" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member1" />
+		<property name="actor" ref="member1" />
+
+	</bean>
+
+	<bean id="folder6Member1" class="domain.Box">
 		<property name="name" value="testBox" />
 		<property name="isSystem" value="false" />
 		<property name="rootBox" ref="folder5Member1" />
 		<property name="actor" ref="member1" />
 
 	</bean>
+	
+
 
 	<!-- Boxes del member2 -->
 
@@ -593,6 +621,14 @@
 		<property name="name" value="spamBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Member2" />
+		<property name="actor" ref="member2" />
+
+	</bean>
+	
+	<bean id="folder5Member2" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member2" />
 		<property name="actor" ref="member2" />
 
 	</bean>
@@ -632,8 +668,15 @@
 
 	</bean>
 	
+	<bean id="folder5Member3" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member3" />
+		<property name="actor" ref="member3" />
+
+	</bean>
 	
-		<!-- Boxes del member2 -->
+		<!-- Boxes del member4 -->
 
 	<bean id="folder1Member4" class="domain.Box">
 		<property name="name" value="inBox" />
@@ -664,6 +707,14 @@
 		<property name="name" value="spamBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Member4" />
+		<property name="actor" ref="member4" />
+
+	</bean>
+	
+	<bean id="folder5Member4" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Member4" />
 		<property name="actor" ref="member4" />
 
 	</bean>
@@ -698,6 +749,14 @@
 
 	<bean id="folder4Brotherhood1" class="domain.Box">
 		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood1" />
+		<property name="actor" ref="brotherhood1" />
+
+	</bean>
+	
+	<bean id="folder5Brotherhood1" class="domain.Box">
+		<property name="name" value="notificationBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Brotherhood1" />
 		<property name="actor" ref="brotherhood1" />
@@ -740,6 +799,14 @@
 
 	</bean>
 	
+	<bean id="folder5Brotherhood2" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood2" />
+		<property name="actor" ref="brotherhood2" />
+
+	</bean>
+	
 	
 		<!-- Boxes del brotherhood3 -->
 
@@ -770,6 +837,14 @@
 
 	<bean id="folder4Brotherhood3" class="domain.Box">
 		<property name="name" value="spamBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder4Brotherhood3" />
+		<property name="actor" ref="brotherhood3" />
+
+	</bean>
+	
+	<bean id="folder5Brotherhood3" class="domain.Box">
+		<property name="name" value="notificationBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Brotherhood3" />
 		<property name="actor" ref="brotherhood3" />
@@ -807,6 +882,14 @@
 		<property name="name" value="spamBox" />
 		<property name="isSystem" value="true" />
 		<property name="rootBox" ref="folder4Brotherhood4" />
+		<property name="actor" ref="brotherhood4" />
+
+	</bean>
+	
+	<bean id="folder5Brotherhood4" class="domain.Box">
+		<property name="name" value="notificationBox" />
+		<property name="isSystem" value="true" />
+		<property name="rootBox" ref="folder5Brotherhood4" />
 		<property name="actor" ref="brotherhood4" />
 
 	</bean>
@@ -1022,6 +1105,13 @@
 		<property name="linkSN" value="https://twitter.com/Aprobados"></property>
 		<property name="actor" ref="member1" />
 	</bean>
+	
+	<bean id="socialProfile6" class="domain.SocialProfile">
+		<property name="nick" value="ProofMaster"></property>
+		<property name="nameSN" value="Twitter"></property>
+		<property name="linkSN" value="https://twitter.com/Appa"></property>
+		<property name="actor" ref="member4" />
+	</bean>
 
 
 	<!-- Procession -->
@@ -1048,9 +1138,9 @@
 
 	<bean id="procession3" class="domain.Procession">
 		<property name="ticker" value="123456-ASDBH" />
-		<property name="title" value="El Cacharro" />
+		<property name="title" value="Procesion de los valientes" />
 		<property name="description"
-			value="El Cacharro es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
+			value=" es una procesion normal como cualquier otra con una descripcion normal como cualquier otra no tiene nada mas que palabras" />
 		<property name="momentOrganised" value="2020/09/02" />
 		<property name="ffinal" value="false" />
 		<property name="brotherhood" ref="brotherhood2" />
@@ -1065,6 +1155,7 @@
 		<property name="ffinal" value="true" />
 		<property name="brotherhood" ref="brotherhood2" />
 	</bean>
+
 
 
 
@@ -1162,11 +1253,11 @@
 		<property name="photo"
 			value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Escudo_de_la_Hermandad_de_la_Macarena_%28Sevilla%29.svg/200px-Escudo_de_la_Hermandad_de_la_Macarena_%28Sevilla%29.svg.png "/>
 		<property name="email" value="sevillaLaMacarena@gmail.com" />
-		<property name="phone" value="+34(447)458227565" />
+		<property name="phone" value="+34(447)458227465" />
 
 		<property name="spammer" value="false" />
 		<property name="banned" value="false" />
-		<property name="score" value="0.5" />
+		<property name="score" value="0.45" />
 
 		<property name="userAccount" ref="userAccount8" />
 
@@ -1175,7 +1266,7 @@
 		<property name="establishedMoment" value="February 27, 1978 22:05" />
 		<property name="pictures">
 			<list>
-				<bean id="picture1brotherhood3" class="domain.Url">
+				<bean id="picture1brotherhood4" class="domain.Url">
 					<property name="url"
 						value="https://i.ytimg.com/vi/MyqFc0nG9l0/hqdefault.jpg" />
 				</bean>
@@ -1233,8 +1324,8 @@
 			</list>
 		</property>
 		<property name="lastUpdate" value="Feb 2, 2018" />
-		<property name="minDate" value="Feb 1, 2020" />
-		<property name="maxDate" value="Feb 1, 2022" />
+		<property name="minDate" value="Feb 2, 2020" />
+		<property name="maxDate" value="Feb 2, 2022" />
 		<property name="keyword" value="finder4" />
 	</bean>
 	
@@ -1304,14 +1395,14 @@
 		<property name="banned" value="false" />
 		<property name="score" value="0.5" />
 		<property name="address" value="Calle Pablo" />
-		<property name="userAccount" ref="userAccount8" />
+		<property name="userAccount" ref="userAccount9" />
 
 	</bean>
 	
 	
 	
 	<bean id="member4" class="domain.Member">
-		<property name="name" value="Iñigo" />
+		<property name="name" value="Inigo" />
 		<property name="middleName" value="" />
 		<property name="surname" value="Montoya" />
 		<property name="photo"
@@ -1323,7 +1414,7 @@
 		<property name="banned" value="false" />
 		<property name="score" value="0.5" />
 		<property name="address" value="Calle soy iñigo montoya,preparate a morir" />
-		<property name="userAccount" ref="userAccount9" />
+		<property name="userAccount" ref="userAccount10" />
 
 	</bean>
 
