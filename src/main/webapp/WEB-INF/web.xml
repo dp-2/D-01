@@ -9,6 +9,18 @@
  * http://www.tdg-seville.info/License.html
  -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  
+  <security-constraint>
+<web-resource-collection>
+<web-resource-name>Acme-Madruga</web-resource-name>
+<url-pattern>/*</url-pattern>
+</web-resource-collection>
+<user-data-constraint>
+<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+</user-data-constraint>
+
+</security-constraint>
+  
   <display-name>Acme-Madruga</display-name>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -17,6 +17,7 @@ import domain.Actor;
 import domain.Brotherhood;
 import domain.March;
 import domain.Member;
+import domain.Message;
 
 @Service
 @Transactional
@@ -36,6 +37,12 @@ public class MarchService {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private MessageService		messageService;
+
+	@Autowired
+	private BoxService			boxService;
 
 
 	//Constructor----------------------------------------------------------------------------
@@ -78,6 +85,26 @@ public class MarchService {
 	public March save(final March march) {
 		//Assert.isTrue(this.checkPrincipal(march) || this.checkPrincipalBro(march));
 		Assert.notNull(march);
+		if (march.getId() > 0) {
+			final March oldMarch = this.marchRepository.findOne(march.getId());
+			if (!march.getStatus().equals(oldMarch.getStatus())) {
+				final Actor system = this.actorService.findActorByUsername("system");
+				final Message message = this.messageService.create(this.boxService.findBoxByActorAndName(system, "outBox"));
+				message.setBody("Status changed");
+				message.setPriority("HIGH");
+				message.setRecipient(march.getMember());
+				message.setSubject("Status changed");
+				message.setTags("");
+				this.messageService.save(message, true);
+				final Message message1 = this.messageService.create(this.boxService.findBoxByActorAndName(system, "outBox"));
+				message1.setBody("Status changed");
+				message1.setPriority("HIGH");
+				message1.setRecipient(march.getProcession().getBrotherhood());
+				message1.setSubject("Status changed");
+				message1.setTags("");
+				this.messageService.save(message1, true);
+			}
+		}
 		final March result;
 		final List<Integer> a = new ArrayList<>();
 		//	final Collection<March> marchs = this.marchRepository.findAll();

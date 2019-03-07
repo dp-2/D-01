@@ -105,41 +105,5 @@ public class EnrollServiceTest extends AbstractTest {
 		}
 		this.unauthenticate();
 	}
-	@Test
-	public void testFindAll() {
-		System.out.println("========== testFindAll() ==========");
-		final int enrollId = this.getEntityId("Enroll1");
-		try {
-			final Enroll enroll = this.enrollService.findOne(enrollId);
-			final Collection<Enroll> enrolls = this.enrollService.findAll();
-			Assert.isTrue(enrolls.contains(enroll));
-			System.out.println("¡Exito!");
-
-		} catch (final Exception e) {
-			System.out.println("¡Fallo," + e.getMessage() + "!");
-		}
-
-	}
-
-	@Test
-	public void testDelete() {
-		System.out.println("========== testDelete() ==========");
-		this.authenticate("referee1");
-		final int enrollId = this.getEntityId("Enroll1");
-
-		try {
-			final Enroll enroll = this.enrollService.findOne(enrollId);
-			this.enrollService.delete(enroll);
-			final Collection<Enroll> enrolls = this.enrollService.findAll();
-			Assert.notNull(enrolls);
-			Assert.isTrue(!enrolls.contains(enroll));
-
-			System.out.println("¡Exito!");
-
-		} catch (final Exception e) {
-			System.out.println("¡Fallo," + e.getMessage() + "!");
-		}
-		this.unauthenticate();
-	}
 
 }
